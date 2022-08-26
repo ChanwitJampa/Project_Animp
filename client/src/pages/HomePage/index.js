@@ -1,7 +1,8 @@
+import Wallpaper from "../../component/Wallpaper";
 const HomePage=()=>{
     return(
         <div>
-            <h1>Wellcome to Anime Map</h1>
+            <Wallpaper/>
         </div>
     )
 }
