@@ -1,0 +1,31 @@
+$colorPink:#FF1493;
+$colorBlack:#141313;
+$colorWhite:#FFFFFF;
+*{
+    padding: 0;
+    margin: 0;
+}
+.text-title{
+    color: $colorWhite;
+    text-decoration: none;
+    padding: 10px;
+    &:hover{
+        text-decoration: none;
+        color:$colorPink;
+    }
+}
+.appbar{
+    
+}
+.navbar{
+    justify-content: space-between;
+    background-color: $colorPink;
+    width: 100%;
+
+}
+.nav-logo{
+    padding: 10px 10px 10px 20px;
+}
+.nav-logo-text{
+    color: #FFFFFF;
+}
