@@ -1,0 +1,18 @@
+$colorPink:#FF1493;
+$colorBlack:#141313;
+$colorWhite:#FFFFFF;
+$colorGray:#313131;
+.searchBar-input{
+    border: none;
+    padding: 9px;
+    width: 220px;
+}
+.searchBar{
+
+}
+.searchBar-button{
+    padding: 9px;
+    background-color: $colorGray;
+    border: none;
+    color: $colorWhite;
+}

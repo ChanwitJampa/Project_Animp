@@ -1,4 +1,6 @@
 import './index.scss'
+import SearchBar from '../SearchBar';
+import Profile from '../Profile';
 const Navbar=()=>{
     return(
         <div className='navbar'>
@@ -15,8 +17,9 @@ const Navbar=()=>{
                     </ul>
                 </div>
             </div>
-            <div>
-                <h1>Login</h1>
+            <div className='navbar-right'>
+                <SearchBar/>
+                <Profile/>
             </div>
         </div>
     )

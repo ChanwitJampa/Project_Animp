@@ -26,6 +26,13 @@ $colorWhite:#FFFFFF;
     flex-direction: row;
     align-items: center;
 }
+.navbar-right{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 380px;
+    justify-content: space-between;
+}
 .navbar-logo{
     padding: 10px 10px 10px 20px;
 }
@@ -38,7 +45,6 @@ $colorWhite:#FFFFFF;
 }
 .navbar-item-li{
     float: left;
-    
     padding: 15px;
 }
 .navbar-item-link{
@@ -46,4 +52,7 @@ $colorWhite:#FFFFFF;
     color: white;
     text-align: center;
     text-decoration: none;
+}
+.navbar-profile{
+    padding: 10px;
 }
