@@ -14,18 +14,36 @@ $colorWhite:#FFFFFF;
         color:$colorPink;
     }
 }
-.appbar{
-    
-}
 .navbar{
+    display: flex;
+    flex-direction: row;
     justify-content: space-between;
     background-color: $colorPink;
     width: 100%;
-
 }
-.nav-logo{
+.navbar-left{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.navbar-logo{
     padding: 10px 10px 10px 20px;
 }
-.nav-logo-text{
+.navbar-logo-text{
     color: #FFFFFF;
+}
+.navbar-item{
+    overflow: hidden;
+    list-style-type: none;
+}
+.navbar-item-li{
+    float: left;
+    
+    padding: 15px;
+}
+.navbar-item-link{
+    display: block;
+    color: white;
+    text-align: center;
+    text-decoration: none;
 }
