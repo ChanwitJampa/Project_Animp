@@ -1,8 +1,10 @@
 import './index.scss'
+import FilterTopAnime from '../../component/FilterTopAnime';
 const TopAnimePage=()=>{
     return(
-        <div>
-            <h1>Top Anime</h1>
+        <div className='container'>
+            <h1 className='header'>Top Anime</h1>
+            <FilterTopAnime/>
         </div>
     )
 }

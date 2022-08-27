@@ -1,0 +1,45 @@
+$colorPink:#FF1493;
+$colorBlack:#141313;
+$colorWhite:#FFFFFF;
+$colorDarkPink:#371037;
+.card-filter{
+    width: 100%;
+    background-color: $colorDarkPink;
+    border-radius: 20px;
+    padding: 10px 0px 10px 0px;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-around;
+}
+.card-filter-search{
+    padding: 0px;
+    margin: 20px;
+}
+.card-filter-search h5{
+    color: $colorWhite;
+    font-weight: 300;
+    font-size: 16px;
+    padding-bottom: 8px;
+}
+.card-filter-search input,select{
+    height: 42px;
+    width: 240px;
+    border-radius: 10px;
+}
+.card-filter-button-search{
+    margin-top: 16px;
+    padding: 12px 20px 12px 20px;
+    background-color: $colorPink;
+    color:$colorWhite ;
+    border-radius: 8px;
+    border: none;
+}
+.card-filter-button-clear{
+    margin-top: 16px;
+    padding: 12px 20px 12px 20px;
+    background-color: $colorWhite;
+    color:$colorPink ;
+    border-radius: 8px;
+    border-color: $colorPink;
+}
