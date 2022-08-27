@@ -1,0 +1,163 @@
+[
+    {
+        "id":1,
+        "name":"Sword art online",
+        "year":2012,
+        "studios":"A-1 Pictures",
+        "seasonal":"Summer",
+        "episodes":25,
+        "image":"https://cdn.myanimelist.net/images/anime/11/39717.jpg",
+        "quantity":1
+    },
+    {
+        "id":2,
+        "name":"Attack on titan",
+        "year":2013,
+        "studios":"MAPPA",
+        "seasonal":"Spring",
+        "episodes":25,
+        "image":"https://cdn.myanimelist.net/images/anime/10/47347.jpg",
+        "quantity":1
+
+    },
+    {
+        "id":3,
+        "name":"Noragami",
+        "year":2014,
+        "studios":"Bones",
+        "seasonal":"Winter",
+        "episodes":12,
+        "image":"https://cdn.myanimelist.net/images/anime/9/77809.jpg",
+        "quantity":1
+    },
+    {
+        "id":4,
+        "name":"Re:Zero",
+        "year":2016,
+        "studios":"White Fox",
+        "seasonal":"Spring",
+        "episodes":25,
+        "image":"https://cdn.myanimelist.net/images/anime/11/79410.jpg",
+        "quantity":1
+    },
+    {
+        "id":5,
+        "name":"My Dress-Up Darling",
+        "year":2022,
+        "studios":"CloverWorks",
+        "seasonal":"Winter",
+        "episodes":12,
+        "image":"https://cdn.myanimelist.net/images/anime/1179/119897.jpg",
+        "quantity":1
+    },
+    {
+        "id":6,
+        "name":"Fullmetal Alchemist: Brotherhood",
+        "year":2009,
+        "studios":"Bones",
+        "seasonal":"Spring",
+        "episodes":64,
+        "image":"https://cdn.myanimelist.net/images/anime/1223/96541.jpg",
+        "quantity":1
+    },
+    {
+        "id":7,
+        "name":"Steins;Gate",
+        "year":2011,
+        "studios":"White Fox",
+        "seasonal":"Spring",
+        "episodes":24,
+        "image":"https://cdn.myanimelist.net/images/anime/5/73199.jpg",
+        "quantity":1
+    },
+    {
+        "id":8,
+        "name":"Code Geass: Lelouch of the Rebellion",
+        "year":2006,
+        "studios":"Sunrise",
+        "seasonal":"Fall",
+        "episodes":25,
+        "image":"https://cdn.myanimelist.net/images/anime/5/50331.jpg",
+        "quantity":1
+    },
+    {
+        "id":9,
+        "name":"Jujutsu Kaisen",
+        "year":2020,
+        "studios":"MAPPA",
+        "seasonal":"Fall",
+        "episodes":24,
+        "image":"https://cdn.myanimelist.net/images/anime/1171/109222.jpg",
+        "quantity":1
+    },
+    {
+        "id":10,
+        "name":"Spy x Family",
+        "year":2022,
+        "studios":"Wit Studio, CloverWorks",
+        "seasonal":"Spring",
+        "episodes":12,
+        "image":"https://cdn.myanimelist.net/images/anime/1441/122795.jpg",
+        "quantity":1
+    },
+    {
+        "id":11,
+        "name":"The Promised Neverland",
+        "year":2019,
+        "studios":"CloverWorks",
+        "seasonal":"Winter",
+        "episodes":12,
+        "image":"https://cdn.myanimelist.net/images/anime/1830/118780.jpg",
+        "quantity":1
+    },
+    {
+        "id":12,
+        "name":"Kaguya-sama: Love is War",
+        "year":2019,
+        "studios":"A-1 Pictures",
+        "seasonal":"Winter",
+        "episodes":12,
+        "image":"https://cdn.myanimelist.net/images/anime/1295/106551.jpg",
+        "quantity":1
+    },
+    {
+        "id":13,
+        "name":"Dr. Stone",
+        "year":2019,
+        "studios":"TMS Entertainment",
+        "seasonal":"Summer",
+        "episodes":24,
+        "image":"https://cdn.myanimelist.net/images/anime/1613/102576.jpg",
+        "quantity":1
+    },
+    {
+        "id":14,
+        "name":"Hyouka",
+        "year":2012,
+        "studios":"Kyoto Animation",
+        "seasonal":"Spring",
+        "episodes":22,
+        "image":"https://cdn.myanimelist.net/images/anime/13/50521.jpg",
+        "quantity":1
+    },
+    {
+        "id":15,
+        "name":"Fate/stay night [Unlimited Blade Works]",
+        "year":2014,
+        "studios":"ufotable",
+        "seasonal":"Fall",
+        "episodes":24,
+        "image":"https://cdn.myanimelist.net/images/anime/12/67333.jpg",
+        "quantity":1
+    },
+    {
+        "id":16,
+        "name":"Black Clover",
+        "year":2017,
+        "studios":"Studio Pierrot",
+        "seasonal":"Fall",
+        "episodes":170,
+        "image":"https://cdn.myanimelist.net/images/anime/2/88336.jpg",
+        "quantity":1
+    }
+]

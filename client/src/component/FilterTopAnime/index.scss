@@ -20,12 +20,20 @@ $colorDarkPink:#371037;
     color: $colorWhite;
     font-weight: 300;
     font-size: 16px;
-    padding-bottom: 8px;
+
 }
-.card-filter-search input,select{
+.card-filter-search input{
     height: 42px;
     width: 240px;
     border-radius: 10px;
+}
+.card-filter-search-select{
+    width: 240px;
+    border-radius: 10px;
+}
+.card-filter-search{
+    width: 240px;
+    
 }
 .card-filter-button-search{
     margin-top: 16px;
