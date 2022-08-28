@@ -27,18 +27,18 @@ const FilterTopAnime=(props)=>{
         year: "",
     })
     const onChangItem=name=>event=>{
-        setState({...state,[name]:event.target.value})
-        console.log(name+"="+event.target.value)
+        setState({...state,[name]:event.value})
+        //console.log(name+"="+event.value)
         if(name=="studio"){
-            //props.studio(event.target.value)
+            props.studio(name,event.value)
         }else if(name=="season"){   
-            //props.season(event.target.value)
+            props.season(name,event.value)
         }else if(name=="year"){
-            //props.year(event.target.value)
+            props.year(name,event.value)
         }
     }
     useEffect(()=>{
-        Datastudio.forEach(e=>studioOptions.push({label:e.studio_name}))
+        Datastudio.forEach(e=>studioOptions.push({value:e.studio_name,label:e.studio_name}))
     })
     return(
         <div className="card-filter">
@@ -49,30 +49,27 @@ const FilterTopAnime=(props)=>{
                 <Select
                     className="card-filter-search-select"
                     classNamePrefix="select"
-                    defaultValue={studioOptions[0]}
-                    isClearable={true} 
                     name="studio"
-                    value={state.studio}
                     options={studioOptions}
-                    onChange={onChangItem("studio")}/>
+                    onChange={onChangItem("studio")}
+                    />
             </div>
             <div className='card-filter-search'><h5>season</h5>
                 <Select 
                     className="card-filter-search-select"
                     classNamePrefix="select"
-                    isClearable={true}
                     name="season"
-                    value={state.season}
                     options={seasonOptions}
-                    onChange={onChangItem("season")}/>
+                    onChange={onChangItem("season")}
+                    />
             </div>
             <div className='card-filter-search'><h5>year</h5>
                 <Select
                     className="card-filter-search-select" 
                     classNamePrefix="select"
-                    isClearable={true}
                     name="year"
                     options={yearOption} 
+                    onChange={onChangItem("year")}
                     />
             </div>
             <div className='card-filter-search'><button className='card-filter-button-search'>Search</button></div>

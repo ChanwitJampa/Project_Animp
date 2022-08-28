@@ -1,12 +1,8 @@
 import './index.scss'
 import Dataanime from '../../assets/anime.json'
 import React, {useState,useEffect } from 'react';
-const TableTopAnime=()=>{
-    const [animeList,setAnimeList]=useState([]);
-    useEffect(()=>{
-        setAnimeList(Dataanime)
-    })
-    console.log(animeList)
+const TableTopAnime=(props)=>{
+    const {anime} = props
     return(
         <div className='container-table'>
             <table className='table-topanime'>
@@ -21,7 +17,7 @@ const TableTopAnime=()=>{
                     </tr> 
                 </thead>
                 <tbody>
-                {animeList.map((anime,index)=>{
+                {anime.map((anime,index)=>{
                    return <tr key={index} className='table-content-row'>
                     <td>{index+1}</td>
                     <td><div className='card-anime'><img src={anime.image} alt="image"/></div></td>

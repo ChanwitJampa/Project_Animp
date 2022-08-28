@@ -15,9 +15,17 @@ const TopAnimePage=()=>{
         console.log(name+"=="+value)
     }
     const filterAnime=(item)=>{
-
+        if(stateFilter.studio=="" && stateFilter.season=="" && stateFilter.year==""){
+            return item
+        }else if(item.studios==stateFilter.studio && stateFilter.season=="" && stateFilter.year==""){
+            return item
+        }else if(item.studios==stateFilter.studio && item.seasonal==stateFilter.season && stateFilter.year==""){
+            return item
+        }else if(item.studios==stateFilter.studio && item.seasonal==stateFilter.season && item.year==stateFilter.year){
+            return item
+        }
     }
-    //const displayAnime=Dataanime.filter(filterAnime)
+    const displayAnime=Dataanime.filter(filterAnime)
     return(
         <div className='container'>
             <h1 className='header'>Top Anime</h1>
@@ -25,7 +33,8 @@ const TopAnimePage=()=>{
                 studio={onInputChange}
                 season={onInputChange}
                 year={onInputChange}/>
-            <TableTopAnime/>
+            <TableTopAnime
+                anime={displayAnime}/>
         </div>
     )
 }
