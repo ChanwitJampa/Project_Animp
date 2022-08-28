@@ -24,8 +24,9 @@ const TableTopAnime=()=>{
                 {animeList.map((anime,index)=>{
                    return <tr key={index} className='table-content-row'>
                     <td>{index+1}</td>
-                    <td>{anime.name}</td>
-                    <td>Episodes: {anime.episodes} <br/>
+                    <td><div className='card-anime'><img src={anime.image} alt="image"/></div></td>
+                    <td>Anime: {anime.name} <br/>
+                        Episodes: {anime.episodes} <br/>
                         Season: {anime.seasonal} <br/>
                         Year: {anime.year}</td>
                     <td>{anime.studios}</td>
