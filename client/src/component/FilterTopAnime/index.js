@@ -72,7 +72,6 @@ const FilterTopAnime=(props)=>{
                     onChange={onChangItem("year")}
                     />
             </div>
-            <div className='card-filter-search'><button className='card-filter-button-search'>Search</button></div>
             <div className='card-filter-search'><button className='card-filter-button-clear'>Clear</button></div>
         </div>
     )

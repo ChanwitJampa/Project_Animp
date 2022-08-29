@@ -7,7 +7,10 @@
         "seasonal":"Summer",
         "episodes":25,
         "image":"https://cdn.myanimelist.net/images/anime/11/39717.jpg",
-        "quantity":1
+        "trailer":"",
+        "wallpaper":"https://wallpaperaccess.com/full/1122002.jpg",
+        "duration":"",
+        "score":""
     },
     {
         "id":2,
@@ -17,8 +20,10 @@
         "seasonal":"Spring",
         "episodes":25,
         "image":"https://cdn.myanimelist.net/images/anime/10/47347.jpg",
-        "quantity":1
-
+        "trailer":"",
+        "wallpaper":"",
+        "duration":"",
+        "score":""
     },
     {
         "id":3,
@@ -28,7 +33,10 @@
         "seasonal":"Winter",
         "episodes":12,
         "image":"https://cdn.myanimelist.net/images/anime/9/77809.jpg",
-        "quantity":1
+        "trailer":"",
+        "wallpaper":"",
+        "duration":"",
+        "score":""
     },
     {
         "id":4,
@@ -38,7 +46,10 @@
         "seasonal":"Spring",
         "episodes":25,
         "image":"https://cdn.myanimelist.net/images/anime/11/79410.jpg",
-        "quantity":1
+        "trailer":"",
+        "wallpaper":"",
+        "duration":"",
+        "score":""
     },
     {
         "id":5,
@@ -48,7 +59,10 @@
         "seasonal":"Winter",
         "episodes":12,
         "image":"https://cdn.myanimelist.net/images/anime/1179/119897.jpg",
-        "quantity":1
+        "trailer":"",
+        "wallpaper":"",
+        "duration":"",
+        "score":""
     },
     {
         "id":6,
@@ -58,7 +72,10 @@
         "seasonal":"Spring",
         "episodes":64,
         "image":"https://cdn.myanimelist.net/images/anime/1223/96541.jpg",
-        "quantity":1
+        "trailer":"",
+        "wallpaper":"",
+        "duration":"",
+        "score":""
     },
     {
         "id":7,
@@ -68,7 +85,10 @@
         "seasonal":"Spring",
         "episodes":24,
         "image":"https://cdn.myanimelist.net/images/anime/5/73199.jpg",
-        "quantity":1
+        "trailer":"",
+        "wallpaper":"",
+        "duration":"",
+        "score":""
     },
     {
         "id":8,
@@ -78,7 +98,10 @@
         "seasonal":"Fall",
         "episodes":25,
         "image":"https://cdn.myanimelist.net/images/anime/5/50331.jpg",
-        "quantity":1
+        "trailer":"",
+        "wallpaper":"",
+        "duration":"",
+        "score":""
     },
     {
         "id":9,
@@ -88,7 +111,10 @@
         "seasonal":"Fall",
         "episodes":24,
         "image":"https://cdn.myanimelist.net/images/anime/1171/109222.jpg",
-        "quantity":1
+        "trailer":"",
+        "wallpaper":"",
+        "duration":"",
+        "score":""
     },
     {
         "id":10,
@@ -98,7 +124,10 @@
         "seasonal":"Spring",
         "episodes":12,
         "image":"https://cdn.myanimelist.net/images/anime/1441/122795.jpg",
-        "quantity":1
+        "trailer":"",
+        "wallpaper":"",
+        "duration":"",
+        "score":""
     },
     {
         "id":11,
@@ -108,7 +137,10 @@
         "seasonal":"Winter",
         "episodes":12,
         "image":"https://cdn.myanimelist.net/images/anime/1830/118780.jpg",
-        "quantity":1
+        "trailer":"",
+        "wallpaper":"",
+        "duration":"",
+        "score":""
     },
     {
         "id":12,
@@ -118,7 +150,10 @@
         "seasonal":"Winter",
         "episodes":12,
         "image":"https://cdn.myanimelist.net/images/anime/1295/106551.jpg",
-        "quantity":1
+        "trailer":"",
+        "wallpaper":"",
+        "duration":"",
+        "score":""
     },
     {
         "id":13,
@@ -128,7 +163,10 @@
         "seasonal":"Summer",
         "episodes":24,
         "image":"https://cdn.myanimelist.net/images/anime/1613/102576.jpg",
-        "quantity":1
+        "trailer":"",
+        "wallpaper":"",
+        "duration":"",
+        "score":""
     },
     {
         "id":14,
@@ -138,7 +176,10 @@
         "seasonal":"Spring",
         "episodes":22,
         "image":"https://cdn.myanimelist.net/images/anime/13/50521.jpg",
-        "quantity":1
+        "trailer":"",
+        "wallpaper":"",
+        "duration":"",
+        "score":""
     },
     {
         "id":15,
@@ -148,7 +189,10 @@
         "seasonal":"Fall",
         "episodes":24,
         "image":"https://cdn.myanimelist.net/images/anime/12/67333.jpg",
-        "quantity":1
+        "trailer":"",
+        "wallpaper":"",
+        "duration":"",
+        "score":""
     },
     {
         "id":16,
@@ -158,6 +202,23 @@
         "seasonal":"Fall",
         "episodes":170,
         "image":"https://cdn.myanimelist.net/images/anime/2/88336.jpg",
-        "quantity":1
+        "trailer":"",
+        "wallpaper":"",
+        "duration":"",
+        "score":""
+    },
+    {
+        "id":17,
+        "name":"Sword Art Online Progressive: Aria of a Starless Night",
+        "year":2021,
+        "studios":"A-1 Pictures",
+        "seasonal":"",
+        "episodes":1,
+        "image":"https://cdn.myanimelist.net/images/anime/1590/116274.jpg",
+        "trailer":"https://www.youtube.com/watch?v=Y7auZbRxUIw",
+        "trailer_start":"",
+        "wallpaper":"https://pic-bstarstatic.akamaized.net/ugc/ed8c4790be03bbf8187fb852fd633e7f.jpg",
+        "duration":"1 hr. 37 min.",
+        "score":"8.02"
     }
 ]

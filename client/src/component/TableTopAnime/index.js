@@ -1,6 +1,6 @@
 import './index.scss'
-import Dataanime from '../../assets/anime.json'
 import React, {useState,useEffect } from 'react';
+import { Link, withRouter } from "react-router-dom";
 const TableTopAnime=(props)=>{
     const {anime} = props
     return(
@@ -20,7 +20,8 @@ const TableTopAnime=(props)=>{
                 {anime.map((anime,index)=>{
                    return <tr key={index} className='table-content-row'>
                     <td>{index+1}</td>
-                    <td><div className='card-anime'><img src={anime.image} alt="image"/></div></td>
+                    <td><div className='card-anime'>
+                    <Link to={`/anime/${anime.id}`}><img src={anime.image} alt="image"/></Link></div></td>
                     <td>Anime: {anime.name} <br/>
                         Episodes: {anime.episodes} <br/>
                         Season: {anime.seasonal} <br/>
