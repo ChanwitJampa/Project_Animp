@@ -5,23 +5,43 @@ import Dataanime from '../../assets/anime.json'
 import { useEffect, useState } from 'react';
 const TopAnimePage=()=>{
     const [anime,setAnime]=useState([])
-    const [stateFilter,setStateFilter]=useState({
-        studio:"",
-        season:"",
-        year:""
-    })
+    const [isClear,setIsClear]=useState(false)
+    const [studio,setStudio]=useState("")
+    const [season,setSeason]=useState("")
+    const [year,setYear]=useState("")
     const onInputChange=(name,value)=>{
-        setStateFilter({...stateFilter,[name]:value})
+        //setStateFilter({...stateFilter,[name]:value})
+        if(name=="studio"){
+            setStudio(value)
+        }else if(name=="season"){   
+            setSeason(value)
+        }else if(name=="year"){
+            setYear(value)
+        }
         console.log(name+"=="+value)
     }
+    const isClearChange=(value)=>{
+        setStudio("")
+        setSeason("")
+        setYear("")
+        console.log(value)
+    }
     const filterAnime=(item)=>{
-        if(stateFilter.studio=="" && stateFilter.season=="" && stateFilter.year==""){
+        if(studio=="" && season=="" && year==""){
             return item
-        }else if(item.studios==stateFilter.studio && stateFilter.season=="" && stateFilter.year==""){
+        }else if(studio==item.studios && season=="" && year==""){
             return item
-        }else if(item.studios==stateFilter.studio && item.seasonal==stateFilter.season && stateFilter.year==""){
+        }else if(studio=="" && season==item.seasonal && year==""){
             return item
-        }else if(item.studios==stateFilter.studio && item.seasonal==stateFilter.season && item.year==stateFilter.year){
+        }else if(studio=="" && season=="" && year==item.year){
+            return item
+        }else if(studio==item.studios && season==item.seasonal && year==""){
+            return item
+        }else if(studio=="" && season==item.seasonal && year==item.year){
+            return item
+        }else if(studio==item.studios && season=="" && year==item.year){
+            return item
+        }else if(studio==item.studios && season==item.seasonal && year==item.year){
             return item
         }
     }
@@ -32,7 +52,8 @@ const TopAnimePage=()=>{
             <FilterTopAnime 
                 studio={onInputChange}
                 season={onInputChange}
-                year={onInputChange}/>
+                year={onInputChange}
+                isClear={isClearChange}/>
             <TableTopAnime
                 anime={displayAnime}/>
         </div>

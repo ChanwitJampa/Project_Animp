@@ -26,30 +26,40 @@ const FilterTopAnime=(props)=>{
         season: "",
         year: "",
     })
+    const [studio,setStudio]=useState("")
+    const [season,setSeason]=useState("")
+    const [year,setYear]=useState("")
     const onChangItem=name=>event=>{
-        setState({...state,[name]:event.value})
+        //setState({...state,[name]:event})
         //console.log(name+"="+event.value)
         if(name=="studio"){
+            setStudio(event)
             props.studio(name,event.value)
         }else if(name=="season"){   
+            setSeason(event)
             props.season(name,event.value)
         }else if(name=="year"){
+            setYear(event)
             props.year(name,event.value)
         }
+    }
+    const clearValue=()=>{
+        setStudio("")
+        setSeason("")
+        setYear("")
+        props.isClear(true)
     }
     useEffect(()=>{
         Datastudio.forEach(e=>studioOptions.push({value:e.studio_name,label:e.studio_name}))
     })
     return(
         <div className="card-filter">
-            <div className='card-filter-search'><h5>search</h5>
-                <input/>
-            </div>
             <div className='card-filter-search'><h5>studio</h5>
                 <Select
                     className="card-filter-search-select"
                     classNamePrefix="select"
                     name="studio"
+                    value={studio}
                     options={studioOptions}
                     onChange={onChangItem("studio")}
                     />
@@ -59,6 +69,7 @@ const FilterTopAnime=(props)=>{
                     className="card-filter-search-select"
                     classNamePrefix="select"
                     name="season"
+                    value={season}
                     options={seasonOptions}
                     onChange={onChangItem("season")}
                     />
@@ -68,11 +79,12 @@ const FilterTopAnime=(props)=>{
                     className="card-filter-search-select" 
                     classNamePrefix="select"
                     name="year"
+                    value={year}
                     options={yearOption} 
                     onChange={onChangItem("year")}
                     />
             </div>
-            <div className='card-filter-search'><button className='card-filter-button-clear'>Clear</button></div>
+            <div className='card-filter-search'><button className='card-filter-button-clear' onClick={clearValue}>Clear</button></div>
         </div>
     )
 }

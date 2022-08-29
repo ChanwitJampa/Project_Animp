@@ -19,7 +19,7 @@ const TableTopAnime=(props)=>{
                 <tbody>
                 {anime.map((anime,index)=>{
                    return <tr key={index} className='table-content-row'>
-                    <td>{index+1}</td>
+                    <td className='table-rank'>{index+1}</td>
                     <td><div className='card-anime'>
                     <Link to={`/anime/${anime.id}`}><img src={anime.image} alt="image"/></Link></div></td>
                     <td>Anime: {anime.name} <br/>
