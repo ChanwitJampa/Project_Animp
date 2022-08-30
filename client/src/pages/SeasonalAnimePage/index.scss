@@ -1,0 +1,21 @@
+$colorPink:#FF1493;
+$colorBlack:#141313;
+$colorWhite:#FFFFFF;
+$colorDarkPink:#371037;
+.wallpaper-text{
+    padding: 50px;
+}
+.wallpaper-text h1{
+    color: white;
+    font-size:40px;
+    -webkit-text-stroke: 1px black; 
+}
+.wallpaper-text h6{
+    color: white;
+    font-size:18px;
+    -webkit-text-stroke: 1px black; 
+}
+.select-season-bar{
+    height: 80px;
+    //background-color:$colorDarkPink ;
+}

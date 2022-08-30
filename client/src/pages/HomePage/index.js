@@ -2,7 +2,7 @@ import Wallpaper from "../../component/Wallpaper";
 const HomePage=()=>{
     return(
         <div>
-            <Wallpaper/>
+            <Wallpaper type="main"/>
         </div>
     )
 }
