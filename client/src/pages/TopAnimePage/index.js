@@ -5,7 +5,6 @@ import Dataanime from '../../assets/anime.json'
 import { useEffect, useState } from 'react';
 const TopAnimePage=()=>{
     const [anime,setAnime]=useState([])
-    const [isClear,setIsClear]=useState(false)
     const [studio,setStudio]=useState("")
     const [season,setSeason]=useState("")
     const [year,setYear]=useState("")
@@ -45,7 +44,7 @@ const TopAnimePage=()=>{
             return item
         }
     }
-    const displayAnime=Dataanime.filter(filterAnime)
+    const displayAnime=Dataanime.filter(filterAnime).sort((firstItem, secondItem) => secondItem.score - firstItem.score);
     return(
         <div className='container'>
             <h1 className='header'>Top Anime</h1>

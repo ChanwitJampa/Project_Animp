@@ -27,7 +27,7 @@ const TableTopAnime=(props)=>{
                         Season: {anime.seasonal} <br/>
                         Year: {anime.year}</td>
                     <td>{anime.studios}</td>
-                    <td>-</td>
+                    <td>{anime.score}</td>
                     <td><button className='table-content-button'>Add to List</button></td>
                 </tr> 
                 })}

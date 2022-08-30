@@ -21,11 +21,6 @@ const yearOption =[
 ]
 const studioOptions=[]
 const FilterTopAnime=(props)=>{
-    const [state,setState]=useState({
-        studio: "",
-        season: "",
-        year: "",
-    })
     const [studio,setStudio]=useState("")
     const [season,setSeason]=useState("")
     const [year,setYear]=useState("")
@@ -50,7 +45,9 @@ const FilterTopAnime=(props)=>{
         props.isClear(true)
     }
     useEffect(()=>{
-        Datastudio.forEach(e=>studioOptions.push({value:e.studio_name,label:e.studio_name}))
+        if(studioOptions==""){
+            Datastudio.forEach(e=>studioOptions.push({value:e.studio_name,label:e.studio_name}))
+        }
     })
     return(
         <div className="card-filter">

@@ -8,9 +8,10 @@
         "episodes":25,
         "image":"https://cdn.myanimelist.net/images/anime/11/39717.jpg",
         "trailer":"",
+        "trailer_start":"",
         "wallpaper":"https://wallpaperaccess.com/full/1122002.jpg",
         "duration":"",
-        "score":""
+        "score":7.2
     },
     {
         "id":2,
@@ -21,9 +22,10 @@
         "episodes":25,
         "image":"https://cdn.myanimelist.net/images/anime/10/47347.jpg",
         "trailer":"",
+        "trailer_start":"",
         "wallpaper":"",
         "duration":"",
-        "score":""
+        "score":8.53
     },
     {
         "id":3,
@@ -34,9 +36,10 @@
         "episodes":12,
         "image":"https://cdn.myanimelist.net/images/anime/9/77809.jpg",
         "trailer":"",
+        "trailer_start":"",
         "wallpaper":"",
         "duration":"",
-        "score":""
+        "score":7.96
     },
     {
         "id":4,
@@ -47,9 +50,10 @@
         "episodes":25,
         "image":"https://cdn.myanimelist.net/images/anime/11/79410.jpg",
         "trailer":"",
+        "trailer_start":"",
         "wallpaper":"",
         "duration":"",
-        "score":""
+        "score":8.21
     },
     {
         "id":5,
@@ -60,9 +64,10 @@
         "episodes":12,
         "image":"https://cdn.myanimelist.net/images/anime/1179/119897.jpg",
         "trailer":"",
+        "trailer_start":"",
         "wallpaper":"",
         "duration":"",
-        "score":""
+        "score":8.32
     },
     {
         "id":6,
@@ -73,9 +78,10 @@
         "episodes":64,
         "image":"https://cdn.myanimelist.net/images/anime/1223/96541.jpg",
         "trailer":"",
+        "trailer_start":"",
         "wallpaper":"",
         "duration":"",
-        "score":""
+        "score":9.13
     },
     {
         "id":7,
@@ -86,9 +92,10 @@
         "episodes":24,
         "image":"https://cdn.myanimelist.net/images/anime/5/73199.jpg",
         "trailer":"",
+        "trailer_start":"",
         "wallpaper":"",
         "duration":"",
-        "score":""
+        "score":9.08
     },
     {
         "id":8,
@@ -99,9 +106,10 @@
         "episodes":25,
         "image":"https://cdn.myanimelist.net/images/anime/5/50331.jpg",
         "trailer":"",
+        "trailer_start":"",
         "wallpaper":"",
         "duration":"",
-        "score":""
+        "score":8.7
     },
     {
         "id":9,
@@ -112,9 +120,10 @@
         "episodes":24,
         "image":"https://cdn.myanimelist.net/images/anime/1171/109222.jpg",
         "trailer":"",
+        "trailer_start":"",
         "wallpaper":"",
         "duration":"",
-        "score":""
+        "score":8.67
     },
     {
         "id":10,
@@ -125,9 +134,10 @@
         "episodes":12,
         "image":"https://cdn.myanimelist.net/images/anime/1441/122795.jpg",
         "trailer":"",
+        "trailer_start":"",
         "wallpaper":"",
         "duration":"",
-        "score":""
+        "score":8.78
     },
     {
         "id":11,
@@ -138,9 +148,10 @@
         "episodes":12,
         "image":"https://cdn.myanimelist.net/images/anime/1830/118780.jpg",
         "trailer":"",
+        "trailer_start":"",
         "wallpaper":"",
         "duration":"",
-        "score":""
+        "score":8.53
     },
     {
         "id":12,
@@ -151,9 +162,10 @@
         "episodes":12,
         "image":"https://cdn.myanimelist.net/images/anime/1295/106551.jpg",
         "trailer":"",
+        "trailer_start":"",
         "wallpaper":"",
         "duration":"",
-        "score":""
+        "score":8.41
     },
     {
         "id":13,
@@ -164,9 +176,10 @@
         "episodes":24,
         "image":"https://cdn.myanimelist.net/images/anime/1613/102576.jpg",
         "trailer":"",
+        "trailer_start":"",
         "wallpaper":"",
         "duration":"",
-        "score":""
+        "score":8.18
     },
     {
         "id":14,
@@ -177,9 +190,10 @@
         "episodes":22,
         "image":"https://cdn.myanimelist.net/images/anime/13/50521.jpg",
         "trailer":"",
+        "trailer_start":"",
         "wallpaper":"",
         "duration":"",
-        "score":""
+        "score":8.09
     },
     {
         "id":15,
@@ -190,9 +204,10 @@
         "episodes":24,
         "image":"https://cdn.myanimelist.net/images/anime/12/67333.jpg",
         "trailer":"",
+        "trailer_start":"",
         "wallpaper":"",
         "duration":"",
-        "score":""
+        "score":8.19
     },
     {
         "id":16,
@@ -203,9 +218,10 @@
         "episodes":170,
         "image":"https://cdn.myanimelist.net/images/anime/2/88336.jpg",
         "trailer":"",
+        "trailer_start":"",
         "wallpaper":"",
         "duration":"",
-        "score":""
+        "score":8.13
     },
     {
         "id":17,
@@ -219,7 +235,7 @@
         "trailer_start":"",
         "wallpaper":"https://pic-bstarstatic.akamaized.net/ugc/ed8c4790be03bbf8187fb852fd633e7f.jpg",
         "duration":"1 hr. 37 min.",
-        "score":"8.02"
+        "score":8.02
     },
     {
         "id":18,
@@ -233,7 +249,7 @@
         "trailer_start":"",
         "wallpaper":"http://static.minitokyo.net/downloads/25/08/332925.jpg",
         "duration":"24 min. per ep",
-        "score":"8.91"
+        "score":8.91
     },
     {
         "id":19,
@@ -247,7 +263,7 @@
         "trailer_start":"",
         "wallpaper":"https://images7.alphacoders.com/737/737400.jpg",
         "duration":"1 hr. 46 min",
-        "score":"8.86"
+        "score":8.86
     },
     {
         "id":20,
@@ -261,7 +277,7 @@
         "trailer_start":"",
         "wallpaper":"https://wallpapercave.com/wp/wp11250477.jpg",
         "duration":"26 min. per ep",
-        "score":"8.85"
+        "score":8.85
     },
     {
         "id":21,
@@ -275,7 +291,7 @@
         "trailer_start":"",
         "wallpaper":"https://wallpaperaccess.com/full/3652673.jpg",
         "duration":"24 min. per ep",
-        "score":"8.79"
+        "score":8.79
     },
     {
         "id":22,
@@ -289,7 +305,7 @@
         "trailer_start":"",
         "wallpaper":"https://cdn.wallpapersafari.com/80/49/XO7wnY.jpg",
         "duration":"24 min. per ep",
-        "score":"8.67"
+        "score":8.67
     },
     {
         "id":23,
@@ -303,7 +319,7 @@
         "trailer_start":"",
         "wallpaper":"https://otakuusamagazine.com/wp-content/uploads/2022/07/op-film-red-imax2.jpg",
         "duration":"24 min. per ep",
-        "score":"7.88"
+        "score":7.88
     },
     {
         "id":24,
@@ -317,7 +333,7 @@
         "trailer_start":"",
         "wallpaper":"https://wallpapercave.com/uwp/uwp1625702.jpeg",
         "duration":"1 hr. 59 min",
-        "score":"8.66"
+        "score":8.66
     },
     {
         "id":25,
@@ -331,35 +347,35 @@
         "trailer_start":"",
         "wallpaper":"https://images3.alphacoders.com/114/1142445.png",
         "duration":"1 hr. 55 min",
-        "score":"8.65"
+        "score":8.65
     },
     {
         "id":26,
-        "name":"Natsume Yuujinchou Shi Natsume's Book of Friends Season 4",
+        "name":"Natsume's Book of Friends Season 4",
         "year":2012,
         "studios":"Brain's Base",
-        "seasonal":"",
+        "seasonal":"Winter",
         "episodes":13,
         "image":"https://cdn.myanimelist.net/images/anime/3/37449.jpg",
         "trailer":"https://youtu.be/n_Ku789_xVo",
         "trailer_start":"",
         "wallpaper":"https://images3.alphacoders.com/764/764333.jpg",
         "duration":"24 min. per ep",
-        "score":"8.65"
+        "score":8.65
     },
     {
         "id":27,
-        "name":"Natsume Yuujinchou Shi",
-        "year":2012,
+        "name":"Natsume's Book of Friends",
+        "year":2008,
         "studios":"Brain's Base",
-        "seasonal":"",
+        "seasonal":"Summer",
         "episodes":13,
-        "image":"https://cdn.myanimelist.net/images/anime/3/37449.jpg",
-        "trailer":"https://youtu.be/n_Ku789_xVo",
+        "image":"https://cdn.myanimelist.net/images/anime/1681/108439.jpg",
+        "trailer":"",
         "trailer_start":"",
-        "wallpaper":"https://images3.alphacoders.com/764/764333.jpg",
+        "wallpaper":"https://images-na.ssl-images-amazon.com/images/I/91MqMI+RQIL._RI_.jpg",
         "duration":"24 min. per ep",
-        "score":"8.65"
+        "score":8.32
     },
     {
         "id":28,
@@ -373,7 +389,7 @@
         "trailer_start":"",
         "wallpaper":"https://coolthemestores.com/wp-content/uploads/2021/02/death-note-featured-image.jpg",
         "duration":"23 min. per ep",
-        "score":"8.62"
+        "score":8.62
     },
     {
         "id":29,
@@ -387,7 +403,7 @@
         "trailer_start":"",
         "wallpaper":"https://i.pinimg.com/736x/31/60/06/316006be5372525d11134749c23a1635.jpg",
         "duration":"23 min. per ep",
-        "score":"8.56"
+        "score":8.56
     },
     {
         "id":30,
@@ -401,6 +417,6 @@
         "trailer_start":"",
         "wallpaper":"https://images2.alphacoders.com/121/1217094.jpg",
         "duration":"1 hr. 45 min",
-        "score":"8.51"
+        "score":8.51
     }
 ]
