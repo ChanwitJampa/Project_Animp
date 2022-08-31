@@ -1,7 +1,5 @@
 import './index.scss'
 import React from "react";
-import SlideshowWithPagination from "react-slideshow-with-pagination";
-
 
 const SeasonnalAnimePage=()=>{
     const seasonOptions = [
@@ -35,30 +33,6 @@ const SeasonnalAnimePage=()=>{
             <div className='wallpaper-text'>
                 <h1>Anime</h1> 
             </div>
-            // Slideshow with preset card features along with pagination and arrow buttons
-    <SlideshowWithPagination
-      options={yearOptions}
-      showNumbers={true}
-      showDots={true}
-      showArrows={true}
-      numberOfCardsPerScreen={3}
-      showOneCardForWidthLower="sm"
-      slideshowContainerMaxWidth={false}
-      cardWidth={500}
-      cardHeight={300}
-    />
-    // Slideshow with (only) pagination and arrow buttons feature
-    <SlideshowWithPagination
-      showNumbers={true}
-      showDots={true}
-      showArrows={true}
-    >
-      {yearOptions.map((item, index) => (
-        <React.Fragment key={index}>
-          <p>{item.value}</p>
-        </React.Fragment>
-      ))}
-    </SlideshowWithPagination>
         </div>
     )
 }
