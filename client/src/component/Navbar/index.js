@@ -4,6 +4,7 @@ import Profile from '../Profile';
 import {Link,withRouter} from "react-router-dom";
 
 const Navbar=()=>{
+    
     return(
         <div className='navbar'>
             <div className='navbar-left'>
@@ -11,7 +12,7 @@ const Navbar=()=>{
                     <h1 className='navbar-logo-text'>AniMap</h1>
                 </div>
                 <div>
-                    <ul className='navbar-item'>
+                    <ul className='navbar-item' >
                         <li className="navbar-item-li"><Link to="/" className="navbar-item-link">Home</Link></li>
                         <li className="navbar-item-li"><Link to="/allanime" className="navbar-item-link">Anime</Link></li>
                         <li className="navbar-item-li"><Link to="/topanime" className="navbar-item-link">Top Anime</Link></li>

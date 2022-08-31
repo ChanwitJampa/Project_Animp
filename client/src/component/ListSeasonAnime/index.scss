@@ -1,0 +1,33 @@
+$colorPink:#FF1493;
+$colorBlack:#141313;
+$colorWhite:#FFFFFF;
+$colorDarkPink:#371037;
+.season-year-list{
+    padding: 20px 90px 20px 90px;
+}
+.season-year-list h2{
+    color: $colorWhite;
+}
+.season-year-container{
+    justify-content: space-between;
+}
+.season-year-card{
+    padding: 20px 0px 20px 0px;
+    width:230px;
+}
+.season-year-card img{
+    border-radius: 15px;
+    width:230px;
+    height: 329px;
+    cursor: pointer;
+}
+.season-year-card button{
+    border-radius: 15px;
+    border: none;
+    cursor: pointer;
+    background-color: $colorPink;
+    color: $colorWhite;
+    width: 100%;
+    margin-top: 20px;
+    padding: 16px 10px 16px 10px;
+}
