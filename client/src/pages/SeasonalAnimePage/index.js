@@ -1,6 +1,11 @@
 import './index.scss'
-import React from "react";
-
+import React, { useRef, useState } from "react";
+// Import Swiper React components
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Pagination, Navigation } from "swiper";
+import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
 const SeasonnalAnimePage=()=>{
     const seasonOptions = [
         { value: 'Winter', label: 'Winter' },
@@ -33,6 +38,26 @@ const SeasonnalAnimePage=()=>{
             <div className='wallpaper-text'>
                 <h1>Anime</h1> 
             </div>
+            <div className='select-season-bar'>
+              <Swiper
+              slidesPerView={8}
+              spaceBetween={20}
+              slidesPerGroup={8}
+              loop={true}
+              loopFillGroupWithBlank={true}
+              pagination={{
+                clickable: true,
+              }}
+              navigation={true}
+              modules={[Pagination, Navigation]}
+              className="mySwiper"
+              >
+                {yearOptions.map((item)=>
+                  <SwiperSlide>{item.label}</SwiperSlide>
+                )}
+            </Swiper>
+            </div>
+            
         </div>
     )
 }
