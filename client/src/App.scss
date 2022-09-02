@@ -1,4 +1,8 @@
+$colorPink:#FF1493;
+$colorBlack:#141313;
+$colorWhite:#FFFFFF;
+$colorDarkPink:#201020;
 body{
-    background-color: black;
+    background-color: $colorDarkPink;
     font-family:'Prompt', sans-serif;
 }

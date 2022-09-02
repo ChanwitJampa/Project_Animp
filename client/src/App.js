@@ -4,6 +4,7 @@ import Navbar from './component/Navbar';
 import TopAnimePage from './pages/TopAnimePage';
 import SingleAnimePage from './pages/SingleAnimePage';
 import SeasonnalAnimePage from './pages/SeasonalAnimePage';
+import AnimeMapPage from './pages/AnimeMapPage';
 import React, { useState, useEffect } from "react";
 import './App.scss'
 function App() {
@@ -14,6 +15,7 @@ function App() {
         <Route path="/topanime" element={<TopAnimePage/>}/>
         <Route path="/anime/:id" element={<SingleAnimePage/>}/>
         <Route path="/allanime" element={<SeasonnalAnimePage/>}/>
+        <Route path="/mymap" element={<AnimeMapPage/>}/>
     </Routes>
     )
   }

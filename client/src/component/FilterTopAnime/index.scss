@@ -1,10 +1,11 @@
 $colorPink:#FF1493;
-$colorBlack:#141313;
+$colorBlack:#000000;
 $colorWhite:#FFFFFF;
-$colorDarkPink:#371037;
+$colorDarkPink:#201020;
+$colorDarkDarkPink :#371037;
 .card-filter{
     width: 100%;
-    background-color: $colorDarkPink;
+    background-color: $colorDarkDarkPink;
     border-radius: 20px;
     padding: 10px 0px 10px 0px;
     display: flex;

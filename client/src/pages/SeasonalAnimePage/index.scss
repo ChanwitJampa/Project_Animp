@@ -1,7 +1,8 @@
 $colorPink:#FF1493;
-$colorBlack:#141313;
+$colorBlack:#000000;
 $colorWhite:#FFFFFF;
-$colorDarkPink:#371037;
+$colorDarkPink:#201020;
+$colorDarkDarkPink :#371037;
 .season-text-header{
     padding: 45px 0px 20px 90px;
 }
@@ -17,7 +18,7 @@ $colorDarkPink:#371037;
 }
 .select-season-bar{
     height: 60px;
-    background-color:$colorDarkPink ;
+    background-color:$colorBlack ;
 }
 .swiper {
   width: 100%;
@@ -26,7 +27,7 @@ $colorDarkPink:#371037;
 
 .swiper-slide {
   text-align: center;
-  background: $colorDarkPink;
+  background: $colorBlack;
   /* Center slide text vertically */
   display: -webkit-box;
   display: -ms-flexbox;
@@ -49,7 +50,7 @@ $colorDarkPink:#371037;
   object-fit: cover;
 }
 .link-season{
-  background-color: $colorDarkPink;
+  background-color: $colorBlack;
   border: none;
   font-size: 18px;
   cursor: pointer;
