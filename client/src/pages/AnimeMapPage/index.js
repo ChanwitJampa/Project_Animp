@@ -1,5 +1,6 @@
 import './index.scss'
 import React, { useRef, useState,useEffect } from "react";
+import ProgressBar from '../../component/ProgressBar';
 const AnimeMapPage=()=>{
     const mainWallpaper= "./image/New_map.png"
     let mapStyle = {
@@ -31,7 +32,11 @@ const AnimeMapPage=()=>{
                 <span class="dot" id="dotnumber5"></span>
             </div>
             <div className='progress-box'>
-                <h2>Beginer</h2>
+                <div className='progress-box-hearder'>
+                    <h2>Beginer</h2>
+                </div>
+                <ProgressBar completed= '60' />
+                <div className='progress-box-detail'><h2>Viewed 6 item</h2></div>
             </div>
         </div>
     );

@@ -1,0 +1,13 @@
+$colorPink:#FF1493;
+$colorBlack:#000000;
+$colorWhite:#FFFFFF;
+$colorDarkPink:#201020;
+$colorDarkDarkPink :#371037;
+.progress-container{
+    height: 40px;
+    width: 100%;
+    background-color: #6F6B6B;
+    border-radius: 50px;
+    margin: 50px;
+    border: 4px solid $colorBlack;
+}

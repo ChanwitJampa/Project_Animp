@@ -24,6 +24,9 @@ $colorDarkDarkPink :#371037;
     display: inline-block;
     cursor: pointer;
     border: 4px solid $colorBlack;
+    &:hover{
+      background-color:$colorDarkDarkPink;
+  }
   }  
   #dotnumber1{
     float:right;
@@ -64,11 +67,21 @@ $colorDarkDarkPink :#371037;
     height: 200px;
     position: absolute;
     bottom: 0px;
+    display: flex;
+    flex-direction: row;
 }
-.progress-box h2{
+.progress-box-hearder h2{
     padding-left: 90px;
     padding-top: 25px;
     color: $colorWhite;
     font-size:40px;
     -webkit-text-stroke: 1px black; 
+}
+.progress-box-detail{
+  width: 450px;
+  padding-top: 40px;
+}
+.progress-box-detail h2{
+  color: $colorWhite;
+  -webkit-text-stroke: 1px black; 
 }
