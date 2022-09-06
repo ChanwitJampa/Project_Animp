@@ -8,30 +8,24 @@
         "episodes":25,
         "image":"https://cdn.myanimelist.net/images/anime/11/39717.jpg",
         "trailer":"",
+        "trailer_start":"",
         "wallpaper":"https://wallpaperaccess.com/full/1122002.jpg",
         "duration":"",
-        "score":""
+        "score":7.2
     },
     {
         "id":2,
         "name":"Attack on titan",
         "year":2013,
-        "studios":"Wit Studio",
+        "studios":"MAPPA",
         "seasonal":"Spring",
         "episodes":25,
         "image":"https://cdn.myanimelist.net/images/anime/10/47347.jpg",
-<<<<<<< Updated upstream
-        "trailer":"https://youtu.be/LHtdKWJdif4",
-        "trailer_start":"",
-        "wallpaper":"https://csirsu.com/wp-content/uploads/2021/04/Attack-on-titan_12.jpeg",
-        "duration":"24 min. per ep.",
-        "score":8.53
-=======
         "trailer":"",
+        "trailer_start":"",
         "wallpaper":"",
         "duration":"",
-        "score":""
->>>>>>> Stashed changes
+        "score":8.53
     },
     {
         "id":3,
@@ -42,9 +36,10 @@
         "episodes":12,
         "image":"https://cdn.myanimelist.net/images/anime/9/77809.jpg",
         "trailer":"",
+        "trailer_start":"",
         "wallpaper":"",
         "duration":"",
-        "score":""
+        "score":7.96
     },
     {
         "id":4,
@@ -55,9 +50,10 @@
         "episodes":25,
         "image":"https://cdn.myanimelist.net/images/anime/11/79410.jpg",
         "trailer":"",
+        "trailer_start":"",
         "wallpaper":"",
         "duration":"",
-        "score":""
+        "score":8.21
     },
     {
         "id":5,
@@ -68,9 +64,10 @@
         "episodes":12,
         "image":"https://cdn.myanimelist.net/images/anime/1179/119897.jpg",
         "trailer":"",
+        "trailer_start":"",
         "wallpaper":"",
         "duration":"",
-        "score":""
+        "score":8.32
     },
     {
         "id":6,
@@ -81,9 +78,10 @@
         "episodes":64,
         "image":"https://cdn.myanimelist.net/images/anime/1223/96541.jpg",
         "trailer":"",
+        "trailer_start":"",
         "wallpaper":"",
         "duration":"",
-        "score":""
+        "score":9.13
     },
     {
         "id":7,
@@ -94,9 +92,10 @@
         "episodes":24,
         "image":"https://cdn.myanimelist.net/images/anime/5/73199.jpg",
         "trailer":"",
+        "trailer_start":"",
         "wallpaper":"",
         "duration":"",
-        "score":""
+        "score":9.08
     },
     {
         "id":8,
@@ -107,9 +106,10 @@
         "episodes":25,
         "image":"https://cdn.myanimelist.net/images/anime/5/50331.jpg",
         "trailer":"",
+        "trailer_start":"",
         "wallpaper":"",
         "duration":"",
-        "score":""
+        "score":8.7
     },
     {
         "id":9,
@@ -120,9 +120,10 @@
         "episodes":24,
         "image":"https://cdn.myanimelist.net/images/anime/1171/109222.jpg",
         "trailer":"",
+        "trailer_start":"",
         "wallpaper":"",
         "duration":"",
-        "score":""
+        "score":8.67
     },
     {
         "id":10,
@@ -133,9 +134,10 @@
         "episodes":12,
         "image":"https://cdn.myanimelist.net/images/anime/1441/122795.jpg",
         "trailer":"",
+        "trailer_start":"",
         "wallpaper":"",
         "duration":"",
-        "score":""
+        "score":8.78
     },
     {
         "id":11,
@@ -146,9 +148,10 @@
         "episodes":12,
         "image":"https://cdn.myanimelist.net/images/anime/1830/118780.jpg",
         "trailer":"",
+        "trailer_start":"",
         "wallpaper":"",
         "duration":"",
-        "score":""
+        "score":8.53
     },
     {
         "id":12,
@@ -159,9 +162,10 @@
         "episodes":12,
         "image":"https://cdn.myanimelist.net/images/anime/1295/106551.jpg",
         "trailer":"",
+        "trailer_start":"",
         "wallpaper":"",
         "duration":"",
-        "score":""
+        "score":8.41
     },
     {
         "id":13,
@@ -172,9 +176,10 @@
         "episodes":24,
         "image":"https://cdn.myanimelist.net/images/anime/1613/102576.jpg",
         "trailer":"",
+        "trailer_start":"",
         "wallpaper":"",
         "duration":"",
-        "score":""
+        "score":8.18
     },
     {
         "id":14,
@@ -185,9 +190,10 @@
         "episodes":22,
         "image":"https://cdn.myanimelist.net/images/anime/13/50521.jpg",
         "trailer":"",
+        "trailer_start":"",
         "wallpaper":"",
         "duration":"",
-        "score":""
+        "score":8.09
     },
     {
         "id":15,
@@ -198,9 +204,10 @@
         "episodes":24,
         "image":"https://cdn.myanimelist.net/images/anime/12/67333.jpg",
         "trailer":"",
+        "trailer_start":"",
         "wallpaper":"",
         "duration":"",
-        "score":""
+        "score":8.19
     },
     {
         "id":16,
@@ -211,9 +218,10 @@
         "episodes":170,
         "image":"https://cdn.myanimelist.net/images/anime/2/88336.jpg",
         "trailer":"",
+        "trailer_start":"",
         "wallpaper":"",
         "duration":"",
-        "score":""
+        "score":8.13
     },
     {
         "id":17,
@@ -227,7 +235,7 @@
         "trailer_start":"",
         "wallpaper":"https://pic-bstarstatic.akamaized.net/ugc/ed8c4790be03bbf8187fb852fd633e7f.jpg",
         "duration":"1 hr. 37 min.",
-        "score":"8.02"
+        "score":8.02
     },
     {
         "id":18,
@@ -241,7 +249,7 @@
         "trailer_start":"",
         "wallpaper":"http://static.minitokyo.net/downloads/25/08/332925.jpg",
         "duration":"24 min. per ep",
-        "score":"8.91"
+        "score":8.91
     },
     {
         "id":19,
@@ -255,7 +263,7 @@
         "trailer_start":"",
         "wallpaper":"https://images7.alphacoders.com/737/737400.jpg",
         "duration":"1 hr. 46 min",
-        "score":"8.86"
+        "score":8.86
     },
     {
         "id":20,
@@ -269,7 +277,7 @@
         "trailer_start":"",
         "wallpaper":"https://wallpapercave.com/wp/wp11250477.jpg",
         "duration":"26 min. per ep",
-        "score":"8.85"
+        "score":8.85
     },
     {
         "id":21,
@@ -283,7 +291,7 @@
         "trailer_start":"",
         "wallpaper":"https://wallpaperaccess.com/full/3652673.jpg",
         "duration":"24 min. per ep",
-        "score":"8.79"
+        "score":8.79
     },
     {
         "id":22,
@@ -297,7 +305,7 @@
         "trailer_start":"",
         "wallpaper":"https://cdn.wallpapersafari.com/80/49/XO7wnY.jpg",
         "duration":"24 min. per ep",
-        "score":"8.67"
+        "score":8.67
     },
     {
         "id":23,
@@ -311,7 +319,7 @@
         "trailer_start":"",
         "wallpaper":"https://otakuusamagazine.com/wp-content/uploads/2022/07/op-film-red-imax2.jpg",
         "duration":"24 min. per ep",
-        "score":"7.88"
+        "score":7.88
     },
     {
         "id":24,
@@ -325,7 +333,7 @@
         "trailer_start":"",
         "wallpaper":"https://wallpapercave.com/uwp/uwp1625702.jpeg",
         "duration":"1 hr. 59 min",
-        "score":"8.66"
+        "score":8.66
     },
     {
         "id":25,
@@ -339,35 +347,35 @@
         "trailer_start":"",
         "wallpaper":"https://images3.alphacoders.com/114/1142445.png",
         "duration":"1 hr. 55 min",
-        "score":"8.65"
+        "score":8.65
     },
     {
         "id":26,
-        "name":"Natsume Yuujinchou Shi Natsume's Book of Friends Season 4",
+        "name":"Natsume's Book of Friends Season 4",
         "year":2012,
         "studios":"Brain's Base",
-        "seasonal":"",
+        "seasonal":"Winter",
         "episodes":13,
         "image":"https://cdn.myanimelist.net/images/anime/3/37449.jpg",
         "trailer":"https://youtu.be/n_Ku789_xVo",
         "trailer_start":"",
         "wallpaper":"https://images3.alphacoders.com/764/764333.jpg",
         "duration":"24 min. per ep",
-        "score":"8.65"
+        "score":8.65
     },
     {
         "id":27,
-        "name":"Natsume Yuujinchou Shi",
-        "year":2012,
+        "name":"Natsume's Book of Friends",
+        "year":2008,
         "studios":"Brain's Base",
-        "seasonal":"",
+        "seasonal":"Summer",
         "episodes":13,
-        "image":"https://cdn.myanimelist.net/images/anime/3/37449.jpg",
-        "trailer":"https://youtu.be/n_Ku789_xVo",
+        "image":"https://cdn.myanimelist.net/images/anime/1681/108439.jpg",
+        "trailer":"",
         "trailer_start":"",
-        "wallpaper":"https://images3.alphacoders.com/764/764333.jpg",
+        "wallpaper":"https://images-na.ssl-images-amazon.com/images/I/91MqMI+RQIL._RI_.jpg",
         "duration":"24 min. per ep",
-        "score":"8.65"
+        "score":8.32
     },
     {
         "id":28,
@@ -381,7 +389,7 @@
         "trailer_start":"",
         "wallpaper":"https://coolthemestores.com/wp-content/uploads/2021/02/death-note-featured-image.jpg",
         "duration":"23 min. per ep",
-        "score":"8.62"
+        "score":8.62
     },
     {
         "id":29,
@@ -395,7 +403,7 @@
         "trailer_start":"",
         "wallpaper":"https://i.pinimg.com/736x/31/60/06/316006be5372525d11134749c23a1635.jpg",
         "duration":"23 min. per ep",
-        "score":"8.56"
+        "score":8.56
     },
     {
         "id":30,
@@ -409,92 +417,92 @@
         "trailer_start":"",
         "wallpaper":"https://images2.alphacoders.com/121/1217094.jpg",
         "duration":"1 hr. 45 min",
-        "score":"8.51"
+        "score":8.51
     },
     {
         "id":31,
-        "name":"One Punch Man",
-        "year":2015,
-        "studios":"Madhouse",
-        "seasonal":"",
+        "name":"The Devil is a Part-Timer! Season 2",
+        "year":2022,
+        "studios":"Studio 3Hz",
+        "seasonal":"Summer",
         "episodes":12,
-        "image":"https://cdn.myanimelist.net/images/anime/12/76049.jpg",
-        "trailer":"https://youtu.be/Poo5lqoWSGw",
+        "image":"https://cdn.myanimelist.net/images/anime/1502/124354.jpg",
+        "trailer":"https://youtu.be/LxpTh8GKAL4",
         "trailer_start":"",
-        "wallpaper":"https://wallpapersden.com/one-punch-man-a-hero-nobody-knows-wallpaper/",
-        "duration":"24 min. per ep",
-        "score":"8.51"
+        "wallpaper":"https://www.online-station.net/wp-content/uploads/2021/03/01-1200x630-7.jpg",
+        "duration":"23 min. per ep.",
+        "score":7.17
     },
     {
         "id":32,
-        "name":"Fruits Basket: Prelude",
+        "name":"Overlord IV",
         "year":2022,
-        "studios":"TMS Entertainment",
-        "seasonal":"",
-        "episodes":1,
-        "image":"https://myanimelist.net/anime/49310/Fruits_Basket__Prelude/pics",
-        "trailer":"https://youtu.be/ZeEB1VoNato",
+        "studios":"Madhouse",
+        "seasonal":"Summer",
+        "episodes":13,
+        "image":"https://cdn.myanimelist.net/images/anime/1530/120110.jpg",
+        "trailer":"https://youtu.be/tNYQjEyTO6s",
         "trailer_start":"",
-        "wallpaper":"https://www.slashfilm.com/901513/fruits-basket-prelude-review-an-incomplete-love-story/",
-        "duration":"1 hr. 28 min",
-        "score":"8.51"
+        "wallpaper":"https://sportshub.cbsistatic.com/i/2021/12/17/7e7ca027-1660-4c1b-a188-3725a0e64079/overlord-season-4-anime.jpg",
+        "duration":"23 min. per ep.",
+        "score":8.33
     },
     {
         "id":33,
-        "name":"Banana Fish",
-        "year":2018,
-        "studios":"MAPPA",
-        "seasonal":"",
-        "episodes":24,
-        "image":"https://myanimelist.net/anime/49310/Fruits_Basket__Prelude/pics",
-        "trailer":"https://youtu.be/LRzyT-lty2g",
+        "name":"Rent-a-Girlfriend 2nd Season",
+        "year":2022,
+        "studios":"TMS Entertainment",
+        "seasonal":"Summer",
+        "episodes":12,
+        "image":"https://cdn.myanimelist.net/images/anime/1070/124592.jpg",
+        "trailer":"https://youtu.be/EwbHVNLPM4g",
         "trailer_start":"",
-        "wallpaper":"https://wall.alphacoders.com/by_sub_category.php?id=298722&name=Banana+Fish+Wallpapers",
-        "duration":"22 min. per ep",
-        "score":"8.50"
+        "wallpaper":"https://i0.wp.com/www.animegeek.com/wp-content/uploads/2020/09/Rent-A-Girlfriend-Season-2-Anime-Announcement.jpg?fit=1200%2C675&ssl=1",
+        "duration":"24 min. per ep.",
+        "score":6.51
     },
     {
         "id":34,
-        "name":"Mob Psycho 100",
-        "year":2016,
-        "studios":"MAPPA",
-        "seasonal":"",
-        "episodes":24,
-        "image":"https://myanimelist.net/anime/32182/Mob_Psycho_100/pics",
-        "trailer":"https://youtu.be/nTze7vAdRpM",
+        "name":"Classroom of the Elite II",
+        "year":2022,
+        "studios":"Lerche",
+        "seasonal":"Summer",
+        "episodes":13,
+        "image":"https://cdn.myanimelist.net/images/anime/1010/124180.jpg",
+        "trailer":"https://youtu.be/0mM3lQytac4",
         "trailer_start":"",
-        "wallpaper":"https://www.anime2you.de/news/348917/mobile-game-mob-psycho-100-psychic-battle-ab-sofort-verfuegbar/",
-        "duration":"24 min. per ep",
-        "score":"8.48"
+        "wallpaper":"https://br.atsit.in/th/wp-content/uploads/2022/03/classroom-of-the-elite-e0b88be0b8b5e0b88be0b8b1e0b988e0b899-2-e0b8a3e0b8b1e0b89ae0b882e0b989e0b8ade0b8a1e0b8b9e0b8a5e0b8a7e0b8b1e0b899e0b897.jpg",
+        "duration":"23 min. per ep.",
+        "score":8.05
     },
     {
         "id":35,
-        "name":"Steins;Gate Movie: Fuka Ryouiki no Déjà vu",
-        "year":2013,
-        "studios":"White Fox",
-        "seasonal":"",
-        "episodes":1,
-        "image":"https://myanimelist.net/anime/11577/Steins_Gate_Movie__Fuka_Ryouiki_no_D%C3%A9j%C3%A0_vu/pics",
-        "trailer":"https://youtu.be/WU95WOqrP54",
+        "name":"Call of the Night",
+        "year":2022,
+        "studios":"LIDENFILMS",
+        "seasonal":"Summer",
+        "episodes":13,
+        "image":"https://cdn.myanimelist.net/images/anime/1045/123711.jpg",
+        "trailer":"https://youtu.be/a4bSbmqwhso",
         "trailer_start":"",
-        "wallpaper":"https://aniblogtracker.com/post.php?id=27043",
-        "duration":"1 hr. 30 min",
-        "score":"8.46"
+        "wallpaper":"https://www.animegeek.com/wp-content/uploads/2022/06/TV%E3%82%A2%E3%83%8B%E3%83%A1%E3%80%8E%E3%82%88%E3%81%B5%E3%81%8B%E3%81%97%E3%81%AE%E3%81%86%E3%81%9F%E3%80%8F%E6%9C%ACPV-1-19-screenshot.jpg",
+        "duration":"22 min. per ep.",
+        "score":8.05
     },
     {
         "id":36,
-        "name":"Saiki Kusuo no Ψ-nan",
-        "year":2016,
-        "studios":"J.C.Staff, Egg Firm",
-        "seasonal":"",
-        "episodes":120,
-        "image":"https://myanimelist.net/anime/33255/Saiki_Kusuo_no_%CE%A8-nan/pics",
-        "trailer":"https://youtu.be/sbw7QB6nrTc",
+        "name":"Made in Abyss: The Golden City of the Scorching Sun",
+        "year":2022,
+        "studios":"Kinema Citrus",
+        "seasonal":"Summer",
+        "episodes":12,
+        "image":"https://cdn.myanimelist.net/images/anime/1864/122519.jpg",
+        "trailer":"https://youtu.be/CWZz5x-XCA8",
         "trailer_start":"",
-        "wallpaper":"https://wallpaperaccess.com/saiki-kusuo-no-psi-nan",
-        "duration":"5 min. per ep",
-        "score":"8.42"
-    },
+        "wallpaper":"http://static.hidive.com/titles/MIA/MIA_02_KEY_1200x450.jpg",
+        "duration":"24 min. per ep.",
+        "score":8.77
+    }, 
     {
         "id":37,
         "name":"Hunter x Hunter",
@@ -827,66 +835,6 @@
         "image":"https://myanimelist.net/anime/21419/Detective_Conan_Movie_18__The_Sniper_from_Another_Dimension/pics",
         "trailer":"https://youtu.be/AtwRBjmUHX8",
         "trailer_start":"",
-        "wallpaper":"http://static.hidive.com/titles/MIA/MIA_02_KEY_1200x450.jpg",
-        "duration":"24 min. per ep.",
-        "score":8.77
-    },
-    {
-        "id":37,
-        "name":"Komi Can't Communicate",
-        "year":2021,
-        "studios":"OLM",
-        "seasonal":"Fall",
-        "episodes":12,
-        "image":"https://cdn.myanimelist.net/images/anime/1899/117237.jpg",
-        "trailer":"https://youtu.be/3snByVaQUF0",
-        "trailer_start":"",
-        "wallpaper":"https://occ-0-590-2567.1.nflxso.net/dnm/api/v6/E8vDc_W8CLv7-yMQu8KMEC7Rrr8/AAAABdFpoAUTAK32U3kaNnJq9tW0XnSBrIFdmppaDECnI7kz1_ffEG2UKxgShsPNWr4qPaXGSqw4GgIROiQ4Lwyok2GT_6b3aFg2-wVM.jpg?r=9a7",
-        "duration":"23 min. per ep.",
-        "score":8.00
-    },
-    {
-        "id":38,
-        "name":"Sakura-sou no Pet na Kanojo",
-        "year":2012,
-        "studios":"J.C.Staff",
-        "seasonal":"Fall",
-        "episodes":24,
-        "image":"https://cdn.myanimelist.net/images/anime/4/43643.jpg",
-        "trailer":"https://youtu.be/HPTtuR1EF_U",
-        "trailer_start":"",
-        "wallpaper":"https://images8.alphacoders.com/361/thumb-1920-361041.jpg",
-        "duration":"23 min. per ep.",
-        "score":8.10
-    },
-    {
-        "id":39,
-        "name":"Golden Time",
-        "year":2013,
-        "studios":"J.C.Staff",
-        "seasonal":"Fall",
-        "episodes":24,
-        "image":"https://cdn.myanimelist.net/images/anime/12/52091.jpg",
-        "trailer":"https://youtu.be/44njDYJ5OJA",
-        "trailer_start":"",
-        "wallpaper":"https://f.ptcdn.info/139/012/000/1384452363-yandere270-o.jpg",
-        "duration":"24 min. per ep.",
-        "score":7.75
-    },
-    {
-        "id":40,
-        "name":"Charlotte",
-        "year":2015,
-        "studios":"P.A. Works",
-        "seasonal":"Summer",
-        "episodes":13,
-        "image":"https://cdn.myanimelist.net/images/anime/12/74683.jpg",
-        "trailer":"https://youtu.be/6AgEzww-a0w",
-        "trailer_start":"",
-        "wallpaper":"https://a-static.besthdwallpaper.com/charlotte-anime-wx-ll-pepexr-1680x1050-23544_5.jpg",
-        "duration":"24 min. per ep.",
-        "score":7.75
-=======
         "wallpaper":"https://www.animenewsnetwork.com/encyclopedia/anime.php?id=15794",
         "duration":"1 hr. 50 min.",
         "score":"8.08"
@@ -905,4 +853,5 @@
         "duration":"23 min. per ep",
         "score":"8.08"
     }
+
 ]
