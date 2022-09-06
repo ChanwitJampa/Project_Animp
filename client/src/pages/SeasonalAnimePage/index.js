@@ -36,7 +36,7 @@ const yearOptions =[
     { value: '2006', label: '2006' },
     { value: '2005', label: '2005' },
 ]
-const SeasonnalAnimePage=()=>{
+  const SeasonnalAnimePage=()=>{
     const [season,setSeason]=useState("Summer")
     const [year,setYear]=useState(yearOptions[0].label)
     if(seasonYearOption==""){
@@ -49,6 +49,13 @@ const SeasonnalAnimePage=()=>{
     const onChangeValue=(season,year)=>{
       setSeason(season)
       setYear(year)
+    }
+    
+    let linkSeason = {
+      color:`#FFFFFF`
+    };
+    let linkSeasonNow={
+      color:`#FF1493`
     }
     return(
         <div>
@@ -70,7 +77,16 @@ const SeasonnalAnimePage=()=>{
               className="mySwiper"
               >
                 {seasonYearOption.map((item,index)=>
-                  <SwiperSlide key={index} className='swiper-slide-season'><button className='link-season' onClick={()=>onChangeValue(item.season,item.year)}>{item.season} {item.year}</button></SwiperSlide>
+                  <SwiperSlide key={index} className='swiper-slide-season'>
+                    {item.season==season&&item.year==year?
+                      <button style={linkSeasonNow} className='link-season' 
+                            onClick={()=>onChangeValue(item.season,item.year)}>
+                            {item.season} {item.year}</button>:
+                      <button style={linkSeason} className='link-season' 
+                            onClick={()=>onChangeValue(item.season,item.year)}>
+                            {item.season} {item.year}</button>}
+                    
+                  </SwiperSlide>
                 )}
             </Swiper>
             </div>

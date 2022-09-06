@@ -5,35 +5,38 @@ $colorDarkPink:#371037;
 .season-year-list{
     //padding: 20px 90px 20px 90px;
     margin: auto;
-    width: 1280px;
+    width: 1300px;
 }
 .season-year-list h2{
+    padding-top: 15px;
     color: $colorWhite;
 }
 .season-year-container{
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
-    justify-content: space-between;
+    margin:-15px;
 }
 .season-year-card{
     //padding: 20px 60px 20px 0px;
-    width:230px;
+    width:189px;
     padding-top: 20px;
+    margin: 15px;
 }
 .season-year-card img{
     border-radius: 15px;
-    width:230px;
-    height: 329px;
+    width:189px;
+    height: 270px;
     cursor: pointer;
 }
 .season-year-card button{
-    border-radius: 15px;
+    border-radius: 12px;
     border: none;
     cursor: pointer;
     background-color: $colorPink;
     color: $colorWhite;
     width: 100%;
     margin-top: 20px;
-    padding: 16px 10px 16px 10px;
+    padding: 14px 10px 14px 10px;
+    font-size: 16px;
 }
