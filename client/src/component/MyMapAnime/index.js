@@ -1,6 +1,6 @@
 import './index.scss'
 const MyMapAnime=()=>{
-    return(<div className="season-year-list">
+    return(<div className="myanime-list">
         <h2>My Anime</h2>
         <h4>Watched in (item)</h4>
     </div>);

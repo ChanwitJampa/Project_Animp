@@ -9,7 +9,7 @@ const Navbar=()=>{
         <div className='navbar'>
             <div className='navbar-left'>
                 <div className='navbar-logo'>
-                    <h1 className='navbar-logo-text'>AniMap</h1>
+                    <h1 className='navbar-logo-text'><Link to="/" className="navbar-item-link">AniMap</Link></h1>
                 </div>
                 <div>
                     <ul className='navbar-item' >

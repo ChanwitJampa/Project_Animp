@@ -3,18 +3,23 @@ $colorBlack:#141313;
 $colorWhite:#FFFFFF;
 $colorDarkPink:#371037;
 .season-year-list{
-    padding: 20px 90px 20px 90px;
+    //padding: 20px 90px 20px 90px;
+    margin: auto;
+    width: 1280px;
 }
 .season-year-list h2{
     color: $colorWhite;
 }
 .season-year-container{
     display: flex;
+    flex-wrap: wrap;
     flex-direction: row;
+    justify-content: space-between;
 }
 .season-year-card{
-    padding: 20px 60px 20px 0px;
+    //padding: 20px 60px 20px 0px;
     width:230px;
+    padding-top: 20px;
 }
 .season-year-card img{
     border-radius: 15px;

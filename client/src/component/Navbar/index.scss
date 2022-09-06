@@ -1,6 +1,8 @@
 $colorPink:#FF1493;
-$colorBlack:#141313;
+$colorBlack:#000000;
 $colorWhite:#FFFFFF;
+$colorDarkPink:#201020;
+$colorDarkDarkPink :#371037;
 *{
     padding: 0;
     margin: 0;
@@ -37,7 +39,7 @@ $colorWhite:#FFFFFF;
     padding: 10px 10px 10px 20px;
 }
 .navbar-logo-text{
-    color: #FFFFFF;
+    font-size: 32px;
 }
 .navbar-item{
     overflow: hidden;
@@ -49,9 +51,12 @@ $colorWhite:#FFFFFF;
 }
 .navbar-item-link{
     display: block;
-    color: white;
+    color: $colorWhite;
     text-align: center;
     text-decoration: none;
+    &:hover{
+        color: $colorBlack;
+    }
 }
 .navbar-profile{
     padding: 10px;

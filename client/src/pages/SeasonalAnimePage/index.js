@@ -47,8 +47,6 @@ const SeasonnalAnimePage=()=>{
         }
     }
     const onChangeValue=(season,year)=>{
-      console.log(season)
-      console.log(year)
       setSeason(season)
       setYear(year)
     }
@@ -72,7 +70,7 @@ const SeasonnalAnimePage=()=>{
               className="mySwiper"
               >
                 {seasonYearOption.map((item,index)=>
-                  <SwiperSlide key={index}><button className='link-season' onClick={()=>onChangeValue(item.season,item.year)}>{item.season} {item.year}</button></SwiperSlide>
+                  <SwiperSlide key={index} className='swiper-slide-season'><button className='link-season' onClick={()=>onChangeValue(item.season,item.year)}>{item.season} {item.year}</button></SwiperSlide>
                 )}
             </Swiper>
             </div>

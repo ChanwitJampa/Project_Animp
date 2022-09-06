@@ -488,5 +488,19 @@
         "wallpaper":"https://www.animegeek.com/wp-content/uploads/2022/06/TV%E3%82%A2%E3%83%8B%E3%83%A1%E3%80%8E%E3%82%88%E3%81%B5%E3%81%8B%E3%81%97%E3%81%AE%E3%81%86%E3%81%9F%E3%80%8F%E6%9C%ACPV-1-19-screenshot.jpg",
         "duration":"22 min. per ep.",
         "score":8.05
+    },
+    {
+        "id":36,
+        "name":"Made in Abyss: The Golden City of the Scorching Sun",
+        "year":2022,
+        "studios":"Kinema Citrus",
+        "seasonal":"Summer",
+        "episodes":12,
+        "image":"https://cdn.myanimelist.net/images/anime/1864/122519.jpg",
+        "trailer":"https://youtu.be/CWZz5x-XCA8",
+        "trailer_start":"",
+        "wallpaper":"http://static.hidive.com/titles/MIA/MIA_02_KEY_1200x450.jpg",
+        "duration":"24 min. per ep.",
+        "score":8.77
     }
 ]

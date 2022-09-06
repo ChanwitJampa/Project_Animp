@@ -1,0 +1,37 @@
+$colorPink:#FF1493;
+$colorBlack:#000000;
+$colorWhite:#FFFFFF;
+$colorDarkPink:#201020;
+$colorDarkDarkPink :#371037;
+#swiper-anime {
+    width: 90%;
+    height: 100%;
+    padding: 40px;
+  }
+  
+.swiper-slide-anime {
+    text-align: center;
+    /* Center slide text vertically */
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+  }
+.swiper-slide-anime img {
+    height: 220px;
+    width: 160px;
+    border-radius: 15px;
+}
+.slide-anime-header h2{
+    padding: 20px 90px 0px 90px;
+    color: $colorWhite;
+    font-weight: 500;
+}

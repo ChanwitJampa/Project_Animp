@@ -16,6 +16,7 @@ const MyMapFrist=(props)=>{
         return(
             <div className='tag-point'>
                 <h3>You are here</h3> 
+                <p>Viewed {totalAnime} item</p>
                 <div className='arrow-side'></div>
             </div>
         )
@@ -32,6 +33,7 @@ const MyMapFrist=(props)=>{
                         <p>อาณาจักรแห่งการค้าขาย ผู้คนจำนวนมากเข้ามารวมตัวกันอยู่ที่นี่และทำการค้าขายกัน</p>
                         <div class="arrow"></div>
                     </div>
+                    {totalAnime<=10&&totalAnime>5?<TagPosition/>:<></>}
                 </div>
             </div>
             <div className='linenumber2'>
@@ -41,6 +43,7 @@ const MyMapFrist=(props)=>{
                         <p>ท่าเรือแห่งเดียวของเกาะแห่งนี้ สถานที่ๆ เดียวที่จะพอนักเดินทางทั้งหลายไปยังเมืองอื่นๆ ได้</p>
                         <div class="arrow"></div>
                     </div>
+                    {totalAnime<=25&&totalAnime>20?<TagPosition/>:<></>}
                 </div>
             </div>
             <div className='linenumber3'>
@@ -50,6 +53,7 @@ const MyMapFrist=(props)=>{
                         <p>แม่น้ำที่เป็นเส้นทางเดินเรือหลักของเรือขนส่งสินค้า จากต่างเมืองเข้าสู่อาณาจักร</p>
                         <div class="arrow"></div>
                     </div>
+                    {totalAnime<=15&&totalAnime>10?<TagPosition/>:<></>}
                 </div>
             </div>
             <div className='linenumber4'>
@@ -59,6 +63,7 @@ const MyMapFrist=(props)=>{
                         <p>ค่ายที่เหล่านักเดินทางมักจะพักก่อนที่จะเดินทางต่อ มีคนจำนวนมาละทิ้งปลายทางและอาศัยที่นี่ </p>
                         <div class="arrow"></div>
                     </div>
+                    {totalAnime<=20&&totalAnime>15?<TagPosition/>:<></>}
                 </div>
             </div>
             <div className='linenumber5'>
@@ -68,7 +73,7 @@ const MyMapFrist=(props)=>{
                         <p>ผู้กล้าทุกๆ คนจะเริ่มต้นเดินทางที่นี่ เตรียมใจไว้ให้พร้อมละ</p>
                         <div class="arrow"></div>
                     </div>
-                    <TagPosition/>
+                    {totalAnime<=5&&totalAnime>=0?<TagPosition/>:<></>}
                 </div>
             </div>
             <div className='progress-box'>
