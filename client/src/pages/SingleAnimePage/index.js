@@ -13,6 +13,18 @@ const SingleAnimePage=(props)=>{
         backgroundPosition: `center center`,
         backgroundSize: `cover`
       };
+    const [scrollPosition, setScrollPosition] = useState(0);
+    const handleScroll = () => {
+        const position = window.pageYOffset;
+        setScrollPosition(position);
+      };
+    useEffect(() => {
+        window.addEventListener("scroll", handleScroll);
+        return () => {
+          window.removeEventListener("scroll", handleScroll);
+        };
+    },[]);
+    console.log(scrollPosition)
     return(
         <div>
             <div style={dropzoneStyle}>
@@ -41,8 +53,7 @@ const SingleAnimePage=(props)=>{
                     <h1>Story</h1>
                 </div>
                 <div>
-                    <h1>Trailer</h1>
-                    <iframe width="560" height="315" src={singleAnime[0].trailer} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    <iframe width="560" height="315" src={`${singleAnime[0].trailer}?autoplay=${scrollPosition>200?1:0}&mute=1`} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 </div>
             </div>
         </div>
