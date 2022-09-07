@@ -42,7 +42,7 @@ const SingleAnimePage=(props)=>{
                 </div>
                 <div>
                     <h1>Trailer</h1>
-                    
+                    <iframe width="560" height="315" src={singleAnime[0].trailer} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 </div>
             </div>
         </div>
