@@ -2,6 +2,7 @@ import './index.scss'
 import { useEffect, useState } from "react";
 import { Routes, Route, useParams } from "react-router-dom";
 import Dataanime from "../../assets/anime.json"
+import SliderAnime from '../../component/SliderAnime';
 const SingleAnimePage=(props)=>{
     let params = useParams();
     const singleAnime=Dataanime.filter((item)=>{if(item.id==params.id) return item})
@@ -14,6 +15,8 @@ const SingleAnimePage=(props)=>{
         backgroundSize: `cover`
       };
     const [scrollPosition, setScrollPosition] = useState(0);
+    const [isAutoPlay, setIsAutoPlay]=useState(false)
+    const [isPauseVideo,setIsPauseVideo]=useState(false)
     const handleScroll = () => {
         const position = window.pageYOffset;
         setScrollPosition(position);
@@ -24,7 +27,12 @@ const SingleAnimePage=(props)=>{
           window.removeEventListener("scroll", handleScroll);
         };
     },[]);
-    console.log(scrollPosition)
+    useEffect(()=>{
+        if(scrollPosition>200){
+            setIsAutoPlay(true)
+        }
+    },[scrollPosition])
+    
     return(
         <div>
             <div style={dropzoneStyle}>
@@ -52,10 +60,13 @@ const SingleAnimePage=(props)=>{
                 <div>
                     <h1>Story</h1>
                 </div>
-                <div>
-                    <iframe width="560" height="315" src={`${singleAnime[0].trailer}?autoplay=${scrollPosition>200?1:0}&mute=1`} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <div className='videoWrapper-container'>
+                    <div className='videoWrapper'>
+                    <iframe width="560" height="315" id="player" src={`${singleAnime[0].trailer}?autoplay=${isAutoPlay}&mute=1&pauseVideo=${isPauseVideo}`} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
                 </div>
             </div>
+            <SliderAnime tagAnime="From same studio" mode="studio" valueOfMode={singleAnime[0].studios}/>
         </div>
         )
 }

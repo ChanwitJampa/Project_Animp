@@ -555,7 +555,7 @@
         "image":"https://cdn.myanimelist.net/images/anime/1795/95088.jpg",
         "trailer":"https://www.youtube.com/embed/g5xWqjFglsk",
         "trailer_start":"",
-        "wallpaper":"https://occ-0-2705-2774.1.nflxso.net/dnm/api/v6/6AYY37jfdO6hpXcMjf9Yu5cnmO0/AAAABb150EDveGACRjpVRds2J_ngNFjEJjw-JJ8CzWkVZzUQCSR2OKi-58ZmnpUUtJYvWyhy3hAEgFs1pC8LZq9Edp7dGu-LEJV5k1-b.jpg?r=89c",
+        "wallpaper":"https://images.alphacoders.com/901/901101.png",
         "duration":"24 min. per ep",
         "score":"8.67"
     },
@@ -838,6 +838,61 @@
         "wallpaper":"https://wallpaperaccess.com/yowamushi-pedal",
         "duration":"23 min. per ep",
         "score":"8.08"
+    },
+    {
+        "id":61,
+        "name":"Komi Can't Communicate",
+        "year":2021,
+        "studios":"OLM",
+        "seasonal":"Fall",
+        "episodes":12,
+        "image":"https://cdn.myanimelist.net/images/anime/1899/117237.jpg",
+        "trailer":"https://www.youtube.com/embed/3snByVaQUF0",
+        "trailer_start":"",
+        "wallpaper":"https://occ-0-590-2567.1.nflxso.net/dnm/api/v6/E8vDc_W8CLv7-yMQu8KMEC7Rrr8/AAAABdFpoAUTAK32U3kaNnJq9tW0XnSBrIFdmppaDECnI7kz1_ffEG2UKxgShsPNWr4qPaXGSqw4GgIROiQ4Lwyok2GT_6b3aFg2-wVM.jpg?r=9a7",
+        "duration":"23 min. per ep.",
+        "score":8.00
+    },
+    {
+        "id":62,
+        "name":"Sakura-sou no Pet na Kanojo",
+        "year":2012,
+        "studios":"J.C.Staff",
+        "seasonal":"Fall",
+        "episodes":24,
+        "image":"https://cdn.myanimelist.net/images/anime/4/43643.jpg",
+        "trailer":"https://www.youtube.com/embed/HPTtuR1EF_U",
+        "trailer_start":"",
+        "wallpaper":"https://images8.alphacoders.com/361/thumb-1920-361041.jpg",
+        "duration":"23 min. per ep.",
+        "score":8.10
+    },
+    {
+        "id":63,
+        "name":"Golden Time",
+        "year":2013,
+        "studios":"J.C.Staff",
+        "seasonal":"Fall",
+        "episodes":24,
+        "image":"https://cdn.myanimelist.net/images/anime/12/52091.jpg",
+        "trailer":"https://www.youtube.com/embed/44njDYJ5OJA",
+        "trailer_start":"",
+        "wallpaper":"https://static.zerochan.net/Golden.Time.full.1632209.jpg",
+        "duration":"24 min. per ep.",
+        "score":7.75
+    },
+    {
+        "id":64,
+        "name":"Charlotte",
+        "year":2015,
+        "studios":"P.A. Works",
+        "seasonal":"Summer",
+        "episodes":13,
+        "image":"https://cdn.myanimelist.net/images/anime/12/74683.jpg",
+        "trailer":"https://www.youtube.com/embed/6AgEzww-a0w",
+        "trailer_start":"",
+        "wallpaper":"https://a-static.besthdwallpaper.com/charlotte-anime-wx-ll-pepexr-1680x1050-23544_5.jpg",
+        "duration":"24 min. per ep.",
+        "score":7.75
     }
-
 ]

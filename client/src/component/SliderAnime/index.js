@@ -23,18 +23,21 @@ const SliderAnime=(props)=>{
                 return item
             }
         }
+        if(mode=="studio"){
+            if(valueOfMode==item.studios){
+                return item
+            }
+        }
     }
     useEffect(()=>{
         if(mode=="topanime"){
             setAnimeList(Dataanime.slice(1,valueOfMode).sort((firstItem, secondItem) => secondItem.score - firstItem.score));
         }else{
             setAnimeList(Dataanime.filter(filterAnime).sort((firstItem, secondItem) => secondItem.score - firstItem.score))
-            
         }
+        
     }
     )
-    
-    
     return(
         <div className="slide-anime-header">
             <h2>{tagAnime}</h2>
