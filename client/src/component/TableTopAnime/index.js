@@ -21,7 +21,7 @@ const TableTopAnime=(props)=>{
                    return <tr key={index} className='table-content-row'>
                     <td className='table-rank'>{index+1}</td>
                     <td><div className='card-anime'>
-                    <Link to={`/anime/${anime.id}`}><img src={anime.image} alt="image"/></Link></div></td>
+                    <a href={`/anime/${anime.id}`}><img src={anime.image} alt="image"/></a></div></td>
                     <td className='card-anime-detail'><h2>{anime.name}</h2> <br/>
                         Episodes: {anime.episodes} <br/>
                         Season: {anime.seasonal} <br/>
