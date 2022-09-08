@@ -52,17 +52,16 @@ const SingleAnimePage=(props)=>{
                 <div className='anime-detail'>
                     <h2>Detail</h2><br/>
                     <p>Anime: {singleAnime[0].name}</p><br/>
-                    {singleAnime[0].seasonal?<p>Seasonal: {singleAnime[0].seasonal}</p>:<p>Type: Movie</p>}
+                    {singleAnime[0].seasonal?<p>Episodes: {singleAnime[0].episodes} <br/>Seasonal: {singleAnime[0].seasonal}</p>:
+                    <p>Type: Movie</p>}
                     <br/>
                     <p>Year: {singleAnime[0].year}</p><br/>
                     <p>Studio: {singleAnime[0].studios}</p><br/>
-                </div>
-                <div>
-                    <h1>Story</h1>
+                    <p>Duration: {singleAnime[0].duration}</p>
                 </div>
                 <div className='videoWrapper-container'>
                     <div className='videoWrapper'>
-                    <iframe width="560" height="315" id="player" src={`${singleAnime[0].trailer}?autoplay=${isAutoPlay}&mute=1&pauseVideo=${isPauseVideo}`} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        <iframe width="560" height="315" id="player" src={`${singleAnime[0].trailer}?autoplay=${isAutoPlay}&mute=1&pauseVideo=${isPauseVideo}`} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                     </div>
                 </div>
             </div>

@@ -9,9 +9,15 @@ import { Link, withRouter } from "react-router-dom";
 import { Routes, Route, useParams } from "react-router-dom";
 import './index.scss'
 import Dataanime from "../../assets/anime.json"
+import AddAnimeModal from "../AddAnimeModal";
+
 const SliderAnime=(props)=>{
     const {tagAnime,mode,valueOfMode} =props
     const [animeList,setAnimeList]=useState([])
+    const [modalIsOpen, setIsOpen] = useState(false);
+    function openModal() {
+        setIsOpen(true);
+    }
     const filterAnime=(item)=>{
         if(tagAnime=="New Anime"){
             if(item.year=="2022"&&item.seasonal=="Summer"){
@@ -51,9 +57,10 @@ const SliderAnime=(props)=>{
               id="swiper-anime"
               >
                 {animeList.map((item,index)=>
-                  <SwiperSlide key={index} className='swiper-slide-anime'><img src={item.image}></img></SwiperSlide>
+                  <SwiperSlide key={index} className='swiper-slide-anime'><img src={item.image} onClick={openModal}></img></SwiperSlide>
                 )}
             </Swiper>
+            <AddAnimeModal modalOpen={modalIsOpen}/>
         </div>
     )
 }
