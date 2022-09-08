@@ -1,6 +1,7 @@
+import './index.scss'
 const NotFoundPage=()=>{
     return(
-    <div>
+    <div className='wallpaper-notfound'>
         <h1>Not Found</h1>
     </div>)
 }
