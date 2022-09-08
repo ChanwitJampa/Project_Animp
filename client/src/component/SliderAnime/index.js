@@ -45,23 +45,30 @@ const SliderAnime=(props)=>{
     }
     )
     return(
-        <div className="slide-anime-header">
-            <h2>{tagAnime}</h2>
-            <Swiper
-              slidesPerView={7}
-              spaceBetween={20}
-              slidesPerGroup={7}
-              navigation={true}
-              modules={[Pagination, Navigation]}
-              className="mySwiper"
-              id="swiper-anime"
-              >
-                {animeList.map((item,index)=>
-                  <SwiperSlide key={index} className='swiper-slide-anime'><img src={item.image} onClick={openModal}></img></SwiperSlide>
-                )}
-            </Swiper>
-            <AddAnimeModal modalOpen={modalIsOpen}/>
-        </div>
+        <>
+            <div className="slide-anime-header">
+                <h2>{tagAnime}</h2>
+                <Swiper
+                slidesPerView={7}
+                spaceBetween={20}
+                slidesPerGroup={7}
+                navigation={true}
+                modules={[Pagination, Navigation]}
+                className="mySwiper"
+                id="swiper-anime"
+                >
+                    {animeList.map((item,index)=>
+                    <SwiperSlide key={index} className='swiper-slide-anime'><img src={item.image} onClick={openModal}></img>
+                    
+                    </SwiperSlide>
+                    
+                    )}
+                </Swiper>
+                
+            </div>
+        <AddAnimeModal modalOpen={modalIsOpen}/>
+        </>
+        
     )
 }
 export default SliderAnime;
