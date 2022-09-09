@@ -16,35 +16,51 @@ const SingleAnimePage=(props)=>{
       };
     const [scrollPosition, setScrollPosition] = useState(0);
     const [isAutoPlay, setIsAutoPlay]=useState(false)
-    const [isPauseVideo,setIsPauseVideo]=useState(false)
-    const handleScroll = () => {
-        const position = window.pageYOffset;
-        setScrollPosition(position);
-      };
-    useEffect(() => {
-        window.addEventListener("scroll", handleScroll);
-        return () => {
-          window.removeEventListener("scroll", handleScroll);
-        };
-    },[]);
+    // const handleScroll = () => {
+    //     const position = window.pageYOffset;
+    //     setScrollPosition(position);
+    //   };
+    // useEffect(() => {
+    //     window.addEventListener("scroll", handleScroll);
+    //     return () => {
+    //       window.removeEventListener("scroll", handleScroll);
+    //     };
+    // },[]);
     useEffect(()=>{
-        if(scrollPosition>200){
-            setIsAutoPlay(true)
-        }
-    },[scrollPosition])
-    
+        const myTimeout = setTimeout(setAutoPlay, 3000);
+    },[])
+    const setAutoPlay=()=>{
+        setIsAutoPlay(true)
+    }
+
     return(
         <div>
             <div style={dropzoneStyle}>
-                <div className='wallpaper-text'>
-                    <h1>{singleAnime[0].name}</h1>
-                </div>
-                <div className='wallpaper-detailbox'>
-                    <div className='wallpaper-detailbox-imagebox'>
-                        <img src={singleAnime[0].image}></img>
+                <div className='singleAnime-wallpaper'>
+                    <div className='singleAnime-wallpaper-text'>
+                        <h1>{singleAnime[0].name}</h1>
                     </div>
-                    <div className='wallpaper-detailbox-textbox'>
-                        <button>Add to list</button>
+                    <div className='singleAnime-wallpaper-detailbox'>
+                        <div className='singleAnime-wallpaper-detailbox-imagebox'>
+                            <img src={singleAnime[0].image}></img>
+                            <button>Add to list</button>
+                        </div>
+                        <div className='singleAnime-wallpaper-detailbox-tagAnime'>
+                            <div className='detailbox-tagAnime-score'>
+                                <h2>Score {singleAnime[0].score}/10</h2>
+                                <h2>My score /10</h2><br></br>
+                            </div>
+                            <div className='detailbox-tagAnime-score'>
+                                <button>School</button>
+                                <button>School</button>
+                                <button>School</button>
+                            </div>
+                        </div>
+                        <div className='videoWrapper-container'>
+                            <div className='videoWrapper'>
+                                <iframe width="560" height="315" id="player" src={`${singleAnime[0].trailer}?autoplay=${isAutoPlay}&mute=1`} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -52,18 +68,15 @@ const SingleAnimePage=(props)=>{
                 <div className='anime-detail'>
                     <h2>Detail</h2><br/>
                     <p>Anime: {singleAnime[0].name}</p><br/>
-                    {singleAnime[0].seasonal?<p>Episodes: {singleAnime[0].episodes} <br/>Seasonal: {singleAnime[0].seasonal}</p>:
-                    <p>Type: Movie</p>}
-                    <br/>
+                    {singleAnime[0].seasonal?<>
+                        <p>Episodes: {singleAnime[0].episodes}</p><br/>
+                        <p>Seasonal: {singleAnime[0].seasonal}</p></>:
+                    <p>Type: Movie</p>}<br/>
                     <p>Year: {singleAnime[0].year}</p><br/>
                     <p>Studio: {singleAnime[0].studios}</p><br/>
                     <p>Duration: {singleAnime[0].duration}</p>
                 </div>
-                <div className='videoWrapper-container'>
-                    <div className='videoWrapper'>
-                        <iframe width="560" height="315" id="player" src={`${singleAnime[0].trailer}?autoplay=${isAutoPlay}&mute=1&pauseVideo=${isPauseVideo}`} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                    </div>
-                </div>
+                
             </div>
             <SliderAnime tagAnime="From same studio" mode="studio" valueOfMode={singleAnime[0].studios}/>
         </div>
