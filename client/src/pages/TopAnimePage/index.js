@@ -23,7 +23,6 @@ const TopAnimePage=()=>{
         setStudio("")
         setSeason("")
         setYear("")
-        console.log(value)
     }
     const filterAnime=(item)=>{
         if(studio=="" && season=="" && year==""){

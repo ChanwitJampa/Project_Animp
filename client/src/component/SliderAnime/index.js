@@ -10,12 +10,23 @@ import { Routes, Route, useParams } from "react-router-dom";
 import './index.scss'
 import Dataanime from "../../assets/anime.json"
 import AddAnimeModal from "../AddAnimeModal";
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
+import Modal from '@mui/material/Modal';
 
 const SliderAnime=(props)=>{
     const {tagAnime,mode,valueOfMode} =props
     const [animeList,setAnimeList]=useState([])
+    const [modalAnime,setModalAnime]=useState()
+
     const [open, setOpen] = useState(false);
-    const handleOpen = () => setOpen(true);
+    const handleOpen = (item) => {
+        setModalAnime(item)
+        setOpen(true);
+    }
+    const handleClose = () =>setOpen(false);
+
     const filterAnime=(item)=>{
         if(tagAnime=="New Anime"){
             if(item.year=="2022"&&item.seasonal=="Summer"){
@@ -47,16 +58,16 @@ const SliderAnime=(props)=>{
             <div className="slide-anime-header">
                 <h2>{tagAnime}</h2>
                 <Swiper
-                slidesPerView={7}
-                spaceBetween={20}
-                slidesPerGroup={7}
-                navigation={true}
-                modules={[Pagination, Navigation]}
-                className="mySwiper"
-                id="swiper-anime"
-                >
+                    slidesPerView={7}
+                    spaceBetween={20}
+                    slidesPerGroup={7}
+                    navigation={true}
+                    modules={[Pagination, Navigation]}
+                    className="mySwiper"
+                    id="swiper-anime"
+                    >
                     {animeList.map((item,index)=>
-                    <SwiperSlide key={index} className='swiper-slide-anime' onClick={handleOpen}><img src={item.image} ></img>
+                    <SwiperSlide key={index} className='swiper-slide-anime' onClick={()=>handleOpen(item)}><img src={item.image} ></img>
                     
                     </SwiperSlide>
                     
@@ -64,7 +75,7 @@ const SliderAnime=(props)=>{
                 </Swiper>
                 
             </div>
-            <AddAnimeModal open={open} />
+            <AddAnimeModal open={open} onClose={handleClose} anime={modalAnime}/>
         </>
         
     )
