@@ -1,53 +1,25 @@
 import React, { useRef, useState,useEffect } from "react";
 import ReactDOM from 'react-dom';
-import Modal from 'react-modal';
-const customStyles = {
-    content: {
-      top: '50%',
-      left: '50%',
-      right: 'auto',
-      bottom: 'auto',
-      marginRight: '-50%',
-      transform: 'translate(-50%, -50%)',
-    },
-  };
-  
-  // Make sure to bind modal to your appElement (https://reactcommunity.org/react-modal/accessibility/)
+import './index.scss'
+import Modal from '@mui/material/Modal';
+
 const AddAnimeModal=(props)=>{
-    let subtitle;
-    const {modalOpen}=props
-    const [modalIsOpen, setIsOpen] = useState(false);
-    function openModal() {
-        setIsOpen(true);
+    const {open}=props
+    const [isOpen, setOpen] = useState();
+    const handleClose = () =>{
+      setOpen(false);
     }
-     
-      function afterOpenModal() {
-        // references are now sync'd and can be accessed.
-        subtitle.style.color = '#f00';
-      }
-    
-      function closeModal() {
-        setIsOpen(false);
-      }
+    useEffect(()=>{
+      setOpen(open)
+    },[])
     return(
-        <Modal
-          isOpen={modalOpen}
-          onAfterOpen={afterOpenModal}
-          onRequestClose={closeModal}
-          style={customStyles}
-          contentLabel="Example Modal"
-        >
-          <h2 ref={(_subtitle) => (subtitle = _subtitle)}>Hello</h2>
-          <button onClick={closeModal}>close</button>
-          <div>I am a modal</div>
-          <form>
-            <input />
-            <button>tab navigation</button>
-            <button>stays</button>
-            <button>inside</button>
-            <button>the modal</button>
-          </form>
-        </Modal>
-     )
+    <Modal 
+      open={isOpen}
+      onClose={handleClose}
+      aria-labelledby="modal-modal-title"
+      aria-describedby="modal-modal-description">
+        <div className="modalStyles"><h1>Hello</h1>
+        </div>
+    </Modal>);
 }
 export default AddAnimeModal;

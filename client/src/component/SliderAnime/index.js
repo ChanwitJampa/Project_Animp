@@ -14,10 +14,8 @@ import AddAnimeModal from "../AddAnimeModal";
 const SliderAnime=(props)=>{
     const {tagAnime,mode,valueOfMode} =props
     const [animeList,setAnimeList]=useState([])
-    const [modalIsOpen, setIsOpen] = useState(false);
-    function openModal() {
-        setIsOpen(true);
-    }
+    const [open, setOpen] = useState(false);
+    const handleOpen = () => setOpen(true);
     const filterAnime=(item)=>{
         if(tagAnime=="New Anime"){
             if(item.year=="2022"&&item.seasonal=="Summer"){
@@ -58,7 +56,7 @@ const SliderAnime=(props)=>{
                 id="swiper-anime"
                 >
                     {animeList.map((item,index)=>
-                    <SwiperSlide key={index} className='swiper-slide-anime'><img src={item.image} onClick={openModal}></img>
+                    <SwiperSlide key={index} className='swiper-slide-anime' onClick={handleOpen}><img src={item.image} ></img>
                     
                     </SwiperSlide>
                     
@@ -66,7 +64,7 @@ const SliderAnime=(props)=>{
                 </Swiper>
                 
             </div>
-        <AddAnimeModal modalOpen={modalIsOpen}/>
+            <AddAnimeModal open={open} />
         </>
         
     )
