@@ -978,5 +978,33 @@
         "wallpaper":"https://images6.alphacoders.com/112/thumb-1920-1126742.png",
         "duration":"23 min. per ep.",
         "score":8.03
+    },
+    {
+        "id":71,
+        "name":"Sword Art Online: Progressive Movie - Hoshi Naki Yoru no Aria",
+        "year":2021,
+        "studios":"A-1 Pictures",
+        "seasonal":"",
+        "episodes":1,
+        "image":"https://cdn.myanimelist.net/images/anime/1590/116274.jpg",
+        "trailer":"https://youtu.be/embed/blAzIwXB9zo",
+        "trailer_start":"",
+        "wallpaper":"https://i0.wp.com/erzat.blog/wp-content/uploads/2022/07/Sword-Art-Online-Progressive-Movie-Hoshi-Naki-Yoru-no-Aria-Limited-Edition-1-e1657707591529.jpg?fit=1012%2C570&ssl=1",
+        "duration":"1 hr. 37 min.",
+        "score":8.02
+    },
+    {
+        "id":72,
+        "name":"ReLIFE",
+        "year":2016,
+        "studios":"TMS Entertainment",
+        "seasonal":"Summer",
+        "episodes":1,
+        "image":"https://cdn.myanimelist.net/images/anime/3/82149.jpg",
+        "trailer":"https://youtu.be/embed/Azs6jA8vRH8",
+        "trailer_start":"",
+        "wallpaper":"https://images6.alphacoders.com/789/789005.jpg",
+        "duration":"23 min. per ep.",
+        "score":7.98
     }
 ]
