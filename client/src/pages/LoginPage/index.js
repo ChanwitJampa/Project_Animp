@@ -4,22 +4,9 @@ import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import TextField from '@mui/material/TextField';
-import { makeStyles } from '@mui/styles';
 import { pink } from '@mui/material/colors';
 import { Link, withRouter, Navigate } from "react-router-dom";
-const useStyles = makeStyles(() => ({
-    textField: {           
-        paddingBottom: 0,
-        marginTop: 0,
-        fontWeight: 500,
-        backgroundColor:'white'
-    },
-    input: {
-        color: 'white'
-    }
-}));
 const LoginPage = () => {
-    const classes = useStyles();
     return (
         <div>
             <div className='login-bar'>
@@ -37,11 +24,11 @@ const LoginPage = () => {
                             color: 'white',
                             mb: 3
                         }} 
-                        variant="standard"
+                        
                         >
                         <h3>Username</h3>
                         <TextField
-                            className={classes.textField}
+                            className='textField'
                             hiddenLabel
                             required
                             id="outlined-basic"
@@ -58,11 +45,11 @@ const LoginPage = () => {
                         >
                         <h3>Password</h3>
                         <TextField
-                            className={classes.textField}
+                            className='textField'
                             hiddenLabel
                             required
                             id="outlined-basic"
-                            placeholder="username or e-mail"
+                            placeholder="password"
                         />
                     </FormControl>
                     <button>Sign In</button>
