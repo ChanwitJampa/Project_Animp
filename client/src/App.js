@@ -6,6 +6,7 @@ import SingleAnimePage from './pages/SingleAnimePage';
 import SeasonnalAnimePage from './pages/SeasonalAnimePage';
 import AnimeMapPage from './pages/AnimeMapPage';
 import NotFoundPage from './pages/NotFoundPage';
+import LoginPage from './pages/LoginPage';
 import React, { useState, useEffect } from "react";
 import './App.scss'
 function App() {
@@ -18,12 +19,13 @@ function App() {
         <Route path="/allanime" element={<SeasonnalAnimePage/>}/>
         <Route path="/mymap" element={<AnimeMapPage/>}/>
         <Route path="*" element={<NotFoundPage/>}/>
+        <Route path="/login" element={<LoginPage/>}/>
     </Routes>
     )
   }
   return (
     <div>
-      <Navbar/>
+      
       <AuthApp/>
     </div>
   );

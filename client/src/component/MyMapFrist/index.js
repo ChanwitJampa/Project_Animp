@@ -22,7 +22,7 @@ const MyMapFrist=(props)=>{
         )
     }
     return(
-        <div style={mapStyle}>
+        <div style={{backgroundImage:`url(${mainWallpaper})`}} className="animeMap-map">
             <div className='animeMap-text-header'>
                 <h1>My Map</h1> 
             </div>
