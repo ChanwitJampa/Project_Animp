@@ -38,17 +38,18 @@ $colorDarkDarkPink :#371037;
         font-weight: 500;
         padding-bottom: 15px;
     }
-    button{
-        width: 100%;
-        background-color: $colorPink;
-        border-radius: 20px;
-        color: $colorWhite;
-        font-size: 32px;
-        font-weight: 500;
-        padding: 15px;
-        margin-top: 20px;
-        margin-bottom: 20px;
-    }
+}
+.login-button{
+    width: 100%;
+    background-color: $colorPink;
+    border-radius: 20px;
+    color: $colorWhite;
+    font-size: 32px;
+    font-weight: 500;
+    padding: 15px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    cursor: pointer;
 }
 .login-card-bottom{
     display: flex;
@@ -64,7 +65,7 @@ $colorDarkDarkPink :#371037;
         text-align: center;
         text-decoration: none;
         &:hover{
-            color: $colorBlack;
+            color: $colorDarkDarkPink;
         }
     }
 }
