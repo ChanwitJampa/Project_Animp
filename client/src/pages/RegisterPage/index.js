@@ -40,7 +40,7 @@ const RegisterPage = () => {
     const handleClickShowRePassword = () => {
         setValues({
             ...values,
-            showPassword: !values.showRePassword,
+            showRePassword: !values.showRePassword,
         });
     };
     const handleMouseDownRePassword = (event) => {

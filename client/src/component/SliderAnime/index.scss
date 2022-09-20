@@ -25,10 +25,17 @@ $colorDarkDarkPink :#371037;
     -webkit-align-items: center;
     align-items: center;
   }
-.swiper-slide-anime img {
-    height: 220px;
-    width: 160px;
-    border-radius: 15px;
+.swiper-slide-anime{
+    img{
+      height: 220px;
+      width: 160px;
+      border-radius: 15px;
+      transition: transform .3s ease;
+      &:hover{
+        transform: scale(1.2);
+      }
+    }
+
 }
 .slide-anime-header h2{
     padding: 20px 90px 0px 90px;

@@ -5,15 +5,9 @@ import { Pagination, Navigation } from "swiper";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
-import { Link, withRouter } from "react-router-dom";
-import { Routes, Route, useParams } from "react-router-dom";
 import './index.scss'
 import Dataanime from "../../assets/anime.json"
 import AddAnimeModal from "../AddAnimeModal";
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
-import Modal from '@mui/material/Modal';
 
 const SliderAnime=(props)=>{
     const {tagAnime,mode,valueOfMode} =props

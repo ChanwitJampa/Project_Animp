@@ -30,6 +30,7 @@ $colorDarkPink:#371037;
 .table-header-20{
     width: 20%;
 }
+
 .table-content-row{
     height: 20px;
 }
@@ -39,11 +40,20 @@ $colorDarkPink:#371037;
     background-color: $colorPink;
     border: none;
     border-radius: 12px;
+    cursor: pointer;
+    &:hover{
+        background-color: $colorDarkPink;
+    }
 }
 .card-anime img{
     height: 220px;
     width: 160px;
     border-radius: 15px;
+    cursor: pointer;
+    transition: transform .3s ease;
+    &:hover{
+      transform: scale(1.2);
+    }
 }
 .table-rank{
     text-align: center;
@@ -52,4 +62,5 @@ $colorDarkPink:#371037;
 .card-anime-detail{
     margin-top: 20px;
     position: absolute;
+    width: 520px;
 }

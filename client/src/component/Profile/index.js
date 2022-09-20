@@ -6,6 +6,7 @@ const Profile=()=>{
             <button class="user-profile"></button>
             <div class="dropdown-content">
                 <Link to="#">Profile</Link>
+                <Link to="#">Admin</Link>
                 <Link to="#">Logout</Link>
         </div>
 </div>

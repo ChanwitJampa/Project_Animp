@@ -1,5 +1,5 @@
 $colorPink:#FF1493;
-$colorBlack:#141313;
+$colorBlack:#000000;
 $colorWhite:#FFFFFF;
 $colorDarkPink:#371037;
 .modalStyles{
@@ -9,15 +9,38 @@ $colorDarkPink:#371037;
     transform: translate(-50%, -50%);
     width: 840px;
     background-color: $colorBlack;
-    padding: 4px;
     border: none;
     border-radius: 15px;
-    img{
-        width: 100%;
-        border-top-left-radius: 15px ;
-        border-top-right-radius: 15px ;
+}
+.modal-header{
+    color: $colorWhite;
+    padding: 20px 30px 10px 30px;
+    cursor: pointer;
+}
+.modal-buttom{
+    display: flex;
+    justify-content: space-around;
+    padding: 30px;
+    h2{
+        color:$colorPink;
+        font-size: 24px;
+        font-weight: 400;
+        padding-bottom: 20px;
     }
     h1{
+        color:$colorWhite;
+        font-size: 32px;
+        padding-bottom: 5px;
+        border-bottom:  5px solid #FF1493;
+    }
+    td{
         color: $colorWhite;
     }
+    tr{
+        padding-right: 20px;
+    }
+}
+.modal-select{
+    background-color: $colorWhite;
+    border-radius: 5px;
 }

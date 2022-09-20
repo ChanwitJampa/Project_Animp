@@ -3,8 +3,10 @@ import { useEffect, useState } from "react";
 import { Routes, Route, useParams } from "react-router-dom";
 import Dataanime from "../../assets/anime.json"
 import SliderAnime from '../../component/SliderAnime';
+import { useNavigate } from "react-router-dom";
 const SingleAnimePage=(props)=>{
     let params = useParams();
+    const navigate =useNavigate()
     const singleAnime=Dataanime.filter((item)=>{if(item.id==params.id) return item})
     let dropzoneStyle = {
         width: `100%`,
@@ -26,7 +28,9 @@ const SingleAnimePage=(props)=>{
     //       window.removeEventListener("scroll", handleScroll);
     //     };
     // },[]);
+    
     useEffect(()=>{
+        window.scrollTo(0, 0);
         const myTimeout = setTimeout(setAutoPlay, 3000);
     },[])
     const setAutoPlay=()=>{
@@ -73,10 +77,9 @@ const SingleAnimePage=(props)=>{
                         <p>Seasonal: {singleAnime[0].seasonal}</p></>:
                     <p>Type: Movie</p>}<br/>
                     <p>Year: {singleAnime[0].year}</p><br/>
-                    <p>Studio: {singleAnime[0].studios}</p><br/>
+                    <p onClick={()=>navigate(`/studio/${singleAnime[0].id}`)}>Studio: {singleAnime[0].studios}</p><br/>
                     <p>Duration: {singleAnime[0].duration}</p>
                 </div>
-                
             </div>
             <SliderAnime tagAnime="From same studio" mode="studio" valueOfMode={singleAnime[0].studios}/>
         </div>
