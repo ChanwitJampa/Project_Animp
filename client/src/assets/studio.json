@@ -133,5 +133,113 @@
         "studio_image":"",
         "studio_logo":"https://cdn.myanimelist.net/img/common/companies/14.png",
         "studio_established":"Nov, 1976"
+    },
+    {
+        "id":16,
+        "studio_name":"MAPPA",
+        "studio_year":"2011",
+        "studio_description":"MAPPA (MAPPA Co., Ltd.) is a Japanese animation studio founded by Masao Maruyama in June 2014, following his departure from Madhouse. It employs 250 people as of December 2021 between its Tokyo and Sendai studios. Maruyama's intent was for the film Kono Sekai no Katasumi ni (In This Corner of the World) to be the studio's first release, though the project would not be complete until 2016. By that time, the studio had already co-produced Sakamichi no Apollon (Kids on the Slope) and Hajime no Ippo: Rising, and released its first original anime—Zankyou no Terror (Terror in Resonance)",
+        "studio_image":"",
+        "studio_logo":"https://cdn.myanimelist.net/img/common/companies/569.png",
+        "studio_established":"Jun 14, 2011"
+    },
+    {
+        "id":17,
+        "studio_name":"Pierrot",
+        "studio_year":"1979",
+        "studio_description":"",
+        "studio_image":"",
+        "studio_logo":"https://cdn.myanimelist.net/img/common/companies/1.png",
+        "studio_established":"May, 1979"
+    },
+    {
+        "id":18,
+        "studio_name":"CoMix Wave Films",
+        "studio_year":"2007",
+        "studio_description":"",
+        "studio_image":"",
+        "studio_logo":"https://cdn.myanimelist.net/img/common/companies/291.png",
+        "studio_established":"Mar, 2007"
+    },
+    {
+        "id":19,
+        "studio_name":"B.CMAY PICTURES",
+        "studio_year":"2017",
+        "studio_description":"",
+        "studio_image":"",
+        "studio_logo":"https://cdn.myanimelist.net/img/common/companies/1350.png",
+        "studio_established":"Apr, 2017"
+    },
+    {
+        "id":20,
+        "studio_name":"Toei Animation",
+        "studio_year":"1948",
+        "studio_description":"",
+        "studio_image":"",
+        "studio_logo":"https://cdn.myanimelist.net/img/common/companies/18.png",
+        "studio_established":"Jan 23, 1948"
+    },
+    {
+        "id":21,
+        "studio_name":"Brain's Base",
+        "studio_year":"1996",
+        "studio_description":"",
+        "studio_image":"",
+        "studio_logo":"https://cdn.myanimelist.net/img/common/companies/112.png",
+        "studio_established":"Jul, 1996"
+    },
+    {
+        "id":22,
+        "studio_name":"Studio 3Hz",
+        "studio_year":"2013",
+        "studio_description":"",
+        "studio_image":"",
+        "studio_logo":"https://cdn.myanimelist.net/img/common/companies/1127.png",
+        "studio_established":"Mar, 2013"
+    },
+    {
+        "id":23,
+        "studio_name":"Lerche",
+        "studio_year":"2011",
+        "studio_description":"",
+        "studio_image":"",
+        "studio_logo":"https://cdn.myanimelist.net/img/common/companies/456.png",
+        "studio_established":"2011"
+    },
+    {
+        "id":24,
+        "studio_name":"LIDENFILMS",
+        "studio_year":"2012",
+        "studio_description":"",
+        "studio_image":"",
+        "studio_logo":"https://cdn.myanimelist.net/img/common/companies/839.png",
+        "studio_established":"Feb 22, 2012"
+    },
+    {
+        "id":25,
+        "studio_name":"Kinema Citrus",
+        "studio_year":"2008",
+        "studio_description":"",
+        "studio_image":"",
+        "studio_logo":"https://cdn.myanimelist.net/img/common/companies/290.png",
+        "studio_established":"Mar 3, 2008"
+    },
+    {
+        "id":26,
+        "studio_name":"Studio Deen",
+        "studio_year":"1975",
+        "studio_description":"",
+        "studio_image":"",
+        "studio_logo":"https://cdn.myanimelist.net/img/common/companies/37.png",
+        "studio_established":"Mar 14, 1975"
+    },
+    {
+        "id":27,
+        "studio_name":"SILVER LINK.",
+        "studio_year":"2007",
+        "studio_description":"SILVER LINK. (SILVER LINK., Inc.) is a Japanese animation studio based in based in Mitaka City, Tokyo. The studio was founded by former Frontline animation producer Hayato Kaneko in December 2007 and specialized in subcontracting for drawing work. The company also owned two subsidiary studios, BEEP Co. and CONNECT Inc., both of which have been dissolved. In 2020, Asahi Broadcasting Group Holdings aquired SILVER LINK.",
+        "studio_image":"",
+        "studio_logo":"https://cdn.myanimelist.net/img/common/companies/300.png",
+        "studio_established":"Dec, 2007"
     }
 ]
