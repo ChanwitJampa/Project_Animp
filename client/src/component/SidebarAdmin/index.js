@@ -23,23 +23,24 @@ import CampaignIcon from '@mui/icons-material/Campaign';
 import { pink } from '@mui/material/colors';
 import { BrowserRouter, Redirect, Route ,Routes} from 'react-router-dom'
 import AdminHomePage from '../../pages/AdminHomePage';
-import AdminAnime from '../AdminAnime';
+import AdminAnimePage from '../../pages/AdminAnimePage';
+import { useNavigate } from "react-router-dom";
 const drawerWidth = 240;
 
 function SidebarAdmin(props) {
     const { window} = props;
     const [mobileOpen, setMobileOpen] = React.useState(false);
-
+    const navigate =useNavigate()
     const handleDrawerToggle = () => {
         setMobileOpen(!mobileOpen);
     };
     const SideList = [
-        { id: '1', item: "Anime", icon: <LocalMoviesIcon/> },
-        { id: '2', item: "Anime Tag", icon:  <TagIcon/>},
-        { id: '3', item: "Studio", icon:  <MovieIcon/> },
-        { id: '4', item: "User", icon:  <AssignmentIndIcon/>},
-        { id: '5', item: "Wallpaper", icon:  <WallpaperIcon/> },
-        { id: '6', item: "News", icon: <CampaignIcon/> }
+        { id: '1', item: "Anime", icon: <LocalMoviesIcon/> ,link:"/adminanime"},
+        { id: '2', item: "Anime Tag", icon:  <TagIcon/>,link:"/"},
+        { id: '3', item: "Studio", icon:  <MovieIcon/>,link:"/" },
+        { id: '4', item: "User", icon:  <AssignmentIndIcon/>,link:"/"},
+        { id: '5', item: "Wallpaper", icon:  <WallpaperIcon/>,link:"/" },
+        { id: '6', item: "News", icon: <CampaignIcon/>,link:"/" }
     ]
     const drawer = (
         <div>
@@ -47,7 +48,7 @@ function SidebarAdmin(props) {
             <Divider />
             <List>
                 {SideList.map((text, index) => (
-                    <ListItem key={text.item} disablePadding>
+                    <ListItem key={text.item} disablePadding onClick={()=>navigate(`${text.link}`)}>
                         <ListItemButton>
                             <ListItemIcon>
                                 {text.icon}
@@ -68,7 +69,7 @@ function SidebarAdmin(props) {
             <AppBar
                 position="fixed"
                 sx={{
-                    backgroundColor: pink[600],
+                    backgroundColor: pink[400],
                     width: { sm: `calc(100% - ${drawerWidth}px)` },
                     ml: { sm: `${drawerWidth}px` },
                 }}
@@ -127,7 +128,7 @@ function SidebarAdmin(props) {
                 <Toolbar />
                 <Routes>
                     <Route path="/" element={<AdminHomePage/>}/>
-                    <Route path="/adminanime" element={<AdminAnime/>}/>
+                    <Route path="/adminanime" element={<AdminAnimePage/>}/>
                 </Routes>
             </Box>
         </Box>

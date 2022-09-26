@@ -1,0 +1,23 @@
+$colorPink: #FF1493;
+$colorBlack: #000000;
+$colorWhite: #FFFFFF;
+$colorDarkPink: #201020;
+$colorDarkDarkPink :#371037;
+$colorPurple : #7900D8;
+$colorGray : #C3BBBE;
+.modal-addanime-modalStyles{
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 640px;
+    background-color: $colorWhite;
+    border: none;
+    border-radius: 15px;
+}
+.modal-addanime-container{
+    padding: 50px;
+    h3{
+        color: $colorBlack;
+    }
+}

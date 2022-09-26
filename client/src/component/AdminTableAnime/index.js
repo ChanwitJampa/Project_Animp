@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { useRef, useState,useEffect } from "react";
 import PropTypes from 'prop-types';
 import Box from '@mui/material/Box';
 import Table from '@mui/material/Table';
@@ -12,32 +12,10 @@ import TableSortLabel from '@mui/material/TableSortLabel';
 import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
 import { visuallyHidden } from '@mui/utils';
-
-function createData(name, calories, fat, carbs, protein) {
-  return {
-    name,
-    calories,
-    fat,
-    carbs,
-    protein,
-  };
-}
-
-const rows = [
-  createData('Cupcake', 305, 3.7, 67, 4.3),
-  createData('Donut', 452, 25.0, 51, 4.9),
-  createData('Eclair', 262, 16.0, 24, 6.0),
-  createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-  createData('Gingerbread', 356, 16.0, 49, 3.9),
-  createData('Honeycomb', 408, 3.2, 87, 6.5),
-  createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-  createData('Jelly Bean', 375, 0.0, 94, 0.0),
-  createData('KitKat', 518, 26.0, 65, 7.0),
-  createData('Lollipop', 392, 0.2, 98, 0.0),
-  createData('Marshmallow', 318, 0, 81, 2.0),
-  createData('Nougat', 360, 19.0, 9, 37.0),
-  createData('Oreo', 437, 18.0, 63, 4.0),
-];
+import Dataanime from "../../assets/anime.json"
+import './index.scss'
+import { pink } from '@mui/material/colors';
+import AdminAddAnimeModal from '../AdminAddAnimeModal';
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -71,37 +49,43 @@ function stableSort(array, comparator) {
 
 const headCells = [
   {
-    id: 'name',
+    id: 'anime',
     numeric: false,
     disablePadding: true,
     label: 'Anime',
   },
   {
-    id: 'calories',
+    id: 'studio',
     numeric: true,
     disablePadding: false,
     label: 'Studio',
   },
   {
-    id: 'fat',
+    id: 'score',
     numeric: true,
     disablePadding: false,
     label: 'Score',
   },
   {
-    id: 'carbs',
+    id: 'year',
     numeric: true,
     disablePadding: false,
     label: 'Year',
   },
   {
-    id: 'protein',
+    id: 'season',
     numeric: true,
     disablePadding: false,
     label: 'Season',
   },
   {
-    id: 'protein',
+    id: 'type',
+    numeric: true,
+    disablePadding: false,
+    label: 'Type',
+  },
+  {
+    id: 'manage',
     numeric: true,
     disablePadding: false,
     label: 'Manage',
@@ -116,17 +100,17 @@ function EnhancedTableHead(props) {
   };
 
   return (
-    <TableHead>
+    <TableHead sx={{backgroundColor: pink[400]}}>
       <TableRow>
         <TableCell padding="checkbox">
-          
         </TableCell>
         {headCells.map((headCell) => (
           <TableCell
             key={headCell.id}
-            align={headCell.numeric ? 'right' : 'left'}
             padding={headCell.disablePadding ? 'none' : 'normal'}
-           
+            sx={{
+              color:'white'
+            }}
           >
            {headCell.label}
           </TableCell>
@@ -144,28 +128,11 @@ EnhancedTableHead.propTypes = {
   orderBy: PropTypes.string.isRequired,
   rowCount: PropTypes.number.isRequired,
 };
-export default function AdminAnime() {
-  const [order, setOrder] = React.useState('asc');
-  const [orderBy, setOrderBy] = React.useState('calories');
-  const [selected, setSelected] = React.useState([]);
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
-
-  const handleRequestSort = (event, property) => {
-    const isAsc = orderBy === property && order === 'asc';
-    setOrder(isAsc ? 'desc' : 'asc');
-    setOrderBy(property);
-  };
-
-  const handleSelectAllClick = (event) => {
-    if (event.target.checked) {
-      const newSelected = rows.map((n) => n.name);
-      setSelected(newSelected);
-      return;
-    }
-    setSelected([]);
-  };
-
+export default function AdminTableAnime() {
+  
+  const [selected, setSelected] = useState([]);
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -178,8 +145,18 @@ export default function AdminAnime() {
 
   // Avoid a layout jump when reaching the last page with empty rows.
   const emptyRows =
-    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
-
+    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - Dataanime.length) : 0;
+    const [modalAnime,setModalAnime]=useState()
+    const [modalMode,setModalMode]=useState('')
+    const [open, setOpen] = useState(false);
+    const handleOpen = (item,mode) => {
+        setModalMode(mode);
+        if(mode=="edit"){
+            setModalAnime(item)
+        }
+        setOpen(true);
+    }
+    const handleClose = () =>setOpen(false);
   return (
     <Box sx={{ width: '100%' }}>
       <Paper sx={{ width: '100%', mb: 2 }}>
@@ -196,10 +173,9 @@ export default function AdminAnime() {
             <TableBody>
               {/* if you don't need to support IE11, you can replace the `stableSort` call with:
                  rows.slice().sort(getComparator(order, orderBy)) */}
-              {rows
+              {Dataanime
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row, index) => { 
-                  const labelId = `enhanced-table-checkbox-${index}`;
                   return (
                     <TableRow
                       hover
@@ -211,17 +187,17 @@ export default function AdminAnime() {
                       </TableCell>
                       <TableCell
                         component="th"
-                        id={labelId}
                         scope="row"
                         padding="none"
                       >
                         {row.name}
                       </TableCell>
-                      <TableCell align="right">{row.calories}</TableCell>
-                      <TableCell align="right">{row.fat}</TableCell>
-                      <TableCell align="right">{row.carbs}</TableCell>
-                      <TableCell align="right">{row.protein}</TableCell>
-                      <TableCell align="center"></TableCell>
+                      <TableCell align="left">{row.studios}</TableCell>
+                      <TableCell align="left">{row.score}</TableCell>
+                      <TableCell align="left">{row.year}</TableCell>
+                      <TableCell align="left">{row.seasonal}</TableCell>
+                      <TableCell align="left">{row.seasonal?'TV':'Movie'}</TableCell>
+                      <TableCell align="left"><button className='adminTable-detail-button' onClick={()=>handleOpen([],"edit")}>Detail</button></TableCell>
                     </TableRow>
                   );
                 })}
@@ -240,14 +216,14 @@ export default function AdminAnime() {
         <TablePagination
           rowsPerPageOptions={[5 ,10, 25, 50]}
           component="div"
-          count={rows.length}
+          count={Dataanime.length}
           rowsPerPage={rowsPerPage}
           page={page}
           onPageChange={handleChangePage}
           onRowsPerPageChange={handleChangeRowsPerPage}
         />
       </Paper>
-      
+      <AdminAddAnimeModal open={open} onClose={handleClose} anime={modalAnime} mode={modalMode}/>
     </Box>
   );
 }
