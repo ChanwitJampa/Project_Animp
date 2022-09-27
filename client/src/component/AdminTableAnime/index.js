@@ -197,7 +197,7 @@ export default function AdminTableAnime() {
                       <TableCell align="left">{row.year}</TableCell>
                       <TableCell align="left">{row.seasonal}</TableCell>
                       <TableCell align="left">{row.seasonal?'TV':'Movie'}</TableCell>
-                      <TableCell align="left"><button className='adminTable-detail-button' onClick={()=>handleOpen([],"edit")}>Detail</button></TableCell>
+                      <TableCell align="left"><button className='adminTable-detail-button' onClick={()=>handleOpen(row,"edit")}>Detail</button></TableCell>
                     </TableRow>
                   );
                 })}
