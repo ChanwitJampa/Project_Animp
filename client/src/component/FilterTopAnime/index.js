@@ -1,5 +1,5 @@
 import './index.scss'
-import React, { Component, Fragment,useState,useEffect } from 'react';
+import { useState,useEffect } from 'react';
 import Select from 'react-select'
 import Datastudio from '../../assets/studio.json'
 const seasonOptions = [
