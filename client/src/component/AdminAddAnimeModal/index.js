@@ -10,9 +10,10 @@ import MenuItem from '@mui/material/MenuItem';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import Datastudio from '../../assets/studio.json'
 
 const seasonOptions = [
-    { id:1, value: 'Winter', label: 'Winter' },
+    { id:1,value: 'Winter', label: 'Winter' },
     { id:2,value: 'Spring', label: 'Spring' },
     { id:3,value: 'Summer', label: 'Summer' },
     { id:4,value: 'Fall', label: 'Fall' }
@@ -22,33 +23,70 @@ const AdminAddAnimeModal = (props) => {
     const { open, onClose, anime, mode } = props
     const navigate = useNavigate()
 
-    const [modalAnime, setModalAnime] = useState([])
-    const [studio, setStudio] = useState("")
-    const [season, setSeason] = useState()
+    
+    const [name,setName] =useState()
     const [year, setYear] = useState()
+    const [studio, setStudio] = useState()
+    const [season, setSeason] = useState([])
+    const [episodes,setEpisodes]= useState()
+    const [image,setImage]= useState()
+    const [trailer,setTrailer]=useState()
+    const [wallpaper,setWallpaper]=useState()
+    const [duration,setDuration]=useState()
+    const [score,setScore]=useState()
+    const [descript,setDescript]=useState()
     const onChangItem = name => event => {
-        if (name == "studio") {
-            setStudio(event)
-            props.studio(name, event.value)
-        } else if (name == "season") {
-            setSeason(event)
-            props.season(name, event.value)
-        } else if (name == "year") {
+        if (name == "name") {
+            setName(event.value)
+        }
+        else if (name == "year") {
             setYear(event)
-            props.year(name, event.value)
+        }
+        else if (name == "studio") {
+            setStudio(event.target.value)
+        }
+        else if (name == "season") {
+            setSeason(event.target.value)
+        } 
+        else if (name == "episodes") {
+            setEpisodes(event.value)
+        }
+        else if (name == "image") {
+            setImage(event.value)
+        }
+        else if (name == "trailer") {
+            setTrailer(event.value)
+        }
+        else if (name == "wallpaper") {
+            setWallpaper(event.value)
+        }
+        else if (name == "duration") {
+            setDuration(event.value)
+        }
+        else if (name == "score") {
+            setScore(event.value)
+        }
+        else if (name == "descript") {
+            setDescript(event.value)
         }
     }
     useEffect(() => {
-        if (open && mode =="edit") {
-            setModalAnime(anime)
+        if (mode =="edit") {
+            setName(anime.name)
             setYear(anime.year.toString())
+            setStudio(anime.studios)
             setSeason(anime.seasonal)
-        }else if(open && mode == "create"){
-
+            setEpisodes(anime.episodes)
+            setImage(anime.image)
+            setTrailer(anime.trailer)
+            setWallpaper(anime.wallpaper)
+            setDuration(anime.duration)
+            setScore(anime.score)
+        }else if(mode == "create"){
             setSeason(seasonOptions[Math.ceil((dayjs().month()+1)/4)].value)
             setYear(dayjs())
         }
-    }, [anime, open, mode])
+    }, [mode,open])
     return (
         <div className='modal-body'>
             <Modal
@@ -74,6 +112,9 @@ const AdminAddAnimeModal = (props) => {
                                 required
                                 id="outlined-adornment"
                                 placeholder="Anime name"
+                                value={name}
+                                name="name"
+                                onChange={onChangItem("name")}
                             />
                         </FormControl>
                         <div className='modal-addanime-form'>
@@ -90,27 +131,33 @@ const AdminAddAnimeModal = (props) => {
                                     required
                                     id="outlined-adornment"
                                     placeholder="Score"
+                                    value={score}
+                                    name="score"
+                                    onChange={onChangItem("score")}
                                 />
                             </FormControl>
                             <FormControl
-                                variant="standard"
                                 sx={{
                                     width: 240,
                                     mb: 3
                                 }}
                             >
                                 <h3>Studio</h3>
-                                <TextField
-                                    hiddenLabel
+                                <Select
+                                    labelId="demo-simple-select-label"
+                                    id="demo-simple-select"
                                     required
-                                    id="outlined-adornment"
-                                    placeholder="Studio"
-                                />
+                                    value={studio}
+                                    name="studio"
+                                    onChange={onChangItem("studio")}
+                                >{Datastudio.map((item) => (
+                                    <MenuItem value={item.studio_name}>{item.studio_name}</MenuItem>
+                                ))}
+                                </Select>
                             </FormControl>
                         </div>
                         <div className='modal-addanime-form'>
                             <FormControl
-                                
                                 sx={{
                                     width: 240,
                                     mb: 3
@@ -165,6 +212,9 @@ const AdminAddAnimeModal = (props) => {
                                     required
                                     id="outlined-adornment"
                                     placeholder="Ex 25, 1, 13"
+                                    value={episodes}
+                                    name="episodes"
+                                    onChange={onChangItem("episodes")}
                                 />
                             </FormControl>
                             <FormControl
@@ -180,9 +230,13 @@ const AdminAddAnimeModal = (props) => {
                                     required
                                     id="outlined-adornment"
                                     placeholder="Ex 25 min. per ep."
+                                    value={duration}
+                                    name="duration"
+                                    onChange={onChangItem("duration")}
                                 />
                             </FormControl>
                         </div>
+                        
                         <FormControl
                             fullWidth
                             sx={{
@@ -196,6 +250,9 @@ const AdminAddAnimeModal = (props) => {
                                 required
                                 id="outlined-adornment"
                                 placeholder="Ex. https://images5.alphacoders.com/587/thumbbig-587597.webp"
+                                value={image}
+                                name="image"
+                                onChange={onChangItem("image")}
                             />
 
                         </FormControl>
@@ -212,6 +269,10 @@ const AdminAddAnimeModal = (props) => {
                                 required
                                 id="outlined-adornment"
                                 placeholder="Ex. https://www.youtube.com/embed/eKoD2CRr_KA"
+                                value={trailer}
+                                name="trailer"
+                                onChange={onChangItem("trailer")}
+
                             />
                         </FormControl>
                         <FormControl
@@ -227,6 +288,10 @@ const AdminAddAnimeModal = (props) => {
                                 required
                                 id="outlined-adornment"
                                 placeholder="Ex. https://images5.alphacoders.com/587/thumbbig-587597.webp"
+                                value={wallpaper}
+                                name="wallpaper"
+                                onChange={onChangItem("wallpaper")}
+
                             />
                         </FormControl>
                         <FormControl
@@ -242,6 +307,9 @@ const AdminAddAnimeModal = (props) => {
                                 id="outlined-multiline-static"
                                 multiline
                                 rows={4}
+                                value={descript}
+                                name="descript"
+                                onChange={onChangItem("descript")}
                             />
                         </FormControl>
                     </div>

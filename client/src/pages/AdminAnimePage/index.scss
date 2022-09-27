@@ -25,7 +25,20 @@ $colorGray : #C3BBBE;
         }
     }
 }
-
+.adminAnime-clear-button{
+    cursor: pointer;
+    padding: 14px;
+    font-size: 18px;
+    padding: 12px 20px 12px 20px;
+    background-color: $colorGray;
+    color: $colorWhite ;
+    border-radius: 8px;
+    border: none;
+    margin-top: 14px;
+    &:hover {
+        background-color: #767374;
+    }
+}
 .adminAnime-container-paper {
     margin: -20px;
     display: flex;
@@ -33,18 +46,4 @@ $colorGray : #C3BBBE;
 .adminAnime-container-paper-item{
     margin: 20px;
     padding: 12px;
-    button {
-            cursor: pointer;
-            padding: 14px;
-            font-size: 18px;
-            padding: 12px 20px 12px 20px;
-            background-color: $colorGray;
-            color: $colorWhite ;
-            border-radius: 8px;
-            border: none;
-            margin-top: 14px;
-            &:hover {
-                background-color: #767374;
-            }
-        }
 }

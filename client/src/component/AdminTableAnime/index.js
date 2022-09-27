@@ -1,4 +1,4 @@
-import { useRef, useState,useEffect } from "react";
+import { useState,useEffect } from "react";
 import PropTypes from 'prop-types';
 import Box from '@mui/material/Box';
 import Table from '@mui/material/Table';
@@ -8,11 +8,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
-import TableSortLabel from '@mui/material/TableSortLabel';
-import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
-import { visuallyHidden } from '@mui/utils';
-import Dataanime from "../../assets/anime.json"
 import './index.scss'
 import { pink } from '@mui/material/colors';
 import AdminAddAnimeModal from '../AdminAddAnimeModal';
@@ -128,8 +124,8 @@ EnhancedTableHead.propTypes = {
   orderBy: PropTypes.string.isRequired,
   rowCount: PropTypes.number.isRequired,
 };
-export default function AdminTableAnime() {
-  
+export default function AdminTableAnime(props) {
+  const {anime} =props
   const [selected, setSelected] = useState([]);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
@@ -145,7 +141,7 @@ export default function AdminTableAnime() {
 
   // Avoid a layout jump when reaching the last page with empty rows.
   const emptyRows =
-    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - Dataanime.length) : 0;
+    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - anime.length) : 0;
     const [modalAnime,setModalAnime]=useState()
     const [modalMode,setModalMode]=useState('')
     const [open, setOpen] = useState(false);
@@ -173,7 +169,7 @@ export default function AdminTableAnime() {
             <TableBody>
               {/* if you don't need to support IE11, you can replace the `stableSort` call with:
                  rows.slice().sort(getComparator(order, orderBy)) */}
-              {Dataanime
+              {anime
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row, index) => { 
                   return (
@@ -216,7 +212,7 @@ export default function AdminTableAnime() {
         <TablePagination
           rowsPerPageOptions={[5 ,10, 25, 50]}
           component="div"
-          count={Dataanime.length}
+          count={anime.length}
           rowsPerPage={rowsPerPage}
           page={page}
           onPageChange={handleChangePage}
