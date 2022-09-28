@@ -24,6 +24,7 @@ import { pink } from '@mui/material/colors';
 import { BrowserRouter, Redirect, Route ,Routes} from 'react-router-dom'
 import AdminHomePage from '../../pages/AdminHomePage';
 import AdminAnimePage from '../../pages/AdminAnimePage';
+import AdminAnimeTagPage from '../../pages/AdminAnimeTagPage';
 import { useNavigate } from "react-router-dom";
 const drawerWidth = 240;
 
@@ -36,7 +37,7 @@ function SidebarAdmin(props) {
     };
     const SideList = [
         { id: '1', item: "Anime", icon: <LocalMoviesIcon/> ,link:"/adminanime"},
-        { id: '2', item: "Anime Tag", icon:  <TagIcon/>,link:"/"},
+        { id: '2', item: "Anime Tag", icon:  <TagIcon/>,link:"/admintaganime"},
         { id: '3', item: "Studio", icon:  <MovieIcon/>,link:"/" },
         { id: '4', item: "User", icon:  <AssignmentIndIcon/>,link:"/"},
         { id: '5', item: "Wallpaper", icon:  <WallpaperIcon/>,link:"/" },
@@ -129,6 +130,7 @@ function SidebarAdmin(props) {
                 <Routes>
                     <Route path="/" element={<AdminHomePage/>}/>
                     <Route path="/adminanime" element={<AdminAnimePage/>}/>
+                    <Route path="/admintaganime" element={<AdminAnimeTagPage/>}/>
                 </Routes>
             </Box>
         </Box>

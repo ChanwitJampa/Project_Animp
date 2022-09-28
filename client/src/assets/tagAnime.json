@@ -1,14 +1,62 @@
 [
     {
         "id":1,
-        "tag_name":"fantasy"
+        "tag_name":"Fantasy",
+        "tag_universe_status":false,
+        "tage_wallpaper":""
     },
     {
         "id":2,
-        "tag_name":"school"
+        "tag_name":"School",
+        "tag_universe_status":false,
+        "tage_wallpaper":""
     },
     {
         "id":3,
-        "tag_name":"game"
+        "tag_name":"Game",
+        "tag_universe_status":false,
+        "tage_wallpaper":""
+    },
+    {
+        "id":4,
+        "tag_name":"Fate",
+        "tag_universe_status":true,
+        "tage_wallpaper":""
+    },
+    {
+        "id":5,
+        "tag_name":"Drama",
+        "tag_universe_status":false,
+        "tage_wallpaper":""
+    },
+    {
+        "id":6,
+        "tag_name":"Sci-Fi",
+        "tag_universe_status":false,
+        "tage_wallpaper":""
+    },
+    {
+        "id":7,
+        "tag_name":"Sword Art Online",
+        "tag_universe_status":true,
+        "tage_wallpaper":""
+    },
+    {
+        "id":8,
+        "tag_name":"Suzumiya Haruhi",
+        "tag_universe_status":true,
+        "tage_wallpaper":""
+    },
+    {
+        "id":9,
+        "tag_name":"Shokugeki no Soma",
+        "tag_universe_status":true,
+        "tage_wallpaper":""
+    },
+    {
+        "id":10,
+        "tag_name":"My Hero Academia",
+        "tag_universe_status":true,
+        "tage_wallpaper":""
     }
 ]

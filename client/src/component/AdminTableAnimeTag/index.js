@@ -11,16 +11,13 @@ import Paper from '@mui/material/Paper';
 import './index.scss'
 import { pink } from '@mui/material/colors';
 import AdminAddAnimeModal from '../AdminAddAnimeModal';
+import TagAnime from '../../assets/tagAnime.json'
 
 // This method is created for cross-browser compatibility, if you don't
 // need to support IE11, you can use Array.prototype.sort() directly
 const headCells = [
-  {  id: 'anime',disablePadding: true,label: 'Anime'},
-  {  id: 'studio',disablePadding: false,label: 'Studio'},
-  {  id: 'score',disablePadding: false,label: 'Score'},
-  {  id: 'year',disablePadding: false, label: 'Year'}, 
-  {  id: 'season',disablePadding: false,label: 'Season'},
-  {  id: 'type',disablePadding: false,label: 'Type'},
+  {  id: 'tag',disablePadding: true,label: 'Tag'},
+  {  id: 'universe status',disablePadding: false,label: 'Universe status'},
   {  id: 'manage',disablePadding: false,label: 'Manage'}
 ];
 
@@ -45,8 +42,7 @@ function EnhancedTableHead() {
     </TableHead>
   );
 }
-export default function AdminTableAnime(props) {
-  const {anime} =props
+export default function AdminTableAnimeTag() {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
 
@@ -61,20 +57,20 @@ export default function AdminTableAnime(props) {
 
   // Avoid a layout jump when reaching the last page with empty rows.
   const emptyRows =
-    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - anime.length) : 0;
-    const [modalAnime,setModalAnime]=useState()
+    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - TagAnime.length) : 0;
+    const [modalAnimeTag,setModalAnimeTag]=useState()
     const [modalMode,setModalMode]=useState('')
     const [open, setOpen] = useState(false);
     const handleOpen = (item,mode) => {
         setModalMode(mode);
         if(mode=="edit"){
-            setModalAnime(item)
+            setModalAnimeTag(item)
         }
         setOpen(true);
     }
     const handleClose = () =>setOpen(false);
   return (
-    <Box sx={{ width: '100%' }}>
+    <Box sx={{ width: '50%' }}>
       <Paper sx={{ width: '100%', mb: 2 }}>
         <TableContainer>
           <Table
@@ -86,14 +82,14 @@ export default function AdminTableAnime(props) {
             <TableBody>
               {/* if you don't need to support IE11, you can replace the `stableSort` call with:
                  rows.slice().sort(getComparator(order, orderBy)) */}
-              {anime
+              {TagAnime
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row, index) => { 
                   return (
                     <TableRow
                       hover
                       tabIndex={-1}
-                      key={row.name}
+                      key={row.id}
                     >
                       <TableCell padding="checkbox">
                     
@@ -103,13 +99,9 @@ export default function AdminTableAnime(props) {
                         scope="row"
                         padding="none"
                       >
-                        {row.name}
+                        {row.tag_name}
                       </TableCell>
-                      <TableCell align="left">{row.studios}</TableCell>
-                      <TableCell align="left">{row.score}</TableCell>
-                      <TableCell align="left">{row.year}</TableCell>
-                      <TableCell align="left">{row.seasonal}</TableCell>
-                      <TableCell align="left">{row.seasonal?'TV':'Movie'}</TableCell>
+                      <TableCell align="left">{row.tag_universe_status?"True":"False"}</TableCell>
                       <TableCell align="left"><button className='adminTable-detail-button' onClick={()=>handleOpen(row,"edit")}>Detail</button></TableCell>
                     </TableRow>
                   );
@@ -129,14 +121,14 @@ export default function AdminTableAnime(props) {
         <TablePagination
           rowsPerPageOptions={[5 ,10, 25, 50]}
           component="div"
-          count={anime.length}
+          count={TagAnime.length}
           rowsPerPage={rowsPerPage}
           page={page}
           onPageChange={handleChangePage}
           onRowsPerPageChange={handleChangeRowsPerPage}
         />
       </Paper>
-      <AdminAddAnimeModal open={open} onClose={handleClose} anime={modalAnime} mode={modalMode}/>
+      {/* <AdminAddAnimeModal open={open} onClose={handleClose} anime={modalAnime} mode={modalMode}/> */}
     </Box>
   );
 }

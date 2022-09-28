@@ -1,0 +1,27 @@
+$colorPink: #FF1493;
+$colorBlack: #000000;
+$colorWhite: #FFFFFF;
+$colorDarkPink: #201020;
+$colorDarkDarkPink :#371037;
+$colorPurple : #7900D8;
+$colorGray : #C3BBBE;
+.adminAnime-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+
+    button {
+        padding: 14px;
+        font-size: 24px;
+        background-color: $colorPurple;
+        color: $colorWhite;
+        cursor: pointer;
+        border: none;
+        border-radius: 15px;
+        
+
+        &:hover {
+            background-color: $colorBlack;
+        }
+    }
+}
