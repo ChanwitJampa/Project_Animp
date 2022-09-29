@@ -1,0 +1,23 @@
+[
+    {
+        "accounts_id": "1",
+        "accounts_name": "plai",
+        "accounts_user": "adminPlai",
+        "accounts_pwd": "@4801",
+        "accounts_role": "user"
+    },
+    {
+        "accounts_id": "3",
+        "accounts_name": "fouth",
+        "accounts_user": "adminFourth",
+        "accounts_pwd": "@4755",
+        "accounts_role": "admin"
+    },
+    {
+        "accounts_id": "4",
+        "accounts_name": "test",
+        "accounts_user": "adminTest",
+        "accounts_pwd": "@test",
+        "accounts_role": "user"
+    }
+]

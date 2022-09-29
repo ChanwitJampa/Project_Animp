@@ -1,5 +1,6 @@
 import './index.scss'
 import React, { useState,useEffect } from "react";
+import {useDispatch,useSelector} from 'react-redux'
 import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
@@ -12,12 +13,15 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import { pink } from '@mui/material/colors';
 import { Link, withRouter, Navigate } from "react-router-dom";
 
+import {fetchAuthAsync} from '../../actions/authAction'
+
 const LoginPage = () => {
     const [values, setValues] = useState({
         username: '',
         password: '',
         showPassword: false,
     });
+    const {loading,error} =useSelector(state=>state.status)
     const [checked,setChecked] = useState(false)
     const handleChangeChecked=(event)=>{
         setChecked(event.target.checked)
@@ -40,7 +44,10 @@ const LoginPage = () => {
         console.log(values.username)
         console.log(values.password)
         console.log(checked)
+        dispatch(fetchAuthAsync(values.username,values.password))
     }
+
+    const dispatch=useDispatch()
     return (
         <div>
             <div className='login-bar'>
@@ -103,7 +110,8 @@ const LoginPage = () => {
                             }
                         />
                     </FormControl>
-                    <button className='login-button' onClick={submitForm}>Sign In</button>
+                    <button className='login-button' onClick={submitForm}>Sign In {loading ? "Loading": ""}</button>
+                    {error && <p style={{color:'red',fontSize:'12'}}>{error}</p>}
                     <FormControlLabel
                         label="Remember Me"
                         sx={{
