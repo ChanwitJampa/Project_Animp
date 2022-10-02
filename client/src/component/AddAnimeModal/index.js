@@ -1,55 +1,62 @@
 import { useState, useEffect } from "react";
-import ReactDOM from 'react-dom';
-import './index.scss'
-import Modal from '@mui/material/Modal';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
-import { pink } from '@mui/material/colors';
+import "./index.scss";
+import Modal from "@mui/material/Modal";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
 import { useNavigate } from "react-router-dom";
-const style = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: 400,
-  bgcolor: 'background.paper',
-  border: '2px solid #000',
-  boxShadow: 24,
-  p: 4,
-};
+import { useSelector, useDispatch } from 'react-redux'
+import dayjs from 'dayjs';
+import TextField from '@mui/material/TextField'
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { addToList} from "../../actions/myAnimeListAction"
+
 
 const AddAnimeModal = (props) => {
-  const { open, onClose, anime } = props
-  const [modalAnime, setModalAnime] = useState([])
+  const { open, onClose, anime } = props;
+  const [modalAnime, setModalAnime] = useState([]);
+  const [score, setScore] = useState();
+  const [year, setYear] = useState();
 
-  const [score, setScore] = useState('');
-  const [year,setYear] = useState('');
+  const onChangItem = name => event => {
+    if (name == "score") {
+        setScore(event.value)
+    }
+    else if (name == "year") {
+        setYear(event)
+    }
+    
 
-  const handleChange = (event) => {
-    setScore(event.target.value);
-  };
-  const navigate =useNavigate()
+}
+  const navigate = useNavigate();
   let dropzoneModalStyle = {
     width: `100%`,
-    height: `460px`,
+    height: `420px`,
     backgroundImage: `url(${modalAnime.wallpaper})`,
     backgroundRepeat: `no-repeat`,
     backgroundPosition: `center center`,
     backgroundSize: `cover`,
     borderTopLeftRadius: `15px`,
-    borderTopRightRadius: `15px`
+    borderTopRightRadius: `15px`,
   };
   useEffect(() => {
     if (anime && open) {
-      console.log(anime)
-      setModalAnime(anime)
-      setScore('')
-      setYear('')
+      console.log(anime);
+      setModalAnime(anime);
+      setScore("");
+      setYear("");
     }
-  }, [anime, open])
-
+  }, [anime, open]);
+  const myAnimeList = useSelector(state => state.myAnimeList)
+  const dispatch = useDispatch()
+  const addAnimeToList=()=>{
+    onClose()
+    dispatch(addToList({ ...modalAnime, quantity: 1 }))
+    
+  }
+  console.log(myAnimeList)
   return (
     <Modal
       open={open}
@@ -58,9 +65,18 @@ const AddAnimeModal = (props) => {
       aria-describedby="modal-modal-description"
     >
       <div className="modalStyles">
-        <div style={dropzoneModalStyle}>
+        <div style={dropzoneModalStyle}></div>
+        <div className="modal-header">
+          <div className="modal-header-detail">
+            <h1 onClick={() => navigate(`/anime/${modalAnime.id}`)}>
+            {modalAnime.name}
+          </h1>
+              <p>Score: {modalAnime.score}  ({modalAnime.year})</p>
+          </div>
+          
+          <button>Detail</button>
         </div>
-        <h1 className="modal-header" onClick={()=>navigate(`/anime/${modalAnime.id}`)}>{modalAnime.name}</h1>
+
         <div className="modal-buttom">
           <div>
             <h2>Status</h2>
@@ -68,14 +84,13 @@ const AddAnimeModal = (props) => {
           </div>
           <div>
             <h2>My score</h2>
-            <FormControl 
-                className='modal-select'
-                fullWidth>    
+            <FormControl className="modal-select" fullWidth>
               <Select
                 id="demo-simple-select-helper"
                 value={score}
+                name="score"
                 hiddenLabel
-                onChange={handleChange}
+                onChange={onChangItem("score")}
               >
                 <MenuItem value={10}>10</MenuItem>
                 <MenuItem value={9}>9</MenuItem>
@@ -92,33 +107,29 @@ const AddAnimeModal = (props) => {
           </div>
           <div>
             <h2>Watch in</h2>
-            <FormControl 
-                className='modal-select'
-                fullWidth>    
-              <Select
-                id="demo-simple-select-helper"
-                value={year}
-                hiddenLabel
-                onChange={handleChange}
-              >
-                <MenuItem value={10}>Ten</MenuItem>
-                <MenuItem value={20}>Twenty</MenuItem>
-                <MenuItem value={30}>Thirty</MenuItem>
-              </Select>
-            </FormControl></div>
+            <FormControl className="modal-select" fullWidth>
+              <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <DatePicker
+                  views={["year"]}
+                  value={year}
+                  hiddenLabel
+                  name="year"
+                  minDate={dayjs("1950")}
+                  maxDate={dayjs()}
+                  onChange={onChangItem("year")}
+                  renderInput={(params) => (
+                    <TextField {...params} helperText={null} />
+                  )}
+                />
+              </LocalizationProvider>
+            </FormControl>
+          </div>
           <div>
-            <tr>
-              <td>Score:</td><td>{modalAnime.score}</td>
-            </tr>
-            <tr>
-              <td>Tag:</td><td>{modalAnime.seasonal}</td>
-            </tr>
-            <tr>
-              <td>Year:</td><td>{modalAnime.year}</td>
-            </tr>
+            <button className="modal-button-addtolist" onClick={addAnimeToList}>Add to List</button>
           </div>
         </div>
       </div>
-    </Modal>);
-}
+    </Modal>
+  );
+};
 export default AddAnimeModal;

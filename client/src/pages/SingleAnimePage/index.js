@@ -16,7 +16,6 @@ const SingleAnimePage=(props)=>{
         backgroundPosition: `center center`,
         backgroundSize: `cover`
       };
-    const [scrollPosition, setScrollPosition] = useState(0);
     const [isAutoPlay, setIsAutoPlay]=useState(false)
     // const handleScroll = () => {
     //     const position = window.pageYOffset;
@@ -36,6 +35,7 @@ const SingleAnimePage=(props)=>{
     const setAutoPlay=()=>{
         setIsAutoPlay(true)
     }
+    const animeList = Dataanime.filter((item)=>{if(item.studios==singleAnime[0].studios) return item})
 
     return(
         <div>
@@ -62,7 +62,7 @@ const SingleAnimePage=(props)=>{
                         </div>
                         <div className='videoWrapper-container'>
                             <div className='videoWrapper'>
-                                <iframe width="560" height="315" id="player" src={`${singleAnime[0].trailer}?autoplay=${isAutoPlay}&mute=1`} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                <iframe width="560" height="315" id="player" src={`${singleAnime[0].trailer}`} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                             </div>
                         </div>
                     </div>
@@ -81,7 +81,7 @@ const SingleAnimePage=(props)=>{
                     <p>Duration: {singleAnime[0].duration}</p>
                 </div>
             </div>
-            <SliderAnime tagAnime="From same studio" mode="studio" valueOfMode={singleAnime[0].studios}/>
+            <SliderAnime tagAnime="From same studio" animeList={animeList}/>
         </div>
         )
 }

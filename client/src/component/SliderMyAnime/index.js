@@ -10,13 +10,19 @@ import { Routes, Route, useParams } from "react-router-dom";
 import './index.scss'
 import Dataanime from "../../assets/anime.json"
 const SliderMyAnime=(props)=>{
-    const {year} =props
+    const {year,myAnime} =props
     const filterAnime=(item)=>{
         if(item.year==year){
             return item
         }
     }
-    const animeList=Dataanime.filter(filterAnime)
+    var animeList
+    if(myAnime){
+        animeList=myAnime
+    }else{
+        animeList=[]
+    }
+    console.log(myAnime)
     return(
         <div className="slide-anime-header">
             <h2>Watched in {year}</h2>
@@ -33,6 +39,7 @@ const SliderMyAnime=(props)=>{
                     <SwiperSlide key={index} className='swiper-slide-anime'><img src={item.image}></img></SwiperSlide>
                     )}
                 </Swiper>
+
         </div>);
 }
 export default SliderMyAnime

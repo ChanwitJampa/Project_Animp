@@ -57,3 +57,16 @@ $colorDarkDarkPink :#371037;
 .navbar-profile{
     padding: 10px;
 }
+.navbar-login-button{
+    padding: 10px;
+    background-color: $colorBlack;
+    border-radius: 12px;
+    color: $colorWhite;
+    font-size: medium;
+    margin-right: 15px;
+    text-decoration: none;
+    cursor: pointer;
+    &:hover{
+        background-color:$colorDarkDarkPink
+    }
+}

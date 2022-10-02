@@ -1,8 +1,9 @@
 import './index.scss'
 import FilterTopAnime from '../../component/FilterTopAnime';
 import TableTopAnime from '../../component/TableTopAnime';
-import Dataanime from '../../assets/anime.json'
 import { useEffect, useState } from 'react';
+import {fetchAnimeAsync} from '../../actions/animeListAction'
+import {useDispatch,useSelector} from 'react-redux'
 const TopAnimePage=()=>{
     const [anime,setAnime]=useState([])
     const [studio,setStudio]=useState("")
@@ -43,6 +44,11 @@ const TopAnimePage=()=>{
             return item
         }
     }
+    const Dataanime =useSelector(state=>state.animeList)
+    const dispatch=useDispatch()
+    useEffect(()=>{
+        dispatch(fetchAnimeAsync())
+    })
     const displayAnime=Dataanime.filter(filterAnime).sort((firstItem, secondItem) => secondItem.score - firstItem.score);
     return(
         <div className='container'>

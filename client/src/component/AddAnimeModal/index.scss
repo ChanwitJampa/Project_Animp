@@ -2,9 +2,10 @@ $colorPink:#FF1493;
 $colorBlack:#000000;
 $colorWhite:#FFFFFF;
 $colorDarkPink:#371037;
+$colorGray : #C3BBBE;
 .modalStyles{
     position: absolute;
-    top: 40%;
+    top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     width: 840px;
@@ -13,9 +14,39 @@ $colorDarkPink:#371037;
     border-radius: 15px;
 }
 .modal-header{
-    color: $colorWhite;
     padding: 20px 30px 10px 30px;
-    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    
+    button{
+        background-color: $colorPink;
+        padding: 20px;
+        border-radius: 12px;
+        font-size: medium;
+        color: $colorWhite;
+        cursor: pointer;
+        &:hover{
+            background-color: $colorDarkPink;
+        }
+    }
+}
+.modal-header-detail{
+    display: flex;
+    flex-direction: column;
+
+    h1{
+        color: $colorWhite;
+        cursor: pointer;
+        &:hover{
+            color: $colorGray;
+        }
+
+    }
+    p{
+        color: $colorWhite;
+        font-size: medium;
+
+    }
 }
 .modal-buttom{
     display: flex;
@@ -33,12 +64,20 @@ $colorDarkPink:#371037;
         padding-bottom: 5px;
         border-bottom:  5px solid #FF1493;
     }
-    td{
+    
+    }
+
+.modal-button-addtolist{
+        background-color: $colorPink;
+        padding: 20px;
+        border-radius: 12px;
+        margin-top: 47px;
+        font-size: medium;
         color: $colorWhite;
-    }
-    tr{
-        padding-right: 20px;
-    }
+        cursor: pointer;
+        &:hover{
+            background-color: $colorDarkPink;
+        }
 }
 .modal-select{
     background-color: $colorWhite;

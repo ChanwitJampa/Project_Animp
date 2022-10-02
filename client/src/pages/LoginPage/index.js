@@ -12,10 +12,12 @@ import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import { pink } from '@mui/material/colors';
 import { Link, withRouter, Navigate } from "react-router-dom";
-
+import { authenticate } from "../../servies/authorize";
+import { useNavigate } from "react-router-dom";
 import {fetchAuthAsync} from '../../actions/authAction'
 
 const LoginPage = () => {
+    const navigate = useNavigate();
     const [values, setValues] = useState({
         username: '',
         password: '',
@@ -44,7 +46,13 @@ const LoginPage = () => {
         console.log(values.username)
         console.log(values.password)
         console.log(checked)
-        dispatch(fetchAuthAsync(values.username,values.password))
+        dispatch(fetchAuthAsync(values.username,values.password)).then(
+            res=>{
+                console.log(res)
+                navigate('/')
+
+            }
+        )
     }
 
     const dispatch=useDispatch()
@@ -112,7 +120,7 @@ const LoginPage = () => {
                     </FormControl>
                     <button className='login-button' onClick={submitForm}>Sign In {loading ? "Loading": ""}</button>
                     {error && <p style={{color:'red',fontSize:'12'}}>{error}</p>}
-                    <FormControlLabel
+                    {/* <FormControlLabel
                         label="Remember Me"
                         sx={{
                             '.MuiFormControlLabel-label': {
@@ -129,7 +137,7 @@ const LoginPage = () => {
                                 },
 
                             }}
-                        />} />
+                        />} /> */}
                     <div className='login-card-bottom'><p>New to animap?</p><Link to="/register">Sign Up now</Link></div>
                 </div>
             </div>
