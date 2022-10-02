@@ -4,64 +4,51 @@ import IconButton from "@mui/material/IconButton";
 import SearchIcon from "@mui/icons-material/Search";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
+import { createFilterOptions } from '@mui/material/Autocomplete';
 import Box from '@mui/material/Box';
 import {fetchAnimeAsync} from '../../actions/animeListAction'
 import {useDispatch,useSelector} from 'react-redux'
+import { useNavigate } from "react-router-dom";
 
 const SearchBarAnime = () => {
   const dispatch=useDispatch()
-  const dataHistory = [
-    "Paris",
-    "London",
-    "New York",
-    "Tokyo",
-    "Berlin",
-    "Buenos Aires",
-    "Cairo",
-    "Canberra",
-    "Rio de Janeiro",
-    "Dublin",
-  ];
+  const navigate = useNavigate();
   const DataAnime =useSelector(state=>state.animeList)
-  const [keySearch,setKeySearch]=useState("")
-  const [listKeySearch,setListKeySearch]=useState([])
-  const onChangeSearch=(key)=>{
-    
-  }
-  const filterKey=(item)=>{
-    if(item.name==keySearch){
-      console.log(item)
-      return item
-    }else{
-      console.log(item)
-      return item
-    } 
-  }
+  const [value, setValue] = useState();
+  const [inputValue, setInputValue] = useState('');
+
   
   useEffect(()=>{
     dispatch(fetchAnimeAsync())
   })
-  useEffect(()=>{
-    setListKeySearch(DataAnime.slice(1,10).filter(filterKey))
-  },[keySearch])
+
+
+  const defaultFilterOptions = createFilterOptions();
+  const filterOptions = (options, state) => {
+    return defaultFilterOptions(options, state).slice(0, 10);
+  };
+
   return (
     <div className="searchBar">
       <Autocomplete
         disablePortal
+        filterOptions={filterOptions}
         id="free-solo-demo"
         freeSolo
-        options={listKeySearch}
+        options={DataAnime}
         sx={{
           width: 240,
         }}
+        getOptionLabel={(option) => option.name}
         renderOption={(props, option) => (
-          <Box component="li" sx={{ '& > img': { mr: 2, flexShrink: 0 } }} {...props}>
+          <Box component="li" sx={{ '& > img': { mr: 2, flexShrink: 0 } }} {...props} onClick={()=>navigate(`/anime/${option.id}`)}>
             <img
               loading="lazy"
-              width="20"
+              width="40"
               alt=""
+              src={`${option.image}`}
             />
-            {option.name} ({option.studios}) +{option.year}
+            {option.name} <br></br>({option.studios})<br></br> {option.year}
           </Box>
         )}
         renderInput={(params) => (
@@ -71,7 +58,6 @@ const SearchBarAnime = () => {
             hiddenLabel
             placeholder="Search"
             className="searchBar-input"
-            onChange={(event)=>{setKeySearch(event.target.value)}}
           />
         )}
       />
