@@ -1,16 +1,30 @@
 package main
 
 import (
-	"animapDB/api/pkg/routes"
-	"log"
-	"net/http"
+	_ "AnimapDB/api/models"
+	"database/sql"
+	"time"
 
-	"github.com/gorilla/mux"
+	"github.com/gin-gonic/gin"
 )
 
+var db *sql.DB
+var accountServices models
+
 func main() {
-	r := mux.NewRouter()
-	routes.RegisterAccountRoutes(r)
-	http.Handle("/", r)
-	log.Fatal(http.ListenAndServe("localhost:3306", r))
+	var err error
+	db, err = sql.Open("mysql", "adminPlai:@6220504801plai@tcp(20.194.171.207:3306)/animemapdb")
+	if err != nil {
+		panic(err)
+	}
+
+	// See "Important settings" section.
+	db.SetConnMaxLifetime(time.Minute * 3)
+	db.SetMaxOpenConns(10)
+	db.SetMaxIdleConns(10)
+
+	router := gin.Default()
+	router.GET("/accounts", models.)
+
+	router.Run("localhost:8080")
 }
