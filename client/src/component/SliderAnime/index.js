@@ -32,11 +32,10 @@ const SliderAnime=(props)=>{
                     className="mySwiper"
                     id="swiper-anime"
                     >
-                    {animeList.map((item,index)=>
-                    <SwiperSlide key={index} className='swiper-slide-anime' onClick={()=>handleOpen(item)}><img src={item.image} ></img>
-                    
+                    {animeList.map((item)=>
+                    <SwiperSlide key={item.id} className='swiper-slide-anime' onClick={()=>handleOpen(item)}>
+                        <img src={item.image} ></img>
                     </SwiperSlide>
-                    
                     )}
                 </Swiper>
                 
