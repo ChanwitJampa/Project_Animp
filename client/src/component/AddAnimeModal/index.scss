@@ -17,13 +17,7 @@ $colorGray : #C3BBBE;
     padding: 20px 30px 10px 30px;
     display: flex;
     justify-content: space-between;
-    h1{
-        color: $colorWhite;
-        cursor: pointer;
-        &:hover{
-            color: $colorGray;
-        }
-    }
+    
     button{
         background-color: $colorPink;
         padding: 20px;
@@ -34,6 +28,24 @@ $colorGray : #C3BBBE;
         &:hover{
             background-color: $colorDarkPink;
         }
+    }
+}
+.modal-header-detail{
+    display: flex;
+    flex-direction: column;
+
+    h1{
+        color: $colorWhite;
+        cursor: pointer;
+        &:hover{
+            color: $colorGray;
+        }
+
+    }
+    p{
+        color: $colorWhite;
+        font-size: medium;
+
     }
 }
 .modal-buttom{
@@ -52,12 +64,20 @@ $colorGray : #C3BBBE;
         padding-bottom: 5px;
         border-bottom:  5px solid #FF1493;
     }
-    td{
+    
+    }
+
+.modal-button-addtolist{
+        background-color: $colorPink;
+        padding: 20px;
+        border-radius: 12px;
+        margin-top: 47px;
+        font-size: medium;
         color: $colorWhite;
-    }
-    tr{
-        padding-right: 20px;
-    }
+        cursor: pointer;
+        &:hover{
+            background-color: $colorDarkPink;
+        }
 }
 .modal-select{
     background-color: $colorWhite;

@@ -5,16 +5,18 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import { useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from 'react-redux'
 import dayjs from 'dayjs';
 import TextField from '@mui/material/TextField'
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { addToList} from "../../actions/myAnimeListAction"
+
 
 const AddAnimeModal = (props) => {
   const { open, onClose, anime } = props;
   const [modalAnime, setModalAnime] = useState([]);
-
   const [score, setScore] = useState();
   const [year, setYear] = useState();
 
@@ -47,7 +49,14 @@ const AddAnimeModal = (props) => {
       setYear("");
     }
   }, [anime, open]);
-
+  const myAnimeList = useSelector(state => state.myAnimeList)
+  const dispatch = useDispatch()
+  const addAnimeToList=()=>{
+    onClose()
+    dispatch(addToList({ ...modalAnime, quantity: 1 }))
+    
+  }
+  console.log(myAnimeList)
   return (
     <Modal
       open={open}
@@ -58,9 +67,13 @@ const AddAnimeModal = (props) => {
       <div className="modalStyles">
         <div style={dropzoneModalStyle}></div>
         <div className="modal-header">
-          <h1 onClick={() => navigate(`/anime/${modalAnime.id}`)}>
+          <div className="modal-header-detail">
+            <h1 onClick={() => navigate(`/anime/${modalAnime.id}`)}>
             {modalAnime.name}
           </h1>
+              <p>Score: {modalAnime.score}  ({modalAnime.year})</p>
+          </div>
+          
           <button>Detail</button>
         </div>
 
@@ -112,18 +125,7 @@ const AddAnimeModal = (props) => {
             </FormControl>
           </div>
           <div>
-            <tr>
-              <td>Score:</td>
-              <td>{modalAnime.score}</td>
-            </tr>
-            <tr>
-              <td>Tag:</td>
-              <td>{modalAnime.seasonal}</td>
-            </tr>
-            <tr>
-              <td>Year:</td>
-              <td>{modalAnime.year}</td>
-            </tr>
+            <button className="modal-button-addtolist" onClick={addAnimeToList}>Add to List</button>
           </div>
         </div>
       </div>

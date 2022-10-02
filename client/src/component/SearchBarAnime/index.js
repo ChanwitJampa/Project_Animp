@@ -41,14 +41,14 @@ const SearchBarAnime = () => {
         }}
         getOptionLabel={(option) => option.name}
         renderOption={(props, option) => (
-          <Box component="li" sx={{ '& > img': { mr: 2, flexShrink: 0 } }} {...props} onClick={()=>navigate(`/anime/${option.id}`)}>
+          <Box component="li" sx={{ '& > img': { mr: 1, flexShrink: 0 } }} {...props} onClick={()=>navigate(`/anime/${option.id}`)}>
             <img
               loading="lazy"
-              width="40"
+              width="50"
               alt=""
               src={`${option.image}`}
             />
-            {option.name} <br></br>({option.studios})<br></br> {option.year}
+            {option.name}
           </Box>
         )}
         renderInput={(params) => (
