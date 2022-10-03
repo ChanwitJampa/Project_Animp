@@ -5,7 +5,7 @@ $colorDarkPink:#201020;
 $colorDarkDarkPink :#371037;
 .user-profile {
     display: inline-block;
-    margin-right: 30px;
+    
     width: 45px;
     height: 45px;
     cursor: pointer;
@@ -21,6 +21,7 @@ $colorDarkDarkPink :#371037;
   .dropdown {
     position: relative;
     display: inline-block;
+    padding-right: 30px;
   }
 
   .dropdown-content {

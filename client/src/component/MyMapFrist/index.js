@@ -87,14 +87,7 @@ const MyMapFrist=(props)=>{
                     {totalAnime<=5&&totalAnime>=0?<TagPosition/>:<></>}
                 </div>
             </div>
-            <div className='progress-box'>
-                <div className='progress-box-hearder'>
-                    <h2>{totalAnime==0?"Beginer":levelOfUser[0]}</h2>
-                        
-                </div>
-                <ProgressBar completed= {totalAnime} />
-                <div className='progress-box-detail'><h2>Viewed {totalAnime} item</h2></div>
-            </div>
+            
         </div>
     );
 }

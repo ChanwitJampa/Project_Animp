@@ -13,43 +13,35 @@ const levelOfGame=[
   {level:10 , label: "Challenger" ,numberOfAnime: 60 ,color :"#19002D"}
 ]
 const ProgressBar = (props) => {
-    const { completed } = props;
-    var fillerStyles = {
-      height: '100%',
-      width: `${((completed%6)/6)*100}%`,
-      backgroundColor: `${levelOfGame[0].color}`,
-      borderRadius: 'inherit',
-      textAlign: 'right',
-    }
+    const { totalAnime } = props;
     const labelStyles = {
         paddingTop:10,
       color: 'white',
       fontWeight: 'bold',
     }
-    const [levelOfUser,setLevelOfUser]=useState()
-    useEffect(()=>{
-      const filterLevel=(item)=>{
-        if(item.numberOfAnime>=completed){
-            return item
-          }
+    //const [levelOfUser,setLevelOfUser]=useState(levelOfGame[0])
+
+
+    const filterLevel=(item)=>{
+      if(item.numberOfAnime>=totalAnime){
+          return item
       }
-      setLevelOfUser(levelOfGame.filter(filterLevel).map((item)=>item.color))    
-    },[completed])
-     fillerStyles = {
-        height: '100%',
-        width: `${((completed%6)/6)*100}%`,
-        //backgroundColor: `${levelOfUser[0]}`,
-        backgroundColor: `${levelOfGame[0].color}`,
-        borderRadius: 'inherit',
-        textAlign: 'right',
-      }
-      console.log(levelOfUser)
+    }
+    const levelOfUser=levelOfGame.filter(filterLevel).map((item)=>item)
+    console.log(levelOfUser[0])
     return (
-      <div className="progress-container">
-        <div style={fillerStyles}>
-          <div style={labelStyles}>{`${((completed%6)/6)*100}%`}</div>
+      <div className='progress-box'>
+        <div className='progress-box-hearder'>
+          <h2>{totalAnime==0?"Beginer":levelOfUser[0].label}</h2>
+        </div>        
+        <div className="progress-container">
+          <div style={{width:`${((totalAnime%6)/6)*100}%`,backgroundColor: `${levelOfUser[0].color}`}} className="progress-style">
+            <div style={labelStyles} >{`${ parseInt(((totalAnime%6)/6)*100) }%`}</div>
+          </div> 
         </div>
+        <div className='progress-box-detail'><h2>Viewed {totalAnime} item</h2></div>
       </div>
+      
     );
   };
   
