@@ -12,7 +12,7 @@ import { useSelector, useDispatch } from 'react-redux'
 const SliderAnime=(props)=>{
     
     const myAnimeList = useSelector(state => state.myAnimeList)
-    const nameOfMyAnimeList=myAnimeList.map((item)=>item.name)
+    const nameOfMyAnimeList=myAnimeList.map((item)=>item.animes_name)
     const {tagAnime,animeList} =props
     const [modalAnime,setModalAnime]=useState()
 
@@ -36,9 +36,9 @@ const SliderAnime=(props)=>{
                     id="swiper-anime"
                     >
                     {animeList.map((item)=>
-                    <SwiperSlide key={item.id}  onClick={()=>handleOpen(item)}>
-                        <div className='swiper-slide-anime' style={{backgroundImage:`url(${item.image})`}}>
-                            {nameOfMyAnimeList.includes(item.name)?<h5>Watched</h5>:<></>}
+                    <SwiperSlide key={item.animes_id}  onClick={()=>handleOpen(item)}>
+                        <div className='swiper-slide-anime' style={{backgroundImage:`url(${item.animes_image})`}}>
+                            {nameOfMyAnimeList.includes(item.animes_name)?<h5>Watched</h5>:<></>}
                         </div>
                     </SwiperSlide>
                     )}

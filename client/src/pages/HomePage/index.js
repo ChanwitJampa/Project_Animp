@@ -9,19 +9,20 @@ const SliderContainer=(props)=>{
     const dispatch=useDispatch()
     var animeList=[]
     const Dataanime =useSelector(state=>state.animeList)
+    console.log(Dataanime)
     const filterAnime=(item)=>{
         if(tagAnime=="New Anime"){
-            if(item.year=="2022"&&item.seasonal=="Summer"){
+            if(item.animes_year=="2022"&&item.animes_seasonal=="Summer"){
                 return item
             }
         }
         if(mode=="year"){
-            if(valueOfMode==item.year){
+            if(valueOfMode==item.animes_year){
                 return item
             }
         }
         if(mode=="studio"){
-            if(valueOfMode==item.studios){
+            if(valueOfMode==item.Studio){
                 return item
             }
         }
@@ -30,9 +31,9 @@ const SliderContainer=(props)=>{
         dispatch(fetchAnimeAsync())
     })
     if(mode=="topanime"){
-        animeList = (Dataanime.slice(1,valueOfMode).sort((firstItem, secondItem) => secondItem.score - firstItem.score));
+        animeList = (Dataanime.slice(1,valueOfMode).sort((firstItem, secondItem) => secondItem.animes_score - firstItem.animes_score));
     }else{
-        animeList= (Dataanime.filter(filterAnime).sort((firstItem, secondItem) => secondItem.score - firstItem.score))
+        animeList= (Dataanime.filter(filterAnime).sort((firstItem, secondItem) => secondItem.animes_score - firstItem.animes_score))
     }
     return(
         <SliderAnime tagAnime={tagAnime} animeList={animeList} />

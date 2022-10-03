@@ -35,7 +35,7 @@ const AddAnimeModal = (props) => {
   let dropzoneModalStyle = {
     width: `100%`,
     height: `420px`,
-    backgroundImage: `url(${modalAnime.wallpaper})`,
+    backgroundImage: `url(${modalAnime.animes_wallpaper})`,
     backgroundRepeat: `no-repeat`,
     backgroundPosition: `center center`,
     backgroundSize: `cover`,
@@ -83,11 +83,11 @@ const AddAnimeModal = (props) => {
         <div style={dropzoneModalStyle}></div>
         <div className="modal-header">
           <div className="modal-header-detail">
-            <h1>{modalAnime.name}</h1>
-              <p>Score: {modalAnime.score}  ({modalAnime.year})</p>
+            <h1>{modalAnime.animes_name}</h1>
+              <p>Score: {modalAnime.score}  ({modalAnime.animes_score})</p>
           </div>
           
-          <button onClick={() => navigate(`/anime/${modalAnime.id}`)}>Detail</button>
+          <button onClick={() => navigate(`/anime/${modalAnime.animes_id}`)}>Detail</button>
         </div>
 
         <div className="modal-buttom">

@@ -24,7 +24,7 @@ const ListSeasonAnime=(props)=>{
         dispatch(fetchAnimeAsync())
     })
     const myAnimeList = useSelector(state => state.myAnimeList)
-    const nameOfMyAnimeList=myAnimeList.map((item)=>item.name)
+    const nameOfMyAnimeList=myAnimeList.map((item)=>item.animes_name)
     return(
         <div className="season-year-list">
             <h2>{season} {year}</h2>
@@ -33,9 +33,9 @@ const ListSeasonAnime=(props)=>{
                     <div key={index} className="season-year-card">
                         <div 
                             className='season-year-card-image' 
-                            style={{backgroundImage:`url(${anime.image})`}}
-                            onClick={()=>navigate(`/anime/${anime.id}`)}>
-                                {nameOfMyAnimeList.includes(anime.name)?<h5>Watched</h5>:<></>}
+                            style={{backgroundImage:`url(${anime.animes_image})`}}
+                            onClick={()=>navigate(`/anime/${anime.animes_id}`)}>
+                                {nameOfMyAnimeList.includes(anime.animes_name)?<h5>Watched</h5>:<></>}
                         </div>
                         <button onClick={()=>handleOpen(anime)}>Add to List</button>
                     </div>

@@ -18,7 +18,7 @@ const TableTopAnime=(props)=>{
     const handleClose = () =>setOpen(false);
 
     const myAnimeList = useSelector(state => state.myAnimeList)
-    const nameOfMyAnimeList=myAnimeList.map((item)=>item.name)
+    const nameOfMyAnimeList=myAnimeList.map((item)=>item.animes_name)
     return(
         <div className='container-table'>
             <table className='table-topanime'>
@@ -38,19 +38,19 @@ const TableTopAnime=(props)=>{
                     <td className='table-rank'>{index+1}</td>
                     <td>
                         <div className='card-anime-image' 
-                            style={{backgroundImage:`url(${anime.image})`}}
-                            onClick={()=>navigate(`/anime/${anime.id}`)}
+                            style={{backgroundImage:`url(${anime.animes_image})`}}
+                            onClick={()=>navigate(`/anime/${anime.animes_id}`)}
                             >
-                            {nameOfMyAnimeList.includes(anime.name)?<h5>Watched</h5>:<></>}
+                            {nameOfMyAnimeList.includes(anime.animes_name)?<h5>Watched</h5>:<></>}
                         </div>
                     </td>
                     <td className='card-anime-detail'>
-                        <h2>{anime.name}</h2> <br/>
-                        Episodes: {anime.episodes} <br/>
-                        Season: {anime.seasonal} <br/>
-                        Year: {anime.year}</td>
-                    <td><h3>{anime.studios}</h3></td>
-                    <td><h3>{anime.score}</h3></td>
+                        <h2>{anime.animes_name}</h2> <br/>
+                        Episodes: {anime.animes_episodes} <br/>
+                        Season: {anime.animes_seasonal} <br/>
+                        Year: {anime.animes_year}</td>
+                    <td><h3>{anime.Studio}</h3></td>
+                    <td><h3>{anime.animes_score}</h3></td>
                     <td><button className='table-content-button' onClick={()=>handleOpen(anime)}>Add to List</button></td>
                 </tr> 
                 })}

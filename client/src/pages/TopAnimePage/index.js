@@ -28,19 +28,19 @@ const TopAnimePage=()=>{
     const filterAnime=(item)=>{
         if(studio=="" && season=="" && year==""){
             return item
-        }else if(studio==item.studios && season=="" && year==""){
+        }else if(studio==item.Studio && season=="" && year==""){
             return item
-        }else if(studio=="" && season==item.seasonal && year==""){
+        }else if(studio=="" && season==item.animes_seasonal && year==""){
             return item
-        }else if(studio=="" && season=="" && year==item.year){
+        }else if(studio=="" && season=="" && year==item.animes_year){
             return item
-        }else if(studio==item.studios && season==item.seasonal && year==""){
+        }else if(studio==item.Studio && season==item.animes_seasonal && year==""){
             return item
-        }else if(studio=="" && season==item.seasonal && year==item.year){
+        }else if(studio=="" && season==item.animes_seasonal && year==item.animes_year){
             return item
-        }else if(studio==item.studios && season=="" && year==item.year){
+        }else if(studio==item.Studio && season=="" && year==item.animes_year){
             return item
-        }else if(studio==item.studios && season==item.seasonal && year==item.year){
+        }else if(studio==item.Studio && season==item.animes_seasonal && year==item.animes_year){
             return item
         }
     }
@@ -49,7 +49,7 @@ const TopAnimePage=()=>{
     useEffect(()=>{
         dispatch(fetchAnimeAsync())
     })
-    const displayAnime=Dataanime.filter(filterAnime).sort((firstItem, secondItem) => secondItem.score - firstItem.score);
+    const displayAnime=Dataanime.filter(filterAnime).sort((firstItem, secondItem) => secondItem.animes_score - firstItem.animes_score);
     return(
         <div className='container'>
             <h1 className='header'>Top Anime</h1>

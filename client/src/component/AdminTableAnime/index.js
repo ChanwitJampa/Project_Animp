@@ -93,7 +93,7 @@ export default function AdminTableAnime(props) {
                     <TableRow
                       hover
                       tabIndex={-1}
-                      key={row.name}
+                      key={row.animes_name}
                     >
                       <TableCell padding="checkbox">
                     
@@ -105,11 +105,11 @@ export default function AdminTableAnime(props) {
                       >
                         {row.name}
                       </TableCell>
-                      <TableCell align="left">{row.studios}</TableCell>
-                      <TableCell align="left">{row.score}</TableCell>
-                      <TableCell align="left">{row.year}</TableCell>
-                      <TableCell align="left">{row.seasonal}</TableCell>
-                      <TableCell align="left">{row.seasonal?'TV':'Movie'}</TableCell>
+                      <TableCell align="left">{row.Studio}</TableCell>
+                      <TableCell align="left">{row.animes_score}</TableCell>
+                      <TableCell align="left">{row.animes_year}</TableCell>
+                      <TableCell align="left">{row.animes_seasonal}</TableCell>
+                      <TableCell align="left">{row.animes_seasonal?'TV':'Movie'}</TableCell>
                       <TableCell align="left"><button className='adminTable-detail-button' onClick={()=>handleOpen(row,"edit")}>Detail</button></TableCell>
                     </TableRow>
                   );
