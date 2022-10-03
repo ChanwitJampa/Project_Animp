@@ -10,40 +10,6 @@ import (
 	"gorm.io/gorm"
 )
 
-type Account struct {
-	Id   int    `db:"accounts_id" json:"accounts_id"`
-	Name string `db:"accounts_name" json:"accounts_name"`
-	User string `db:"accounts_user" json:"accounts_user"`
-	Pwd  string `db:"accounts_pwd" json:"accounts_pwd"`
-}
-
-type Anime struct {
-	Id        int    `db:"animes_id" json:"animes_id"`
-	Name      string `db:"animes_name" json:"animes_name"`
-	Name_TH   string `db:"animes_nameTH" json:"animes_nameTH"`
-	Year      string `db:"animes_year" json:"animes_year"`
-	Studioes  []Studio
-	Trailer   string  `db:"animes_trailer" json:"animes_trailer"`
-	Episodes  int     `db:"animes_episodes" json:"animes_episodes"`
-	Fix_score float64 `db:"animes_score" json:"animes_score"`
-	Score     float64
-	Image     string `db:"animes_image" json:"animes_image"`
-	Seasonal  string `db:"animes_seasonal" json:"animes_seasonal"`
-	Content   string `db:"animes_content" json:"animes_content"`
-	Wallpaper string `db:"animes_wallpaper" json:"animes_wallpaper"`
-	Duration  string `db:"animes_duration" json:"animes_duration"`
-	Streaming string `db:"animes_streaming" json:"animes_streaming"`
-}
-
-type Studio struct {
-	Id          int    `db:"studioes_id" json:"studioes_id"`
-	Name        string `db:"studioes_name" json:"studioes_name"`
-	Logo        string `db:"studioes_logo" json:"studioes_logo"`
-	Established string `db:"studioes_established" json:"studioes_established"`
-	Description string `db:"studioes_description" json:"studioes_description"`
-	Image       string `db:"studioes_image" json:"studioes_image"`
-}
-
 // database handle
 type AnimapHandler struct {
 	DB *gorm.DB
@@ -67,6 +33,10 @@ func setupRouter() *gin.Engine {
 	r.PUT("/accounts/:id", h.UpdateAccount)
 	r.DELETE("/accounts/:id", h.DeleteAccount)
 
+	//studio API
+	r.GET("/studioes", h.GetAllStudioes)
+	r.GET("/studioes/:id", h.GetStudio)
+
 	return r
 
 }
@@ -82,6 +52,14 @@ func (h *AnimapHandler) Initialize() {
 	h.DB = db
 }
 
+// accounts Table
+type Account struct {
+	Id   int    `db:"accounts_id" json:"accounts_id"`
+	Name string `db:"accounts_name" json:"accounts_name"`
+	User string `db:"accounts_user" json:"accounts_user"`
+	Pwd  string `db:"accounts_pwd" json:"accounts_pwd"`
+}
+
 // get all accounts
 func (h *AnimapHandler) GetAllAccounts(c *gin.Context) {
 	accounts := []Account{}
@@ -95,7 +73,6 @@ func (h *AnimapHandler) GetAllAccounts(c *gin.Context) {
 			log.Fatal(err)
 		}
 		accounts = append(accounts, a)
-		// do something
 	}
 	c.JSON(http.StatusOK, accounts)
 }
@@ -181,4 +158,65 @@ func (h *AnimapHandler) DeleteAccount(c *gin.Context) {
 	}
 
 	c.JSON(http.StatusOK, "delete success")
+}
+
+// studioes Table
+type Studio struct {
+	Id          int    `db:"studioes_id" json:"studioes_id"`
+	Name        string `db:"studioes_name" json:"studioes_name"`
+	Logo        string `db:"studioes_logo" json:"studioes_logo"`
+	Established string `db:"studioes_established" json:"studioes_established"`
+	Description string `db:"studioes_description" json:"studioes_description"`
+	Image       string `db:"studioes_image" json:"studioes_image"`
+}
+
+// get all studioes
+func (h *AnimapHandler) GetAllStudioes(c *gin.Context) {
+	studioes := []Studio{}
+	rows, err := h.DB.Raw("SELECT studioes_id, studioes_name, studioes_logo, studioes_established, studioes_description, studioes_image FROM studioes").Rows()
+	defer rows.Close()
+
+	for rows.Next() {
+		var s Studio
+		err = rows.Scan(&s.Id, &s.Name, &s.Logo, &s.Established, &s.Description, &s.Image)
+		if err != nil {
+			log.Fatal(err)
+		}
+		studioes = append(studioes, s)
+	}
+
+	c.JSON(http.StatusOK, studioes)
+}
+
+// get studio using studioes_id
+func (h *AnimapHandler) GetStudio(c *gin.Context) {
+	id := c.Param("id")
+	s := Studio{}
+	row := h.DB.Table("studioes").Where("studioes_id = ?", &id).Select("studioes_id", "studioes_name", "studioes_logo", "studioes_established", "studioes_description", "studioes_image").Row()
+	if err := row.Err(); err != nil {
+		log.Fatal(err)
+	}
+	row.Scan(&s.Id, &s.Name, &s.Logo, &s.Established, &s.Description, &s.Image)
+
+	c.JSON(http.StatusOK, s)
+
+}
+
+// animes Table
+type Anime struct {
+	Id        int    `db:"animes_id" json:"animes_id"`
+	Name      string `db:"animes_name" json:"animes_name"`
+	Name_TH   string `db:"animes_nameTH" json:"animes_nameTH"`
+	Year      string `db:"animes_year" json:"animes_year"`
+	Studioes  []Studio
+	Trailer   string  `db:"animes_trailer" json:"animes_trailer"`
+	Episodes  int     `db:"animes_episodes" json:"animes_episodes"`
+	Fix_score float64 `db:"animes_score" json:"animes_score"`
+	Score     float64
+	Image     string `db:"animes_image" json:"animes_image"`
+	Seasonal  string `db:"animes_seasonal" json:"animes_seasonal"`
+	Content   string `db:"animes_content" json:"animes_content"`
+	Wallpaper string `db:"animes_wallpaper" json:"animes_wallpaper"`
+	Duration  string `db:"animes_duration" json:"animes_duration"`
+	Streaming string `db:"animes_streaming" json:"animes_streaming"`
 }
