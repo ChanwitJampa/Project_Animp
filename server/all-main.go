@@ -44,30 +44,12 @@ type Studio struct {
 	Image       string `db:"studioes_image" json:"studioes_image"`
 }
 
+// database handle
 type AnimapHandler struct {
 	DB *gorm.DB
 }
 
-// var db *sql.DB
-
 func main() {
-	// var err error
-	// db, err = sql.Open("mysql", "adminPlai:@6220504801plai@tcp(20.194.171.207:3306)/animemapdb")
-	// if err != nil {
-	// 	panic(err)
-	// }
-
-	// // See "Important settings" section.
-	// db.SetConnMaxLifetime(time.Minute * 3)
-	// db.SetMaxOpenConns(10)
-	// db.SetMaxIdleConns(10)
-
-	// router := gin.Default()
-	// router.GET("/accounts", getAccounts)
-	// router.GET("/account", createAccount)
-
-	// router.Run("localhost:8080")
-
 	r := setupRouter()
 	r.Run()
 }
@@ -78,6 +60,7 @@ func setupRouter() *gin.Engine {
 	h := AnimapHandler{}
 	h.Initialize()
 
+	//account API
 	r.GET("/accounts", h.GetAllAccounts)
 	r.GET("/accounts/:id", h.GetAccount)
 	r.POST("/accounts", h.SaveAccount)
@@ -88,22 +71,20 @@ func setupRouter() *gin.Engine {
 
 }
 
+// initializer
 func (h *AnimapHandler) Initialize() {
-	// db, err := gorm.Open("mysql", "adminPlai:@6220504801plai@tcp(20.194.171.207:3306)/animemapdb")
 	dsn := "adminPlai:@6220504801plai@tcp(20.194.171.207:3306)/animemapdb"
 	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	// db.AutoMigrate(&Account{})
-
 	h.DB = db
 }
 
+// get all accounts
 func (h *AnimapHandler) GetAllAccounts(c *gin.Context) {
 	accounts := []Account{}
-	// h.DB.Raw("SELECT accounts_id, accounts_name, accounts_user, accounts_pwd FROM animemapdb.accounts;").Scan(&accounts)
 	rows, err := h.DB.Model(&Account{}).Select("accounts_id, accounts_name, accounts_user, accounts_pwd").Rows()
 	defer rows.Close()
 
@@ -119,6 +100,7 @@ func (h *AnimapHandler) GetAllAccounts(c *gin.Context) {
 	c.JSON(http.StatusOK, accounts)
 }
 
+// get account using accounts_id
 func (h *AnimapHandler) GetAccount(c *gin.Context) {
 	id := c.Param("id")
 	account := Account{}
@@ -132,6 +114,7 @@ func (h *AnimapHandler) GetAccount(c *gin.Context) {
 
 }
 
+// create account receive json -> accounts_name, accounts_user, accounts_pwd
 func (h *AnimapHandler) SaveAccount(c *gin.Context) {
 	var a = Account{}
 	if err := c.BindJSON(&a); err != nil {
@@ -147,6 +130,7 @@ func (h *AnimapHandler) SaveAccount(c *gin.Context) {
 
 }
 
+// update account using id in path parameter and receive json -> accounts_name, accounts_user, accounts_pwd
 func (h *AnimapHandler) UpdateAccount(c *gin.Context) {
 	id := c.Param("id")
 	account := Account{}
@@ -181,6 +165,7 @@ func (h *AnimapHandler) UpdateAccount(c *gin.Context) {
 
 }
 
+// delete account using id
 func (h *AnimapHandler) DeleteAccount(c *gin.Context) {
 	id := c.Param("id")
 	account := Account{}
