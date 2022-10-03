@@ -8,7 +8,7 @@ import "swiper/css/navigation";
 import './index.scss'
 import AddAnimeModal from "../AddAnimeModal";
 import { useSelector, useDispatch } from 'react-redux'
-import Swal from "sweetalert2/src/sweetalert2";
+
 const SliderAnime=(props)=>{
     
     const myAnimeList = useSelector(state => state.myAnimeList)
@@ -25,7 +25,7 @@ const SliderAnime=(props)=>{
     return(
         <>
             <div className="slide-anime-header">
-                <h2 onClick={()=>Swal.fire('Any fool can use a computer')}>{tagAnime}</h2>
+                <h2>{tagAnime}</h2>
                 <Swiper
                     slidesPerView={7}
                     spaceBetween={20}
