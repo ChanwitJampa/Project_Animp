@@ -19,16 +19,12 @@ const ProgressBar = (props) => {
       color: 'white',
       fontWeight: 'bold',
     }
-    //const [levelOfUser,setLevelOfUser]=useState(levelOfGame[0])
-
-
     const filterLevel=(item)=>{
       if(item.numberOfAnime>=totalAnime){
           return item
       }
     }
     const levelOfUser=levelOfGame.filter(filterLevel).map((item)=>item)
-    console.log(levelOfUser[0])
     return (
       <div className='progress-box'>
         <div className='progress-box-hearder'>
