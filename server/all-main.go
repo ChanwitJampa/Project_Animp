@@ -11,10 +11,37 @@ import (
 )
 
 type Account struct {
-	Accounts_id   string `db:"accounts_id" json:"accounts_id"`
+	Accounts_id   int    `db:"accounts_id" json:"accounts_id"`
 	Accounts_name string `db:"accounts_name" json:"accounts_name"`
 	Accounts_user string `db:"accounts_user" json:"accounts_user"`
 	Accounts_pwd  string `db:"accounts_pwd" json:"accounts_pwd"`
+}
+
+type Anime struct {
+	Id        int    `db:"animes_id" json:"animes_id"`
+	Name      string `db:"animes_name" json:"animes_name"`
+	Name_TH   string `db:"animes_nameTH" json:"animes_nameTH"`
+	Year      string `db:"animes_year" json:"animes_year"`
+	Studioes  []Studio
+	Trailer   string  `db:"animes_trailer" json:"animes_trailer"`
+	Episodes  int     `db:"animes_episodes" json:"animes_episodes"`
+	Fix_score float64 `db:"animes_score" json:"animes_score"`
+	Score     float64
+	Image     string `db:"animes_image" json:"animes_image"`
+	Seasonal  string `db:"animes_seasonal" json:"animes_seasonal"`
+	Content   string `db:"animes_content" json:"animes_content"`
+	Wallpaper string `db:"animes_wallpaper" json:"animes_wallpaper"`
+	Duration  string `db:"animes_duration" json:"animes_duration"`
+	Streaming string `db:"animes_streaming" json:"animes_streaming"`
+}
+
+type Studio struct {
+	Id          int    `db:"studioes_id" json:"studioes_id"`
+	Name        string `db:"studioes_name" json:"studioes_name"`
+	Logo        string `db:"studioes_logo" json:"studioes_logo"`
+	Established string `db:"studioes_established" json:"studioes_established"`
+	Description string `db:"studioes_description" json:"studioes_description"`
+	Image       string `db:"studioes_image" json:"studioes_image"`
 }
 
 type AnimapHandler struct {
@@ -102,22 +129,12 @@ func (h *AnimapHandler) GetAccount(c *gin.Context) {
 }
 
 func (h *AnimapHandler) SaveAccount(c *gin.Context) {
-	a := Account{}
-	c.BindJSON(&a)
-	// fmt.Println(account)
+	var a = Account{}
+	if err := c.BindJSON(&a); err != nil {
+		return
+	}
 
-	// if err := c.ShouldBindJSON(&account); err != nil {
-	// 	c.Status(http.StatusBadRequest)
-	// 	return
-	// }
-	// h.DB.Raw("insert into accounts (`accounts_name` ,`accounts_user` ,`accounts_pwd`) VALUES (? ,? ,?)", &account.Accounts_name, &account.Accounts_user, &account.Accounts_pwd)
-	// h.DB.Select("accounts_name", "accounts_user", "accounts_pwd").Create(&account)
-	if err := h.DB.Create(&Account{
-		Accounts_id:   "",
-		Accounts_name: a.Accounts_name,
-		Accounts_user: a.Accounts_user,
-		Accounts_pwd:  a.Accounts_pwd,
-	}).Error; err != nil {
+	if err := h.DB.Create(&a).Error; err != nil {
 		c.Status(http.StatusInternalServerError)
 		return
 	}
