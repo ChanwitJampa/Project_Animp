@@ -23,13 +23,20 @@ const ListSeasonAnime=(props)=>{
     useEffect(()=>{
         dispatch(fetchAnimeAsync())
     })
+    const myAnimeList = useSelector(state => state.myAnimeList)
+    const nameOfMyAnimeList=myAnimeList.map((item)=>item.name)
     return(
         <div className="season-year-list">
             <h2>{season} {year}</h2>
             <div className="season-year-container">
                 {animeInSeasonYear.map((anime,index)=>
                     <div key={index} className="season-year-card">
-                        <img src={anime.image} onClick={()=>navigate(`/anime/${anime.id}`)}/>
+                        <div 
+                            className='season-year-card-image' 
+                            style={{backgroundImage:`url(${anime.image})`}}
+                            onClick={()=>navigate(`/anime/${anime.id}`)}>
+                                {nameOfMyAnimeList.includes(anime.name)?<h5>Watched</h5>:<></>}
+                        </div>
                         <button onClick={()=>handleOpen(anime)}>Add to List</button>
                     </div>
                 )}

@@ -15,7 +15,7 @@ const AnimeMapPage=()=>{
     <div>
         <MyMapFrist totalAnime={myAnimeList.length}/>
         <div>
-            <h2 className="myanime-list">My Anime</h2>
+            <h2 className="myanime-list">My Map</h2>
             {watchanimeYear.map((item)=>(
                 <SliderMyAnime year={item.year} myAnime={myAnimeList}/>
             ))}
