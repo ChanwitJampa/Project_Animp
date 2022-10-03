@@ -37,6 +37,10 @@ func setupRouter() *gin.Engine {
 	r.GET("/studioes", h.GetAllStudioes)
 	r.GET("/studioes/:id", h.GetStudio)
 
+	//anime API
+	r.GET("/animes", h.GetAllAnimes)
+	r.GET("/animes/:id", h.GetAnime)
+
 	return r
 
 }
@@ -209,6 +213,7 @@ type Anime struct {
 	Name_TH   string `db:"animes_nameTH" json:"animes_nameTH"`
 	Year      string `db:"animes_year" json:"animes_year"`
 	Studioes  []Studio
+	Studio    string  `db:"animes_studio json:"animes_studio"`
 	Trailer   string  `db:"animes_trailer" json:"animes_trailer"`
 	Episodes  int     `db:"animes_episodes" json:"animes_episodes"`
 	Fix_score float64 `db:"animes_score" json:"animes_score"`
@@ -219,4 +224,38 @@ type Anime struct {
 	Wallpaper string `db:"animes_wallpaper" json:"animes_wallpaper"`
 	Duration  string `db:"animes_duration" json:"animes_duration"`
 	Streaming string `db:"animes_streaming" json:"animes_streaming"`
+}
+
+// get all animes (temp)
+func (h *AnimapHandler) GetAllAnimes(c *gin.Context) {
+	animes := []Anime{}
+	rows, err := h.DB.Raw("SELECT `animes_id`, `animes_name`, `animes_nameTH`, `animes_trailer`, `animes_episodes`, `animes_score`, `animes_image`, `animes_seasonal`, `animes_year`, `animes_content`, `animes_wallpaper`, `animes_duration`, `animes_studioes`, `animes_streaming` FROM `animes`").Rows()
+	defer rows.Close()
+
+	for rows.Next() {
+		var anime Anime
+		err = rows.Scan(&anime.Id, &anime.Name, &anime.Name_TH, &anime.Trailer, &anime.Episodes, &anime.Fix_score, &anime.Image, &anime.Seasonal, &anime.Year, &anime.Content, &anime.Wallpaper,
+			&anime.Duration, &anime.Studio, &anime.Streaming)
+		if err != nil {
+			log.Fatal(err)
+		}
+		animes = append(animes, anime)
+	}
+
+	c.JSON(http.StatusOK, animes)
+}
+
+// get anime using animes_id (temp)
+func (h *AnimapHandler) GetAnime(c *gin.Context) {
+	id := c.Param("id")
+	anime := Anime{}
+	row := h.DB.Raw("SELECT `animes_id`, `animes_name`, `animes_nameTH`, `animes_trailer`, `animes_episodes`, `animes_score`, `animes_image`, `animes_seasonal`, `animes_year`, `animes_content`, `animes_wallpaper`, `animes_duration`, `animes_studioes`, `animes_streaming` FROM `animes`").Where("animes_id = ? ", id).Row()
+	if err := row.Err(); err != nil {
+		log.Fatal(err)
+	}
+	row.Scan(&anime.Id, &anime.Name, &anime.Name_TH, &anime.Trailer, &anime.Episodes, &anime.Fix_score, &anime.Image, &anime.Seasonal, &anime.Year, &anime.Content, &anime.Wallpaper,
+		&anime.Duration, &anime.Studio, &anime.Streaming)
+
+	c.JSON(http.StatusOK, anime)
+
 }
