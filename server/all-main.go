@@ -41,6 +41,10 @@ func setupRouter() *gin.Engine {
 	r.GET("/animes", h.GetAllAnimes)
 	r.GET("/animes/:id", h.GetAnime)
 
+	//tag API
+	r.GET("/tags", h.GetAllTags)
+
+	r.Run(":5000")
 	return r
 
 }
@@ -257,5 +261,96 @@ func (h *AnimapHandler) GetAnime(c *gin.Context) {
 		&anime.Duration, &anime.Studio, &anime.Streaming)
 
 	c.JSON(http.StatusOK, anime)
+
+}
+
+// tag Table
+type Tag struct {
+	Id               int    `db:"tags_id" json:"tags_id"`
+	Name             string `db:"tags_name" json:"tags_name"`
+	Universal_status bool   `db:"tags_univesal_status" json:"tags_univesal_status"`
+	Wallpaper        string `db:"tags_wallpaper" json:"tags_wallpaper"`
+}
+
+// get all tags
+func (h *AnimapHandler) GetAllTags(c *gin.Context) {
+	tags := []Tag{}
+	rows, err := h.DB.Raw("SELECT `tags_id`, `tags_name`, `tags_universe_status`, `tags_wallpaper` FROM `tags`;").Rows()
+	defer rows.Close()
+
+	for rows.Next() {
+		var t Tag
+		err = rows.Scan(&t.Id, &t.Name, &t.Universal_status, &t.Wallpaper)
+		if err != nil {
+			log.Fatal(err)
+		}
+		tags = append(tags, t)
+	}
+
+	c.JSON(http.StatusOK, tags)
+}
+
+// get tag using tags_id
+func (h *AnimapHandler) GetTag(c *gin.Context) {
+	id := c.Param("id")
+	t := Tag{}
+	row := h.DB.Raw("SELECT `tags_id`, `tags_name`, `tags_universe_status`, `tags_wallpaper` FROM `animemapdb`.`tags`").Where("tags_id = ? ", id).Row()
+	if err := row.Err(); err != nil {
+		log.Fatal(err)
+	}
+	row.Scan(&t.Id, &t.Name, &t.Universal_status, &t.Wallpaper)
+
+	c.JSON(http.StatusOK, t)
+
+}
+
+// create tag receive json -> tags_name, tags_universe_status, tags_wallpaper
+func (h *AnimapHandler) SaveTag(c *gin.Context) {
+	var t = Tag{}
+	if err := c.BindJSON(&t); err != nil {
+		return
+	}
+
+	if err := h.DB.Create(&t).Error; err != nil {
+		c.Status(http.StatusInternalServerError)
+		return
+	}
+
+	c.JSON(http.StatusOK, "insert success")
+
+}
+
+// update tag using id in path parameter and receive json -> tags_name, tags_universe_status, tags_wallpaper
+func (h *AnimapHandler) UpdateTag(c *gin.Context) {
+	id := c.Param("id")
+	tag := Tag{}
+	row := h.DB.Table("accounts").Where("accounts_id = ?", &id).Select("accounts_id", "accounts_name", "accounts_user", "accounts_pwd").Row()
+	if err := row.Err(); err != nil {
+		c.Status(http.StatusNotFound)
+		return
+	}
+	row.Scan(&tag.Id, &tag.Name, &tag.Universal_status, &tag.Wallpaper)
+
+	var newTag = Tag{}
+	if err := c.BindJSON(&newTag); err != nil {
+		c.Status(http.StatusBadRequest)
+		return
+	}
+
+	if newTag.Name != "" {
+		tag.Name = newTag.Name
+	}
+	if newTag.Universal_status != tag.Universal_status {
+		tag.Universal_status = newTag.Universal_status
+	}
+	if newTag.Wallpaper != "" {
+		tag.Wallpaper = newTag.Wallpaper
+	}
+	if err := h.DB.Exec("UPDATE `tags` SET `tags_name` = ? ,`tags_universe_status` = ? ,`tags_wallpaper` = ? WHERE `tags_id` = ?;", tag.Name, tag.Universal_status, tag.Wallpaper, id).Error; err != nil {
+		c.Status(http.StatusInternalServerError)
+		return
+	}
+
+	c.JSON(http.StatusOK, "update success")
 
 }
