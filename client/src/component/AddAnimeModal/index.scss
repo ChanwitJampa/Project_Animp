@@ -36,11 +36,6 @@ $colorGray : #C3BBBE;
 
     h1{
         color: $colorWhite;
-        cursor: pointer;
-        &:hover{
-            color: $colorGray;
-        }
-
     }
     p{
         color: $colorWhite;

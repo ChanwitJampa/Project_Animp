@@ -50,7 +50,6 @@ const yearOptions =[
       setSeason(season)
       setYear(year)
     }
-    console.log(seasonYearOption)
     let linkSeason = {
       color:`#FFFFFF`
     };
@@ -67,11 +66,7 @@ const yearOptions =[
               slidesPerView={8}
               spaceBetween={20}
               slidesPerGroup={8}
-              loop={true}
-              loopFillGroupWithBlank={true}
-              pagination={{
-                clickable: true,
-              }}
+              
               navigation={true}
               modules={[Pagination, Navigation]}
               className="mySwiper"

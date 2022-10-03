@@ -8,6 +8,7 @@ import "swiper/css/navigation";
 import './index.scss'
 import AddAnimeModal from "../AddAnimeModal";
 import { useSelector, useDispatch } from 'react-redux'
+
 const SliderAnime=(props)=>{
     
     const myAnimeList = useSelector(state => state.myAnimeList)

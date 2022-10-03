@@ -12,7 +12,8 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { addToList} from "../../actions/myAnimeListAction"
-
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
 
 const AddAnimeModal = (props) => {
   const { open, onClose, anime } = props;
@@ -48,13 +49,29 @@ const AddAnimeModal = (props) => {
       setYear("");
     }
   }, [anime, open]);
+  const MySwal = withReactContent(Swal)
   const myAnimeList = useSelector(state => state.myAnimeList)
   const dispatch = useDispatch()
   const addAnimeToList=()=>{
     onClose()
-    dispatch(addToList({ ...modalAnime, quantity: 1 }))
-    
+    MySwal.fire({
+      title: <p>Loading</p>,
+      didOpen: () => {
+        // `MySwal` is a subclass of `Swal` with all the same instance & static methods
+        
+        MySwal.showLoading()
+        dispatch(addToList({ ...modalAnime, quantity: 1 }))
+        MySwal.fire({
+          title: <strong>Good job!</strong>,
+          html: <i>Successfully added to list</i>,
+          icon: 'success'
+        })
+      },
+    }).then(() => {
+      return MySwal.fire(<p>Shorthand works too</p>)
+    })
   }
+  
   return (
     <Modal
       open={open}
@@ -66,13 +83,11 @@ const AddAnimeModal = (props) => {
         <div style={dropzoneModalStyle}></div>
         <div className="modal-header">
           <div className="modal-header-detail">
-            <h1 onClick={() => navigate(`/anime/${modalAnime.id}`)}>
-            {modalAnime.name}
-          </h1>
+            <h1>{modalAnime.name}</h1>
               <p>Score: {modalAnime.score}  ({modalAnime.year})</p>
           </div>
           
-          <button>Detail</button>
+          <button onClick={() => navigate(`/anime/${modalAnime.id}`)}>Detail</button>
         </div>
 
         <div className="modal-buttom">
