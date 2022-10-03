@@ -55,7 +55,7 @@ func setupRouter() *gin.Engine {
 	r.GET("/accounts/:id", h.GetAccount)
 	r.POST("/accounts", h.SaveAccount)
 	// r.PUT("/accounts/:id", h.UpdateAccount)
-	// r.DELETE("/accounts/:id", h.DeleteAccount)
+	r.DELETE("/accounts/:id", h.DeleteAccount)
 
 	return r
 
@@ -102,20 +102,45 @@ func (h *AnimapHandler) GetAccount(c *gin.Context) {
 }
 
 func (h *AnimapHandler) SaveAccount(c *gin.Context) {
-	account := Account{}
+	a := Account{}
+	c.BindJSON(&a)
+	// fmt.Println(account)
 
-	if err := c.ShouldBindJSON(&account); err != nil {
-		c.Status(http.StatusBadRequest)
-		return
-	}
-
-	if err := h.DB.Create(&account).Error; err != nil {
+	// if err := c.ShouldBindJSON(&account); err != nil {
+	// 	c.Status(http.StatusBadRequest)
+	// 	return
+	// }
+	// h.DB.Raw("insert into accounts (`accounts_name` ,`accounts_user` ,`accounts_pwd`) VALUES (? ,? ,?)", &account.Accounts_name, &account.Accounts_user, &account.Accounts_pwd)
+	// h.DB.Select("accounts_name", "accounts_user", "accounts_pwd").Create(&account)
+	if err := h.DB.Create(&Account{
+		Accounts_id:   "",
+		Accounts_name: a.Accounts_name,
+		Accounts_user: a.Accounts_user,
+		Accounts_pwd:  a.Accounts_pwd,
+	}).Error; err != nil {
 		c.Status(http.StatusInternalServerError)
 		return
 	}
 
-	c.JSON(http.StatusOK, account)
+	c.JSON(http.StatusOK, "insert success")
 
+}
+
+func (h *AnimapHandler) DeleteAccount(c *gin.Context) {
+	id := c.Param("id")
+	account := Account{}
+
+	if err := h.DB.Find(&account, id).Error; err != nil {
+		c.Status(http.StatusNotFound)
+		return
+	}
+
+	if err := h.DB.Exec("DELETE FROM accounts WHERE accounts_id = ?", id).Error; err != nil {
+		c.Status(http.StatusInternalServerError)
+		return
+	}
+
+	c.JSON(http.StatusOK, "delete success")
 }
 
 // // getAccounts responds with the list of all Accounts as JSON.
