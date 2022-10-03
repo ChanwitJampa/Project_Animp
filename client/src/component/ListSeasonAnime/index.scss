@@ -2,6 +2,7 @@ $colorPink:#FF1493;
 $colorBlack:#141313;
 $colorWhite:#FFFFFF;
 $colorDarkPink:#371037;
+$colorGreen: #1EC602;
 .season-year-list{
     //padding: 20px 90px 20px 90px;
     margin: auto;
@@ -16,27 +17,51 @@ $colorDarkPink:#371037;
     flex-wrap: wrap;
     flex-direction: row;
     margin:-15px;
+    
 }
 .season-year-card{
     //padding: 20px 60px 20px 0px;
     width:189px;
     padding-top: 20px;
     margin: 15px;
+    
+    button{
+        border-radius: 12px;
+        border: none;
+        cursor: pointer;
+        background-color: $colorPink;
+        color: $colorWhite;
+        width: 100%;
+        margin-top: 20px;
+        padding: 14px 10px 14px 10px;
+        font-size: 16px;
+    }
 }
-.season-year-card img{
-    border-radius: 15px;
+.season-year-card-image{
+    display: flex;
+    justify-items: end;
+    text-align: center;
+    background-position: center center;
+    background-size: cover;
     width:189px;
     height: 270px;
+    border-radius: 15px;
+    transition: transform .3s ease;
+    align-items: flex-end;
     cursor: pointer;
-}
-.season-year-card button{
-    border-radius: 12px;
-    border: none;
-    cursor: pointer;
-    background-color: $colorPink;
-    color: $colorWhite;
-    width: 100%;
-    margin-top: 20px;
-    padding: 14px 10px 14px 10px;
-    font-size: 16px;
+    &:hover{
+      transform: scale(1.2);
+    }
+    h5{
+        color: $colorWhite;
+        text-align: center;
+        background-color: $colorGreen;
+        width:189px;
+        padding: 4px 0px 4px 0px;
+        position: absolute;
+        border-bottom-left-radius: 15px;
+        border-bottom-right-radius: 15px;
+        
+      }
+
 }
