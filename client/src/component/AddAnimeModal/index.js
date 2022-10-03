@@ -12,7 +12,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { addToList} from "../../actions/myAnimeListAction"
-
+import Swal from 'sweetalert2/src/sweetalert2.js'
 
 const AddAnimeModal = (props) => {
   const { open, onClose, anime } = props;
@@ -51,8 +51,8 @@ const AddAnimeModal = (props) => {
   const myAnimeList = useSelector(state => state.myAnimeList)
   const dispatch = useDispatch()
   const addAnimeToList=()=>{
-    onClose()
     dispatch(addToList({ ...modalAnime, quantity: 1 }))
+    onClose()
     
   }
   return (
@@ -66,13 +66,11 @@ const AddAnimeModal = (props) => {
         <div style={dropzoneModalStyle}></div>
         <div className="modal-header">
           <div className="modal-header-detail">
-            <h1 onClick={() => navigate(`/anime/${modalAnime.id}`)}>
-            {modalAnime.name}
-          </h1>
+            <h1>{modalAnime.name}</h1>
               <p>Score: {modalAnime.score}  ({modalAnime.year})</p>
           </div>
           
-          <button>Detail</button>
+          <button onClick={() => navigate(`/anime/${modalAnime.id}`)}>Detail</button>
         </div>
 
         <div className="modal-buttom">
