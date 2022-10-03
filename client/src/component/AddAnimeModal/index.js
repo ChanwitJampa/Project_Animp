@@ -43,7 +43,6 @@ const AddAnimeModal = (props) => {
   };
   useEffect(() => {
     if (anime && open) {
-      console.log(anime);
       setModalAnime(anime);
       setScore("");
       setYear("");
@@ -56,7 +55,6 @@ const AddAnimeModal = (props) => {
     dispatch(addToList({ ...modalAnime, quantity: 1 }))
     
   }
-  console.log(myAnimeList)
   return (
     <Modal
       open={open}

@@ -50,7 +50,7 @@ const yearOptions =[
       setSeason(season)
       setYear(year)
     }
-    
+    console.log(seasonYearOption)
     let linkSeason = {
       color:`#FFFFFF`
     };

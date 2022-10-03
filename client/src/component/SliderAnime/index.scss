@@ -3,6 +3,7 @@ $colorBlack:#000000;
 $colorWhite:#FFFFFF;
 $colorDarkPink:#201020;
 $colorDarkDarkPink :#371037;
+$colorGreen: #1EC602;
 #swiper-anime {
     width: 90%;
     height: 100%;
@@ -26,16 +27,29 @@ $colorDarkDarkPink :#371037;
     align-items: center;
   }
 .swiper-slide-anime{
-    img{
-      height: 220px;
-      width: 160px;
-      border-radius: 15px;
-      transition: transform .3s ease;
-      &:hover{
-        transform: scale(1.2);
-      }
+    display: flex;
+    justify-items: end;
+    background-position: center center;
+    background-size: cover;
+    height: 220px;
+    width: 160px;
+    border-radius: 15px;
+    transition: transform .3s ease;
+    cursor: pointer;
+    &:hover{
+      transform: scale(1.2);
     }
-
+    h5{
+        color: $colorWhite;
+        text-align: center;
+        background-color: $colorGreen;
+        width: 160px;
+        padding: 4px 0px 4px 0px;
+        position: absolute;
+        bottom:0px;
+        border-bottom-left-radius: 15px;
+        border-bottom-right-radius: 15px;
+      }
 }
 .slide-anime-header h2{
     padding: 20px 90px 0px 90px;

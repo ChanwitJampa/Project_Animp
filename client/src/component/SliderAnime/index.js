@@ -7,8 +7,11 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 import './index.scss'
 import AddAnimeModal from "../AddAnimeModal";
-
+import { useSelector, useDispatch } from 'react-redux'
 const SliderAnime=(props)=>{
+    
+    const myAnimeList = useSelector(state => state.myAnimeList)
+    const nameOfMyAnimeList=myAnimeList.map((item)=>item.name)
     const {tagAnime,animeList} =props
     const [modalAnime,setModalAnime]=useState()
 
@@ -18,7 +21,6 @@ const SliderAnime=(props)=>{
         setOpen(true);
     }
     const handleClose = () =>setOpen(false);
-
     return(
         <>
             <div className="slide-anime-header">
@@ -33,8 +35,10 @@ const SliderAnime=(props)=>{
                     id="swiper-anime"
                     >
                     {animeList.map((item)=>
-                    <SwiperSlide key={item.id} className='swiper-slide-anime' onClick={()=>handleOpen(item)}>
-                        <img src={item.image} ></img>
+                    <SwiperSlide key={item.id}  onClick={()=>handleOpen(item)}>
+                        <div className='swiper-slide-anime' style={{backgroundImage:`url(${item.image})`}}>
+                            {nameOfMyAnimeList.includes(item.name)?<h5>Watched</h5>:<></>}
+                        </div>
                     </SwiperSlide>
                     )}
                 </Swiper>

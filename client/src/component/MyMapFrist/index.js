@@ -1,17 +1,21 @@
 import './index.scss'
 import React, { useRef, useState,useEffect } from "react";
 import ProgressBar from '../../component/ProgressBar';
+const levelOfGame=[
+        {level:1 , label: "Iron" ,numberOfAnime: 6},
+        {level:2 , label: "Bronze" ,numberOfAnime: 12},
+        {level:3 , label: "Master" ,numberOfAnime: 18},
+        {level:4 , label: "Silver" ,numberOfAnime: 24},
+        {level:5 , label: "Gold" ,numberOfAnime: 30},
+        {level:6 , label: "Platinum" ,numberOfAnime: 36},
+        {level:7 , label: "Diamond" ,numberOfAnime: 42},
+        {level:8 , label: "Master" ,numberOfAnime: 48},
+        {level:9 , label: "Grandmaster" ,numberOfAnime: 54},
+        {level:10 , label: "Challenger" ,numberOfAnime: 60}
+    ]
 const MyMapFrist=(props)=>{
     const {totalAnime} = props
     const mainWallpaper= "./image/New_map.png"
-    let mapStyle = {
-        width: `100%`,
-        height: `660px`,
-        backgroundImage: `url(${mainWallpaper})`,
-        backgroundRepeat: `no-repeat`,
-        backgroundPosition: `center -300px`,
-        backgroundSize: `cover`
-      };
     const TagPosition=()=>{
         return(
             <div className='tag-point'>
@@ -21,6 +25,13 @@ const MyMapFrist=(props)=>{
             </div>
         )
     }
+    const filterLevel=(item)=>{
+        if(item.numberOfAnime>=totalAnime){
+            return item
+        }
+    }
+    const levelOfUser=levelOfGame.filter(filterLevel).map((item)=>item.label)
+    console.log(levelOfUser[0])
     return(
         <div style={{backgroundImage:`url(${mainWallpaper})`}} className="animeMap-map">
             <div className='animeMap-text-header'>
@@ -78,7 +89,8 @@ const MyMapFrist=(props)=>{
             </div>
             <div className='progress-box'>
                 <div className='progress-box-hearder'>
-                    <h2>Beginer</h2>
+                    <h2>{totalAnime==0?"Beginer":levelOfUser[0]}</h2>
+                        
                 </div>
                 <ProgressBar completed= {totalAnime} />
                 <div className='progress-box-detail'><h2>Viewed {totalAnime} item</h2></div>
