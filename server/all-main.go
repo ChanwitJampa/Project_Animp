@@ -27,11 +27,14 @@ func setupRouter() *gin.Engine {
 	h.Initialize()
 
 	//account API
-	r.GET("/accounts", h.GetAllAccounts)
-	r.GET("/accounts/:id", h.GetAccount)
-	r.POST("/accounts", h.SaveAccount)
-	r.PUT("/accounts/:id", h.UpdateAccount)
-	r.DELETE("/accounts/:id", h.DeleteAccount)
+	accounts := r.Group("/accounts")
+	{
+		accounts.GET("", h.GetAllAccounts)
+		accounts.GET("/:id", h.GetAccount)
+		accounts.POST("", h.SaveAccount)
+		accounts.PUT("/:id", h.UpdateAccount)
+		accounts.DELETE("/:id", h.DeleteAccount)
+	}
 
 	//studio API
 	r.GET("/studioes", h.GetAllStudioes)
@@ -42,7 +45,14 @@ func setupRouter() *gin.Engine {
 	r.GET("/animes/:id", h.GetAnime)
 
 	//tag API
-	r.GET("/tags", h.GetAllTags)
+	tags := r.Group("/tags")
+	{
+		tags.GET("/tags", h.GetAllTags)
+		tags.GET("/tags/:id", h.GetTag)
+		tags.POST("/tags", h.SaveTag)
+		tags.PUT("/tags/:id", h.UpdateTag)
+		tags.DELETE("/tags/:id", h.DeleteTag)
+	}
 
 	r.Run(":5000")
 	return r
@@ -266,10 +276,10 @@ func (h *AnimapHandler) GetAnime(c *gin.Context) {
 
 // tag Table
 type Tag struct {
-	Id               int    `db:"tags_id" json:"tags_id"`
-	Name             string `db:"tags_name" json:"tags_name"`
-	Universal_status bool   `db:"tags_univesal_status" json:"tags_univesal_status"`
-	Wallpaper        string `db:"tags_wallpaper" json:"tags_wallpaper"`
+	Id              int    `db:"tags_id" json:"tags_id"`
+	Name            string `db:"tags_name" json:"tags_name"`
+	Universe_status bool   `db:"tags_universe_status" json:"tags_universe_status"`
+	Wallpaper       string `db:"tags_wallpaper" json:"tags_wallpaper"`
 }
 
 // get all tags
@@ -280,7 +290,7 @@ func (h *AnimapHandler) GetAllTags(c *gin.Context) {
 
 	for rows.Next() {
 		var t Tag
-		err = rows.Scan(&t.Id, &t.Name, &t.Universal_status, &t.Wallpaper)
+		err = rows.Scan(&t.Id, &t.Name, &t.Universe_status, &t.Wallpaper)
 		if err != nil {
 			log.Fatal(err)
 		}
@@ -294,11 +304,11 @@ func (h *AnimapHandler) GetAllTags(c *gin.Context) {
 func (h *AnimapHandler) GetTag(c *gin.Context) {
 	id := c.Param("id")
 	t := Tag{}
-	row := h.DB.Raw("SELECT `tags_id`, `tags_name`, `tags_universe_status`, `tags_wallpaper` FROM `animemapdb`.`tags`").Where("tags_id = ? ", id).Row()
+	row := h.DB.Table("tags").Where("tags_id = ? ", &id).Select("tags_id", "tags_name", "tags_universe_status", "tags_wallpaper").Row()
 	if err := row.Err(); err != nil {
 		log.Fatal(err)
 	}
-	row.Scan(&t.Id, &t.Name, &t.Universal_status, &t.Wallpaper)
+	row.Scan(&t.Id, &t.Name, &t.Universe_status, &t.Wallpaper)
 
 	c.JSON(http.StatusOK, t)
 
@@ -324,12 +334,12 @@ func (h *AnimapHandler) SaveTag(c *gin.Context) {
 func (h *AnimapHandler) UpdateTag(c *gin.Context) {
 	id := c.Param("id")
 	tag := Tag{}
-	row := h.DB.Table("accounts").Where("accounts_id = ?", &id).Select("accounts_id", "accounts_name", "accounts_user", "accounts_pwd").Row()
+	row := h.DB.Table("tags").Where("tags_id = ?", &id).Select("tags_id", "tags_name", "tags_universe_status", "tags_wallpaper").Row()
 	if err := row.Err(); err != nil {
 		c.Status(http.StatusNotFound)
 		return
 	}
-	row.Scan(&tag.Id, &tag.Name, &tag.Universal_status, &tag.Wallpaper)
+	row.Scan(&tag.Id, &tag.Name, &tag.Universe_status, &tag.Wallpaper)
 
 	var newTag = Tag{}
 	if err := c.BindJSON(&newTag); err != nil {
@@ -340,17 +350,34 @@ func (h *AnimapHandler) UpdateTag(c *gin.Context) {
 	if newTag.Name != "" {
 		tag.Name = newTag.Name
 	}
-	if newTag.Universal_status != tag.Universal_status {
-		tag.Universal_status = newTag.Universal_status
+	if newTag.Universe_status != tag.Universe_status {
+		tag.Universe_status = newTag.Universe_status
 	}
 	if newTag.Wallpaper != "" {
 		tag.Wallpaper = newTag.Wallpaper
 	}
-	if err := h.DB.Exec("UPDATE `tags` SET `tags_name` = ? ,`tags_universe_status` = ? ,`tags_wallpaper` = ? WHERE `tags_id` = ?;", tag.Name, tag.Universal_status, tag.Wallpaper, id).Error; err != nil {
+	if err := h.DB.Exec("UPDATE `tags` SET `tags_name` = ? ,`tags_universe_status` = ? ,`tags_wallpaper` = ? WHERE `tags_id` = ?;", tag.Name, tag.Universe_status, tag.Wallpaper, id).Error; err != nil {
 		c.Status(http.StatusInternalServerError)
 		return
 	}
 
 	c.JSON(http.StatusOK, "update success")
 
+}
+
+// delete tag using id
+func (h *AnimapHandler) DeleteTag(c *gin.Context) {
+	id := c.Param("id")
+
+	if err := h.DB.Raw("SELECT `tags_id`, `tags_name`, `tags_universe_status`, `tags_wallpaper` FROM `tags`;").Error; err != nil {
+		c.Status(http.StatusNotFound)
+		return
+	}
+
+	if err := h.DB.Exec("DELETE FROM tags WHERE tags_id = ? ", &id).Error; err != nil {
+		c.Status(http.StatusInternalServerError)
+		return
+	}
+
+	c.JSON(http.StatusOK, "delete success")
 }
