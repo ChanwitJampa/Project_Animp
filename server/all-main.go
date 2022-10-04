@@ -57,16 +57,16 @@ func setupRouter() *gin.Engine {
 	}
 
 	// tagDetails API
-	tagDetails := r.Group("/tagsDetails")
+	tagDetails := r.Group("/tagDetails")
 	{
-		tagDetails.GET("/animes/:id", h.GetAnimesByTagId)
-		tagDetails.GET("/tags/:id", h.GetTagsByAnimesId)
+		tagDetails.GET("/anime/:id", h.GetAnimesByTagId)
+		tagDetails.GET("/tag/:id", h.GetTagsByAnimesId)
 	}
 
 	// animeDetails API
 	animeDetails := r.Group("/animeDetails")
 	{
-		animeDetails.GET("/count/:id", h.GetCountAccountsByAnimesId)
+		animeDetails.GET("/anime/:id", h.GetCountAccountsByAnimesId)
 		animeDetails.GET("/account/:id", h.GetAnimesByAccountsId)
 	}
 
@@ -91,17 +91,18 @@ type Account struct {
 	Name string `db:"accounts_name" json:"accounts_name"`
 	User string `db:"accounts_user" json:"accounts_user"`
 	Pwd  string `db:"accounts_pwd" json:"accounts_pwd"`
+	Role string `db:"accounts_role" json:"accounts_role"`
 }
 
 // get all accounts
 func (h *AnimapHandler) GetAllAccounts(c *gin.Context) {
 	accounts := []Account{}
-	rows, err := h.DB.Model(&Account{}).Select("accounts_id, accounts_name, accounts_user, accounts_pwd").Rows()
+	rows, err := h.DB.Model(&Account{}).Select("accounts_id, accounts_name, accounts_user, accounts_pwd, accounts_role").Rows()
 	defer rows.Close()
 
 	for rows.Next() {
 		var a Account
-		err = rows.Scan(&a.Id, &a.Name, &a.User, &a.Pwd)
+		err = rows.Scan(&a.Id, &a.Name, &a.User, &a.Pwd, &a.Role)
 		if err != nil {
 			log.Fatal(err)
 		}
@@ -114,11 +115,11 @@ func (h *AnimapHandler) GetAllAccounts(c *gin.Context) {
 func (h *AnimapHandler) GetAccount(c *gin.Context) {
 	id := c.Param("id")
 	account := Account{}
-	row := h.DB.Table("accounts").Where("accounts_id = ?", &id).Select("accounts_id", "accounts_name", "accounts_user", "accounts_pwd").Row()
+	row := h.DB.Table("accounts").Where("accounts_id = ?", &id).Select("accounts_id", "accounts_name", "accounts_user", "accounts_pwd", "accounts_role").Row()
 	if err := row.Err(); err != nil {
 		log.Fatal(err)
 	}
-	row.Scan(&account.Id, &account.Name, &account.User, &account.Pwd)
+	row.Scan(&account.Id, &account.Name, &account.User, &account.Pwd, &account.Role)
 
 	c.JSON(http.StatusOK, account)
 
@@ -144,12 +145,12 @@ func (h *AnimapHandler) SaveAccount(c *gin.Context) {
 func (h *AnimapHandler) UpdateAccount(c *gin.Context) {
 	id := c.Param("id")
 	account := Account{}
-	row := h.DB.Table("accounts").Where("accounts_id = ?", &id).Select("accounts_id", "accounts_name", "accounts_user", "accounts_pwd").Row()
+	row := h.DB.Table("accounts").Where("accounts_id = ?", &id).Select("accounts_id", "accounts_name", "accounts_user", "accounts_pwd", "accounts_role").Row()
 	if err := row.Err(); err != nil {
 		c.Status(http.StatusNotFound)
 		return
 	}
-	row.Scan(&account.Id, &account.Name, &account.User, &account.Pwd)
+	row.Scan(&account.Id, &account.Name, &account.User, &account.Pwd, &account.Role)
 
 	var newAccount = Account{}
 	if err := c.BindJSON(&newAccount); err != nil {
@@ -166,7 +167,10 @@ func (h *AnimapHandler) UpdateAccount(c *gin.Context) {
 	if newAccount.Pwd != "" {
 		account.Pwd = newAccount.Pwd
 	}
-	if err := h.DB.Exec("UPDATE `accounts` SET `accounts_name` = ? ,`accounts_user` = ? ,`accounts_pwd` = ? WHERE `accounts_id` = ?;", account.Name, account.User, account.Pwd, id).Error; err != nil {
+	if newAccount.Role != "" {
+		account.Role = newAccount.Role
+	}
+	if err := h.DB.Exec("UPDATE `accounts` SET `accounts_name` = ? ,`accounts_user` = ? ,`accounts_pwd` = ? ,`accounts_role` = ? WHERE `accounts_id` = ?;", account.Name, account.User, account.Pwd, account.Role, id).Error; err != nil {
 		c.Status(http.StatusInternalServerError)
 		return
 	}
@@ -449,6 +453,12 @@ func (h *AnimapHandler) GetTagsByAnimesId(c *gin.Context) {
 // get all studios using animes_id
 
 // animeDetails Table
+type AnimeDetail struct {
+	Id         int `db:"animeDetails_id" json:"animeDetails_id"`
+	Anime_id   int `db:"animeDetails_animes_id" json:"animeDetails_animes_id"`
+	Account_id int `db:"animeDetails_accounts_id" json:"animeDetails_accounts_id"`
+}
+
 // get count accounts using animes_id
 func (h *AnimapHandler) GetCountAccountsByAnimesId(c *gin.Context) {
 	id := c.Param("id")
@@ -481,3 +491,30 @@ func (h *AnimapHandler) GetAnimesByAccountsId(c *gin.Context) {
 	c.JSON(http.StatusOK, animes)
 
 }
+
+// create animeDetails receive json -> animes_id, accounts_id
+func (h *AnimapHandler) SaveAnimeDetails(c *gin.Context) {
+	var animeDetail = AnimeDetail{}
+	if err := c.BindJSON(&animeDetail); err != nil {
+		return
+	}
+
+	if err := h.DB.Create(&animeDetail).Error; err != nil {
+		c.Status(http.StatusInternalServerError)
+		return
+	}
+
+	c.JSON(http.StatusOK, "insert success")
+}
+
+// news Table
+type News struct {
+	Id          int    `db:"news_id" json:"news_id"`
+	Name        string `db:"news_name" json:"news_name"`
+	Date        string `db:"news_date" json:"news_date"`
+	Studio      string `db:"news_studio" json:"news_studio"`
+	Wallpaper   string `db:"news_wallpaper" json:"news_wallpaper"`
+	Description string `db:"news_description" json:"news_description"`
+}
+
+// get all news
