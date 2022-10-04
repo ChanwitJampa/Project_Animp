@@ -35,13 +35,13 @@ function App() {
     return(
       <Routes>
           <Route path="/" element={<HomePage/>}/>
-          {/* <Route path="/topanime" element={<TopAnimePage/>}/>
+          <Route path="/topanime" element={<TopAnimePage/>}/>
           <Route path="/anime/:id" element={<SingleAnimePage/>}/>
           <Route path="/studio/:id" element={<SingleStudioPage/>}/>
           <Route path="/allanime" element={<SeasonnalAnimePage/>}/>
           <Route path="*" element={<NotFoundPage/>}/>
           <Route path="/login" element={<LoginPage/>}/>
-          <Route path="/register" element={<RegisterPage/>}/> */}
+          <Route path="/register" element={<RegisterPage/>}/>
       </Routes>
       )
   }

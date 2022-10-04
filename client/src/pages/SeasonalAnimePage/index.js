@@ -66,7 +66,6 @@ const yearOptions =[
               slidesPerView={8}
               spaceBetween={20}
               slidesPerGroup={8}
-              
               navigation={true}
               modules={[Pagination, Navigation]}
               className="mySwiper"

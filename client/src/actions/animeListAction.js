@@ -12,15 +12,16 @@ export function setList(list){
 export function fetchAnimeAsync(){
     return async function(dispatch){
         try{
-             dispatch(startFetch())
-            const anime = await axios.get(`localhost:5000/animes`);
-            console.log(anime)
-            if(anime){
-                dispatch(setList(anime))
+            dispatch(startFetch())
+            await fetch(`http://192.168.88.237:5000/animes`).
+            then((response) => response.json())
+            .then((animelist) => {
+                dispatch(setList(animelist))
                 dispatch(errorFetch(''))
                 dispatch(endFetch())
-            }
+            });
         }catch(error){
+            console.log("Error")
             dispatch(setList(null))
             dispatch(errorFetch(error))
             dispatch(endFetch())
