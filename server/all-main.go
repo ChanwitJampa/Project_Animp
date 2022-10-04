@@ -285,7 +285,7 @@ func (h *AnimapHandler) GetAllAnimes(c *gin.Context) {
 func (h *AnimapHandler) GetAnime(c *gin.Context) {
 	id := c.Param("id")
 	anime := Anime{}
-	row := h.DB.Raw("SELECT `animes_id`, `animes_name`, `animes_nameTH`, `animes_trailer`, `animes_episodes`, `animes_score`, `animes_image`, `animes_seasonal`, `animes_year`, `animes_content`, `animes_wallpaper`, `animes_duration`, `animes_studioes`, `animes_streaming` FROM `animes`").Where("animes_id = ? ", id).Row()
+	row := h.DB.Raw("SELECT `animes_id`, `animes_name`, `animes_nameTH`, `animes_trailer`, `animes_episodes`, `animes_score`, `animes_image`, `animes_seasonal`, `animes_year`, `animes_content`, `animes_wallpaper`, `animes_duration`, `animes_studioes`, `animes_streaming` FROM animemapdb.animes where animes_id = ? ", &id).Row()
 	if err := row.Err(); err != nil {
 		log.Fatal(err)
 	}
