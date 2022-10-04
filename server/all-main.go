@@ -506,7 +506,7 @@ func (h *AnimapHandler) SaveAnimeDetails(c *gin.Context) {
 		return
 	}
 
-	if err := h.DB.Create(&animeDetail).Error; err != nil {
+	if err := h.DB.Exec("insert into animemapdb.animedetails (`animeDetails_animes_id`, `animeDetails_accounts_id`) VALUES ( ? , ? )", animeDetail.Anime_id, animeDetail.Account_id).Error; err != nil {
 		c.Status(http.StatusInternalServerError)
 		return
 	}
@@ -518,7 +518,7 @@ func (h *AnimapHandler) SaveAnimeDetails(c *gin.Context) {
 func (h *AnimapHandler) UpdateAnimeDetail(c *gin.Context) {
 	id := c.Param("id")
 	animeDetail := AnimeDetail{}
-	row := h.DB.Table("animeDetails").Where("animeDetails_id = ?", &id).Select("animeDetails_id", "animeDetails_accounts_id", "animeDetails_animes_id").Row()
+	row := h.DB.Table("animedetails").Where("animeDetails_id = ?", &id).Select("animeDetails_id", "animeDetails_accounts_id", "animeDetails_animes_id").Row()
 	if err := row.Err(); err != nil {
 		c.Status(http.StatusNotFound)
 		return
@@ -538,7 +538,7 @@ func (h *AnimapHandler) UpdateAnimeDetail(c *gin.Context) {
 		animeDetail.Anime_id = newAnimeDetails.Anime_id
 	}
 
-	if err := h.DB.Exec("UPDATE `animeDetails` SET `animeDetails_animes_id` = ? ,`animeDetails_accounts_id` = ? WHERE `tags_id` = ?;", &animeDetail.Anime_id, &animeDetail.Account_id, &id).Error; err != nil {
+	if err := h.DB.Exec("UPDATE `animedetails` SET `animeDetails_animes_id` = ? ,`animeDetails_accounts_id` = ? WHERE `animeDetails_id` = ?;", &animeDetail.Anime_id, &animeDetail.Account_id, &id).Error; err != nil {
 		c.Status(http.StatusInternalServerError)
 		return
 	}
@@ -550,12 +550,12 @@ func (h *AnimapHandler) UpdateAnimeDetail(c *gin.Context) {
 func (h *AnimapHandler) DeleteAnimeDetail(c *gin.Context) {
 	id := c.Param("id")
 
-	if err := h.DB.Raw("SELECT `animeDetails_id` FROM `animeDetails` WHERE `animeDetails_id` = ? ", &id).Error; err != nil {
+	if err := h.DB.Raw("SELECT `animeDetails_id` FROM `animedetails` WHERE `animeDetails_id` = ? ", &id).Error; err != nil {
 		c.Status(http.StatusNotFound)
 		return
 	}
 
-	if err := h.DB.Exec("DELETE FROM tags WHERE tags_id = ? ", &id).Error; err != nil {
+	if err := h.DB.Exec("DELETE FROM animedetails WHERE animeDetails_id = ? ", &id).Error; err != nil {
 		c.Status(http.StatusInternalServerError)
 		return
 	}
