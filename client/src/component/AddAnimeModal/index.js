@@ -58,7 +58,6 @@ const AddAnimeModal = (props) => {
       title: <p>Loading</p>,
       didOpen: () => {
         // `MySwal` is a subclass of `Swal` with all the same instance & static methods
-        
         MySwal.showLoading()
         dispatch(addToList({ ...modalAnime, quantity: 1 }))
         MySwal.fire({
@@ -84,7 +83,7 @@ const AddAnimeModal = (props) => {
         <div className="modal-header">
           <div className="modal-header-detail">
             <h1>{modalAnime.animes_name}</h1>
-              <p>Score: {modalAnime.score}  ({modalAnime.animes_score})</p>
+              <p>Score: {modalAnime.animes_score}  ({modalAnime.animes_year})</p>
           </div>
           
           <button onClick={() => navigate(`/anime/${modalAnime.animes_id}`)}>Detail</button>

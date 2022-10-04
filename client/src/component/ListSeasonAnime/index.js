@@ -9,7 +9,7 @@ const ListSeasonAnime=(props)=>{
     const dispatch=useDispatch()
     const {year,season}=props;
     const Dataanime =useSelector(state=>state.animeList)
-    const animeInSeasonYear=Dataanime.filter((item)=>{if(item.seasonal==season&&item.year==year) return item})
+    const animeInSeasonYear=Dataanime.filter((item)=>{if(item.animes_seasonal==season&&item.animes_year==year) return item})
     const [open,setOpen]=useState(false);
     const [modalAnime,setModalAnime]=useState();
     const handleOpen=(item)=>{
@@ -22,9 +22,10 @@ const ListSeasonAnime=(props)=>{
     
     useEffect(()=>{
         dispatch(fetchAnimeAsync())
-    })
+    },[])
     const myAnimeList = useSelector(state => state.myAnimeList)
     const nameOfMyAnimeList=myAnimeList.map((item)=>item.animes_name)
+    console.log(nameOfMyAnimeList)
     return(
         <div className="season-year-list">
             <h2>{season} {year}</h2>

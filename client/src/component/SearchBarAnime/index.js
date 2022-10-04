@@ -20,7 +20,7 @@ const SearchBarAnime = () => {
   
   useEffect(()=>{
     dispatch(fetchAnimeAsync())
-  })
+  },[])
 
 
   const defaultFilterOptions = createFilterOptions();

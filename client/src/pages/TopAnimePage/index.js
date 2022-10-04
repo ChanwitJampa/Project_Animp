@@ -48,7 +48,7 @@ const TopAnimePage=()=>{
     const dispatch=useDispatch()
     useEffect(()=>{
         dispatch(fetchAnimeAsync())
-    })
+    },[])
     const displayAnime=Dataanime.filter(filterAnime).sort((firstItem, secondItem) => secondItem.animes_score - firstItem.animes_score);
     return(
         <div className='container'>
