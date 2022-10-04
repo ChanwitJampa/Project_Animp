@@ -353,7 +353,7 @@ func (h *AnimapHandler) SaveTag(c *gin.Context) {
 		return
 	}
 
-	if err := h.DB.Create(&t).Error; err != nil {
+	if err := h.DB.Exec("insert into tags (`tags_name`, `tags_universe_status`, `tags_wallpaper`) VALUES ( ? , ? , ? )", t.Name, t.Universe_status, t.Wallpaper).Error; err != nil {
 		c.Status(http.StatusInternalServerError)
 		return
 	}
