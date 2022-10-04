@@ -85,13 +85,17 @@ const SingleAnimePage=(props)=>{
                 <div className='anime-detail'>
                     <h2>Detail</h2><br/>
                     <p>Anime: {singleAnime.animes_name}</p><br/>
-                    {singleAnime.animes_episodes==1?<>
+                    {singleAnime.animes_episodes!==1?<>
                         <p>Episodes: {singleAnime.animes_episodes}</p><br/>
                         <p>Seasonal: {singleAnime.animes_seasonal}</p></>:
                     <p>Type: Movie</p>}<br/>
                     <p>Year: {singleAnime.animes_year}</p><br/>
                     <p onClick={()=>navigate(`/studio/${singleAnime.animes_id}`)}>Studio: {singleAnime.Studio}</p><br/>
                     <p>Duration: {singleAnime.animes_duration}</p>
+                </div>
+                <div className='anime-detail-content'>
+                    <h2>เนื้อเรื่องย่อ</h2>
+                    <p>{singleAnime.animes_content}</p>
                 </div>
             </div>
             <SliderAnime tagAnime="From same studio" animeList={animeList}/>
