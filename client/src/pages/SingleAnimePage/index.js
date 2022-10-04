@@ -13,7 +13,7 @@ const SingleAnimePage=(props)=>{
     const dispatch=useDispatch()
     const Dataanime =useSelector(state=>state.animeList)
     const fetchAnime = async () => {
-        await axios.get(`http://192.168.88.237:5000/animes/${params.id}`).
+        await axios.get(`http://localhost:5000/animes/${params.id}`).
         then((response) => response.data)
         .then((anime) => {
             console.log(anime);     

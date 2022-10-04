@@ -13,7 +13,8 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import TextField from '@mui/material/TextField'
 import dayjs from 'dayjs';
 import Datastudio from '../../assets/studio.json'
-import Dataanime from "../../assets/anime.json"
+import {fetchAnimeAsync} from '../../actions/animeListAction'
+import {useDispatch,useSelector} from 'react-redux'
 
 const seasonOptions = [
     { id:1,value: 'Winter', label: 'Winter' },
@@ -58,26 +59,28 @@ const AdminAnimePage = () => {
     const filterAnime=(item)=>{
         if(studio=="" && season=="" && year==null){
             return item
-        }else if(studio==item.studios && season=="" && year==null){
+        }else if(studio==item.Studio && season=="" && year==null){
             return item
-        }else if(studio=="" && season==item.seasonal && year==null){
+        }else if(studio=="" && season==item.animes_seasonal && year==null){
             return item
-        }else if(studio=="" && season=="" && year==item.year){
+        }else if(studio=="" && season=="" && year==item.animes_year){
             return item
-        }else if(studio==item.studios && season==item.seasonal && year==null){
+        }else if(studio==item.Studio && season==item.animes_seasonal && year==null){
             return item
-        }else if(studio=="" && season==item.seasonal && year==item.year){
+        }else if(studio=="" && season==item.animes_seasonal && year==item.animes_year){
             return item
-        }else if(studio==item.studios && season=="" && year==item.year){
+        }else if(studio==item.Studio && season=="" && year==item.animes_year){
             return item
-        }else if(studio==item.studios && season==item.seasonal && year==item.year){
+        }else if(studio==item.Studio && season==item.animes_seasonal && year==item.animes_year){
             return item
         }
     }
+    const dispatch=useDispatch()
+    useEffect(()=>{
+        dispatch(fetchAnimeAsync())
+    },[])
+    const Dataanime =useSelector(state=>state.animeList)
     const displayAnime=Dataanime.filter(filterAnime);
-    console.log(year)
-    console.log(studio)
-    console.log(season)
     return (
         <div>
             <div className="adminAnime-header">
@@ -101,7 +104,7 @@ const AdminAnimePage = () => {
                                 value={studio}
                                 name="studio"
                                 onChange={onChangItem("studio")}
-                            >{Datastudio.map((item)=> <MenuItem value={item.studio_name}>{item.studio_name}</MenuItem>)}
+                            >{Datastudio.map((item)=> <MenuItem value={item.studio_name} key={item.id}>{item.studio_name}</MenuItem>)}
                             </Select>
                         </FormControl>
                     </div>
@@ -116,7 +119,7 @@ const AdminAnimePage = () => {
                                 name="season"
                                 onChange={onChangItem("season")}
                             >{seasonOptions.map((item) => (
-                                <MenuItem value={item.value}>{item.label}</MenuItem>
+                                <MenuItem value={item.value} key={item.id}>{item.label}</MenuItem>
                             ))}
 
                             </Select>

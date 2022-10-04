@@ -96,14 +96,13 @@ export default function AdminTableAnime(props) {
                       key={row.animes_name}
                     >
                       <TableCell padding="checkbox">
-                    
                       </TableCell>
                       <TableCell
                         component="th"
                         scope="row"
                         padding="none"
                       >
-                        {row.name}
+                        {row.animes_name}
                       </TableCell>
                       <TableCell align="left">{row.Studio}</TableCell>
                       <TableCell align="left">{row.animes_score}</TableCell>
