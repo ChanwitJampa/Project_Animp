@@ -28,7 +28,7 @@ func setupRouter() *gin.Engine {
 	h.Initialize()
 	r.Use(cors.Default())
 
-	//account API
+	// account API
 	accounts := r.Group("/accounts")
 	{
 		accounts.GET("", h.GetAllAccounts)
@@ -38,15 +38,15 @@ func setupRouter() *gin.Engine {
 		accounts.DELETE("/:id", h.DeleteAccount)
 	}
 
-	//studio API
+	// studio API
 	r.GET("/studioes", h.GetAllStudioes)
 	r.GET("/studioes/:id", h.GetStudio)
 
-	//anime API
+	// anime API
 	r.GET("/animes", h.GetAllAnimes)
 	r.GET("/animes/:id", h.GetAnime)
 
-	//tag API
+	// tag API
 	tags := r.Group("/tags")
 	{
 		tags.GET("", h.GetAllTags)
@@ -55,6 +55,21 @@ func setupRouter() *gin.Engine {
 		tags.PUT("/:id", h.UpdateTag)
 		tags.DELETE("/:id", h.DeleteTag)
 	}
+
+	// tagDetails API
+	tagDetails := r.Group("/tagsDetails")
+	{
+		tagDetails.GET("/animes/:id", h.GetAnimesByTagId)
+		tagDetails.GET("/tags/:id", h.GetTagsByAnimesId)
+	}
+
+	// animeDetails API
+	animeDetails := r.Group("/animeDetails")
+	{
+		animeDetails.GET("/count/:id", h.GetCountAccountsByAnimesId)
+		animeDetails.GET("/account/:id", h.GetAnimesByAccountsId)
+	}
+
 	r.Run(":5000")
 	return r
 
@@ -278,7 +293,6 @@ func (h *AnimapHandler) GetAnime(c *gin.Context) {
 		&anime.Duration, &anime.Studio, &anime.Streaming)
 
 	c.JSON(http.StatusOK, anime)
-
 }
 
 // tag Table
@@ -390,21 +404,80 @@ func (h *AnimapHandler) DeleteTag(c *gin.Context) {
 }
 
 // tagDetails Table
+// get all animes using tags_id
+func (h *AnimapHandler) GetAnimesByTagId(c *gin.Context) {
+	id := c.Param("id")
+	animes := []Anime{}
+	rows, err := h.DB.Raw("SELECT `animes_id`, `animes_name`, `animes_nameTH`, `animes_trailer`, `animes_episodes`, `animes_score`, `animes_image`, `animes_seasonal`, `animes_year`, `animes_content`, `animes_wallpaper`, `animes_duration`, `animes_studioes`, `animes_streaming` FROM animemapdb.animes as A right join animemapdb.tagdetails as T on A.animes_id = T.tagDetails_animes_id ").Where("animes_id = ? ", &id).Rows()
+	defer rows.Close()
 
-// get all studioDetails
-// func (h *AnimapHandler) GetStudioDetails(c *gin.Context) {
-// 	tags := []Tag{}
-// 	rows, err := h.DB.Raw("SELECT `tags_id`, `tags_name`, `tags_universe_status`, `tags_wallpaper` FROM `tags`").Rows()
-// 	defer rows.Close()
+	for rows.Next() {
+		var anime Anime
+		err = rows.Scan(&anime.Id, &anime.Name, &anime.Name_TH, &anime.Trailer, &anime.Episodes, &anime.Fix_score, &anime.Image, &anime.Seasonal, &anime.Year, &anime.Content, &anime.Wallpaper,
+			&anime.Duration, &anime.Studio, &anime.Streaming)
+		if err != nil {
+			log.Fatal(err)
+		}
+		animes = append(animes, anime)
+	}
 
-// 	for rows.Next() {
-// 		var t Tag
-// 		err = rows.Scan(&t.Id, &t.Name, &t.Universe_status, &t.Wallpaper)
-// 		if err != nil {
-// 			log.Fatal(err)
-// 		}
-// 		tags = append(tags, t)
-// 	}
+	c.JSON(http.StatusOK, animes)
 
-// 	c.JSON(http.StatusOK, tags)
-// }
+}
+
+// get all tags using animes_id
+func (h *AnimapHandler) GetTagsByAnimesId(c *gin.Context) {
+	id := c.Param("id")
+	tags := []Tag{}
+	rows, err := h.DB.Raw("SELECT `tags_id`, `tags_name`, `tags_universe_status`, `tags_wallpaper` FROM animemapdb.tags as T right join animemapdb.tagdetails as D on T.tags_id = D.tagDetails_tags_id").Where("tags_id = ? ", &id).Rows()
+	defer rows.Close()
+
+	for rows.Next() {
+		var t Tag
+		err = rows.Scan(&t.Id, &t.Name, &t.Universe_status, &t.Wallpaper)
+		if err != nil {
+			log.Fatal(err)
+		}
+		tags = append(tags, t)
+	}
+
+	c.JSON(http.StatusOK, tags)
+}
+
+// studioDetails Table
+// get all animes using studioes_id
+// get all studios using animes_id
+
+// animeDetails Table
+// get count accounts using animes_id
+func (h *AnimapHandler) GetCountAccountsByAnimesId(c *gin.Context) {
+	id := c.Param("id")
+	var count int
+
+	if err := h.DB.Raw("select count(animeDetails_id) from animemapdb.animedetails").Where("animeDetails_animes_id = ? ", &id).Scan(&count).Error; err != nil {
+		log.Fatal(err)
+		return
+	}
+	c.JSON(http.StatusOK, count)
+}
+
+// get animes using accounts_id
+func (h *AnimapHandler) GetAnimesByAccountsId(c *gin.Context) {
+	id := c.Param("id")
+	animes := []Anime{}
+	rows, err := h.DB.Raw("SELECT `animes_id`, `animes_name`, `animes_nameTH`, `animes_trailer`, `animes_episodes`, `animes_score`, `animes_image`, `animes_seasonal`, `animes_year`, `animes_content`, `animes_wallpaper`, `animes_duration`, `animes_studioes`, `animes_streaming` FROM animemapdb.animes as A right join animemapdb.animedetails as D on A.animes_id = D.animeDetails_animes_id ").Where("animeDetails_accounts_id = ? ", &id).Rows()
+	defer rows.Close()
+
+	for rows.Next() {
+		var anime Anime
+		err = rows.Scan(&anime.Id, &anime.Name, &anime.Name_TH, &anime.Trailer, &anime.Episodes, &anime.Fix_score, &anime.Image, &anime.Seasonal, &anime.Year, &anime.Content, &anime.Wallpaper,
+			&anime.Duration, &anime.Studio, &anime.Streaming)
+		if err != nil {
+			log.Fatal(err)
+		}
+		animes = append(animes, anime)
+	}
+
+	c.JSON(http.StatusOK, animes)
+
+}
