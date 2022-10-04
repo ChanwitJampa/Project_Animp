@@ -68,6 +68,10 @@ func setupRouter() *gin.Engine {
 	{
 		animeDetails.GET("/anime/:id", h.GetCountAccountsByAnimesId)
 		animeDetails.GET("/account/:id", h.GetAnimesByAccountsId)
+
+		animeDetails.POST("", h.SaveAnimeDetails)
+		animeDetails.PUT("/:id", h.UpdateAnimeDetail)
+		animeDetails.DELETE("/:id", h.DeleteAnimeDetail)
 	}
 
 	r.Run(":5000")
@@ -394,7 +398,7 @@ func (h *AnimapHandler) UpdateTag(c *gin.Context) {
 func (h *AnimapHandler) DeleteTag(c *gin.Context) {
 	id := c.Param("id")
 
-	if err := h.DB.Raw("SELECT `tags_id`, `tags_name`, `tags_universe_status`, `tags_wallpaper` FROM `tags`;").Error; err != nil {
+	if err := h.DB.Raw("SELECT `tags_id`, `tags_name`, `tags_universe_status`, `tags_wallpaper` FROM `tags` WHERE `tags_id` = ? ", &id).Error; err != nil {
 		c.Status(http.StatusNotFound)
 		return
 	}
@@ -505,6 +509,55 @@ func (h *AnimapHandler) SaveAnimeDetails(c *gin.Context) {
 	}
 
 	c.JSON(http.StatusOK, "insert success")
+}
+
+// update animeDetails using id in path parameter and receive json -> animes_id, accounts_id
+func (h *AnimapHandler) UpdateAnimeDetail(c *gin.Context) {
+	id := c.Param("id")
+	animeDetail := AnimeDetail{}
+	row := h.DB.Table("animeDetails").Where("animeDetails_id = ?", &id).Select("animeDetails_id", "animeDetails_accounts_id", "animeDetails_animes_id").Row()
+	if err := row.Err(); err != nil {
+		c.Status(http.StatusNotFound)
+		return
+	}
+	row.Scan(&animeDetail.Id, &animeDetail.Account_id, &animeDetail.Anime_id)
+
+	var newAnimeDetails = AnimeDetail{}
+	if err := c.BindJSON(&newAnimeDetails); err != nil {
+		c.Status(http.StatusBadRequest)
+		return
+	}
+
+	if newAnimeDetails.Account_id != animeDetail.Account_id {
+		animeDetail.Account_id = newAnimeDetails.Account_id
+	}
+	if newAnimeDetails.Anime_id != animeDetail.Anime_id {
+		animeDetail.Anime_id = newAnimeDetails.Anime_id
+	}
+
+	if err := h.DB.Exec("UPDATE `animeDetails` SET `animeDetails_animes_id` = ? ,`animeDetails_accounts_id` = ? WHERE `tags_id` = ?;", &animeDetail.Anime_id, &animeDetail.Account_id, &id).Error; err != nil {
+		c.Status(http.StatusInternalServerError)
+		return
+	}
+
+	c.JSON(http.StatusOK, "update success")
+}
+
+// delete animeDetail using id
+func (h *AnimapHandler) DeleteAnimeDetail(c *gin.Context) {
+	id := c.Param("id")
+
+	if err := h.DB.Raw("SELECT `animeDetails_id` FROM `animeDetails` WHERE `animeDetails_id` = ? ", &id).Error; err != nil {
+		c.Status(http.StatusNotFound)
+		return
+	}
+
+	if err := h.DB.Exec("DELETE FROM tags WHERE tags_id = ? ", &id).Error; err != nil {
+		c.Status(http.StatusInternalServerError)
+		return
+	}
+
+	c.JSON(http.StatusOK, "delete success")
 }
 
 // news Table
