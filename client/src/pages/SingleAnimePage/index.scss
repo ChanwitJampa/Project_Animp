@@ -77,18 +77,33 @@ $colorFadedPink:#F169B2;
 .anime-detail-container{
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
 }
 .anime-detail{
-    width: 550px;
-    padding-left: 50px;
-    padding-top: 30px;
+    width: 300px;
+    margin: 20px;
+    padding: 30px 20px 50px 50px;
+    border-radius: 20px;
+    background-color:$colorBlack;
     p{
         color: $colorWhite;
         font-size: 18px;
     }
     h2{
         color: $colorWhite;
+    }
+}
+.anime-detail-content{
+    width: 500px;
+    padding-left: 50px;
+    padding-top: 30px;
+    margin: 20px;
+    p{
+        color: $colorWhite;
+        font-size: 18px;
+    }
+    h2{
+        color: $colorWhite;
+        padding-bottom: 20px;
     }
 }
 .videoWrapper-container{

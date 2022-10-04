@@ -23,7 +23,6 @@ const AdminAddAnimeModal = (props) => {
     const { open, onClose, anime, mode } = props
     const navigate = useNavigate()
 
-    
     const [name,setName] =useState()
     const [year, setYear] = useState()
     const [studio, setStudio] = useState()
@@ -72,21 +71,40 @@ const AdminAddAnimeModal = (props) => {
     }
     useEffect(() => {
         if (mode =="edit") {
-            setName(anime.name)
-            setYear(anime.year.toString())
-            setStudio(anime.studios)
-            setSeason(anime.seasonal)
-            setEpisodes(anime.episodes)
-            setImage(anime.image)
-            setTrailer(anime.trailer)
-            setWallpaper(anime.wallpaper)
-            setDuration(anime.duration)
-            setScore(anime.score)
+            setName(anime.animes_name)
+            setYear(anime.animes_year.toString())
+            setStudio(anime.Studio)
+            setSeason(anime.animes_seasonal)
+            setEpisodes(anime.animes_episodes)
+            setImage(anime.animes_image)
+            setTrailer(anime.animes_trailer)
+            setWallpaper(anime.animes_wallpaper)
+            setDuration(anime.animes_duration)
+            setScore(anime.animes_score)
+            setDescript(anime.animes_content)
         }else if(mode == "create"){
             setSeason(seasonOptions[Math.ceil((dayjs().month()+1)/4)].value)
             setYear(dayjs())
         }
     }, [mode,open])
+    const submitFormAnime=()=>{
+        console.log(name)
+            console.log(year)
+            console.log(studio)
+            console.log(season)
+            console.log(episodes)
+            console.log(image)
+            console.log(trailer)
+            console.log(wallpaper)
+            console.log(duration)
+            console.log(score)
+            console.log(descript)
+        // if(mode=="create"){
+            
+        // }else{
+
+        // }
+    }
     return (
         <div className='modal-body'>
             <Modal
@@ -151,7 +169,7 @@ const AdminAddAnimeModal = (props) => {
                                     name="studio"
                                     onChange={onChangItem("studio")}
                                 >{Datastudio.map((item) => (
-                                    <MenuItem value={item.studio_name}>{item.studio_name}</MenuItem>
+                                    <MenuItem value={item.studio_name} key={item.studio_name}>{item.studio_name}</MenuItem>
                                 ))}
                                 </Select>
                             </FormControl>
@@ -171,7 +189,7 @@ const AdminAddAnimeModal = (props) => {
                                     name="season"
                                     onChange={onChangItem("season")}
                                 >{seasonOptions.map((item) => (
-                                    <MenuItem value={item.value}>{item.label}</MenuItem>
+                                    <MenuItem value={item.value} key={item.id}>{item.label}</MenuItem>
                                 ))}
                                 </Select>
                                 
@@ -304,6 +322,7 @@ const AdminAddAnimeModal = (props) => {
                             <h3>Descript</h3>
                             <TextField
                                 hiddenLabel
+                                required
                                 id="outlined-multiline-static"
                                 multiline
                                 rows={4}
@@ -314,7 +333,7 @@ const AdminAddAnimeModal = (props) => {
                         </FormControl>
                     </div>
                     <div className='modal-addanime-container-bottom'>
-                        <button>{mode == "create" ? "Add New":" Edit Anime"}</button>
+                        <button onClick={submitFormAnime}>{mode == "create" ? "Add New":" Edit Anime"}</button>
                     </div>
                 </div>
             </Modal>

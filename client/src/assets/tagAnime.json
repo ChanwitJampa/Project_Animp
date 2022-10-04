@@ -118,5 +118,23 @@
         "tag_name":"วิทยาศาสตร์",
         "tag_universe_status":false,
         "tage_wallpaper":""
+    },
+    {
+        "id":21,
+        "tag_name":"พระเอกเมินนางเอก",
+        "tag_universe_status":false,
+        "tage_wallpaper":""
+    },
+    {
+        "id":22,
+        "tag_name":"พระเอกเก่ง",
+        "tag_universe_status":false,
+        "tage_wallpaper":""
+    },
+    {
+        "id":23,
+        "tag_name":"นางเอกผมเหลือง",
+        "tag_universe_status":false,
+        "tage_wallpaper":""
     }
 ]
