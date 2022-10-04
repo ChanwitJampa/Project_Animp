@@ -74,6 +74,9 @@ func setupRouter() *gin.Engine {
 		animeDetails.DELETE("/:id", h.DeleteAnimeDetail)
 	}
 
+	// news API
+	r.GET("/news", h.GetAllNews)
+
 	r.Run(":5000")
 	return r
 
@@ -571,3 +574,19 @@ type News struct {
 }
 
 // get all news
+func (h *AnimapHandler) GetAllNews(c *gin.Context) {
+	news := []News{}
+	rows, err := h.DB.Raw("SELECT `news_id`, `news_name`, `news_date`, `news_studio`, `news_wallpaper`, `news_description` FROM `news`").Rows()
+	defer rows.Close()
+
+	for rows.Next() {
+		var n News
+		err = rows.Scan(&n.Id, &n.Name, &n.Date, &n.Studio, &n.Wallpaper, &n.Description)
+		if err != nil {
+			log.Fatal(err)
+		}
+		news = append(news, n)
+	}
+
+	c.JSON(http.StatusOK, news)
+}
