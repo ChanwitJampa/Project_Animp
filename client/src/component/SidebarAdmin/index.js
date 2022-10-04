@@ -18,8 +18,6 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import LocalMoviesIcon from '@mui/icons-material/LocalMovies';
 import MovieIcon from '@mui/icons-material/Movie';
-import WallpaperIcon from '@mui/icons-material/Wallpaper';
-import CampaignIcon from '@mui/icons-material/Campaign';
 import { pink } from '@mui/material/colors';
 import { BrowserRouter, Redirect, Route ,Routes} from 'react-router-dom'
 import AdminHomePage from '../../pages/AdminHomePage';
@@ -40,8 +38,6 @@ function SidebarAdmin(props) {
         { id: '2', item: "Anime Tag", icon:  <TagIcon/>,link:"/admintaganime"},
         { id: '3', item: "Studio", icon:  <MovieIcon/>,link:"/" },
         { id: '4', item: "User", icon:  <AssignmentIndIcon/>,link:"/"},
-        { id: '5', item: "Wallpaper", icon:  <WallpaperIcon/>,link:"/" },
-        { id: '6', item: "News", icon: <CampaignIcon/>,link:"/" }
     ]
     const drawer = (
         <div>

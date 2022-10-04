@@ -11,7 +11,9 @@ import Paper from '@mui/material/Paper';
 import './index.scss'
 import { pink } from '@mui/material/colors';
 import AdminAddAnimeModal from '../AdminAddAnimeModal';
-import TagAnime from '../../assets/tagAnime.json'
+import { useSelector, useDispatch } from 'react-redux'
+import AdminAnimeTagModal from "../AdminAnimeTagModal";
+import { fetchTagAsync } from "../../actions/tagListAction"; 
 
 // This method is created for cross-browser compatibility, if you don't
 // need to support IE11, you can use Array.prototype.sort() directly
@@ -43,6 +45,8 @@ function EnhancedTableHead() {
   );
 }
 export default function AdminTableAnimeTag() {
+  const dispatch=useDispatch()
+  const TagAnime = useSelector(state => state.tagList)
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
 
@@ -54,7 +58,9 @@ export default function AdminTableAnimeTag() {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
   };
-
+  useEffect(()=>{
+    dispatch(fetchTagAsync())
+  },[])
   // Avoid a layout jump when reaching the last page with empty rows.
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - TagAnime.length) : 0;
@@ -70,11 +76,11 @@ export default function AdminTableAnimeTag() {
     }
     const handleClose = () =>setOpen(false);
   return (
-    <Box sx={{ width: '50%' }}>
+    <Box sx={{ width: '100%' }}>
       <Paper sx={{ width: '100%', mb: 2 }}>
         <TableContainer>
           <Table
-            sx={{ minWidth: 750 }}
+            sx={{ minWidth: 450 }}
             aria-labelledby="tableTitle"
             size={'medium'}
           >
@@ -89,7 +95,7 @@ export default function AdminTableAnimeTag() {
                     <TableRow
                       hover
                       tabIndex={-1}
-                      key={row.id}
+                      key={row.tags_id}
                     >
                       <TableCell padding="checkbox">
                     
@@ -99,9 +105,9 @@ export default function AdminTableAnimeTag() {
                         scope="row"
                         padding="none"
                       >
-                        {row.tag_name}
+                        {row.tags_name}
                       </TableCell>
-                      <TableCell align="left">{row.tag_universe_status?"True":"False"}</TableCell>
+                      <TableCell align="left">{row.tags_universe_status?"True":"False"}</TableCell>
                       <TableCell align="left"><button className='adminTable-detail-button' onClick={()=>handleOpen(row,"edit")}>Detail</button></TableCell>
                     </TableRow>
                   );
@@ -128,7 +134,7 @@ export default function AdminTableAnimeTag() {
           onRowsPerPageChange={handleChangeRowsPerPage}
         />
       </Paper>
-      {/* <AdminAddAnimeModal open={open} onClose={handleClose} anime={modalAnime} mode={modalMode}/> */}
+      <AdminAnimeTagModal open={open} onClose={handleClose} tag={modalAnimeTag} mode={modalMode}/>
     </Box>
   );
 }
