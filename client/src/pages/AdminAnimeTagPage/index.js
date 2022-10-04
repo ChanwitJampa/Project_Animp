@@ -1,31 +1,43 @@
-import './index.scss'
-import Paper from '@mui/material/Paper';
-import Box from '@mui/material/Box';
-import Grid from '@mui/material/Grid';
-import AdminTableAnimeTag from '../../component/AdminTableAnimeTag';
+import "./index.scss";
+import AdminTableAnimeTag from "../../component/AdminTableAnimeTag";
+import AdminAnimeTagModal from "../../component/AdminAnimeTagModal";
+import { useState, useEffect } from 'react';
+
 const AdminAnimeTagPage = () => {
-    return (<div>
-        <div className='adminAnime-header'>
-            <h1>Tag Anime</h1>
-            <button>Add Tag</button>
+    const [modalTag, setModalTag] = useState()
+    const [modalModeTag, setModalModeTag] = useState('')
+    const [openTag, setOpenTag] = useState(false);
+    const handleCloseModalTag = () =>setOpenTag(false);
+    const handleOpenModalTag = (item, mode) => {
+        setModalModeTag(mode);
+        if (mode == "edit") {
+            setModalTag(item)
+        }
+        setOpenTag(true);
+    }
+  return (
+    <div>
+        <div className="adminAnime-header">
+            <h1>Manage Tag Anime</h1>
         </div>
-        <Paper
-            elevation={3}
-            sx={{
-                mb: 3,
-                p: 2
-            }}>
-
-        </Paper>
-        <Grid sx={{ flexGrow: 1 }}>
-            <Grid >
+        <div className="adminAnimeTag-container">
+            <div className="adminAnimeTag-container-table">
+                <div className="adminAnimeTag-container-header">
+                   <h2>Tag Anime</h2>
+                    <button onClick={() => handleOpenModalTag([], "create")}>Add Tag</button> 
+                </div>
                 <AdminTableAnimeTag />
-            </Grid>
-            <Grid>
-                <AdminTableAnimeTag />
-            </Grid>
-        </Grid>
-
-    </div>)
-}
-export default AdminAnimeTagPage
+            </div>
+            <div className="adminAnimeTag-container-table">
+                <div className="adminAnimeTag-container-header">
+                   <h2>Tag Anime</h2>
+                    <button>Add Tag</button> 
+                </div>
+                
+            </div>
+        </div>
+        <AdminAnimeTagModal open={openTag} onClose={handleCloseModalTag} tag={modalTag} mode={modalModeTag}/>
+    </div>
+  );
+};
+export default AdminAnimeTagPage;

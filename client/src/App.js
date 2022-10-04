@@ -49,11 +49,11 @@ function App() {
   const location = useLocation();
   console.log(location.pathname);
   return (
-    <div>
-      {location.pathname=="/login" ||location.pathname=="/register"?<></> :<Navbar/>}
-      {!user?<UnAuthApp/>:<AuthApp/>}
-      
-    </div>
+    //  <div>
+    //    {location.pathname=="/login" ||location.pathname=="/register"?<></> :<Navbar/>}
+    //    {!user?<UnAuthApp/>:<AuthApp/>}
+    // </div>
+    <SidebarAdmin/>
   );
 }
 
