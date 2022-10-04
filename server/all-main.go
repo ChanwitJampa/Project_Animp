@@ -5,6 +5,7 @@ import (
 	"log"
 	"net/http"
 
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
@@ -25,6 +26,7 @@ func setupRouter() *gin.Engine {
 
 	h := AnimapHandler{}
 	h.Initialize()
+	r.Use(cors.Default())
 
 	//account API
 	accounts := r.Group("/accounts")
@@ -53,7 +55,6 @@ func setupRouter() *gin.Engine {
 		tags.PUT("/:id", h.UpdateTag)
 		tags.DELETE("/:id", h.DeleteTag)
 	}
-
 	r.Run(":5000")
 	return r
 
@@ -61,12 +62,11 @@ func setupRouter() *gin.Engine {
 
 // initializer
 func (h *AnimapHandler) Initialize() {
-	dsn := "adminPlai:@6220504801plai@tcp(20.194.171.207:3306)/animemapdb"
+	dsn := "adminPlai:@6220504801plai@tcp(20.194.171.207:3306)/animemapdb?charset=utf8&parseTime=True&loc=Local"
 	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
 	if err != nil {
 		log.Fatal(err)
 	}
-
 	h.DB = db
 }
 
@@ -218,6 +218,13 @@ func (h *AnimapHandler) GetStudio(c *gin.Context) {
 
 	c.JSON(http.StatusOK, s)
 
+}
+
+// studioDetails Table
+type studioDetail struct {
+	Id     int `db:"studioDetails_id" json:"studioDetails_id"`
+	Anime  int `db:"studioDetails_animes_id" json:"studioDetails_animes_id"`
+	Studio int `db:"studioDetails_studioes_id" json:"studioDetails_studioes_id"`
 }
 
 // animes Table
@@ -382,15 +389,10 @@ func (h *AnimapHandler) DeleteTag(c *gin.Context) {
 	c.JSON(http.StatusOK, "delete success")
 }
 
-// studioDetails Table
-type studioDetail struct {
-	Id     int `db:"studioDetails_id" json:"studioDetails_id"`
-	Anime  int `db:"studioDetails_animes_id" json:"studioDetails_animes_id"`
-	Studio int `db:"studioDetails_studioes_id" json:"studioDetails_studioes_id"`
-}
+// tagDetails Table
 
 // get all studioDetails
-// func (h *AnimapHandler) GetAllStudioDetails(c *gin.Context) {
+// func (h *AnimapHandler) GetStudioDetails(c *gin.Context) {
 // 	tags := []Tag{}
 // 	rows, err := h.DB.Raw("SELECT `tags_id`, `tags_name`, `tags_universe_status`, `tags_wallpaper` FROM `tags`").Rows()
 // 	defer rows.Close()
