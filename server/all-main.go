@@ -47,11 +47,11 @@ func setupRouter() *gin.Engine {
 	//tag API
 	tags := r.Group("/tags")
 	{
-		tags.GET("/tags", h.GetAllTags)
-		tags.GET("/tags/:id", h.GetTag)
-		tags.POST("/tags", h.SaveTag)
-		tags.PUT("/tags/:id", h.UpdateTag)
-		tags.DELETE("/tags/:id", h.DeleteTag)
+		tags.GET("", h.GetAllTags)
+		tags.GET("/:id", h.GetTag)
+		tags.POST("", h.SaveTag)
+		tags.PUT("/:id", h.UpdateTag)
+		tags.DELETE("/:id", h.DeleteTag)
 	}
 
 	r.Run(":5000")
@@ -285,7 +285,7 @@ type Tag struct {
 // get all tags
 func (h *AnimapHandler) GetAllTags(c *gin.Context) {
 	tags := []Tag{}
-	rows, err := h.DB.Raw("SELECT `tags_id`, `tags_name`, `tags_universe_status`, `tags_wallpaper` FROM `tags`;").Rows()
+	rows, err := h.DB.Raw("SELECT `tags_id`, `tags_name`, `tags_universe_status`, `tags_wallpaper` FROM `tags`").Rows()
 	defer rows.Close()
 
 	for rows.Next() {
@@ -381,3 +381,28 @@ func (h *AnimapHandler) DeleteTag(c *gin.Context) {
 
 	c.JSON(http.StatusOK, "delete success")
 }
+
+// studioDetails Table
+type studioDetail struct {
+	Id     int `db:"studioDetails_id" json:"studioDetails_id"`
+	Anime  int `db:"studioDetails_animes_id" json:"studioDetails_animes_id"`
+	Studio int `db:"studioDetails_studioes_id" json:"studioDetails_studioes_id"`
+}
+
+// get all studioDetails
+// func (h *AnimapHandler) GetAllStudioDetails(c *gin.Context) {
+// 	tags := []Tag{}
+// 	rows, err := h.DB.Raw("SELECT `tags_id`, `tags_name`, `tags_universe_status`, `tags_wallpaper` FROM `tags`").Rows()
+// 	defer rows.Close()
+
+// 	for rows.Next() {
+// 		var t Tag
+// 		err = rows.Scan(&t.Id, &t.Name, &t.Universe_status, &t.Wallpaper)
+// 		if err != nil {
+// 			log.Fatal(err)
+// 		}
+// 		tags = append(tags, t)
+// 	}
+
+// 	c.JSON(http.StatusOK, tags)
+// }
