@@ -90,7 +90,7 @@ const SingleAnimePage=(props)=>{
                         <p>Seasonal: {singleAnime.animes_seasonal}</p></>:
                     <p>Type: Movie</p>}<br/>
                     <p>Year: {singleAnime.animes_year}</p><br/>
-                    <p onClick={()=>navigate(`/studio/${singleAnime.animes_id}`)}>Studio: {singleAnime.Studio}</p><br/>
+                    <p onClick={()=>navigate(`/studio/${singleAnime.Studio}`)}>Studio: {singleAnime.Studio}</p><br/>
                     <p>Duration: {singleAnime.animes_duration}</p>
                 </div>
                 <div className='anime-detail-content'>
