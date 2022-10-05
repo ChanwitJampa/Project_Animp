@@ -68,14 +68,10 @@ export default function AdminTableTagAnime() {
   // Avoid a layout jump when reaching the last page with empty rows.
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - Dataanime.length) : 0;
-    const [modalAnimeTag,setModalAnimeTag]=useState()
-    const [modalMode,setModalMode]=useState('')
+    const [modalAnime,setModalAnime]=useState([])
     const [open, setOpen] = useState(false);
-    const handleOpen = (item,mode) => {
-        setModalMode(mode);
-        if(mode=="edit"){
-            setModalAnimeTag(item)
-        }
+    const handleOpen = (item) => {
+        setModalAnime(item)
         setOpen(true);
     }
     const handleClose = () =>setOpen(false);
@@ -112,7 +108,7 @@ export default function AdminTableTagAnime() {
                         {row.animes_name}
                       </TableCell>
                       <TableCell align="left"></TableCell>
-                      <TableCell align="left"><button className='adminTable-detail-button' onClick={()=>handleOpen(row,"edit")}>Detail</button></TableCell>
+                      <TableCell align="left"><button className='adminTable-detail-button' onClick={()=>handleOpen(row)}>Detail</button></TableCell>
                     </TableRow>
                   );
                 })}
@@ -138,7 +134,7 @@ export default function AdminTableTagAnime() {
           onRowsPerPageChange={handleChangeRowsPerPage}
         />
       </Paper>
-      <AdminTagAnimeModal open={open} onClose={handleClose} tag={modalAnimeTag} mode={modalMode}/>
+      <AdminTagAnimeModal open={open} onClose={handleClose} anime={modalAnime}/>
     </Box>
   );
 }

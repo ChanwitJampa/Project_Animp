@@ -4,75 +4,55 @@ import FormControl from "@mui/material/FormControl";
 import TextField from "@mui/material/TextField";
 import { useState, useEffect } from "react";
 import "./index.scss";
-import axios from 'axios';
-import Swal from 'sweetalert2'
-import withReactContent from 'sweetalert2-react-content'
+import axios from "axios";
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
 import { fetchTagAsync } from "../../actions/tagListAction";
-import { useSelector, useDispatch } from 'react-redux'
-
+import { fetchTagByAnimeIdAsync } from "../../actions/tagAnimeListAction";
+import { useSelector, useDispatch } from "react-redux";
+import AddAnimeModal from "../AddAnimeModal";
+import Select from '@mui/material/Select';
+import MenuItem from '@mui/material/MenuItem';
 const AdminTagAnimeModal = (props) => {
-  const { open, onClose, tag, mode } = props;
-  const MySwal = withReactContent(Swal)
-  const [tagName, setTagName] = useState();
-  const [tagUniverse, setTagUnivers] = useState(false);
-  const [tagWallpaper, setTagWallpaper] = useState("");
-  const dispatch = useDispatch()
+  const { open, onClose, anime, mode } = props;
+  const MySwal = withReactContent(Swal);
+  const [selectTag, setSelectTag] = useState("");
+  const dispatch = useDispatch();
   const onChangItem = (name) => (event) => {
-    if (name == "tagName") {
-      setTagName(event.target.value);
-      console.log(event.target.value)
-    } else if (name == "tagUniverse") {
-      setTagUnivers(event.target.value);
-      console.log(event.target.value)
-    } else if (name == "tagWallpaper") {
-      setTagWallpaper(event.target.value);
-      console.log(event.target.value)
-    }
+    setSelectTag(event.target.value);
   };
-  useEffect(() => {
-    if (mode == "edit") {
-      setTagName(tag.tags_name);
-      setTagUnivers(tag.tags_universe_status);
-      setTagWallpaper(tag.tags_wallpaper);
-    } else if (mode == "create") {
-      setTagUnivers(false);
-      setTagWallpaper("-")
-    }
-  }, [mode, open]);
   const submitFormTag = () => {
-    if (mode == "create") {
-      onClose()  
+      onClose();
       axios
-        .post(`http://localhost:5000/tags`, {
-            tags_name:tagName,
-            tags_universe_status:tagUniverse,
-            tags_wallpaper:tagWallpaper
+        .post(`localhost:5000/tagDetails`, {
+            tagDetails_tags_id:selectTag,
+            tagDetails_animes_id:anime.animes_id,
         })
         .then((response) => {
-            MySwal.fire("Alert", "บันทึกข้อมูลเรียบร้อย", "success");
-            dispatch(fetchTagAsync())
-            setTagName("")
-            setTagUnivers(false)
-            setTagWallpaper("-")
+          MySwal.fire("Alert", "บันทึกข้อมูลเรียบร้อย", "success");
+          dispatch(fetchTagAsync());
+          selectTag("")
         })
         .catch((error) => {
-            MySwal.fire("Alert", error, "error");
-            setTagName("")
-            setTagUnivers(false)
-            setTagWallpaper("-")
+          MySwal.fire("Alert", error, "error");
         });
-    } else {
-        onClose()
-        MySwal.fire("Alert", "บันทึกข้อมูลเรียบร้อย", "success");
-            setTagName("")
-            setTagUnivers(false)
-            setTagWallpaper("")
-    }
   };
+  const Tag = useSelector((state) => state.tagList);
+  const TagAnime = useSelector((state) => state.tagAnimeList);
+  const [animeModal, setAnimeModal] = useState(anime);
+  useEffect(() => {
+    dispatch(fetchTagAsync());
+  }, []);
 
-  useEffect(()=>{
-    dispatch(fetchTagAsync())
-  },[])
+  useEffect(() => {
+    if (open) {
+      setAnimeModal(anime);
+      console.log(anime.animes_id);
+      dispatch(fetchTagByAnimeIdAsync(anime.animes_id));
+    } else {
+      setAnimeModal([]);
+    }
+  }, [open]);
   return (
     <div className="modal-body">
       <Modal
@@ -83,32 +63,36 @@ const AdminTagAnimeModal = (props) => {
         className="modal-body"
       >
         <div className="modal-addanime-modalStyles">
-          {mode == "create" ? <h1>Add New Tag Anime</h1> : <h1>Edit Tag Anime</h1>}
+          <h1>Add New Tag Anime</h1>
           <div className="modal-addanime-container">
+            <h1>{anime.animes_name}</h1>
             <FormControl
-              fullWidth
+            fullWidth
               sx={{
+
                 mb: 3,
               }}
-              variant="standard"
             >
-              <h3>Anime</h3>
-              <TextField
-                hiddenLabel
+              <h3>Tag</h3>
+              <Select
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
                 required
-                id="outlined-adornment"
-                placeholder="Tag name"
-                value={tagName}
-                name="tagName"
-                onChange={onChangItem("tagName")}
-              />
+                value={selectTag}
+                name="selectTag"
+                onChange={onChangItem("selectTag")}
+              >
+                {Tag.map((item) => (
+                  <MenuItem value={item.tags_id} key={item.tags_name}>
+                    {item.tags_name}
+                  </MenuItem>
+                ))}
+              </Select>
             </FormControl>
-            
-
           </div>
           <div className="modal-addanime-container-bottom">
             <button onClick={submitFormTag}>
-              {mode == "create" ? "Add New" : " Edit Tag"}
+              Add New
             </button>
           </div>
         </div>
