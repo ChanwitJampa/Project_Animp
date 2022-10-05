@@ -12,14 +12,15 @@ import './index.scss'
 import { pink } from '@mui/material/colors';
 import AdminAddAnimeModal from '../AdminAddAnimeModal';
 import { useSelector, useDispatch } from 'react-redux'
-import AdminAnimeTagModal from "../AdminAnimeTagModal";
-import { fetchTagAsync } from "../../actions/tagListAction"; 
+import AdminTagAnimeModal from "../AdminTagAnimeModal";
+import { fetchTagByAnimeIdAsync } from "../../actions/tagAnimeListAction"; 
+import {fetchAnimeAsync} from '../../actions/animeListAction'
 
 // This method is created for cross-browser compatibility, if you don't
 // need to support IE11, you can use Array.prototype.sort() directly
 const headCells = [
-  {  id: 'tag',disablePadding: true,label: 'Tag'},
-  {  id: 'universe status',disablePadding: false,label: 'Universe status'},
+  {  id: 'anime',disablePadding: true,label: 'Anime'},
+  {  id: 'tag',disablePadding: false,label: 'Tag'},
   {  id: 'manage',disablePadding: false,label: 'Manage'}
 ];
 
@@ -44,12 +45,12 @@ function EnhancedTableHead() {
     </TableHead>
   );
 }
-export default function AdminTableAnimeTag() {
+export default function AdminTableTagAnime() {
   const dispatch=useDispatch()
   const TagAnime = useSelector(state => state.tagList)
+  const Dataanime =useSelector(state=>state.animeList)
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
-
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
@@ -58,12 +59,15 @@ export default function AdminTableAnimeTag() {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
   };
+
+
   useEffect(()=>{
-    dispatch(fetchTagAsync())
+    dispatch(fetchAnimeAsync())
   },[])
+
   // Avoid a layout jump when reaching the last page with empty rows.
   const emptyRows =
-    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - TagAnime.length) : 0;
+    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - Dataanime.length) : 0;
     const [modalAnimeTag,setModalAnimeTag]=useState()
     const [modalMode,setModalMode]=useState('')
     const [open, setOpen] = useState(false);
@@ -88,14 +92,14 @@ export default function AdminTableAnimeTag() {
             <TableBody>
               {/* if you don't need to support IE11, you can replace the `stableSort` call with:
                  rows.slice().sort(getComparator(order, orderBy)) */}
-              {TagAnime
+              {Dataanime
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row, index) => { 
                   return (
                     <TableRow
                       hover
                       tabIndex={-1}
-                      key={row.tags_id}
+                      key={row.animes_id}
                     >
                       <TableCell padding="checkbox">
                     
@@ -105,9 +109,9 @@ export default function AdminTableAnimeTag() {
                         scope="row"
                         padding="none"
                       >
-                        {row.tags_name}
+                        {row.animes_name}
                       </TableCell>
-                      <TableCell align="left">{row.tags_universe_status?"True":"False"}</TableCell>
+                      <TableCell align="left"></TableCell>
                       <TableCell align="left"><button className='adminTable-detail-button' onClick={()=>handleOpen(row,"edit")}>Detail</button></TableCell>
                     </TableRow>
                   );
@@ -127,14 +131,14 @@ export default function AdminTableAnimeTag() {
         <TablePagination
           rowsPerPageOptions={[5 ,10, 25, 50]}
           component="div"
-          count={TagAnime.length}
+          count={Dataanime.length}
           rowsPerPage={rowsPerPage}
           page={page}
           onPageChange={handleChangePage}
           onRowsPerPageChange={handleChangeRowsPerPage}
         />
       </Paper>
-      <AdminAnimeTagModal open={open} onClose={handleClose} tag={modalAnimeTag} mode={modalMode}/>
+      <AdminTagAnimeModal open={open} onClose={handleClose} tag={modalAnimeTag} mode={modalMode}/>
     </Box>
   );
 }

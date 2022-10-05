@@ -1,6 +1,7 @@
 import "./index.scss";
-import AdminTableAnimeTag from "../../component/AdminTableAnimeTag";
-import AdminAnimeTagModal from "../../component/AdminAnimeTagModal";
+import AdminTableTag from "../../component/AdminTableTag";
+import AdminTagModal from "../../component/AdminTagModal";
+import AdminTableTagAnime from "../../component/AdminTableTagAnime";
 import { useState, useEffect } from 'react';
 
 const AdminAnimeTagPage = () => {
@@ -21,22 +22,21 @@ const AdminAnimeTagPage = () => {
             <h1>Manage Tag Anime</h1>
         </div>
         <div className="adminAnimeTag-container">
-            <div className="adminAnimeTag-container-table">
+            <div className="adminAnimeTag-container-table1">
                 <div className="adminAnimeTag-container-header">
-                   <h2>Tag Anime</h2>
+                   <h2>Tag</h2>
                     <button onClick={() => handleOpenModalTag([], "create")}>Add Tag</button> 
                 </div>
-                <AdminTableAnimeTag />
+                <AdminTableTag />
             </div>
-            <div className="adminAnimeTag-container-table">
+            <div className="adminAnimeTag-container-table2">
                 <div className="adminAnimeTag-container-header">
                    <h2>Tag Anime</h2>
-                    <button>Add Tag</button> 
                 </div>
-                
+                <AdminTableTagAnime/>
             </div>
         </div>
-        <AdminAnimeTagModal open={openTag} onClose={handleCloseModalTag} tag={modalTag} mode={modalModeTag}/>
+        <AdminTagModal open={openTag} onClose={handleCloseModalTag} tag={modalTag} mode={modalModeTag}/>
     </div>
   );
 };

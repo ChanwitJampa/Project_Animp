@@ -7,13 +7,16 @@ import "./index.scss";
 import axios from 'axios';
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
+import { fetchTagAsync } from "../../actions/tagListAction";
+import { useSelector, useDispatch } from 'react-redux'
 
-const AdminAnimeTagModal = (props) => {
+const AdminTagModal = (props) => {
   const { open, onClose, tag, mode } = props;
   const MySwal = withReactContent(Swal)
   const [tagName, setTagName] = useState();
   const [tagUniverse, setTagUnivers] = useState(false);
   const [tagWallpaper, setTagWallpaper] = useState("");
+  const dispatch = useDispatch()
   const onChangItem = (name) => (event) => {
     if (name == "tagName") {
       setTagName(event.target.value);
@@ -50,12 +53,16 @@ const AdminAnimeTagModal = (props) => {
         })
         .then((response) => {
             MySwal.fire("Alert", "บันทึกข้อมูลเรียบร้อย", "success");
+            dispatch(fetchTagAsync())
             setTagName("")
             setTagUnivers(false)
             setTagWallpaper("-")
         })
         .catch((error) => {
             MySwal.fire("Alert", error, "error");
+            setTagName("")
+            setTagUnivers(false)
+            setTagWallpaper("-")
         });
     } else {
         onClose()
@@ -141,4 +148,4 @@ const AdminAnimeTagModal = (props) => {
     </div>
   );
 };
-export default AdminAnimeTagModal;
+export default AdminTagModal;

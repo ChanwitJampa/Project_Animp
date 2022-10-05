@@ -23,6 +23,9 @@ import { BrowserRouter, Redirect, Route ,Routes} from 'react-router-dom'
 import AdminHomePage from '../../pages/AdminHomePage';
 import AdminAnimePage from '../../pages/AdminAnimePage';
 import AdminAnimeTagPage from '../../pages/AdminAnimeTagPage';
+import NotFoundPage from '../../pages/NotFoundPage';
+import LoginPage from '../../pages/LoginPage';
+import RegisterPage from '../../pages/RegisterPage';
 import { useNavigate } from "react-router-dom";
 const drawerWidth = 240;
 
@@ -124,7 +127,10 @@ function SidebarAdmin(props) {
             >
                 <Toolbar />
                 <Routes>
+                    <Route path="/login" element={<LoginPage/>}/>
+                    <Route path="/register" element={<RegisterPage/>}/>
                     <Route path="/" element={<AdminHomePage/>}/>
+                    <Route path="*" element={<NotFoundPage/>}/>
                     <Route path="/adminanime" element={<AdminAnimePage/>}/>
                     <Route path="/admintaganime" element={<AdminAnimeTagPage/>}/>
                 </Routes>
