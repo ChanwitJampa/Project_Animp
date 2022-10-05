@@ -1,6 +1,6 @@
 import './index.scss'
 import SearchBarAnime from '../SearchBarAnime';
-import Profile from '../Profile';
+import ProfileBar from '../ProfileBar';
 import {Link,withRouter,Navigate} from "react-router-dom";
 import {useSelector} from "react-redux"
 
@@ -23,7 +23,7 @@ const Navbar=()=>{
             </div>
             <div className='navbar-right'>
                 <SearchBarAnime/>
-                {user?<Profile/>:<Link to="/login" className='navbar-login-button' >Login</Link>}
+                {user?<ProfileBar/>:<Link to="/login" className='navbar-login-button' >Login</Link>}
             </div>
         </div>
     )

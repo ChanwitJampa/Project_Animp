@@ -11,6 +11,7 @@ import RegisterPage from './pages/RegisterPage';
 import SingleStudioPage from './pages/SingleStudioPage';
 import SidebarAdmin from './component/SidebarAdmin';
 import AdminHomePage from './pages/AdminHomePage';
+import ProfilePage from './pages/ProfilePage';
 import {useSelector} from "react-redux"
 import React, { useState, useEffect } from "react";
 import { useLocation } from 'react-router-dom'
@@ -28,6 +29,7 @@ function App() {
         <Route path="*" element={<NotFoundPage/>}/>
         <Route path="/login" element={<LoginPage/>}/>
         <Route path="/register" element={<RegisterPage/>}/>
+        <Route path="/profile" element={<ProfilePage/>}/>
     </Routes>
     )
   }
@@ -49,11 +51,11 @@ function App() {
   const location = useLocation();
   console.log(location.pathname);
   return (
-    //  <div>
-    //    {location.pathname=="/login" ||location.pathname=="/register"?<></> :<Navbar/>}
-    //    {!user?<UnAuthApp/>:<AuthApp/>}
-    // </div>
-    <SidebarAdmin/>
+     <div>
+       {location.pathname=="/login" ||location.pathname=="/register"?<></> :<Navbar/>}
+       {!user?<UnAuthApp/>:<AuthApp/>}
+    </div>
+    //<SidebarAdmin/>
   );
 }
 
