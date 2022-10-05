@@ -39,7 +39,7 @@ func setupRouter() *gin.Engine {
 		accounts.PUT("/:id", h.UpdateAccount)
 		accounts.DELETE("/:id", h.DeleteAccount)
 
-		accounts.GET("checkAccount", h.CheckUserAndPwd)
+		accounts.POST("checkAccount", h.CheckUserAndPwd)
 	}
 
 	// studio API
