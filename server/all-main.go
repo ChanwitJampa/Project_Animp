@@ -133,7 +133,7 @@ func (h *AnimapHandler) GetAllAccounts(c *gin.Context) {
 func (h *AnimapHandler) GetAccount(c *gin.Context) {
 	id := c.Param("id")
 	account := Account{}
-	row := h.DB.Table("accounts").Where("accounts_id = ?", &id).Select("accounts_id", "accounts_name", "accounts_user", "accounts_pwd", "accounts_role").Row()
+	row := h.DB.Table("accounts").Where("accounts_id = ?", id).Select("accounts_id", "accounts_name", "accounts_user", "accounts_pwd", "accounts_role").Row()
 	if err := row.Err(); err != nil {
 		log.Fatal(err)
 	}
@@ -163,7 +163,7 @@ func (h *AnimapHandler) SaveAccount(c *gin.Context) {
 func (h *AnimapHandler) UpdateAccount(c *gin.Context) {
 	id := c.Param("id")
 	account := Account{}
-	row := h.DB.Table("accounts").Where("accounts_id = ?", &id).Select("accounts_id", "accounts_name", "accounts_user", "accounts_pwd", "accounts_role").Row()
+	row := h.DB.Table("accounts").Where("accounts_id = ?", id).Select("accounts_id", "accounts_name", "accounts_user", "accounts_pwd", "accounts_role").Row()
 	if err := row.Err(); err != nil {
 		c.Status(http.StatusNotFound)
 		return
@@ -269,7 +269,7 @@ func (h *AnimapHandler) GetAllStudioes(c *gin.Context) {
 func (h *AnimapHandler) GetStudio(c *gin.Context) {
 	id := c.Param("id")
 	s := Studio{}
-	row := h.DB.Table("studioes").Where("studioes_id = ?", &id).Select("studioes_id", "studioes_name", "studioes_logo", "studioes_established", "studioes_description", "studioes_image").Row()
+	row := h.DB.Table("studioes").Where("studioes_id = ?", id).Select("studioes_id", "studioes_name", "studioes_logo", "studioes_established", "studioes_description", "studioes_image").Row()
 	if err := row.Err(); err != nil {
 		log.Fatal(err)
 	}
@@ -329,7 +329,7 @@ func (h *AnimapHandler) GetAllAnimes(c *gin.Context) {
 func (h *AnimapHandler) GetAnime(c *gin.Context) {
 	id := c.Param("id")
 	anime := Anime{}
-	row := h.DB.Raw("SELECT `animes_id`, `animes_name`, `animes_nameTH`, `animes_trailer`, `animes_episodes`, `animes_score`, `animes_image`, `animes_seasonal`, `animes_year`, `animes_content`, `animes_wallpaper`, `animes_duration`, `animes_studioes`, `animes_streaming` FROM animemapdb.animes where animes_id = ? ", &id).Row()
+	row := h.DB.Raw("SELECT `animes_id`, `animes_name`, `animes_nameTH`, `animes_trailer`, `animes_episodes`, `animes_score`, `animes_image`, `animes_seasonal`, `animes_year`, `animes_content`, `animes_wallpaper`, `animes_duration`, `animes_studioes`, `animes_streaming` FROM animemapdb.animes where animes_id = ? ", id).Row()
 	if err := row.Err(); err != nil {
 		log.Fatal(err)
 	}
@@ -386,7 +386,7 @@ func (h *AnimapHandler) GetAllTags(c *gin.Context) {
 func (h *AnimapHandler) GetTag(c *gin.Context) {
 	id := c.Param("id")
 	t := Tag{}
-	row := h.DB.Table("tags").Where("tags_id = ? ", &id).Select("tags_id", "tags_name", "tags_universe_status", "tags_wallpaper").Row()
+	row := h.DB.Table("tags").Where("tags_id = ? ", id).Select("tags_id", "tags_name", "tags_universe_status", "tags_wallpaper").Row()
 	if err := row.Err(); err != nil {
 		log.Fatal(err)
 	}
@@ -416,7 +416,7 @@ func (h *AnimapHandler) SaveTag(c *gin.Context) {
 func (h *AnimapHandler) UpdateTag(c *gin.Context) {
 	id := c.Param("id")
 	tag := Tag{}
-	row := h.DB.Table("tags").Where("tags_id = ?", &id).Select("tags_id", "tags_name", "tags_universe_status", "tags_wallpaper").Row()
+	row := h.DB.Table("tags").Where("tags_id = ?", id).Select("tags_id", "tags_name", "tags_universe_status", "tags_wallpaper").Row()
 	if err := row.Err(); err != nil {
 		c.Status(http.StatusNotFound)
 		return
@@ -451,12 +451,12 @@ func (h *AnimapHandler) UpdateTag(c *gin.Context) {
 func (h *AnimapHandler) DeleteTag(c *gin.Context) {
 	id := c.Param("id")
 
-	if err := h.DB.Raw("SELECT `tags_id`, `tags_name`, `tags_universe_status`, `tags_wallpaper` FROM `tags` WHERE `tags_id` = ? ", &id).Error; err != nil {
+	if err := h.DB.Raw("SELECT `tags_id`, `tags_name`, `tags_universe_status`, `tags_wallpaper` FROM `tags` WHERE `tags_id` = ? ", id).Error; err != nil {
 		c.Status(http.StatusNotFound)
 		return
 	}
 
-	if err := h.DB.Exec("DELETE FROM tags WHERE tags_id = ? ", &id).Error; err != nil {
+	if err := h.DB.Exec("DELETE FROM tags WHERE tags_id = ? ", id).Error; err != nil {
 		c.Status(http.StatusInternalServerError)
 		return
 	}
@@ -533,9 +533,11 @@ func (h *AnimapHandler) GetTagsByAnimesId(c *gin.Context) {
 
 // animeDetails Table
 type AnimeDetail struct {
-	Id         int `db:"animeDetails_id" json:"animeDetails_id"`
-	Anime_id   int `db:"animeDetails_animes_id" json:"animeDetails_animes_id"`
-	Account_id int `db:"animeDetails_accounts_id" json:"animeDetails_accounts_id"`
+	Id         int     `db:"animeDetails_id" json:"animeDetails_id"`
+	Anime_id   int     `db:"animeDetails_animes_id" json:"animeDetails_animes_id"`
+	Account_id int     `db:"animeDetails_accounts_id" json:"animeDetails_accounts_id"`
+	WatchYear  string  `db:"animedetails_watchYear" json:"animedetails_watchYear"`
+	Score      float64 `db:"animedetails_score" json:"animedetails_score"`
 }
 
 type AnimeDetailMore struct {
@@ -549,7 +551,7 @@ func (h *AnimapHandler) GetCountAccountsByAnimesId(c *gin.Context) {
 	id := c.Param("id")
 	var count int
 
-	if err := h.DB.Raw("select count(animeDetails_id) from animemapdb.animedetails").Where("animeDetails_animes_id = ? ", &id).Scan(&count).Error; err != nil {
+	if err := h.DB.Raw("select count(animeDetails_id) from animemapdb.animedetails").Where("animeDetails_animes_id = ? ", id).Scan(&count).Error; err != nil {
 		log.Fatal(err)
 		return
 	}
@@ -560,7 +562,7 @@ func (h *AnimapHandler) GetCountAccountsByAnimesId(c *gin.Context) {
 func (h *AnimapHandler) GetAnimesByAccountsId(c *gin.Context) {
 	id := c.Param("id")
 	animes := []Anime{}
-	rows, err := h.DB.Raw("SELECT `animes_id`, `animes_name`, `animes_nameTH`, `animes_trailer`, `animes_episodes`, `animes_score`, `animes_image`, `animes_seasonal`, `animes_year`, `animes_content`, `animes_wallpaper`, `animes_duration`, `animes_studioes`, `animes_streaming` FROM animemapdb.animes as A right join animemapdb.animedetails as D on A.animes_id = D.animeDetails_animes_id ").Where("animeDetails_accounts_id = ? ", &id).Rows()
+	rows, err := h.DB.Raw("SELECT `animes_id`, `animes_name`, `animes_nameTH`, `animes_trailer`, `animes_episodes`, `animes_score`, `animes_image`, `animes_seasonal`, `animes_year`, `animes_content`, `animes_wallpaper`, `animes_duration`, `animes_studioes`, `animes_streaming` FROM animemapdb.animes as A right join animemapdb.animedetails as D on A.animes_id = D.animeDetails_animes_id WHERE animeDetails_accounts_id = ? ", id).Rows()
 	defer rows.Close()
 	for rows.Next() {
 		var anime Anime
@@ -578,7 +580,7 @@ func (h *AnimapHandler) GetAnimesByAccountsId(c *gin.Context) {
 func (h *AnimapHandler) GetAnimeDetailsByAccountsId(c *gin.Context) {
 	id := c.Param("id")
 	animeDetails := []AnimeDetailMore{}
-	rows, err := h.DB.Raw("SELECT `animes_id`, `animes_name`, `animes_nameTH`, `animes_trailer`, `animes_episodes`, `animes_score`, `animes_image`, `animes_seasonal`, `animes_year`, `animes_content`, `animes_wallpaper`, `animes_duration`, `animes_studioes`, `animes_streaming`, `animedetails_score`, `animedetails_watchYear` FROM animemapdb.animes as A right join animemapdb.animedetails as D on A.animes_id = D.animeDetails_animes_id ").Where("animeDetails_accounts_id = ? ", &id).Rows()
+	rows, err := h.DB.Raw("SELECT `animes_id`, `animes_name`, `animes_nameTH`, `animes_trailer`, `animes_episodes`, `animes_score`, `animes_image`, `animes_seasonal`, `animes_year`, `animes_content`, `animes_wallpaper`, `animes_duration`, `animes_studioes`, `animes_streaming`, `animedetails_score`, `animedetails_watchYear` FROM animemapdb.animes as A right join animemapdb.animedetails as D on A.animes_id = D.animeDetails_animes_id WHERE animeDetails_accounts_id = ? ", id).Rows()
 	defer rows.Close()
 	for rows.Next() {
 		var animeDetail AnimeDetailMore
@@ -592,14 +594,15 @@ func (h *AnimapHandler) GetAnimeDetailsByAccountsId(c *gin.Context) {
 	c.JSON(http.StatusOK, animeDetails)
 }
 
-// create animeDetails receive json -> animes_id, accounts_id
+// create animeDetails receive json -> animes_id, accounts_id, watchYear, score
 func (h *AnimapHandler) SaveAnimeDetails(c *gin.Context) {
 	var animeDetail = AnimeDetail{}
 	if err := c.BindJSON(&animeDetail); err != nil {
+		fmt.Println(animeDetail)
 		return
 	}
-
-	if err := h.DB.Exec("insert into animemapdb.animedetails (`animeDetails_animes_id`, `animeDetails_accounts_id`) VALUES ( ? , ? )", animeDetail.Anime_id, animeDetail.Account_id).Error; err != nil {
+	// fmt.Println(animeDetail)
+	if err := h.DB.Exec("insert into animemapdb.animedetails (`animeDetails_animes_id`, `animeDetails_accounts_id`, `animedetails_watchYear`, `animedetails_score`) VALUES ( ? , ? , ? , ?)", animeDetail.Anime_id, animeDetail.Account_id, animeDetail.WatchYear, animeDetail.Score).Error; err != nil {
 		c.Status(http.StatusInternalServerError)
 		return
 	}
@@ -611,7 +614,7 @@ func (h *AnimapHandler) SaveAnimeDetails(c *gin.Context) {
 func (h *AnimapHandler) UpdateAnimeDetail(c *gin.Context) {
 	id := c.Param("id")
 	animeDetail := AnimeDetail{}
-	row := h.DB.Table("animedetails").Where("animeDetails_id = ?", &id).Select("animeDetails_id", "animeDetails_accounts_id", "animeDetails_animes_id").Row()
+	row := h.DB.Table("animedetails").Where("animeDetails_id = ?", id).Select("animeDetails_id", "animeDetails_accounts_id", "animeDetails_animes_id").Row()
 	if err := row.Err(); err != nil {
 		c.Status(http.StatusNotFound)
 		return
@@ -631,7 +634,7 @@ func (h *AnimapHandler) UpdateAnimeDetail(c *gin.Context) {
 		animeDetail.Anime_id = newAnimeDetails.Anime_id
 	}
 
-	if err := h.DB.Exec("UPDATE `animedetails` SET `animeDetails_animes_id` = ? ,`animeDetails_accounts_id` = ? WHERE `animeDetails_id` = ?;", &animeDetail.Anime_id, &animeDetail.Account_id, &id).Error; err != nil {
+	if err := h.DB.Exec("UPDATE `animedetails` SET `animeDetails_animes_id` = ? ,`animeDetails_accounts_id` = ? WHERE `animeDetails_id` = ?;", animeDetail.Anime_id, animeDetail.Account_id, id).Error; err != nil {
 		c.Status(http.StatusInternalServerError)
 		return
 	}
@@ -643,12 +646,12 @@ func (h *AnimapHandler) UpdateAnimeDetail(c *gin.Context) {
 func (h *AnimapHandler) DeleteAnimeDetail(c *gin.Context) {
 	id := c.Param("id")
 
-	if err := h.DB.Raw("SELECT `animeDetails_id` FROM `animedetails` WHERE `animeDetails_id` = ? ", &id).Error; err != nil {
+	if err := h.DB.Raw("SELECT `animeDetails_id` FROM `animedetails` WHERE `animeDetails_id` = ? ", id).Error; err != nil {
 		c.Status(http.StatusNotFound)
 		return
 	}
 
-	if err := h.DB.Exec("DELETE FROM animedetails WHERE animeDetails_id = ? ", &id).Error; err != nil {
+	if err := h.DB.Exec("DELETE FROM animedetails WHERE animeDetails_id = ? ", id).Error; err != nil {
 		c.Status(http.StatusInternalServerError)
 		return
 	}
