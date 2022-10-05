@@ -14,7 +14,8 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { addToList} from "../../actions/myAnimeListAction"
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
-
+import axios from "axios";
+import {fetchAnimeByAccountAsync} from '../../actions/animeDetailListAction'
 
 const AddAnimeModal = (props) => {
   const { open, onClose, anime } = props;
@@ -24,10 +25,11 @@ const AddAnimeModal = (props) => {
 
   const onChangItem = name => event => {
     if (name == "score") {
-        setScore(event.value)
+      setScore(event.target.value)
     }
-    else if (name == "year") {
-        setYear(event)
+    else if (name == "year") { 
+      console.log(event.format('YYYY'))
+      setYear(event.format('YYYY'))
     }
     
 
@@ -47,7 +49,7 @@ const AddAnimeModal = (props) => {
     if (anime && open) {
       setModalAnime(anime);
       setScore("");
-      setYear("");
+      setYear(null);
     }
   }, [anime, open]);
   const MySwal = withReactContent(Swal)
@@ -62,12 +64,24 @@ const AddAnimeModal = (props) => {
             didOpen: () => {
               // `MySwal` is a subclass of `Swal` with all the same instance & static methods
               MySwal.showLoading()
-              dispatch(addToList({ ...modalAnime, quantity: 1 }))
-              MySwal.fire({
-                title: <strong>Good job!</strong>,
-                html: <i>Successfully added to list</i>,
-                icon: 'success'
+              axios.post(`http://localhost:5000/animeDetails`, {
+                animeDetails_animes_id:anime.animes_id,
+                animeDetails_accounts_id:user.accounts_id,
+                animedetails_watchYear:year,
+                animedetails_score:score
+
               })
+              .then((response) => {
+                MySwal.fire({
+                  title: <strong>Good job!</strong>,
+                  html: <i>Successfully added to list</i>,
+                  icon: 'success'
+                })
+                dispatch(fetchAnimeByAccountAsync(user.accounts_id))
+              })
+              .catch((error) => {
+                MySwal.fire("Alert", error, "error");
+              });
             },
           }).then(() => {
             return MySwal.fire(<p>Shorthand works too</p>)

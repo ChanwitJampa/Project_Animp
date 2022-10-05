@@ -11,12 +11,17 @@ const HomePage=()=>{
     const dispatch=useDispatch()
     const Dataanime =useSelector(state=>state.animeList)
     const myAnimeList = useSelector(state => state.accountAnimeList)
+    const user =useSelector((state)=>state.auth)
+
     useEffect(()=>{
         dispatch(fetchAnimeAsync())
     },[])
 
     useEffect(()=>{
-        //dispatch(fetchAnimeByAccountAsync(1))
+        if(user){
+            dispatch(fetchAnimeByAccountAsync(user.accounts_id))
+        }
+        
     },[])
     const SliderContainer=(props)=>{
         const {tagAnime,mode,valueOfMode} = props

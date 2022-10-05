@@ -11,6 +11,10 @@ import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import { pink } from '@mui/material/colors';
 import { Link, withRouter, Navigate } from "react-router-dom";
+import axios from "axios";
+import Swal from 'sweetalert2'
+import { useNavigate } from "react-router-dom";
+import withReactContent from 'sweetalert2-react-content'
 
 const RegisterPage = () => {
     const [values, setValues] = useState({
@@ -36,7 +40,7 @@ const RegisterPage = () => {
     const handleMouseDownPassword = (event) => {
         event.preventDefault();
     };
-
+    const navigate = useNavigate();
     const handleClickShowRePassword = () => {
         setValues({
             ...values,
@@ -46,12 +50,26 @@ const RegisterPage = () => {
     const handleMouseDownRePassword = (event) => {
         event.preventDefault();
     };
-
+    const MySwal = withReactContent(Swal)
     const submitForm=()=>{
         console.log(values.firstname)
         console.log(values.username)
         console.log(values.password)
         console.log(values.repassword)
+        axios
+        .post(`http://localhost:5000/accounts`, {
+            accounts_name:values.firstname,
+            accounts_user:values.username,
+            accounts_pwd:values.password
+        })
+        .then((response) => {
+            MySwal.fire("Alert", "บันทึกข้อมูลเรียบร้อย", "success");
+            navigate(`/login`)
+        })
+        .catch((error) => {
+            MySwal.fire("Alert", error, "error");
+
+        });
     }
     return (
         <div>
