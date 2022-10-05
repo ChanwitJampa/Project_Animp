@@ -38,6 +38,8 @@ func setupRouter() *gin.Engine {
 		accounts.POST("", h.SaveAccount)
 		accounts.PUT("/:id", h.UpdateAccount)
 		accounts.DELETE("/:id", h.DeleteAccount)
+
+		accounts.GET("checkAccount", h.CheckUserAndPwd)
 	}
 
 	// studio API
@@ -211,6 +213,33 @@ func (h *AnimapHandler) DeleteAccount(c *gin.Context) {
 	}
 
 	c.JSON(http.StatusOK, "delete success")
+}
+
+// check user and pwd
+func (h *AnimapHandler) CheckUserAndPwd(c *gin.Context) {
+	a := Account{}
+	account := Account{}
+	if err := c.BindJSON(&a); err != nil {
+		log.Fatal(err)
+	}
+	fmt.Println(a)
+
+	// if err := h.DB.Exec("select * from animemapdb.accounts where accounts_user = ? and accounts_pwd = ? ", a.User, a.Pwd).Error; err != nil {
+	// 	c.Status(http.StatusInternalServerError)
+	// }
+
+	row := h.DB.Table("accounts").Where("accounts_user = ?", &a.User).Select("accounts_id", "accounts_name", "accounts_user", "accounts_pwd", "accounts_role").Row()
+	if err := row.Err(); err != nil {
+		log.Fatal(err)
+		return
+	}
+	row.Scan(&account.Id, &account.Name, &account.User, &account.Pwd, &account.Role)
+	if a.Pwd != account.Pwd {
+		c.Status(http.StatusNotFound)
+		return
+	}
+	c.JSON(http.StatusOK, account.Name+" login success")
+
 }
 
 // studioes Table
@@ -515,8 +544,7 @@ type AnimeDetail struct {
 }
 
 type AnimeDetailMore struct {
-	Anime Anime `json:anime`
-
+	Anime     Anime   `json:anime`
 	Score     float64 `json:animedetails_score`
 	WatchYear string  `json:animedetails_watchYear`
 }
