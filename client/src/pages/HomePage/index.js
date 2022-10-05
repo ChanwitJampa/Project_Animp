@@ -1,6 +1,7 @@
 import Wallpaper from "../../component/Wallpaper";
 import SliderAnime from "../../component/SliderAnime";
 import {fetchAnimeAsync} from '../../actions/animeListAction'
+import {fetchAnimeByAccountAsync} from '../../actions/animeDetailListAction'
 import {useDispatch,useSelector} from 'react-redux'
 import { useState, useEffect } from "react";
 
@@ -9,8 +10,13 @@ import { useState, useEffect } from "react";
 const HomePage=()=>{
     const dispatch=useDispatch()
     const Dataanime =useSelector(state=>state.animeList)
+    const myAnimeList = useSelector(state => state.accountAnimeList)
     useEffect(()=>{
         dispatch(fetchAnimeAsync())
+    },[])
+
+    useEffect(()=>{
+        //dispatch(fetchAnimeByAccountAsync(1))
     },[])
     const SliderContainer=(props)=>{
         const {tagAnime,mode,valueOfMode} = props
@@ -40,11 +46,9 @@ const HomePage=()=>{
             animeList= (Dataanime.filter(filterAnime).sort((firstItem, secondItem) => secondItem.animes_score - firstItem.animes_score))
         }
         return(
-            <SliderAnime tagAnime={tagAnime} animeList={animeList} />
+            <SliderAnime tagAnime={tagAnime} animeList={animeList} myAnimeList={myAnimeList}/>
         )
         }
-    
-    
     return(
         <div>
             <Wallpaper type="main"/>

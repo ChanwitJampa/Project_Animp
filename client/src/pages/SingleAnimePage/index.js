@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 import {useDispatch,useSelector} from 'react-redux'
 import {fetchAnimeAsync} from '../../actions/animeListAction'
+import {fetchAnimeByAccountAsync} from '../../actions/animeDetailListAction'
 
 const SingleAnimePage=(props)=>{
     let params = useParams();
@@ -48,8 +49,11 @@ const SingleAnimePage=(props)=>{
         fetchAnime()
         dispatch(fetchAnimeAsync())
     },[])
+    useEffect(()=>{
+        dispatch(fetchAnimeByAccountAsync(1))
+    },[])
     const animeList = Dataanime.filter((item)=>{if(item.Studio==singleAnime.Studio) return item})
-
+    const myAnimeList = useSelector(state => state.accountAnimeList)
     return(
         <div>
             <div style={dropzoneStyle}>
@@ -98,7 +102,7 @@ const SingleAnimePage=(props)=>{
                     <p>{singleAnime.animes_content}</p>
                 </div>
             </div>
-            <SliderAnime tagAnime="From same studio" animeList={animeList}/>
+            <SliderAnime tagAnime="From same studio" animeList={animeList} myAnimeList={myAnimeList}/>
         </div>
         )
 }

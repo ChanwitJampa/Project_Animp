@@ -50,27 +50,41 @@ const AddAnimeModal = (props) => {
     }
   }, [anime, open]);
   const MySwal = withReactContent(Swal)
-  const myAnimeList = useSelector(state => state.myAnimeList)
+  //const myAnimeList = useSelector(state => state.myAnimeList)
+  const {user} =useSelector((state)=>state.auth)
   const dispatch = useDispatch()
   const addAnimeToList=()=>{
     onClose()
-    MySwal.fire({
-      title: <p>Loading</p>,
-      didOpen: () => {
-        // `MySwal` is a subclass of `Swal` with all the same instance & static methods
-        MySwal.showLoading()
-        dispatch(addToList({ ...modalAnime, quantity: 1 }))
-        MySwal.fire({
-          title: <strong>Good job!</strong>,
-          html: <i>Successfully added to list</i>,
-          icon: 'success'
-        })
-      },
-    }).then(() => {
-      return MySwal.fire(<p>Shorthand works too</p>)
-    })
+    if(user){
+      MySwal.fire({
+            title: <p>Loading</p>,
+            didOpen: () => {
+              // `MySwal` is a subclass of `Swal` with all the same instance & static methods
+              MySwal.showLoading()
+              dispatch(addToList({ ...modalAnime, quantity: 1 }))
+              MySwal.fire({
+                title: <strong>Good job!</strong>,
+                html: <i>Successfully added to list</i>,
+                icon: 'success'
+              })
+            },
+          }).then(() => {
+            return MySwal.fire(<p>Shorthand works too</p>)
+          })
+        
+    }else{
+      MySwal.fire({
+        icon: 'info',
+        title: 'You need to login',
+        showCancelButton: true,
+        confirmButtonText: 'Login Now',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          navigate(`/login`)
+        } 
+      })
+    }
   }
-  
   return (
     <Modal
       open={open}
