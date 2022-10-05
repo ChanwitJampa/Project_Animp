@@ -222,11 +222,6 @@ func (h *AnimapHandler) CheckUserAndPwd(c *gin.Context) {
 	if err := c.BindJSON(&a); err != nil {
 		log.Fatal(err)
 	}
-	fmt.Println(a)
-
-	// if err := h.DB.Exec("select * from animemapdb.accounts where accounts_user = ? and accounts_pwd = ? ", a.User, a.Pwd).Error; err != nil {
-	// 	c.Status(http.StatusInternalServerError)
-	// }
 
 	row := h.DB.Table("accounts").Where("accounts_user = ?", &a.User).Select("accounts_id", "accounts_name", "accounts_user", "accounts_pwd", "accounts_role").Row()
 	if err := row.Err(); err != nil {
@@ -238,7 +233,7 @@ func (h *AnimapHandler) CheckUserAndPwd(c *gin.Context) {
 		c.Status(http.StatusNotFound)
 		return
 	}
-	c.JSON(http.StatusOK, account.Name+" login success")
+	c.JSON(http.StatusOK, account)
 
 }
 
@@ -517,7 +512,7 @@ func (h *AnimapHandler) GetAnimesByTagId(c *gin.Context) {
 func (h *AnimapHandler) GetTagsByAnimesId(c *gin.Context) {
 	id := c.Param("id")
 	tags := []Tag{}
-	rows, err := h.DB.Raw("SELECT `tags_id`, `tags_name`, `tags_universe_status`, `tags_wallpaper` FROM animemapdb.tags as T right join animemapdb.tagdetails as D on T.tags_id = D.tagDetails_tags_id").Where("tags_id = ? ", &id).Rows()
+	rows, err := h.DB.Raw("SELECT `tags_id`, `tags_name`, `tags_universe_status`, `tags_wallpaper` FROM animemapdb.tags as T right join animemapdb.tagdetails as D on T.tags_id = D.tagDetails_tags_id WHERE tags_id = ? ", id).Rows()
 	defer rows.Close()
 
 	for rows.Next() {
