@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	_ "fmt"
 	"log"
 	"net/http"
@@ -43,8 +44,12 @@ func setupRouter() *gin.Engine {
 	r.GET("/studioes/:id", h.GetStudio)
 
 	// anime API
-	r.GET("/animes", h.GetAllAnimes)
-	r.GET("/animes/:id", h.GetAnime)
+	animes := r.Group("/animes")
+	{
+		animes.GET("", h.GetAllAnimes)
+		animes.GET("/:id", h.GetAnime)
+		animes.POST("", h.SaveAnime)
+	}
 
 	// tag API
 	tags := r.Group("/tags")
@@ -255,22 +260,22 @@ type studioDetail struct {
 
 // animes Table
 type Anime struct {
-	Id        int    `db:"animes_id" json:"animes_id"`
-	Name      string `db:"animes_name" json:"animes_name"`
-	Name_TH   string `db:"animes_nameTH" json:"animes_nameTH"`
-	Year      string `db:"animes_year" json:"animes_year"`
-	Studioes  []Studio
-	Studio    string  `db:"animes_studio json:"animes_studio"`
-	Trailer   string  `db:"animes_trailer" json:"animes_trailer"`
-	Episodes  int     `db:"animes_episodes" json:"animes_episodes"`
-	Fix_score float64 `db:"animes_score" json:"animes_score"`
-	Score     float64
-	Image     string `db:"animes_image" json:"animes_image"`
-	Seasonal  string `db:"animes_seasonal" json:"animes_seasonal"`
-	Content   string `db:"animes_content" json:"animes_content"`
-	Wallpaper string `db:"animes_wallpaper" json:"animes_wallpaper"`
-	Duration  string `db:"animes_duration" json:"animes_duration"`
-	Streaming string `db:"animes_streaming" json:"animes_streaming"`
+	Id      int    `db:"animes_id" json:"animes_id"`
+	Name    string `db:"animes_name" json:"animes_name"`
+	Name_TH string `db:"animes_nameTH" json:"animes_nameTH"`
+	Year    int    `db:"animes_year" json:"animes_year"`
+	// Studioes  []Studio
+	Studio   string `db:"animes_studioes json:"animes_studioes"`
+	Trailer  string `db:"animes_trailer" json:"animes_trailer"`
+	Episodes int    `db:"animes_episodes" json:"animes_episodes"`
+	// Fix_score float64
+	Score     float64 `db:"animes_score" json:"animes_score"`
+	Image     string  `db:"animes_image" json:"animes_image"`
+	Seasonal  string  `db:"animes_seasonal" json:"animes_seasonal"`
+	Content   string  `db:"animes_content" json:"animes_content"`
+	Wallpaper string  `db:"animes_wallpaper" json:"animes_wallpaper"`
+	Duration  string  `db:"animes_duration" json:"animes_duration"`
+	Streaming string  `db:"animes_streaming" json:"animes_streaming"`
 }
 
 // get all animes (temp)
@@ -281,7 +286,7 @@ func (h *AnimapHandler) GetAllAnimes(c *gin.Context) {
 
 	for rows.Next() {
 		var anime Anime
-		err = rows.Scan(&anime.Id, &anime.Name, &anime.Name_TH, &anime.Trailer, &anime.Episodes, &anime.Fix_score, &anime.Image, &anime.Seasonal, &anime.Year, &anime.Content, &anime.Wallpaper,
+		err = rows.Scan(&anime.Id, &anime.Name, &anime.Name_TH, &anime.Trailer, &anime.Episodes, &anime.Score, &anime.Image, &anime.Seasonal, &anime.Year, &anime.Content, &anime.Wallpaper,
 			&anime.Duration, &anime.Studio, &anime.Streaming)
 		if err != nil {
 			log.Fatal(err)
@@ -300,10 +305,27 @@ func (h *AnimapHandler) GetAnime(c *gin.Context) {
 	if err := row.Err(); err != nil {
 		log.Fatal(err)
 	}
-	row.Scan(&anime.Id, &anime.Name, &anime.Name_TH, &anime.Trailer, &anime.Episodes, &anime.Fix_score, &anime.Image, &anime.Seasonal, &anime.Year, &anime.Content, &anime.Wallpaper,
+	row.Scan(&anime.Id, &anime.Name, &anime.Name_TH, &anime.Trailer, &anime.Episodes, &anime.Score, &anime.Image, &anime.Seasonal, &anime.Year, &anime.Content, &anime.Wallpaper,
 		&anime.Duration, &anime.Studio, &anime.Streaming)
 
 	c.JSON(http.StatusOK, anime)
+}
+
+// create anime receive json -> animes_name, animes_nameTH, animes_year, animes_studio, animes_trailer, animes_episodes, animes_score, animes_image, animes_seasonal, animes_content, animes_wallpaper, animes_duration, animes_streaming
+func (h *AnimapHandler) SaveAnime(c *gin.Context) {
+	anime := Anime{}
+	if err := c.BindJSON(&anime); err != nil {
+		return
+	}
+	fmt.Println(anime)
+
+	if err := h.DB.Exec("insert into `animemapdb`.`animes` (`animes_name`, `animes_nameTH`, `animes_year`, `animes_studioes`, `animes_trailer`, `animes_episodes`, `animes_score`, `animes_image`, `animes_seasonal`, `animes_content`, `animes_wallpaper`, `animes_duration`, `animes_streaming`) VALUES ( ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? ) ", anime.Name, anime.Name_TH, anime.Year, anime.Studio, anime.Trailer, anime.Episodes, anime.Score, anime.Image, anime.Seasonal, anime.Content, anime.Wallpaper, anime.Duration, anime.Streaming).Error; err != nil {
+		c.Status(http.StatusInternalServerError)
+		return
+	}
+
+	c.JSON(http.StatusOK, "insert success")
+
 }
 
 // tag Table
@@ -424,7 +446,7 @@ func (h *AnimapHandler) GetAnimesByTagId(c *gin.Context) {
 
 	for rows.Next() {
 		var anime Anime
-		err = rows.Scan(&anime.Id, &anime.Name, &anime.Name_TH, &anime.Trailer, &anime.Episodes, &anime.Fix_score, &anime.Image, &anime.Seasonal, &anime.Year, &anime.Content, &anime.Wallpaper,
+		err = rows.Scan(&anime.Id, &anime.Name, &anime.Name_TH, &anime.Trailer, &anime.Episodes, &anime.Score, &anime.Image, &anime.Seasonal, &anime.Year, &anime.Content, &anime.Wallpaper,
 			&anime.Duration, &anime.Studio, &anime.Streaming)
 		if err != nil {
 			log.Fatal(err)
@@ -484,19 +506,16 @@ func (h *AnimapHandler) GetAnimesByAccountsId(c *gin.Context) {
 	animes := []Anime{}
 	rows, err := h.DB.Raw("SELECT `animes_id`, `animes_name`, `animes_nameTH`, `animes_trailer`, `animes_episodes`, `animes_score`, `animes_image`, `animes_seasonal`, `animes_year`, `animes_content`, `animes_wallpaper`, `animes_duration`, `animes_studioes`, `animes_streaming` FROM animemapdb.animes as A right join animemapdb.animedetails as D on A.animes_id = D.animeDetails_animes_id ").Where("animeDetails_accounts_id = ? ", &id).Rows()
 	defer rows.Close()
-
 	for rows.Next() {
 		var anime Anime
-		err = rows.Scan(&anime.Id, &anime.Name, &anime.Name_TH, &anime.Trailer, &anime.Episodes, &anime.Fix_score, &anime.Image, &anime.Seasonal, &anime.Year, &anime.Content, &anime.Wallpaper,
+		err = rows.Scan(&anime.Id, &anime.Name, &anime.Name_TH, &anime.Trailer, &anime.Episodes, &anime.Score, &anime.Image, &anime.Seasonal, &anime.Year, &anime.Content, &anime.Wallpaper,
 			&anime.Duration, &anime.Studio, &anime.Streaming)
 		if err != nil {
 			log.Fatal(err)
 		}
 		animes = append(animes, anime)
 	}
-
 	c.JSON(http.StatusOK, animes)
-
 }
 
 // create animeDetails receive json -> animes_id, accounts_id
