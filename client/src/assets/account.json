@@ -25,6 +25,6 @@
         "accounts_name": "test",
         "accounts_user": "test@gmail.com",
         "accounts_pwd": "123456",
-        "accounts_role": "user"
+        "accounts_role": "admin"
     }
 ]

@@ -1,6 +1,8 @@
-import { useState } from "react"
-import { useSelector, useDispatch } from 'react-redux'
+import {useDispatch,useSelector} from 'react-redux'
+import { useState, useEffect } from "react";
 import SliderMyAnime from "../../component/SliderMyAnime"
+import {fetchAnimeByAccountAsync} from '../../actions/animeDetailListAction'
+
 import './index.scss'
 const levelOfGame=[
     {level:1 , label: "Iron" ,numberOfAnime: 6 ,color :"#1EC602"},
@@ -19,7 +21,8 @@ const watchanimeYear=[
 
 ]
 const ProfilePage=()=>{
-
+    const dispatch=useDispatch()
+    const myAnimeList = useSelector(state => state.accountAnimeList)
     const totalAnime = useSelector(state => state.myAnimeList)
     const labelStyles = {
         paddingTop:10,
@@ -27,11 +30,15 @@ const ProfilePage=()=>{
       fontWeight: 'bold',
     }
     const filterLevel=(item)=>{
-      if(item.numberOfAnime>=totalAnime){
+      if(item.numberOfAnime>=totalAnime.length){
           return item
       }
     }
+    
     const levelOfUser=levelOfGame.filter(filterLevel).map((item)=>item)
+    useEffect(()=>{
+        dispatch(fetchAnimeByAccountAsync(1))
+    },[])
     return(
         <div>
             <div className="profilepage-header"><h1>Profile</h1></div>
@@ -41,10 +48,10 @@ const ProfilePage=()=>{
                     <h1>Profile</h1>
                 </div>
                 <div className="profilepage-progress">
-                    <h2>{totalAnime==0?"Beginer":levelOfUser[0].label}</h2>
+                    <h2>{totalAnime.length==0?"Beginer":levelOfUser[0].label}</h2>
                 <div className="profilepage-progress-container">
-                    <div style={{width:`${((totalAnime%6)/6)*100}%`,backgroundColor: `${levelOfUser[0].color}`}} className="profilepage-progress-style">
-                        <div style={labelStyles} >{`${ parseInt(((totalAnime%6)/6)*100) }%`}</div>
+                    <div style={{width:`${((totalAnime.length%6)/6)*100}%`,backgroundColor: `${levelOfUser[0].color}`}} className="profilepage-progress-style">
+                        <div style={labelStyles} >{`${ parseInt(((totalAnime.length%6)/6)*100) }%`}</div>
                     </div> 
                 </div>
                 </div>

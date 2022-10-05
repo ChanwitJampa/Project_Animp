@@ -15,6 +15,7 @@ import { addToList} from "../../actions/myAnimeListAction"
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 
+
 const AddAnimeModal = (props) => {
   const { open, onClose, anime } = props;
   const [modalAnime, setModalAnime] = useState([]);

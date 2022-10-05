@@ -15,7 +15,7 @@ export function fetchAuthAsync(email,password){
             dispatch(startFetch())
 
             const user = await signin(email,password)
-
+            console.log(user)
             if(user){
                 dispatch(setAuth(user))
                 dispatch(errorFetch(''))
