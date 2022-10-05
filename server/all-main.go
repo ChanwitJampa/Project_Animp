@@ -67,6 +67,8 @@ func setupRouter() *gin.Engine {
 	{
 		tagDetails.GET("/anime/:id", h.GetAnimesByTagId)
 		tagDetails.GET("/tag/:id", h.GetTagsByAnimesId)
+
+		tagDetails.POST("", h.SaveTagDetail)
 	}
 
 	// animeDetails API
@@ -439,6 +441,28 @@ func (h *AnimapHandler) DeleteTag(c *gin.Context) {
 }
 
 // tagDetails Table
+type tagDetail struct {
+	Id       int `db:"tagDetails_id" json:"tagDetails_id"`
+	Tag_id   int `db:"tagDetails_tags_id" json:"tagDetails_tags_id"`
+	Anime_id int `db:"tagDetails_animes_id" json:"tagDetails_animes_id"`
+}
+
+// create tagDetails receive json -> animes_id, tagDetails_tags_id
+func (h *AnimapHandler) SaveTagDetail(c *gin.Context) {
+	var t = tagDetail{}
+	if err := c.BindJSON(&t); err != nil {
+		return
+	}
+
+	if err := h.DB.Exec("insert into tagdetails (`tagDetails_tags_id`, `tagDetails_animes_id`) VALUES ( ? , ? )", t.Tag_id, t.Anime_id).Error; err != nil {
+		c.Status(http.StatusInternalServerError)
+		return
+	}
+
+	c.JSON(http.StatusOK, "insert success")
+
+}
+
 // get all animes using tags_id
 func (h *AnimapHandler) GetAnimesByTagId(c *gin.Context) {
 	id := c.Param("id")
