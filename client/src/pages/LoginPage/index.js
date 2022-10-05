@@ -43,14 +43,12 @@ const LoginPage = () => {
         event.preventDefault();
     };
     const submitForm=()=>{
-        console.log(values.username)
-        console.log(values.password)
-        console.log(checked)
+
         dispatch(fetchAuthAsync(values.username,values.password)).then(
             res=>{
-                console.log(res)
+                
                 navigate('/')
-
+                
             }
         )
     }

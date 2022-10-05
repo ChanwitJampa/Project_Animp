@@ -24,7 +24,7 @@ const AdminTagAnimeModal = (props) => {
   const submitFormTag = () => {
       onClose();
       axios
-        .post(`localhost:5000/tagDetails`, {
+        .post(`http://localhost:5000/tagDetails`, {
             tagDetails_tags_id:selectTag,
             tagDetails_animes_id:anime.animes_id,
         })
@@ -69,7 +69,6 @@ const AdminTagAnimeModal = (props) => {
             <FormControl
             fullWidth
               sx={{
-
                 mb: 3,
               }}
             >

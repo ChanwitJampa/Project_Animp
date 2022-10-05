@@ -27,6 +27,7 @@ import NotFoundPage from '../../pages/NotFoundPage';
 import LoginPage from '../../pages/LoginPage';
 import RegisterPage from '../../pages/RegisterPage';
 import { useNavigate } from "react-router-dom";
+import ProfileBar from '../ProfileBar';
 const drawerWidth = 240;
 
 function SidebarAdmin(props) {
@@ -87,8 +88,10 @@ function SidebarAdmin(props) {
                     <Typography variant="h6" noWrap component="div">
                         Anime-Map&ToonView
                     </Typography>
+
                 </Toolbar>
-            </AppBar>
+               
+            </AppBar> 
             <Box
                 component="nav"
                 sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}

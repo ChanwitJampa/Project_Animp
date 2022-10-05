@@ -50,9 +50,16 @@ function App() {
   const {user} =useSelector((state)=>state.auth)
   const location = useLocation();
   console.log(location.pathname);
+  const [roleUser,setRoleUser]=useState("")
+  useEffect(()=>{
+    if(user){
+      setRoleUser(user.accounts_role)
+    }
+    
+  },[user])
   return (
     <>
-    {user?<SidebarAdmin/>:
+    {roleUser=="admin"&&user?<SidebarAdmin/>:
      <div>
        {location.pathname=="/login" ||location.pathname=="/register"?<></> :<Navbar/>}
        {!user?<UnAuthApp/>:<AuthApp/>}

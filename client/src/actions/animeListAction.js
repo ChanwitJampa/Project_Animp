@@ -1,6 +1,4 @@
 import {startFetch,endFetch,errorFetch} from './statusAction'
-import { getAllAnime } from '../api/anime'
-import axios from 'axios';
 export const SET_LIST = 'SET_LIST'
 
 export function setList(list){
