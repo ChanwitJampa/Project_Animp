@@ -149,8 +149,11 @@ func (h *AnimapHandler) SaveAccount(c *gin.Context) {
 	if err := c.BindJSON(&a); err != nil {
 		return
 	}
+	if a.Role == "" {
+		a.Role = "user"
+	}
 
-	if err := h.DB.Create(&a).Error; err != nil {
+	if err := h.DB.Exec("insert into animemapdb.accounts (`accounts_name`, `accounts_user`, `accounts_pwd`, `accounts_role`) VALUES (?, ?, ?, ?)", a.Name, a.User, a.Pwd, a.Role).Error; err != nil {
 		c.Status(http.StatusInternalServerError)
 		return
 	}
