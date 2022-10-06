@@ -516,7 +516,7 @@ func (h *AnimapHandler) SaveTagDetail(c *gin.Context) {
 func (h *AnimapHandler) GetAnimesByTagId(c *gin.Context) {
 	id := c.Param("id")
 	animes := []Anime{}
-	rows, err := h.DB.Raw("SELECT `animes_id`, `animes_name`, `animes_nameTH`, `animes_trailer`, `animes_episodes`, `animes_score`, `animes_image`, `animes_seasonal`, `animes_year`, `animes_content`, `animes_wallpaper`, `animes_duration`, `animes_studioes`, `animes_streaming` FROM animemapdb.animes as A right join animemapdb.tagdetails as T on A.animes_id = T.tagDetails_animes_id WHERE animes_id = ? ", id).Rows()
+	rows, err := h.DB.Raw("SELECT DISTINCT `animes_id`, `animes_name`, `animes_nameTH`, `animes_trailer`, `animes_episodes`, `animes_score`, `animes_image`, `animes_seasonal`, `animes_year`, `animes_content`, `animes_wallpaper`, `animes_duration`, `animes_studioes`, `animes_streaming` FROM animemapdb.animes as A right join animemapdb.tagdetails as T on A.animes_id = T.tagDetails_animes_id WHERE tagDetails_tags_id = ? ", id).Rows()
 	defer rows.Close()
 
 	for rows.Next() {

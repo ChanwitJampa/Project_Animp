@@ -12,20 +12,30 @@ const HomePage=()=>{
     const Dataanime =useSelector(state=>state.animeList)
     const myAnimeList = useSelector(state => state.accountAnimeList)
     const {user} =useSelector((state)=>state.auth)
-    const [animeByTag,setAnimeByTag]=useState([])
-    const fetchTagByAnime = async (id) => {
+    const [animeByTagSchool,setAnimeByTagSchool]=useState([])
+    const [animeByTagDrama,setAnimeByTagDrama]=useState([])
+    const fetchAnimeByTagSchool = async (id) => {
         await axios.get(`http://localhost:5000/tagDetails/anime/${id}`).
         then((response) => response.data)
-        .then((anime) => {
-            console.log(anime);     
-            setAnimeByTag(anime)
+        .then((anime) => {   
+            setAnimeByTagSchool(anime)
         }).catch(error=>{
             console.log(error); 
         })
     }
-
+    const fetchAnimeByTagDrama = async (id) => {
+        await axios.get(`http://localhost:5000/tagDetails/anime/${id}`).
+        then((response) => response.data)
+        .then((anime) => {
+            setAnimeByTagDrama(anime)
+        }).catch(error=>{
+            console.log(error); 
+        })
+    }
     useEffect(()=>{
         dispatch(fetchAnimeAsync())
+        fetchAnimeByTagSchool(2)
+        fetchAnimeByTagDrama(8)
     },[])
     useEffect(()=>{
         if(user){
@@ -52,13 +62,8 @@ const HomePage=()=>{
                 }
             }
         }
-        
-      
         if(mode=="topanime"){
             animeList = (Dataanime.slice(1,valueOfMode).sort((firstItem, secondItem) => secondItem.animes_score - firstItem.animes_score));
-        }else if(mode=="School"){
-            fetchTagByAnime(4)
-            animeList = animeByTag
         }else{
             animeList= (Dataanime.filter(filterAnime).sort((firstItem, secondItem) => secondItem.animes_score - firstItem.animes_score))
         }
@@ -72,7 +77,8 @@ const HomePage=()=>{
             <SliderContainer tagAnime="New Anime"/>
             <SliderContainer tagAnime="Top Anime" mode="topanime" valueOfMode="14"/>
             <SliderContainer tagAnime="Anime in 2021" mode="year" valueOfMode="2021"/>
-            <SliderContainer tagAnime="School" mode="School" valueOfMode="2"/>
+            <SliderAnime tagAnime="School" animeList={animeByTagSchool} myAnimeList={myAnimeList}/>
+            <SliderAnime tagAnime="Drama" animeList={animeByTagDrama} myAnimeList={myAnimeList}/>
         </div>
     )
 }
