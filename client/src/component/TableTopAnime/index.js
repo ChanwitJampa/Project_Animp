@@ -4,10 +4,13 @@ import { Link, withRouter } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import AddAnimeModal from '../AddAnimeModal';
 import {useDispatch,useSelector} from 'react-redux'
+import {fetchAnimeByAccountAsync} from '../../actions/animeDetailListAction'
+
 const TableTopAnime=(props)=>{
     const {anime} = props
     const navigate = useNavigate();
-
+    const dispatch=useDispatch()
+    const {user} =useSelector((state)=>state.auth)
     const [modalAnime,setModalAnime]=useState()
     const [open, setOpen] = useState(false);
 
@@ -17,7 +20,12 @@ const TableTopAnime=(props)=>{
     }
     const handleClose = () =>setOpen(false);
 
-    const myAnimeList = useSelector(state => state.myAnimeList)
+    useEffect(()=>{
+        if(user){
+            dispatch(fetchAnimeByAccountAsync(user.accounts_id))
+        }
+    },[user])
+    const myAnimeList = useSelector(state => state.accountAnimeList)
     const nameOfMyAnimeList=myAnimeList.map((item)=>item.animes_name)
     return(
         <div className='container-table'>

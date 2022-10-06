@@ -13,7 +13,10 @@ const SingleAnimePage=(props)=>{
     const navigate =useNavigate()
     const dispatch=useDispatch()
     const Dataanime =useSelector(state=>state.animeList)
-    const user =useSelector((state)=>state.auth)
+    const myAnimeList = useSelector(state => state.accountAnimeList)
+    const scoreMyAnime=myAnimeList.map((item)=>item.Score)
+    const nameOfMyAnimeList=myAnimeList.map((item)=>item.animes_name)
+    const {user} =useSelector((state)=>state.auth)
     const fetchAnime = async () => {
         await axios.get(`http://localhost:5000/animes/${params.id}`).
         then((response) => response.data)
@@ -52,10 +55,12 @@ const SingleAnimePage=(props)=>{
         dispatch(fetchAnimeAsync())
     },[])
     useEffect(()=>{
-        dispatch(fetchAnimeByAccountAsync(user.accounts_id))
-    },[])
+        if(user){
+            dispatch(fetchAnimeByAccountAsync(user.accounts_id))
+        }
+        
+    },[user])
     const animeList = Dataanime.filter((item)=>{if(item.Studio==singleAnime.Studio) return item})
-    const myAnimeList = useSelector(state => state.accountAnimeList)
     return(
         <div>
             <div style={dropzoneStyle}>
@@ -66,12 +71,12 @@ const SingleAnimePage=(props)=>{
                     <div className='singleAnime-wallpaper-detailbox'>
                         <div className='singleAnime-wallpaper-detailbox-imagebox'>
                             <img src={singleAnime.animes_image}></img>
-                            <button>Add to list</button>
+                            <button>{nameOfMyAnimeList.includes(singleAnime.animes_name)?<h5>Watched</h5>:<h5>Add to list</h5>}</button>
                         </div>
                         <div className='singleAnime-wallpaper-detailbox-tagAnime'>
                             <div className='detailbox-tagAnime-score'>
                                 <h2>Score {singleAnime.animes_score}/10</h2>
-                                <h2>My score /10</h2><br></br>
+                               
                             </div>
                             <div className='detailbox-tagAnime-score'>
                                 {tagAnime.map((tag)=>(
