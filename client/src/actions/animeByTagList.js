@@ -1,27 +1,26 @@
 import {startFetch,endFetch,errorFetch} from './statusAction'
-export const SET_TAGANIME_LIST = 'SET_TAGANIME_LIST'
-
-export function setList(list){
+export const SET_ANIMEBYTAG_LIST = 'SET_ANIMEBYTAG_LIST'
+export function setAnimeList(list){
     return{
-        type:SET_TAGANIME_LIST,
+        type:SET_ANIMEBYTAG_LIST,
         payload:list
     }
 }
-export function fetchTagByAnimeIdAsync(id){
+export function fetchAnimeByTagIdAsync(id){
     return async function(dispatch){
         try{
             dispatch(startFetch())
-            await fetch(`http://localhost:5000/tagDetails/anime/${id}`).
+            await fetch(`http://localhost:5000/tagDetails/tag/${id}`).
             then((response) => response.json())
-            .then((taglist) => {
-                console.log(taglist)
-                dispatch(setList(taglist))
+            .then((animelist) => {
+                console.log(animelist)
+                dispatch(setAnimeList(animelist))
                 dispatch(errorFetch(''))
                 dispatch(endFetch())
             });
         }catch(error){
             console.log("Error")
-            dispatch(setList(null))
+            dispatch(setAnimeList(null))
             dispatch(errorFetch(error))
             dispatch(endFetch())
         }

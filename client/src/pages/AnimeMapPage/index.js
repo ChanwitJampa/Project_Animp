@@ -8,7 +8,7 @@ import {fetchAnimeByAccountAsync} from '../../actions/animeDetailListAction'
 const AnimeMapPage=()=>{
     const dispatch = useDispatch()
     const myAnimeList = useSelector(state => state.accountAnimeList)
-    const user =useSelector((state)=>state.auth)
+    const {user} =useSelector((state)=>state.auth)
     useEffect(()=>{
         if(user){
             dispatch(fetchAnimeByAccountAsync(user.accounts_id))

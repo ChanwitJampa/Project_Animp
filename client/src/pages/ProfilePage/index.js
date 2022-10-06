@@ -22,8 +22,9 @@ const watchanimeYear=[
 ]
 const ProfilePage=()=>{
     const dispatch=useDispatch()
-    const myAnimeList = useSelector(state => state.accountAnimeList)
-    const totalAnime = useSelector(state => state.myAnimeList)
+    const totalAnime = useSelector(state => state.accountAnimeList)
+    const {user} =useSelector((state)=>state.auth)
+    //const totalAnime = useSelector(state => state.myAnimeList)
     const labelStyles = {
         paddingTop:10,
       color: 'white',
@@ -37,7 +38,7 @@ const ProfilePage=()=>{
     
     const levelOfUser=levelOfGame.filter(filterLevel).map((item)=>item)
     useEffect(()=>{
-        dispatch(fetchAnimeByAccountAsync(1))
+        dispatch(fetchAnimeByAccountAsync(user.accounts_id))
     },[])
     return(
         <div>

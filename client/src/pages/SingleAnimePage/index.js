@@ -13,6 +13,7 @@ const SingleAnimePage=(props)=>{
     const navigate =useNavigate()
     const dispatch=useDispatch()
     const Dataanime =useSelector(state=>state.animeList)
+    const user =useSelector((state)=>state.auth)
     const fetchAnime = async () => {
         await axios.get(`http://localhost:5000/animes/${params.id}`).
         then((response) => response.data)
@@ -23,7 +24,18 @@ const SingleAnimePage=(props)=>{
             console.log(error); 
         })
     }
+    const fetchTagByAnime = async () => {
+        await axios.get(`http://localhost:5000/tagDetails/tag/${params.id}`).
+        then((response) => response.data)
+        .then((anime) => {
+            console.log(anime);     
+            setTagAnime([...new Set(anime)])
+        }).catch(error=>{
+            console.log(error); 
+        })
+    }
     const [singleAnime,setSingleAnime] =useState("")
+    const [tagAnime,setTagAnime]=useState([])
     //console.log(singleAnime)
     let dropzoneStyle = {
         width: `100%`,
@@ -33,24 +45,14 @@ const SingleAnimePage=(props)=>{
         backgroundPosition: `center center`,
         backgroundSize: `cover`
       };
-    // const handleScroll = () => {
-    //     const position = window.pageYOffset;
-    //     setScrollPosition(position);
-    //   };
-    // useEffect(() => {
-    //     window.addEventListener("scroll", handleScroll);
-    //     return () => {
-    //       window.removeEventListener("scroll", handleScroll);
-    //     };
-    // },[]);
-    
     useEffect(()=>{
         window.scrollTo(0, 0);
         fetchAnime()
+        fetchTagByAnime()
         dispatch(fetchAnimeAsync())
     },[])
     useEffect(()=>{
-        dispatch(fetchAnimeByAccountAsync(1))
+        dispatch(fetchAnimeByAccountAsync(user.accounts_id))
     },[])
     const animeList = Dataanime.filter((item)=>{if(item.Studio==singleAnime.Studio) return item})
     const myAnimeList = useSelector(state => state.accountAnimeList)
@@ -72,9 +74,9 @@ const SingleAnimePage=(props)=>{
                                 <h2>My score /10</h2><br></br>
                             </div>
                             <div className='detailbox-tagAnime-score'>
-                                <button>School</button>
-                                <button>School</button>
-                                <button>School</button>
+                                {tagAnime.map((tag)=>(
+                                    <button>{tag.tags_name}</button>
+                                ))}
                             </div>
                         </div>
                         <div className='videoWrapper-container'>

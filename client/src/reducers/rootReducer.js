@@ -8,6 +8,8 @@ import { tagListReducer } from './tagListReducer'
 import { studioListReducer } from './studioListReducer'
 import { animeDetailListReducer} from './animeDetailListReducer'
 import { tagAnimeListReducer} from './tagAnimeListReducer'
+import { animeByTagListReducer} from './animeByTagReducer'
+
 export const rootReducer=combineReducers({
     animeList: animeListReducer,
     auth: authReducer,
@@ -16,6 +18,7 @@ export const rootReducer=combineReducers({
     tagList :tagListReducer,
     stduioList: studioListReducer,
     accountAnimeList:animeDetailListReducer,
-    tagAnimeList:tagAnimeListReducer
+    tagAnimeList:tagAnimeListReducer,
+    animeByTag:animeByTagListReducer
 })
 //{animeList:[],auth:{user:null},status:{loading: false,error:''}}

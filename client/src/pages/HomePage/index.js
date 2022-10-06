@@ -4,25 +4,34 @@ import {fetchAnimeAsync} from '../../actions/animeListAction'
 import {fetchAnimeByAccountAsync} from '../../actions/animeDetailListAction'
 import {useDispatch,useSelector} from 'react-redux'
 import { useState, useEffect } from "react";
-
+import axios from 'axios';
 
 
 const HomePage=()=>{
     const dispatch=useDispatch()
     const Dataanime =useSelector(state=>state.animeList)
     const myAnimeList = useSelector(state => state.accountAnimeList)
-    const user =useSelector((state)=>state.auth)
+    const {user} =useSelector((state)=>state.auth)
+    const [animeByTag,setAnimeByTag]=useState([])
+    const fetchTagByAnime = async (id) => {
+        await axios.get(`http://localhost:5000/tagDetails/anime/${id}`).
+        then((response) => response.data)
+        .then((anime) => {
+            console.log(anime);     
+            setAnimeByTag(anime)
+        }).catch(error=>{
+            console.log(error); 
+        })
+    }
 
     useEffect(()=>{
         dispatch(fetchAnimeAsync())
     },[])
-
     useEffect(()=>{
         if(user){
             dispatch(fetchAnimeByAccountAsync(user.accounts_id))
         }
-        
-    },[])
+    },[user])
     const SliderContainer=(props)=>{
         const {tagAnime,mode,valueOfMode} = props
         var animeList=[]
@@ -47,6 +56,9 @@ const HomePage=()=>{
       
         if(mode=="topanime"){
             animeList = (Dataanime.slice(1,valueOfMode).sort((firstItem, secondItem) => secondItem.animes_score - firstItem.animes_score));
+        }else if(mode=="School"){
+            fetchTagByAnime(4)
+            animeList = animeByTag
         }else{
             animeList= (Dataanime.filter(filterAnime).sort((firstItem, secondItem) => secondItem.animes_score - firstItem.animes_score))
         }
@@ -60,7 +72,7 @@ const HomePage=()=>{
             <SliderContainer tagAnime="New Anime"/>
             <SliderContainer tagAnime="Top Anime" mode="topanime" valueOfMode="14"/>
             <SliderContainer tagAnime="Anime in 2021" mode="year" valueOfMode="2021"/>
-            
+            <SliderContainer tagAnime="School" mode="School" valueOfMode="2"/>
         </div>
     )
 }

@@ -28,20 +28,22 @@ import LoginPage from '../../pages/LoginPage';
 import RegisterPage from '../../pages/RegisterPage';
 import { useNavigate } from "react-router-dom";
 import ProfileBar from '../ProfileBar';
+import Button from '@mui/material/Button';
+import './index.scss'
 const drawerWidth = 240;
 
 function SidebarAdmin(props) {
     const { window} = props;
     const [mobileOpen, setMobileOpen] = React.useState(false);
-    const navigate =useNavigate()
+    const navigate = useNavigate();
     const handleDrawerToggle = () => {
         setMobileOpen(!mobileOpen);
     };
     const SideList = [
+        { id: '4', item: "Home", icon:  <AssignmentIndIcon/>,link:"/"},
         { id: '1', item: "Anime", icon: <LocalMoviesIcon/> ,link:"/adminanime"},
         { id: '2', item: "Anime Tag", icon:  <TagIcon/>,link:"/admintaganime"},
-        { id: '3', item: "Studio", icon:  <MovieIcon/>,link:"/" },
-        { id: '4', item: "User", icon:  <AssignmentIndIcon/>,link:"/"},
+
     ]
     const drawer = (
         <div>
@@ -85,10 +87,10 @@ function SidebarAdmin(props) {
                     >
                         <MenuIcon />
                     </IconButton>
-                    <Typography variant="h6" noWrap component="div">
+                    <Typography variant="h6" component="div"  sx={{ flexGrow: 1 }}>
                         Anime-Map&ToonView
                     </Typography>
-
+                    <a href='/login' className='logout-button'>Logout</a>
                 </Toolbar>
                
             </AppBar> 

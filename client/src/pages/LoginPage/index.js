@@ -15,6 +15,7 @@ import { Link, withRouter, Navigate } from "react-router-dom";
 import { authenticate } from "../../servies/authorize";
 import { useNavigate } from "react-router-dom";
 import {fetchAuthAsync} from '../../actions/authAction'
+import {fetchAnimeByAccountAsync} from '../../actions/animeDetailListAction'
 
 const LoginPage = () => {
     const navigate = useNavigate();
