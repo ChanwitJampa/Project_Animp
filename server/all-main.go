@@ -70,6 +70,7 @@ func setupRouter() *gin.Engine {
 		tagDetails.GET("/anime/:id", h.GetAnimesByTagId)
 		tagDetails.GET("/tag/:id", h.GetTagsByAnimesId)
 
+		tagDetails.GET("", h.GetAllTagDetails)
 		tagDetails.POST("", h.SaveTagDetail)
 	}
 
@@ -468,15 +469,36 @@ func (h *AnimapHandler) DeleteTag(c *gin.Context) {
 }
 
 // tagDetails Table
-type tagDetail struct {
+type TagDetail struct {
 	Id       int `db:"tagDetails_id" json:"tagDetails_id"`
 	Tag_id   int `db:"tagDetails_tags_id" json:"tagDetails_tags_id"`
 	Anime_id int `db:"tagDetails_animes_id" json:"tagDetails_animes_id"`
 }
 
+// temp check all tagdetails
+func (h *AnimapHandler) GetAllTagDetails(c *gin.Context) {
+	tagdetails := []TagDetail{}
+
+	rows, err := h.DB.Raw("select `tagDetails_id`, `tagDetails_tags_id`, `tagDetails_animes_id` from animemapdb.tagdetails").Rows()
+	if err != nil {
+		c.Status(http.StatusInternalServerError)
+	}
+
+	for rows.Next() {
+		var detail TagDetail
+		err = rows.Scan(&detail.Id, &detail.Tag_id, &detail.Anime_id)
+		if err != nil {
+			log.Fatal(err)
+		}
+		tagdetails = append(tagdetails, detail)
+	}
+
+	c.JSON(http.StatusOK, tagdetails)
+}
+
 // create tagDetails receive json -> animes_id, tagDetails_tags_id
 func (h *AnimapHandler) SaveTagDetail(c *gin.Context) {
-	var t = tagDetail{}
+	var t = TagDetail{}
 	if err := c.BindJSON(&t); err != nil {
 		return
 	}
@@ -515,7 +537,7 @@ func (h *AnimapHandler) GetAnimesByTagId(c *gin.Context) {
 func (h *AnimapHandler) GetTagsByAnimesId(c *gin.Context) {
 	id := c.Param("id")
 	tags := []Tag{}
-	rows, err := h.DB.Raw("SELECT `tags_id`, `tags_name`, `tags_universe_status`, `tags_wallpaper` FROM animemapdb.tags as T right join animemapdb.tagdetails as D on T.tags_id = D.tagDetails_tags_id WHERE tags_id = ? ", id).Rows()
+	rows, err := h.DB.Raw("SELECT `tags_id`, `tags_name`, `tags_universe_status`, `tags_wallpaper` FROM animemapdb.tags as T right join animemapdb.tagdetails as D on T.tags_id = D.tagDetails_tags_id WHERE tagDetails_animes_id = ? ", id).Rows()
 	defer rows.Close()
 
 	for rows.Next() {
