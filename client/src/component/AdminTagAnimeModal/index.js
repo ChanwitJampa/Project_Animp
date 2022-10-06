@@ -19,6 +19,7 @@ const AdminTagAnimeModal = (props) => {
   const [selectTag, setSelectTag] = useState("");
   const dispatch = useDispatch();
   const onChangItem = (name) => (event) => {
+    console.log(event.target.value)
     setSelectTag(event.target.value);
   };
   const submitFormTag = () => {
@@ -31,7 +32,7 @@ const AdminTagAnimeModal = (props) => {
         .then((response) => {
           MySwal.fire("Alert", "บันทึกข้อมูลเรียบร้อย", "success");
           dispatch(fetchTagAsync());
-          selectTag("")
+          setSelectTag("")
         })
         .catch((error) => {
           MySwal.fire("Alert", error, "error");
