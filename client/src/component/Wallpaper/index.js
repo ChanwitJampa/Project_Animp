@@ -13,7 +13,7 @@ const Wallpaper=(props)=>{
     return(
         <div style={wallpaperStyle}>
             <div className='wallpaper-text'>
-            {type=="main"?<><h1>Wellcome to Anime Map</h1>
+            {type=="main"?<><h1>Welcome to Anime Map</h1>
                 <h6>MAP (memory anime path)</h6></>:
                 <><h1>Wellcome to Anime</h1></>} 
             </div>   
