@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/fourth1755/project-animp2022/server-remastered/initializers"
+	"animemap/api/initializers"
 )
 
 func init() {
