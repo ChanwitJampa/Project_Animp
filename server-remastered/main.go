@@ -1,15 +1,20 @@
 package main
 
 import (
-	"fmt"
-
+	"animemap/api/controllers"
 	"animemap/api/initializers"
+
+	"github.com/gin-gonic/gin"
 )
 
 func init() {
 	initializers.LoadEnvVariables()
+	initializers.ConnectToDb()
 }
 
 func main() {
-	fmt.Println("hello 2")
+	r := gin.Default()
+	r.POST("signup", controllers.Signup())
+
+	r.Run()
 }
