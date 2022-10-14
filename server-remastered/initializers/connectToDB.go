@@ -16,5 +16,5 @@ func ConnectToDb() {
 		panic("Fail to connect to DB")
 	}
 
-	db = db
+	DB = db
 }
