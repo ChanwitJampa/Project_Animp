@@ -10,7 +10,7 @@ $colorDarkDarkPink :#371037;
 .login-logo{
     padding: 10px 10px 10px 20px;
     h1{
-        font-size: 40px;
+        font-size: 32px;
         a{
             display: block;
             color: $colorPink;
@@ -23,23 +23,24 @@ $colorDarkDarkPink :#371037;
     }
 }
 .login-container{
-    width: 480px;
+    width: 450px;
     margin: auto;
     
 }
 .login-card{
     background-color: $colorBlack;
     width: 100%;
-    padding: 50px 40px 100px 40px;
+    padding: 30px 40px 80px 40px;
     border-radius: 20px;
-    h1{
+    h2{
         color: $colorWhite;
-        font-size: 48px;
+        font-size: 28px;
         font-weight: 500;
         padding-bottom: 15px;
+        text-align: center;
     }
 }
-.login-button{
+.register-button{
     width: 100%;
     background-color: $colorPink;
     border-radius: 20px;
@@ -50,6 +51,18 @@ $colorDarkDarkPink :#371037;
     margin-top: 20px;
     margin-bottom: 20px;
     cursor: pointer;
+}
+.register-button-disabled{
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.60);
+    border-radius: 20px;
+    color: $colorWhite;
+    font-size: 32px;
+    font-weight: 500;
+    padding: 15px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    cursor:not-allowed;
 }
 .login-card-bottom{
     display: flex;
@@ -72,4 +85,48 @@ $colorDarkDarkPink :#371037;
 .textField{
     background-color: $colorWhite;
     border-radius: 4px;
+}
+.register-password{
+    margin-top: 10px;
+    width: 100%;
+    border-radius: 4px;
+    background-color: #151414;
+    h5{
+        color: rgba(255, 255, 255, 0.40);
+        padding: 10px;
+        font-size: 18px;
+        font-weight: 300;
+    }
+}
+.valid {
+    color: green;
+    padding: 8px;
+    display: flex;
+    p{
+        color: rgba(255, 255, 255, 0.60);
+    }
+}
+  
+.valid:before {
+    //position: relative;
+    left: -35px;
+    margin-right: 6px;
+    content: "✔";
+}
+  
+/* Add a red text color and an "x" when the requirements are wrong */
+.invalid {
+    color: red;
+    padding: 8px;
+    display: flex;
+    p{
+        color: rgba(255, 255, 255, 0.60);
+    }
+}
+  
+.invalid:before {
+    //position: relative;
+    left: -35px;
+    margin-right: 6px;
+    content: "✖";
 }

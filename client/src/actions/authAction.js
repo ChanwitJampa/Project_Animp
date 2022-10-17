@@ -1,5 +1,4 @@
 import {startFetch,endFetch,errorFetch} from './statusAction'
-import {signin} from '../api/user'
 import axios from 'axios';
 
 
