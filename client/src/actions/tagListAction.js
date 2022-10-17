@@ -11,7 +11,7 @@ export function fetchTagAsync(){
     return async function(dispatch){
         try{
             dispatch(startFetch())
-            await fetch(`http://localhost:5000/tags`).
+            await fetch(`http://localhost:5000/getAllTags`).
             then((response) => response.json())
             .then((taglist) => {
                 dispatch(setList(taglist))

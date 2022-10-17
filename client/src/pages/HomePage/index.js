@@ -15,7 +15,7 @@ const HomePage=()=>{
     const [animeByTagSchool,setAnimeByTagSchool]=useState([])
     const [animeByTagDrama,setAnimeByTagDrama]=useState([])
     const fetchAnimeByTagSchool = async (id) => {
-        await axios.get(`http://localhost:5000/tagDetails/anime/${id}`).
+        await axios.get(`http://localhost:5000/getAnimeByTag/${id}`).
         then((response) => response.data)
         .then((anime) => {   
             setAnimeByTagSchool(anime)
@@ -24,7 +24,7 @@ const HomePage=()=>{
         })
     }
     const fetchAnimeByTagDrama = async (id) => {
-        await axios.get(`http://localhost:5000/tagDetails/anime/${id}`).
+        await axios.get(`http://localhost:5000/getAnimeByTag/${id}`).
         then((response) => response.data)
         .then((anime) => {
             setAnimeByTagDrama(anime)

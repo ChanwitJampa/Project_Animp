@@ -11,7 +11,7 @@ export function fetchAnimeAsync(){
     return async function(dispatch){
         try{
             dispatch(startFetch())
-            await fetch(`http://localhost:5000/animes`).
+            await fetch(`http://localhost:5000/getAllAnimes`).
             then((response) => response.json())
             .then((animelist) => {
                 dispatch(setList(animelist))
