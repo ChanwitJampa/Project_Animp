@@ -55,3 +55,22 @@ func GetStudioById(c *gin.Context) {
 	// })
 	c.JSON(http.StatusOK, studio)
 }
+
+// get studio using studioes_id
+func GetStudioByStudioName(c *gin.Context) {
+	name := c.Param("name")
+	studio := models.Studio{}
+	row := initializers.DB.Table("studioes").Where("studioes_name = ?", name).Select("studioes_id", "studioes_name", "studioes_logo", "studioes_established", "studioes_description", "studioes_image").Row()
+	if err := row.Err(); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"message": err,
+		})
+	}
+
+	row.Scan(&studio.Id, &studio.Name, &studio.Logo, &studio.Established, &studio.Description, &studio.Image)
+
+	// c.JSON(http.StatusOK, gin.H{
+	// 	"message": studio,
+	// })
+	c.JSON(http.StatusOK, studio)
+}

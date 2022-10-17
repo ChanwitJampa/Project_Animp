@@ -19,6 +19,7 @@ func init() {
 func main() {
 	r := gin.Default()
 	r.Use(cors.Default())
+
 	// users table
 	r.POST("/signup", controllers.Signup)
 	r.POST("/login", controllers.Login)
@@ -29,6 +30,7 @@ func main() {
 	// studioes table
 	r.GET("/getAllStudioes", controllers.GetAllStudioes)
 	r.GET("/getStudioById/:id", controllers.GetStudioById)
+	r.GET("/getStudioByStudioName/:name", controllers.GetStudioByStudioName)
 
 	// tag table
 	r.GET("/getAllTags", controllers.GetAllTags)
