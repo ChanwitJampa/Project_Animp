@@ -18,7 +18,7 @@ export function fetchAnimeByAccountAsync(id){
     return async function(dispatch){
         try{
             dispatch(startFetch())
-            await fetch(`http://localhost:5000/animeDetails/account/${id}`).
+            await fetch(`http://localhost:5000/getAnimeByUser/${id}`).
             then((response) => response.json())
             .then((animelist) => {
                 console.log(animelist)

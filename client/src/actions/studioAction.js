@@ -11,7 +11,7 @@ export function fetchStduioAsync(){
     return async function(dispatch){
         try{
             dispatch(startFetch())
-            await fetch(`http://localhost:5000/studioes`).
+            await fetch(`http://localhost:5000/getAllStudioes`).
             then((response) => response.json())
             .then((studiolist) => {
                 dispatch(setList(studiolist))

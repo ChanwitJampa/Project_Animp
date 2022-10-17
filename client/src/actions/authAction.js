@@ -15,7 +15,7 @@ export function fetchAuthAsync(email,password){
         try{
             dispatch(startFetch())
             await axios
-        .post(`http://localhost:5000/accounts/checkAccount`, {
+        .post(`http://localhost:5000/login`, {
             accounts_user:email,
             accounts_pwd:password,
         }).

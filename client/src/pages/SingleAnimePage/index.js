@@ -18,7 +18,7 @@ const SingleAnimePage=(props)=>{
     const nameOfMyAnimeList=myAnimeList.map((item)=>item.animes_name)
     const {user} =useSelector((state)=>state.auth)
     const fetchAnime = async () => {
-        await axios.get(`http://localhost:5000/animes/${params.id}`).
+        await axios.get(`http://localhost:5000/getAnimeById/${params.id}`).
         then((response) => response.data)
         .then((anime) => {
             console.log(anime);     
@@ -28,7 +28,7 @@ const SingleAnimePage=(props)=>{
         })
     }
     const fetchTagByAnime = async () => {
-        await axios.get(`http://localhost:5000/tagDetails/tag/${params.id}`).
+        await axios.get(`http://localhost:5000/getTagsByAnime/${params.id}`).
         then((response) => response.data)
         .then((anime) => {
             console.log(anime);     

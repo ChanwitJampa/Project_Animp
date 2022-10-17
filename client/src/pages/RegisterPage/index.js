@@ -17,6 +17,7 @@ import { useNavigate } from "react-router-dom";
 import withReactContent from 'sweetalert2-react-content'
 import isEmail from 'validator/lib/isEmail';
 import FormHelperText from '@mui/material/FormHelperText';
+import { JSEncrypt } from "jsencrypt";
 
 const RegisterPage = () => {
     const [values, setValues] = useState({
@@ -134,7 +135,7 @@ const RegisterPage = () => {
         console.log(email)
         console.log(password)
         console.log(confirmPassword)
-        axios.post(`http://localhost:5000/accounts`, {
+        axios.post(`http://localhost:5000/signup`, {
             accounts_name:firstname,
             accounts_user:email,
             accounts_pwd:password

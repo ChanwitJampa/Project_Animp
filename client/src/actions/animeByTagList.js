@@ -10,7 +10,7 @@ export function fetchAnimeByTagIdAsync(id){
     return async function(dispatch){
         try{
             dispatch(startFetch())
-            await fetch(`http://localhost:5000/tagDetails/tag/${id}`).
+            await fetch(`http://localhost:5000/getAnimeByTag/${id}`).
             then((response) => response.json())
             .then((animelist) => {
                 console.log(animelist)

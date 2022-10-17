@@ -64,12 +64,11 @@ const AddAnimeModal = (props) => {
             didOpen: () => {
               // `MySwal` is a subclass of `Swal` with all the same instance & static methods
               MySwal.showLoading()
-              axios.post(`http://localhost:5000/animeDetails`, {
+              axios.post(`http://localhost:5000/createAnimeDetail`, {
                 animeDetails_animes_id:anime.animes_id,
-                animeDetails_accounts_id:user.accounts_id,
+                animeDetails_users_id:user.accounts_id,
                 animedetails_watchYear:year,
                 animedetails_score:score
-
               })
               .then((response) => {
                 MySwal.fire({
