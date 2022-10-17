@@ -16,6 +16,7 @@ const SingleAnimePage=(props)=>{
     const myAnimeList = useSelector(state => state.accountAnimeList)
     const scoreMyAnime=myAnimeList.map((item)=>item.Score)
     const nameOfMyAnimeList=myAnimeList.map((item)=>item.animes_name)
+    const [studioAnime,setStudioAnime]=useState()
     const {user} =useSelector((state)=>state.auth)
     const fetchAnime = async () => {
         await axios.get(`http://localhost:5000/getAnimeById/${params.id}`).
@@ -23,15 +24,20 @@ const SingleAnimePage=(props)=>{
         .then((anime) => {
             console.log(anime);     
             setSingleAnime(anime)
+            if(anime.Studio.includes(",")){
+                console.log(anime.Studio)
+            }else{
+
+            }
         }).catch(error=>{
             console.log(error); 
         })
+        
     }
     const fetchTagByAnime = async () => {
         await axios.get(`http://localhost:5000/getTagsByAnime/${params.id}`).
         then((response) => response.data)
-        .then((anime) => {
-            console.log(anime);     
+        .then((anime) => {   
             setTagAnime([...new Set(anime)])
         }).catch(error=>{
             console.log(error); 

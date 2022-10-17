@@ -1,23 +1,60 @@
+$colorPink:#FF1493;
+$colorBlack:#141313;
+$colorWhite:#FFFFFF;
+$colorDarkPink:#371037;
+$colorFadedPink:#F169B2;
 .singleStudio-wallpaper-text{
-    padding: 40px 20px 40px 80px;
+    padding: 40px 80px 40px 80px;
     h1{
-        color: white;
+        color: $colorWhite;
         font-size:40px;
         -webkit-text-stroke: 1px black; 
     }
 }
 .singleStudio-wallpaper-imagebox{
-    width: 231px;
-    display: flex;
-    flex-direction: column;
+    
     img{
         border-radius: 15px;
         width: 361px;
         height: 361px;
-        margin-bottom: 20px;
-        margin-top: 20px;
     }
 }
 .singleStudio-container{
     display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.singleStudio-description{
+    margin-top: 30px;
+    width: 300px;
+    color: $colorWhite;
+    
+}
+.singleStudio-donation{
+    width: 450px;
+    height: 360px;
+    border-radius: 20px;
+    background-color: black;
+   
+}
+.singleStudio-donation-child{
+    width: 400px;
+    height: 300px;
+    margin: auto;
+    h2{
+        color: $colorWhite;
+        width: 100%;
+        text-align: center;
+        margin-top: 50px;
+        margin-bottom: 50px;
+    }
+    button{
+        border-radius: 20px;
+        background-color: #FF1493;
+        padding: 20px 50px 20px 50px;
+        width: 100%;
+        color: $colorWhite;
+        cursor: pointer;
+        font-size: 24px;
+    }
 }
