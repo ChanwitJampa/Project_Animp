@@ -53,7 +53,6 @@ function App() {
   }
   //const {user} =useSelector((state)=>state.auth)
   const user= getUser()
-  console.log(user)
   const location = useLocation();
   const [roleUser,setRoleUser]=useState("")
   useEffect(()=>{

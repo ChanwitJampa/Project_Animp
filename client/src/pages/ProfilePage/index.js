@@ -2,7 +2,7 @@ import {useDispatch,useSelector} from 'react-redux'
 import { useState, useEffect } from "react";
 import SliderMyAnime from "../../component/SliderMyAnime"
 import {fetchAnimeByAccountAsync} from '../../actions/animeDetailListAction'
-
+import { getRole, getUser} from "../../servies/authorize";
 import './index.scss'
 const levelOfGame=[
     {level:1 , label: "Iron" ,numberOfAnime: 6 ,color :"#1EC602"},
@@ -23,7 +23,8 @@ const watchanimeYear=[
 const ProfilePage=()=>{
     const dispatch=useDispatch()
     const totalAnime = useSelector(state => state.accountAnimeList)
-    const {user} =useSelector((state)=>state.auth)
+    //const {user} =useSelector((state)=>state.auth)
+    const user =getUser()
     //const totalAnime = useSelector(state => state.myAnimeList)
     const labelStyles = {
         paddingTop:10,
@@ -38,7 +39,7 @@ const ProfilePage=()=>{
     
     const levelOfUser=levelOfGame.filter(filterLevel).map((item)=>item)
     useEffect(()=>{
-        dispatch(fetchAnimeByAccountAsync(user.accounts_id))
+        dispatch(fetchAnimeByAccountAsync(user.ID))
     },[])
     return(
         <div>

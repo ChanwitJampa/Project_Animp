@@ -25,7 +25,6 @@ const ListSeasonAnime=(props)=>{
     },[])
     const myAnimeList = useSelector(state => state.myAnimeList)
     const nameOfMyAnimeList=myAnimeList.map((item)=>item.animes_name)
-    console.log(nameOfMyAnimeList)
     return(
         <div className="season-year-list">
             <h2>{season} {year}</h2>
