@@ -6,18 +6,18 @@ import { useSelector, useDispatch } from 'react-redux'
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 const itemDonate=[
-    {  id: 1, name: "คุ้กกี้", image: "./image/Cokie.png", price: 5},
-    {  id: 2, name: "", image: "", price: 5},
-    {  id: 3, name: "", image: "", price: 10},
-    {  id: 4, name: "เปาะเปี๊ยะทอด", image: "", price: 15},
-    {  id: 5, name: "", image: "", price: 20},
-    {  id: 6, name: "", image: "", price: 25},
-    {  id: 7, name: "", image: "", price: 25},
-    {  id: 8, name: "", image: "", price: 30},
-    {  id: 9, name: "", image: "", price: 40},
-    {  id: 10, name: "", image: "", price: 50},
-    {  id: 11, name: "", image: "", price: 100},
-    {  id: 12, name: "ต้มยำกุ้ง", image: "./image/Tom Yum Goong.png", price: 200},
+    {  id: 1, name: "คุ้กกี้", image: "../image/Cokie.png", price: 5},
+    {  id: 2, name: "ดังโงะ", image: "../image/Dango.png", price: 5},
+    {  id: 3, name: "โมจิ", image: "../image/Mochi.png", price: 10},
+    {  id: 4, name: "เปาะเปี๊ยะทอด", image: "../image/Egg-rolls.png", price: 15},
+    {  id: 5, name: "ฮะเก๋า", image: "../image/Ha-gow.png", price: 20},
+    {  id: 6, name: "ซาลาเปา", image: "../image/Steamed-dumpling.png", price: 25},
+    {  id: 7, name: "เกี๋ยวซ่า", image: "../image/Gyoza.png", price: 25},
+    {  id: 8, name: "ซูชิ", image: "../image/Sushi.png", price: 30},
+    {  id: 9, name: "ไทยากิ", image: "../image/Taiyaki.png", price: 40},
+    {  id: 10, name: "ราเมง", image: "../image/Raman.png", price: 50},
+    {  id: 11, name: "คุ้กกี้เสี่ยงทาย", image: "../image/Fortune-cookie.png", price: 100},
+    {  id: 12, name: "ต้มยำกุ้ง", image: "../image/Tom-Yum-Goong.png", price: 200},
 ]
 const DonateStudioModal = (props) => {
   const { open, onClose, studio } = props;
@@ -91,9 +91,9 @@ const DonateStudioModal = (props) => {
             {itemDonate.map((item)=>(
             <div className="modalstudio-child" onClick={()=>onDonation(item)}>
                 <div>
-                    <div style={{backgroundImage:`url(${mainWallpaper})`}} className="modalstudio-child-img" ></div>
-                    <p>Name</p>
-                    <p>{item.price}</p>
+                    <div className="modalstudio-child-img" style={{backgroundImage:`url(${item.image})`}}></div>
+                    <p>{item.name}</p>
+                    <p>{item.price} $</p>
                 </div>
            </div> 
             ))}
