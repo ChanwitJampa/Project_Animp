@@ -13,6 +13,7 @@ import SidebarAdmin from './component/SidebarAdmin';
 import StudioPage from './pages/StudioPage';
 import AdminHomePage from './pages/AdminHomePage';
 import ProfilePage from './pages/ProfilePage';
+import AccountPage from './pages/AccountPage';
 import {useSelector} from "react-redux"
 import React, { useState, useEffect } from "react";
 import { useLocation } from 'react-router-dom'
@@ -33,6 +34,7 @@ function App() {
         <Route path="/login" element={<LoginPage/>}/>
         <Route path="/register" element={<RegisterPage/>}/>
         <Route path="/profile" element={<ProfilePage/>}/>
+        <Route path="/account" element={<AccountPage/>}/>
     </Routes>
     )
   }
