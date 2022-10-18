@@ -10,6 +10,7 @@ import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import SingleStudioPage from './pages/SingleStudioPage';
 import SidebarAdmin from './component/SidebarAdmin';
+import StudioPage from './pages/StudioPage';
 import AdminHomePage from './pages/AdminHomePage';
 import ProfilePage from './pages/ProfilePage';
 import {useSelector} from "react-redux"
@@ -24,6 +25,7 @@ function App() {
         <Route path="/topanime" element={<TopAnimePage/>}/>
         <Route path="/anime/:id" element={<SingleAnimePage/>}/>
         <Route path="/studio/:id" element={<SingleStudioPage/>}/>
+        <Route path="/allstudio" element={<StudioPage/>}/>
         <Route path="/allanime" element={<SeasonnalAnimePage/>}/>
         <Route path="/mymap" element={<AnimeMapPage/>}/>
         <Route path="*" element={<NotFoundPage/>}/>
@@ -40,6 +42,7 @@ function App() {
           <Route path="/topanime" element={<TopAnimePage/>}/>
           <Route path="/anime/:id" element={<SingleAnimePage/>}/>
           <Route path="/studio/:id" element={<SingleStudioPage/>}/>
+          <Route path="/allstudio" element={<StudioPage/>}/>
           <Route path="/allanime" element={<SeasonnalAnimePage/>}/>
           <Route path="*" element={<NotFoundPage/>}/>
           <Route path="/login" element={<LoginPage/>}/>

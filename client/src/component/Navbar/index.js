@@ -16,6 +16,7 @@ const Navbar=()=>{
                     <ul className='navbar-item' >
                         <li className="navbar-item-li"><Link to='/' className="navbar-item-link">Home</Link></li>
                         <li className="navbar-item-li"><Link to="/allanime" className="navbar-item-link">Anime</Link></li>
+                        <li className="navbar-item-li"><Link to="/allstudio" className="navbar-item-link">Studio</Link></li>
                         <li className="navbar-item-li"><Link to="/topanime" className="navbar-item-link">Top Anime</Link></li>
                         {user?<li className="navbar-item-li"><Link to="/mymap" className="navbar-item-link">My Map</Link></li>:<></>}
                     </ul>

@@ -7,6 +7,7 @@ import { fetchStduioAsync }  from '../../actions/studioAction'
 import SliderAnime from '../../component/SliderAnime';
 import {fetchAnimeAsync} from '../../actions/animeListAction'
 import {fetchAnimeByAccountAsync} from '../../actions/animeDetailListAction'
+import DonateStudioModal from '../../modal/DonateStudioModal';
 const SingleStudioPage=()=>{
     let params = useParams();
     const dispatch=useDispatch()
@@ -15,6 +16,11 @@ const SingleStudioPage=()=>{
     const Dataanime =useSelector(state=>state.animeList)
     const {user} =useSelector((state)=>state.auth)
     const myAnimeList = useSelector(state => state.accountAnimeList)
+    const [open, setOpen] = useState(false);
+    const handleOpen = () => {
+        setOpen(true);
+    }
+    const handleClose = () =>setOpen(false);
     const fetchStudio = async () => {
         await axios.get(`http://localhost:5000/getStudioByStudioName/${params.id}`).
         then((response) => response.data)
@@ -49,12 +55,13 @@ const SingleStudioPage=()=>{
                 <div className='singleStudio-donation'>
                     <div className='singleStudio-donation-child'>
                     <h2>ให้กำลังใจสตูดิโอผู้ผลิต<br></br>อนิเมะผ่านการโดเนท </h2>
-                                        <button>Donate</button>
+                                        <button onClick={handleOpen}>Donate</button>
                     </div>
                     
                 </div>
             </div>
             <SliderAnime tagAnime={studio.studioes_name} animeList={animeInStudio} myAnimeList={myAnimeList}/>
+            <DonateStudioModal open={open} onClose={handleClose} studio={studio}/>
         </div>
     )
 }

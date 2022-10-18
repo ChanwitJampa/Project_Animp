@@ -11,7 +11,6 @@ import TextField from '@mui/material/TextField'
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { addToList} from "../../actions/myAnimeListAction"
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 import axios from "axios";

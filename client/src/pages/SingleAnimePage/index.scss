@@ -87,9 +87,30 @@ $colorFadedPink:#F169B2;
     p{
         color: $colorWhite;
         font-size: 18px;
+        font-weight: 200;
     }
     h2{
         color: $colorWhite;
+    }
+}
+.anime-detail-text{
+    margin-top: 20px;
+    color: $colorWhite;
+    td{
+        padding: 8px;
+        font-size: 18px;
+        font-weight: 200;
+    }
+}
+.anime-detail-link{
+    color: $colorWhite;
+    font-size: 18px;
+    font-weight: 600;
+    background-color: $colorBlack;
+    border: none;
+    cursor: pointer;
+    &:hover{
+        color: $colorPink;
     }
 }
 .anime-detail-content{

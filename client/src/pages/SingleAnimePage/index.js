@@ -101,14 +101,14 @@ const SingleAnimePage=(props)=>{
             <div className='anime-detail-container'>
                 <div className='anime-detail'>
                     <h2>Detail</h2><br/>
-                    <p>Anime: {singleAnime.animes_name}</p><br/>
+                    <tr className='anime-detail-text'><td>Anime:</td><td>{singleAnime.animes_name}</td></tr>
                     {singleAnime.animes_episodes!==1?<>
-                        <p>Episodes: {singleAnime.animes_episodes}</p><br/>
-                        <p>Seasonal: {singleAnime.animes_seasonal}</p></>:
-                    <p>Type: Movie</p>}<br/>
-                    <p>Year: {singleAnime.animes_year}</p><br/>
-                    <p onClick={()=>navigate(`/studio/${singleAnime.Studio}`)}>Studio: {singleAnime.Studio}</p><br/>
-                    <p>Duration: {singleAnime.animes_duration}</p>
+                    <tr className='anime-detail-text'><td>Episodes:</td><td>{singleAnime.animes_episodes}</td></tr>
+                    <tr className='anime-detail-text'><td>Seasonal:</td><td>{singleAnime.animes_seasonal}</td></tr>
+                    </>:<tr className='anime-detail-text'><td>Type:</td><td>Movie</td></tr>}
+                    <tr className='anime-detail-text'><td>Year:</td><td>{singleAnime.animes_year}</td></tr>
+                    <tr className='anime-detail-text'><td>Studio:</td><td><button className='anime-detail-link'onClick={()=>navigate(`/studio/${singleAnime.Studio}`)}>{singleAnime.Studio}</button></td></tr>
+                    <tr className='anime-detail-text'><td>Duration:</td><td>{singleAnime.animes_duration}</td></tr>
                 </div>
                 <div className='anime-detail-content'>
                     <h2>เนื้อเรื่องย่อ</h2>
