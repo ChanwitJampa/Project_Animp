@@ -16,9 +16,13 @@ import { authenticate } from "../../servies/authorize";
 import { useNavigate } from "react-router-dom";
 import {fetchAuthAsync} from '../../actions/authAction'
 import {fetchAnimeByAccountAsync} from '../../actions/animeDetailListAction'
+import Swal from 'sweetalert2'
+import axios from "axios";
+import withReactContent from 'sweetalert2-react-content'
 
 const LoginPage = () => {
     const navigate = useNavigate();
+    const MySwal = withReactContent(Swal)
     const [values, setValues] = useState({
         username: '',
         password: '',
@@ -45,13 +49,24 @@ const LoginPage = () => {
     };
     const submitForm=()=>{
 
-        dispatch(fetchAuthAsync(values.username,values.password)).then(
-            res=>{
-                
-                navigate('/')
-                
-            }
-        )
+        // dispatch(fetchAuthAsync(values.username,values.password)).then(
+        //     res=>{
+        //         
+        //     }
+        // )
+        axios.post(`http://localhost:5000/login`,{
+            username:values.username,
+            password:values.password})
+            .then((response) => response.data)
+            .then((res) => {authenticate(res,()=>navigate('/'))})
+        .catch(err=>{
+            MySwal.fire(
+                'เข้าสู่ระบบไม่สำเร็จ',
+                'Email or Password is wrong',
+                'error',
+                err,
+               )
+        })
     }
 
     const dispatch=useDispatch()

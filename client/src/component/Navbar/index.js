@@ -3,9 +3,11 @@ import SearchBarAnime from '../SearchBarAnime';
 import ProfileBar from '../ProfileBar';
 import {Link,withRouter,Navigate} from "react-router-dom";
 import {useSelector} from "react-redux"
+import { getRole, getUser,logout } from "../../servies/authorize";
 
 const Navbar=()=>{
-    const {user} =useSelector((state)=>state.auth)
+    //const {user} =useSelector((state)=>state.auth)
+    const user=getUser()
     return(
         <div className='navbar'>
             <div className='navbar-left'>

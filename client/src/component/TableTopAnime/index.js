@@ -5,12 +5,14 @@ import { useNavigate } from "react-router-dom";
 import AddAnimeModal from '../AddAnimeModal';
 import {useDispatch,useSelector} from 'react-redux'
 import {fetchAnimeByAccountAsync} from '../../actions/animeDetailListAction'
+import {getUser} from "../../servies/authorize";
 
 const TableTopAnime=(props)=>{
     const {anime} = props
     const navigate = useNavigate();
     const dispatch=useDispatch()
-    const {user} =useSelector((state)=>state.auth)
+    //const {user} =useSelector((state)=>state.auth)
+    const user =getUser()
     const [modalAnime,setModalAnime]=useState()
     const [open, setOpen] = useState(false);
 
@@ -22,9 +24,9 @@ const TableTopAnime=(props)=>{
 
     useEffect(()=>{
         if(user){
-            dispatch(fetchAnimeByAccountAsync(user.accounts_id))
+            dispatch(fetchAnimeByAccountAsync(user.ID))
         }
-    },[user])
+    },[])
     const myAnimeList = useSelector(state => state.accountAnimeList)
     const nameOfMyAnimeList=myAnimeList.map((item)=>item.animes_name)
     return(

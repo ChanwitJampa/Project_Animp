@@ -16,6 +16,7 @@ import ProfilePage from './pages/ProfilePage';
 import {useSelector} from "react-redux"
 import React, { useState, useEffect } from "react";
 import { useLocation } from 'react-router-dom'
+import { getRole, getUser,logout } from "../src/servies/authorize";
 import './App.scss'
 function App() {
   const AuthApp=()=>{
@@ -50,13 +51,14 @@ function App() {
       </Routes>
       )
   }
-  const {user} =useSelector((state)=>state.auth)
+  //const {user} =useSelector((state)=>state.auth)
+  const user= getUser()
+  console.log(user)
   const location = useLocation();
-  console.log(location.pathname);
   const [roleUser,setRoleUser]=useState("")
   useEffect(()=>{
     if(user){
-      setRoleUser(user.accounts_role)
+      setRoleUser(getRole())
     }
     
   },[user])

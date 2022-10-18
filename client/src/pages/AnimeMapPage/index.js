@@ -5,16 +5,18 @@ import { useState,useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import ProgressBar from '../../component/ProgressBar';
 import {fetchAnimeByAccountAsync} from '../../actions/animeDetailListAction'
+import {getUser} from "../../servies/authorize";
 const AnimeMapPage=()=>{
     const dispatch = useDispatch()
     const myAnimeList = useSelector(state => state.accountAnimeList)
-    const {user} =useSelector((state)=>state.auth)
+    //const {user} =useSelector((state)=>state.auth)
+    const user =getUser()
+     
     useEffect(()=>{
         if(user){
-            dispatch(fetchAnimeByAccountAsync(user.accounts_id))
+            dispatch(fetchAnimeByAccountAsync(user.ID))
         } 
     },[])
-
     return(
     <div>
         <div>

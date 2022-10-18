@@ -5,13 +5,14 @@ import {fetchAnimeByAccountAsync} from '../../actions/animeDetailListAction'
 import {useDispatch,useSelector} from 'react-redux'
 import { useState, useEffect } from "react";
 import axios from 'axios';
-
+import { getRole, getUser} from "../../servies/authorize";
 
 const HomePage=()=>{
     const dispatch=useDispatch()
     const Dataanime =useSelector(state=>state.animeList)
     const myAnimeList = useSelector(state => state.accountAnimeList)
-    const {user} =useSelector((state)=>state.auth)
+    //const {user} =useSelector((state)=>state.auth)
+    const user=getUser()
     const [animeByTagSchool,setAnimeByTagSchool]=useState([])
     const [animeByTagDrama,setAnimeByTagDrama]=useState([])
     const fetchAnimeByTagSchool = async (id) => {
@@ -39,9 +40,9 @@ const HomePage=()=>{
     },[])
     useEffect(()=>{
         if(user){
-            dispatch(fetchAnimeByAccountAsync(user.accounts_id))
+            dispatch(fetchAnimeByAccountAsync(user.ID))
         }
-    },[user])
+    },[])
     const SliderContainer=(props)=>{
         const {tagAnime,mode,valueOfMode} = props
         var animeList=[]

@@ -31,7 +31,6 @@ const MyMapFrist=(props)=>{
         }
     }
     const levelOfUser=levelOfGame.filter(filterLevel).map((item)=>item.label)
-    console.log(levelOfUser[0])
     return(
         <div style={{backgroundImage:`url(${mainWallpaper})`}} className="animeMap-map">
             <div className='animeMap-text-header'>
@@ -87,7 +86,6 @@ const MyMapFrist=(props)=>{
                     {totalAnime<=5&&totalAnime>=0?<TagPosition/>:<></>}
                 </div>
             </div>
-            
         </div>
     );
 }

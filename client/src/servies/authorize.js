@@ -1,9 +1,10 @@
 export const authenticate=(response,next)=>{
     if(window!=="undefined"){
         //เก็บข้อมูลลง session
-        sessionStorage.setItem("token",JSON.stringify(response.data.token))
-        sessionStorage.setItem("user",JSON.stringify(response.data.email))
-        sessionStorage.setItem("role",JSON.stringify(response.data.role))
+        //console.log(response.Email)
+        //sessionStorage.setItem("token",JSON.stringify(response.data.token))
+        sessionStorage.setItem("user",JSON.stringify(response))
+        sessionStorage.setItem("role",JSON.stringify(response.Role))
     }
     next()
 }

@@ -21,7 +21,6 @@ export function fetchAnimeByAccountAsync(id){
             await fetch(`http://localhost:5000/getAnimeByUser/${id}`).
             then((response) => response.json())
             .then((animelist) => {
-                console.log(animelist)
                 dispatch(setList(animelist))
                 dispatch(errorFetch(''))
                 dispatch(endFetch())

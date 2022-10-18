@@ -7,7 +7,7 @@ import axios from 'axios';
 import {useDispatch,useSelector} from 'react-redux'
 import {fetchAnimeAsync} from '../../actions/animeListAction'
 import {fetchAnimeByAccountAsync} from '../../actions/animeDetailListAction'
-
+import {getUser} from "../../servies/authorize";
 const SingleAnimePage=(props)=>{
     let params = useParams();
     const navigate =useNavigate()
@@ -17,7 +17,8 @@ const SingleAnimePage=(props)=>{
     const scoreMyAnime=myAnimeList.map((item)=>item.Score)
     const nameOfMyAnimeList=myAnimeList.map((item)=>item.animes_name)
     const [studioAnime,setStudioAnime]=useState()
-    const {user} =useSelector((state)=>state.auth)
+    //const {user} =useSelector((state)=>state.auth)
+    const user =getUser()
     const fetchAnime = async () => {
         await axios.get(`http://localhost:5000/getAnimeById/${params.id}`).
         then((response) => response.data)
@@ -62,10 +63,10 @@ const SingleAnimePage=(props)=>{
     },[])
     useEffect(()=>{
         if(user){
-            dispatch(fetchAnimeByAccountAsync(user.accounts_id))
+            dispatch(fetchAnimeByAccountAsync(user.ID))
         }
         
-    },[user])
+    },[])
     const animeList = Dataanime.filter((item)=>{if(item.Studio==singleAnime.Studio) return item})
     return(
         <div>
