@@ -40,9 +40,9 @@ func Signup(c *gin.Context) {
 
 		return
 	}
-	fmt.Println(hash)
+
 	//create the account
-	user := models.User{Email: body.Username, Pwd: string(hash)}
+	user := models.User{Email: body.Username, Pwd: string(hash), Role: "user"}
 	result := initializers.DB.Create(&user)
 
 	if result.Error != nil {
@@ -58,6 +58,9 @@ func Signup(c *gin.Context) {
 }
 
 func Login(c *gin.Context) {
+	// defender for protect brute force
+	// d := defender.New(10, 1*60*time.Second, 1*time.Hour)
+
 	// get the email and pass req body
 	var body struct {
 		Username string
@@ -71,15 +74,19 @@ func Login(c *gin.Context) {
 
 		return
 	}
+	fmt.Println("ip addr = " + c.ClientIP())
 
-	fmt.Println(body.Username)
-	fmt.Println(body.Password)
+	// if client, ok := d.Client(c.ClientIP()); ok && !client.Banned() {
+	// 	// if d.Inc(c.ClientIP()) {
 
+	// 	// }
+	// }
 	// look up requested user
 	var user models.User
 	initializers.DB.First(&user, "email = ?", body.Username)
 
 	if user.ID == 0 {
+
 		c.JSON(http.StatusBadRequest, gin.H{
 			"error": "Invalid username or password",
 		})
@@ -125,9 +132,10 @@ func Login(c *gin.Context) {
 func Validation(c *gin.Context) {
 	user, _ := c.Get("user")
 
-	c.JSON(http.StatusOK, gin.H{
-		"message": user,
-	})
+	// c.JSON(http.StatusOK, gin.H{
+	// 	"message": user,
+	// })
+	c.JSON(http.StatusOK, user)
 }
 
 // get all users
