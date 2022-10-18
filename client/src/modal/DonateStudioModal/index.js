@@ -5,12 +5,11 @@ import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from 'react-redux'
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
-
 const itemDonate=[
-    {  id: 1, name: "", image: "", price: 5},
+    {  id: 1, name: "คุ้กกี้", image: "./image/Cokie.png", price: 5},
     {  id: 2, name: "", image: "", price: 5},
     {  id: 3, name: "", image: "", price: 10},
-    {  id: 4, name: "", image: "", price: 15},
+    {  id: 4, name: "เปาะเปี๊ยะทอด", image: "", price: 15},
     {  id: 5, name: "", image: "", price: 20},
     {  id: 6, name: "", image: "", price: 25},
     {  id: 7, name: "", image: "", price: 25},
@@ -18,7 +17,7 @@ const itemDonate=[
     {  id: 9, name: "", image: "", price: 40},
     {  id: 10, name: "", image: "", price: 50},
     {  id: 11, name: "", image: "", price: 100},
-    {  id: 12, name: "", image: "", price: 200},
+    {  id: 12, name: "ต้มยำกุ้ง", image: "./image/Tom Yum Goong.png", price: 200},
 ]
 const DonateStudioModal = (props) => {
   const { open, onClose, studio } = props;
@@ -33,6 +32,7 @@ const DonateStudioModal = (props) => {
   const MySwal = withReactContent(Swal)
   const {user} =useSelector((state)=>state.auth)
   const dispatch = useDispatch()
+  const mainWallpaper= "./image/New_map.png"
   const onDonation=(item)=>{
 
     onClose()
@@ -91,7 +91,7 @@ const DonateStudioModal = (props) => {
             {itemDonate.map((item)=>(
             <div className="modalstudio-child" onClick={()=>onDonation(item)}>
                 <div>
-                    <img/>
+                    <div style={{backgroundImage:`url(${mainWallpaper})`}} className="modalstudio-child-img" ></div>
                     <p>Name</p>
                     <p>{item.price}</p>
                 </div>
