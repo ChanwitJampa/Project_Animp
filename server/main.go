@@ -23,7 +23,7 @@ func main() {
 	// users table
 	r.POST("/signup", controllers.Signup)
 	r.POST("/login", controllers.Login)
-	r.GET("/validate", middleware.RequireAuth, controllers.Validation)
+	// r.GET("/validate", middleware.RequireAuth, controllers.Validation)
 	r.GET("/getAllUsers", middleware.RequireAuth, controllers.GetAllUsers)
 	r.GET("/getUserById/:id", middleware.RequireAuth, controllers.GetUserById)
 
