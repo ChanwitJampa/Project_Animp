@@ -8,12 +8,15 @@ import (
 
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
+	"github.com/stripe/stripe-go/v73"
 )
 
 func init() {
 	initializers.LoadEnvVariables()
 	initializers.ConnectToDb()
 	initializers.SyncDatabase()
+
+	stripe.Key = "sk_test_51LuGomLNgThWAHdr2rYAY8OgIGm99tbtttz4pc1UcsbQ5lGp7glM9HW7KmexL7sRSsQW2V8lNgphGoBg5pwoTzib004GRe8aaa"
 }
 
 func main() {
@@ -57,6 +60,9 @@ func main() {
 
 	// anime detail more
 	r.GET("/getAnimeDetail/:id", controllers.GetAnimeDetailsByUsersId)
+
+	// stripe
+	r.POST("/api/charges", controllers.Charges)
 
 	r.Run(os.Getenv("PORT"))
 }
