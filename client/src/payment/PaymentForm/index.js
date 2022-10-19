@@ -56,23 +56,23 @@ const PaymaentModal = (props) => {
     const [loading, setLoading] = useState(false);
     const handleNext = async () => {
         setLoading(true);
-        console.log(user.ID)
+        console.log(typeof user.ID)
         console.log(user.Email)
-        console.log(state.amount);
+        console.log(typeof state.amount);
         console.log(state.ccnumber);
         console.log(state.expMonth)
-        console.log(state.expYear)
-        console.log(state.cvc)
+        console.log(typeof state.expYear)
+        console.log(typeof state.cvc)
         onClose()
         axios.post(`http://localhost:5000/api/charges`, {
             user_id: user.ID,
             stripe_token:"pk_test_51LuGomLNgThWAHdrmtmYnzkwfL4oVwrHt7zfX06XYiQ1qHehbqx9DaOXhMBMRgXwam0hCORTDHpqqVlRTYziOkT1004g7gMtlH",
-            amount:state.amount,
+            amount:Number(state.amount),
             receiptEmail:user.Email,
-            number:state.ccnumber,
-            expMonth:state.expMonth,
-            expYear:state.expYear,
-            CVC:state.cvc
+            number:"4242424242424242",
+            expMonth:"12",
+            expYear:"2023",
+            CVC:"123"
         })
             .then((response) =>MySwal.fire({
                 title: <strong>Good job!</strong>,
@@ -92,7 +92,7 @@ const PaymaentModal = (props) => {
     const [state,setState]=useState({
         userID:"",
         stripe_token:"",
-        amount:"",
+        amount:0,
         receiptEmail:"",
         ccnumber:"",
         expMonth:"",
