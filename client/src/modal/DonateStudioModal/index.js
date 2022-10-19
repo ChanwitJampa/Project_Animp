@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from 'react-redux'
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
+import { getRole, getUser } from "../../servies/authorize";
 const itemDonate=[
     {  id: 1, name: "คุ้กกี้", image: "../image/Cokie.png", price: 5},
     {  id: 2, name: "ดังโงะ", image: "../image/Dango.png", price: 5},
@@ -30,9 +31,8 @@ const DonateStudioModal = (props) => {
     }
   }, [studio, open]);
   const MySwal = withReactContent(Swal)
-  const {user} =useSelector((state)=>state.auth)
+  const user=getUser()
   const dispatch = useDispatch()
-  const mainWallpaper= "./image/New_map.png"
   const onDonation=(item)=>{
 
     onClose()
