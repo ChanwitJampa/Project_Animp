@@ -50,7 +50,10 @@ const PaymentForm = () => {
     const [loading, setLoading] = useState(false);
     const handleNext = async () => {
         setLoading(true);
-
+        console.log(state.amount);
+        console.log(state.ccnumber);
+        console.log(state.ccexp)
+        console.log(state.cvc)
         //console.log(formValues);
 
         // const clientSecretDataObject = clientSecretDataObjectConverter(formValues);
@@ -71,8 +74,18 @@ const PaymentForm = () => {
         setLoading(false);
     }
     const [state,setState]=useState({
-
+        userID:"",
+        stripe_token:"",
+        amount:"",
+        receiptEmail:"",
+        ccnumber:"",
+        ccexp:"",
+        expYear:"",
+        cvc:""
     })
+    const handleChange = (prop) => (event) => {
+        setState({ ...state, [prop]: event.target.value });
+    };
     return <>
         <Grid container item xs={12}>
             <Grid item xs={12} sm={3}>
@@ -99,14 +112,6 @@ const PaymentForm = () => {
                         {...params}
                     />
                 }
-                // value={formValues.currency}
-                // onChange={(event, value) => {
-                //     dispatch({
-                //         type: "editFormValue",
-                //         key: "currency",
-                //         value: value
-                //     })
-                // }}
             />
         </Grid>
         <Grid item xs={6} sm={3}>
@@ -116,6 +121,9 @@ const PaymentForm = () => {
                 variant="outlined"
                 required
                 fullWidth
+                type="number"
+                value={state.amount}
+                onChange={handleChange("amount")}
                 // value={formValues.amount}
                 // onChange={e =>
                 //     dispatch({
@@ -140,6 +148,8 @@ const PaymentForm = () => {
                     },
                 }}
                 InputLabelProps={{ shrink: true }}
+                value={state.ccnumber}
+                onChange={handleChange("ccnumber")}
             />
         </Grid>
         <Grid item xs={6} sm={6}>
@@ -156,6 +166,8 @@ const PaymentForm = () => {
                     inputComponent: StripeInput
                 }}
                 InputLabelProps={{ shrink: true }}
+                value={state.ccexp}
+                onChange={handleChange("ccexp")}
             />
             
         </Grid>
@@ -173,6 +185,8 @@ const PaymentForm = () => {
                     inputComponent: StripeInput
                 }}
                 InputLabelProps={{ shrink: true }}
+                value={state.cvc}
+                onChange={handleChange("cvc")}
             />
         </Grid>
         <Grid container item justify="flex-end">
@@ -180,7 +194,7 @@ const PaymentForm = () => {
                     variant="contained"
                     color="primary"
                     type="submit"
-                    onClick={e =>handleNext}
+                    onClick={handleNext}
                   >{
                     loading
                         ?
