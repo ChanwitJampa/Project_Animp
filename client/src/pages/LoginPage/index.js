@@ -118,9 +118,8 @@ gwQco1KRMDSmXSMkDwIDAQAB
             }
             ////////////en crypt//////////
         }
-
-      
-        return realPlainText
+        const test = JSON.parse(realPlainText)
+        return test
     }
 
     const encodeRSA = (string) => {
@@ -168,7 +167,7 @@ gwQco1KRMDSmXSMkDwIDAQAB
             username: email,
             password: password
         })
-            .then((response) => { console.log(response.data) ;const test = JSON.parse(decodeRSA(response.data));console.log(test)})
+            .then((response) =>decodeRSA(response.data))
             .then((res) => { authenticate(res, () => navigate('/')) })
             .catch(err => {
                 MySwal.fire(
