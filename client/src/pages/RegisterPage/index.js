@@ -50,12 +50,11 @@ const RegisterPage = () => {
     // Assign our encryptor to utilize the public key.
     encrypt.setPublicKey(publicKey);
     var encrypted = encrypt.encrypt("Hello world!")
-    console.log(encrypted)
     // Decrypt with the private key...
     var decrypt = new JSEncrypt();
     decrypt.setPrivateKey(privateKey);
     var uncrypted = decrypt.decrypt(encrypted);
-    console.log(uncrypted)
+
     const [values, setValues] = useState({
         firstname: '',
         showPassword: false,

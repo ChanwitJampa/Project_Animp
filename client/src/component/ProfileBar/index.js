@@ -7,9 +7,10 @@ const ProfileBar=()=>{
             <button class="user-profile"></button>
             <div class="dropdown-content">
                 <Link to="/profile">Profile</Link>
+                <Link to="/account">Account</Link>
                 <Link to="/login" onClick={()=>logout()}>Logout</Link>
+            </div>
         </div>
-</div>
     )
 }
 export default ProfileBar;

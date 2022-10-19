@@ -1,0 +1,22 @@
+$colorPink:#FF1493;
+$colorBlack:#000000;
+$colorWhite:#FFFFFF;
+$colorDarkPink:#201020;
+$colorDarkDarkPink :#371037;
+.accountpage-header{
+    padding: 40px 100px 40px 100px;
+    h1{
+        color: white;
+        font-size:40px;
+        -webkit-text-stroke: 1px $colorBlack; 
+        margin-bottom: 20px;
+    }
+}
+.accountpage-container{
+    background-color: $colorBlack;
+    margin: auto;
+    width: 1000px;
+    height: 450px;
+    display: flex;
+    justify-content: space-between;
+}
