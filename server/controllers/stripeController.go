@@ -12,21 +12,9 @@ import (
 	"github.com/stripe/stripe-go/v73/token"
 )
 
-// ChargeJSON incoming data for Stripe API
-type ChargeJSON struct {
-	User_id      int    `json:"user_id"`
-	Token        string `json:"stripe_token"`
-	Amount       int64  `json:"amount"`
-	ReceiptEmail string `json:"receiptEmail"`
-	Number       string `json:"number"`
-	ExpMonth     string `json:"expMonth"`
-	ExpYear      string `json:"expYear"`
-	CVC          string `json:"CVC"`
-}
-
 func Charges(c *gin.Context) {
 	// we will bind our JSON body to the `json` var
-	var json ChargeJSON
+	var json models.ChargeJSON
 	if err := c.BindJSON(&json); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"error": "Failed to read body",
@@ -36,10 +24,10 @@ func Charges(c *gin.Context) {
 	}
 	params := &stripe.TokenParams{
 		Card: &stripe.CardParams{
-			Number:   stripe.String(json.Number),
-			ExpMonth: stripe.String(json.ExpMonth),
-			ExpYear:  stripe.String(json.ExpYear),
-			CVC:      stripe.String(json.CVC),
+			Number:   stripe.String(string(json.Number)),
+			ExpMonth: stripe.String(string(json.ExpMonth)),
+			ExpYear:  stripe.String(string(json.ExpYear)),
+			CVC:      stripe.String(string(json.CVC)),
 		},
 	}
 	t, err := token.New(params)
