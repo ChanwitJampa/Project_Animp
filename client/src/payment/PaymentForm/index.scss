@@ -1,0 +1,39 @@
+$colorPink:#FF1493;
+$colorBlack:#000000;
+$colorWhite:#FFFFFF;
+$colorDarkPink:#371037;
+$colorGray : #C3BBBE;
+.modalpayment-modalStyles{
+    position: absolute;
+    padding: 15px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 800px;
+    background-color: $colorWhite;
+    border: none;
+    border-radius: 15px;
+    h1{
+        text-align: center;
+        padding-bottom: 20px;
+    }
+}
+.modalpayment-header{
+    padding: 10px 20px 0px 20px;
+    display: flex;
+    justify-content:flex-end;
+    button{
+        background-color: $colorPink;
+        width: 30px;
+        height: 30px;
+        text-align: center;
+        border-radius: 50%;
+        font-size: medium;
+        color: $colorWhite;
+        cursor: pointer;
+        &:hover{
+            background-color: $colorDarkPink;
+        }
+    }
+
+}

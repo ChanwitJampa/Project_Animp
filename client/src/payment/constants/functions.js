@@ -53,20 +53,12 @@ export const clientSecretDataObjectConverter = ({
         }
     )
 
-export const stripeDataObjectConverter = ({ firstname, lastname, email, line1, line2, postal_code, city, country, }, cardElement) => ({
+export const stripeDataObjectConverter = ( firstname, email, cardElement) => ({
     payment_method: {
         card: cardElement,
         billing_details: {
-            address: {
-                city,
-                country: country.code,
-                line1,
-                line2,
-                postal_code,
-                state: null
-            },
             email,
-            name: `${firstname} ${lastname}`,
+            name: `${firstname}`,
             phone: null
         },
     },

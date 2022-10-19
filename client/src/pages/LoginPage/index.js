@@ -115,7 +115,7 @@ uku7JUXcVpt08DFSceCEX9unCuMcT72rAQlLpdZir876
             username: email,
             password: password
         })
-            .then((response) =>response.data)
+            .then((response) => response.data)
             .then((res) => { authenticate(res, () => navigate('/')) })
             .catch(err => {
                 MySwal.fire(

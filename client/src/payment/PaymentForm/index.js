@@ -27,8 +27,16 @@ import {
     useStripe,
     useElements,
 } from '@stripe/react-stripe-js';
-const PaymentForm = () => {
+import axios from "axios";
+import "./index.scss";
+import Modal from "@mui/material/Modal";
+import { Elements, } from "@stripe/react-stripe-js";
+import { loadStripe } from '@stripe/stripe-js';    
 
+const PaymaentModal = (props) => {
+    const stripePromise = loadStripe("pk_test_51LuGomLNgThWAHdrmtmYnzkwfL4oVwrHt7zfX06XYiQ1qHehbqx9DaOXhMBMRgXwam0hCORTDHpqqVlRTYziOkT1004g7gMtlH");
+    const { open, onClose } = props;
+    const token="pk_test_51LuGomLNgThWAHdrmtmYnzkwfL4oVwrHt7zfX06XYiQ1qHehbqx9DaOXhMBMRgXwam0hCORTDHpqqVlRTYziOkT1004g7gMtlH"
     // const [{ formValues }, dispatch] = useStateValue();
     const cardsLogo = [
         "amex",
@@ -43,34 +51,42 @@ const PaymentForm = () => {
         "visaelectron",
     ];
     const MySwal = withReactContent(Swal)
-    const elements = useElements();
-    const stripe = useStripe();
     //const dispatch = useDispatch()
     const user=getUser()
     const [loading, setLoading] = useState(false);
     const handleNext = async () => {
         setLoading(true);
+        console.log(user.ID)
+        console.log(user.Email)
         console.log(state.amount);
         console.log(state.ccnumber);
-        console.log(state.ccexp)
+        console.log(state.expMonth)
+        console.log(state.expYear)
         console.log(state.cvc)
-        //console.log(formValues);
-
-        // const clientSecretDataObject = clientSecretDataObjectConverter(formValues);
-        // const clientSecret = await clientSecretPull(clientSecretDataObject);
-        // const cardElement = elements.getElement(CardCvcElement);
-        // const stripeDataObject = stripeDataObjectConverter(formValues, cardElement);
-        // const { paymentIntent, error } = await stripe.confirmCardPayment(clientSecret, stripeDataObject);
-
-        // if (error) {
-        //     //setCardStatus(false);
-        //     //setCardMessage(error.message)
-        // } else if (paymentIntent && paymentIntent.status === "succeeded") {
-        //     //setCardStatus(true);
-        //     //setCardMessage("");
-        //     //dispatch({ type: 'emptyFormValue' });
-        // }
-        //setActiveStep((prevActiveStep) => prevActiveStep + 1);
+        onClose()
+        axios.post(`http://localhost:5000/api/charges`, {
+            user_id: user.ID,
+            stripe_token:"pk_test_51LuGomLNgThWAHdrmtmYnzkwfL4oVwrHt7zfX06XYiQ1qHehbqx9DaOXhMBMRgXwam0hCORTDHpqqVlRTYziOkT1004g7gMtlH",
+            amount:state.amount,
+            receiptEmail:user.Email,
+            number:state.ccnumber,
+            expMonth:state.expMonth,
+            expYear:state.expYear,
+            CVC:state.cvc
+        })
+            .then((response) =>MySwal.fire({
+                title: <strong>Good job!</strong>,
+                html: <i>Successfully added to list</i>,
+                icon: 'success'
+              }))
+            .catch(err => {
+                MySwal.fire(
+                    'เติมเงินไม่สำเร็จ',
+                    'Email or Password is wrong',
+                    'error',
+                    err,
+                )
+            })
         setLoading(false);
     }
     const [state,setState]=useState({
@@ -79,14 +95,28 @@ const PaymentForm = () => {
         amount:"",
         receiptEmail:"",
         ccnumber:"",
-        ccexp:"",
+        expMonth:"",
         expYear:"",
         cvc:""
     })
     const handleChange = (prop) => (event) => {
         setState({ ...state, [prop]: event.target.value });
     };
-    return <>
+    return (<Modal
+        open={open}
+        onClose={onClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <div className="modalpayment-modalStyles">
+          <div className="modalpayment-header">
+              <button onClick={onClose}>X</button>
+          </div>
+          <h1>เติมเงิน</h1>
+            <div>
+            {stripePromise
+          ? <Elements stripe={stripePromise}>
+              <Grid container spacing={3}>
         <Grid container item xs={12}>
             <Grid item xs={12} sm={3}>
                 <Typography variant="h6">Payment Data</Typography>
@@ -141,33 +171,52 @@ const PaymentForm = () => {
                 variant="outlined"
                 required
                 fullWidth
-                InputProps={{
-                    inputComponent: StripeInput,
-                    inputProps: {
-                        component: CardNumberElement
-                    },
-                }}
+                // InputProps={{
+                //     inputComponent: StripeInput,
+                //     inputProps: {
+                //         component: CardNumberElement
+                //     },
+                // }}
                 InputLabelProps={{ shrink: true }}
                 value={state.ccnumber}
                 onChange={handleChange("ccnumber")}
             />
         </Grid>
-        <Grid item xs={6} sm={6}>
+        <Grid item xs={6} sm={3}>
             <TextField
-                label="Expiration Date"
-                name="ccexp"
+                label="Expiration Month"
+                name="expMonth"
                 variant="outlined"
                 required
                 fullWidth
-                InputProps={{
-                    inputProps: {
-                        component: CardExpiryElement
-                    },
-                    inputComponent: StripeInput
-                }}
+                // InputProps={{
+                //     inputProps: {
+                //         component: CardExpiryElement
+                //     },
+                //     inputComponent: StripeInput
+                // }}
                 InputLabelProps={{ shrink: true }}
-                value={state.ccexp}
-                onChange={handleChange("ccexp")}
+                value={state.expMonth}
+                onChange={handleChange("expMonth")}
+            />
+            
+        </Grid>
+        <Grid item xs={6} sm={3}>
+            <TextField
+                label="Expiration Year"
+                name="expYear"
+                variant="outlined"
+                required
+                fullWidth
+                // InputProps={{
+                //     inputProps: {
+                //         component: CardExpiryElement
+                //     },
+                //     inputComponent: StripeInput
+                // }}
+                InputLabelProps={{ shrink: true }}
+                value={state.expYear}
+                onChange={handleChange("expYear")}
             />
             
         </Grid>
@@ -178,12 +227,12 @@ const PaymentForm = () => {
                 variant="outlined"
                 required
                 fullWidth
-                InputProps={{
-                    inputProps: {
-                        component: CardCvcElement
-                    },
-                    inputComponent: StripeInput
-                }}
+                // InputProps={{
+                //     inputProps: {
+                //         component: CardCvcElement
+                //     },
+                //     inputComponent: StripeInput
+                // }}
                 InputLabelProps={{ shrink: true }}
                 value={state.cvc}
                 onChange={handleChange("cvc")}
@@ -203,11 +252,16 @@ const PaymentForm = () => {
                         'Pay'
             }</Button>
          </Grid>
-    </>
+         </Grid>
+              </Elements>
+                : null
+          }
+        </div>
+        </div>
+      </Modal>)
+    
 }
-
-export default PaymentForm;
-
+export default PaymaentModal;
 const currencies = [
     {
         symbol: "AED",
