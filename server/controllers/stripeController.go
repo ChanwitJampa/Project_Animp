@@ -1,28 +1,48 @@
 package controllers
 
 import (
-	"fmt"
 	"net/http"
 	"os"
 	"testAPI/initializers"
+	"testAPI/models"
 
 	"github.com/gin-gonic/gin"
 	"github.com/stripe/stripe-go/v73"
 	"github.com/stripe/stripe-go/v73/charge"
+	"github.com/stripe/stripe-go/v73/token"
 )
 
 // ChargeJSON incoming data for Stripe API
 type ChargeJSON struct {
 	User_id      int    `json:"user_id"`
-	Studio_id    int    `json:"studio_id"`
+	Token        string `json:"stripe_token"`
 	Amount       int64  `json:"amount"`
 	ReceiptEmail string `json:"receiptEmail"`
+	Number       string `json:"number"`
+	ExpMonth     string `json:"expMonth"`
+	ExpYear      string `json:"expYear"`
+	CVC          string `json:"CVC"`
 }
 
 func Charges(c *gin.Context) {
 	// we will bind our JSON body to the `json` var
 	var json ChargeJSON
-	c.BindJSON(&json)
+	if err := c.BindJSON(&json); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"error": "Failed to read body",
+		})
+
+		return
+	}
+	params := &stripe.TokenParams{
+		Card: &stripe.CardParams{
+			Number:   stripe.String(json.Number),
+			ExpMonth: stripe.String(json.ExpMonth),
+			ExpYear:  stripe.String(json.ExpYear),
+			CVC:      stripe.String(json.CVC),
+		},
+	}
+	t, err := token.New(params)
 
 	// Set Stripe API key
 	apiKey := os.Getenv("SK_TEST_KEY")
@@ -33,35 +53,28 @@ func Charges(c *gin.Context) {
 	// as we are not using it.
 	response, err := charge.New(&stripe.ChargeParams{
 		Amount:       stripe.Int64(json.Amount),
-		Currency:     stripe.String(string(stripe.CurrencyUSD)),
-		Source:       &stripe.PaymentSourceSourceParams{Token: stripe.String("tok_visa")}, // this should come from clientside
+		Currency:     stripe.String(string(stripe.CurrencyTHB)),
+		Source:       &stripe.PaymentSourceSourceParams{Token: &t.ID}, // this should come from clientside
 		ReceiptEmail: stripe.String(json.ReceiptEmail)})
-	fmt.Println()
 	if err != nil {
 		// Handle any errors from attempt to charge
 		c.JSON(http.StatusBadRequest, err)
 		return
 	}
 
-	// type toJSON struct {
-	// 	ID     string `json:"ID"`
-	// 	Status string `json:"Status"`
-	// }
-	// send := toJSON{ID: response.ID, Status: string(response.Status)}
-	StorePayment(c, response, json.User_id, json.Studio_id)
-	// c.JSON(http.StatusCreated, send)
+	StorePayment(c, response, json.User_id)
+	wallet := models.Wallet{Amount: float64(response.Amount), User_Id: json.User_id, Status: "earn"}
+	Earn(c, wallet)
+
+	c.JSON(http.StatusOK, response)
 }
 
-func StorePayment(c *gin.Context, response *stripe.Charge, user_id int, studio_id int) {
+func StorePayment(c *gin.Context, response *stripe.Charge, user_id int) {
 
-	if err := initializers.DB.Exec("INSERT INTO donates (`donates_stripe_id`, `donates_status`, `donates_users_id`, `donates_studioes_id`) VALUES ( ? , ? , ? , ? )", response.ID, response.Status, user_id, studio_id).Error; err != nil {
+	if err := initializers.DB.Exec("INSERT INTO topups (`topups_stripe_id`, `topups_status`, `topups_users_id`, `topups_amount`) VALUES ( ? , ? , ? , ? )", response.ID, response.Status, user_id, response.Amount).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"error": err,
 		})
 		return
 	}
-
-	c.JSON(http.StatusOK, gin.H{
-		"message": "Successfully charged",
-	})
 }
