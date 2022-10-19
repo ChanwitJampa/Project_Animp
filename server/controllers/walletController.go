@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"fmt"
 	"log"
 	"net/http"
 	"strconv"
@@ -27,15 +28,17 @@ func Discount(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"error": "Failed to read body",
 		})
+		return
 	}
 
 	if checkAmount(body.User_Id) < int(body.Amount) {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"error": "Cannot discount",
 		})
+		return
 	}
 
-	if err := initializers.DB.Exec("INSERT INTO wallets (`id`, `amount`, `user_id`, `status`) VALUES ( ? , ? , ? , ? )", body.ID, body.Amount, body.User_Id, body.Status).Error; err != nil {
+	if err := initializers.DB.Exec("INSERT INTO wallets (`id`, `amount`, `user_id`, `wallets_status`) VALUES ( ? , ? , ? , ? )", body.ID, body.Amount, body.User_Id, body.Status).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"error": err,
 		})
@@ -45,14 +48,26 @@ func Discount(c *gin.Context) {
 }
 
 func checkAmount(user_id int) int {
-	var amount int
-	row := initializers.DB.Exec("select earn.user_id, (earn - discount) as amount from ((select user_id, sum(amount) as earn from animemapmaster.wallets where user_id = ? and status = 'earn') as earn left join (select user_id, sum(amount) as discount from animemapmaster.wallets where user_id = ? and status = 'discount') as dis on dis.user_id = earn.user_id)", user_id, user_id).Row()
+	var earn int
+	row := initializers.DB.Raw("SELECT sum(amount) from animemapmaster.wallets WHERE user_id = ? AND wallets_status = 'earn'", user_id).Row()
 	if err := row.Err(); err != nil {
 		log.Fatal(err)
 	}
-	row.Scan(&amount)
 
-	return amount
+	row.Scan(&earn)
+
+	var discount int
+	row = initializers.DB.Raw("SELECT sum(amount) from animemapmaster.wallets WHERE user_id = ? AND wallets_status = 'discount'", user_id).Row()
+	if err := row.Err(); err != nil {
+		log.Fatal(err)
+	}
+	row.Scan(&discount)
+
+	total := earn - discount
+	fmt.Println("total: earn - discount")
+	fmt.Println(total, " ", earn, " ", discount)
+
+	return total
 }
 
 func MyCoin(c *gin.Context) {
@@ -61,6 +76,7 @@ func MyCoin(c *gin.Context) {
 	if err != nil {
 		log.Fatal(err)
 	}
+	fmt.Println("ID: ", ID)
 	amount := checkAmount(ID)
 
 	c.JSON(http.StatusOK, amount)
