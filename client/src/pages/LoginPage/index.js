@@ -118,8 +118,8 @@ gwQco1KRMDSmXSMkDwIDAQAB
             }
             ////////////en crypt//////////
         }
-        
-        console.log(realPlainText)
+        const test = JSON.parse(realPlainText)
+        console.log(test)
         
     }
 
