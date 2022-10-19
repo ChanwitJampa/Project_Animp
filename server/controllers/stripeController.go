@@ -13,6 +13,8 @@ import (
 
 // ChargeJSON incoming data for Stripe API
 type ChargeJSON struct {
+	User_id      int    `json:"user_id"`
+	Studio_id    int    `json:"studio_id"`
 	Amount       int64  `json:"amount"`
 	ReceiptEmail string `json:"receiptEmail"`
 }
@@ -41,20 +43,20 @@ func Charges(c *gin.Context) {
 		return
 	}
 
-	type toJSON struct {
-		ID     string `json:"ID"`
-		Status string `json:"Status"`
-	}
+	// type toJSON struct {
+	// 	ID     string `json:"ID"`
+	// 	Status string `json:"Status"`
+	// }
 	// send := toJSON{ID: response.ID, Status: string(response.Status)}
-	StorePayment(c, response)
+	StorePayment(c, response, json.User_id, json.Studio_id)
 	// c.JSON(http.StatusCreated, send)
 }
 
-func StorePayment(c *gin.Context, response *stripe.Charge) {
+func StorePayment(c *gin.Context, response *stripe.Charge, user_id int, studio_id int) {
 
-	if err := initializers.DB.Exec("INSERT INTO donates (`donates_stripe_id`, `donates_status`, `donates_amount`) VALUES ( ? , ? , ? )", response.ID, response.Status, response.Amount).Error; err != nil {
+	if err := initializers.DB.Exec("INSERT INTO donates (`donates_stripe_id`, `donates_status`, `donates_users_id`, `donates_studioes_id`) VALUES ( ? , ? , ? , ? )", response.ID, response.Status, user_id, studio_id).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
-			"message": err,
+			"error": err,
 		})
 		return
 	}
