@@ -19,16 +19,18 @@ import {fetchAnimeByAccountAsync} from '../../actions/animeDetailListAction'
 import Swal from 'sweetalert2'
 import axios from "axios";
 import withReactContent from 'sweetalert2-react-content'
+import isEmail from 'validator/lib/isEmail';
 
 const LoginPage = () => {
     const navigate = useNavigate();
     const MySwal = withReactContent(Swal)
     const [values, setValues] = useState({
-        username: '',
-        password: '',
         showPassword: false,
     });
-    const {loading,error} =useSelector(state=>state.status)
+    const [email,setEmail]=useState('')
+    const [password,setPassword] =useState('')
+    const [isValidEmail,setIsValidEmail]=useState(false)
+    const [isValidPassword,setIsValidPassword]=useState(false)
     const [checked,setChecked] = useState(false)
     const handleChangeChecked=(event)=>{
         setChecked(event.target.checked)
@@ -37,6 +39,19 @@ const LoginPage = () => {
         setValues({ ...values, [prop]: event.target.value });
     };
 
+    const handleChangeEmail =(event)=>{
+        const val =event.target.value;
+        if(isEmail(val)) {
+            setIsValidEmail(true);              
+         } else {
+            setIsValidEmail(false);              
+         }
+         setEmail(val)
+    }
+    const handleChangePassword =(event)=>{
+        const pass =event.target.value;
+        setPassword(pass)
+    }
     const handleClickShowPassword = () => {
         setValues({
             ...values,
@@ -48,15 +63,9 @@ const LoginPage = () => {
         event.preventDefault();
     };
     const submitForm=()=>{
-
-        // dispatch(fetchAuthAsync(values.username,values.password)).then(
-        //     res=>{
-        //         
-        //     }
-        // )
         axios.post(`http://localhost:5000/login`,{
-            username:values.username,
-            password:values.password})
+            username:email,
+            password:password})
             .then((response) => response.data)
             .then((res) => {authenticate(res,()=>navigate('/'))})
         .catch(err=>{
@@ -68,8 +77,6 @@ const LoginPage = () => {
                )
         })
     }
-
-    const dispatch=useDispatch()
     return (
         <div>
             <div className='login-bar'>
@@ -94,8 +101,8 @@ const LoginPage = () => {
                             className='textField'
                             hiddenLabel
                             required
-                            value={values.username}
-                            onChange={handleChange('username')}
+                            value={email}
+                            onChange={handleChangeEmail}
                             id="outlined-adornment"
                             placeholder="e-mail"
                         />
@@ -113,11 +120,11 @@ const LoginPage = () => {
                             id="outlined-adornment-password"
                             className='textField'
                             type={values.showPassword ? 'text' : 'password'}
-                            value={values.password}
+                            value={password}
                             hiddenLabel
                             required
                             placeholder="password"
-                            onChange={handleChange('password')}
+                            onChange={handleChangePassword}
                             endAdornment={
                                 <InputAdornment position="end">
                                     <IconButton
@@ -132,8 +139,7 @@ const LoginPage = () => {
                             }
                         />
                     </FormControl>
-                    <button className='login-button' onClick={submitForm}>Sign In {loading ? "Loading": ""}</button>
-                    {error && <p style={{color:'red',fontSize:'12'}}>{error}</p>}
+                    <button className='login-button' onClick={submitForm}>Sign In</button>
                     {/* <FormControlLabel
                         label="Remember Me"
                         sx={{

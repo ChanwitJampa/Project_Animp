@@ -7,14 +7,6 @@ import './index.scss'
 
 
 const AccountPage=()=>{
-    const [stripeToken, setStripeToken] = useState(null);
-    const onToken = (token) => {
-        setStripeToken(token)
-      }
-    const options = {
-        // passing the client secret obtained from the server
-        clientSecret: '{{CLIENT_SECRET}}',
-      };
     return(<div>
         <div className='accountpage-header'><h1>My Account</h1></div>
         <div className='accountpage-container'>

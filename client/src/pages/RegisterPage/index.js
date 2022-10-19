@@ -171,9 +171,9 @@ const RegisterPage = () => {
         console.log(password)
         console.log(confirmPassword)
         axios.post(`http://localhost:5000/signup`, {
-            accounts_name:firstname,
-            accounts_user:email,
-            accounts_pwd:password
+            Name:firstname,
+            username:email,
+            password:password
         })
         .then((response) => {
             MySwal.fire("Alert", "บันทึกข้อมูลเรียบร้อย", "success");
