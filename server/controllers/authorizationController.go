@@ -68,9 +68,6 @@ func Signup(c *gin.Context) {
 }
 
 func Login(c *gin.Context) {
-	// defender for protect brute force
-	// d := defender.New(10, 1*60*time.Second, 1*time.Hour)
-
 	// get the email and pass req body
 	var body struct {
 		Username string
@@ -84,20 +81,10 @@ func Login(c *gin.Context) {
 
 		return
 	}
-	// fmt.Println("ip addr = " + c.Request.RemoteAddr)
-	// firstAddress := strings.Split(c.Request.RemoteAddr, ",")[0]
-	// fmt.Println("ip addr = " + firstAddress)
 
-	// if client, ok := d.Client(c.Request.RemoteAddr); ok && !client.Banned() {
-	// 	if d.Inc(c.ClientIP()) {
-
-	// 	}
-	// }
 	// look up requested user
-
 	var user models.User
 	initializers.DB.First(&user, "email = ?", body.Username)
-
 	if user.ID == 0 {
 
 		c.JSON(http.StatusBadRequest, gin.H{
@@ -109,8 +96,20 @@ func Login(c *gin.Context) {
 	// compare sent in pass with saved user pass hash
 	err := bcrypt.CompareHashAndPassword([]byte(user.Pwd), []byte(body.Password))
 	if err != nil {
+		if protectBruteForce(c, body.Username) {
+			return
+		}
 		c.JSON(http.StatusBadRequest, gin.H{
 			"error": "Invalid username or password",
+		})
+		return
+	}
+	tempTime := time.Now()
+	diff := tempTime.Sub(user.LastLogin)
+	if diff < time.Minute*1 {
+		user.LastLogin = time.Now()
+		c.JSON(http.StatusBadRequest, gin.H{
+			"error": "Banned",
 		})
 		return
 	}
@@ -234,4 +233,27 @@ func exportPrivKeyAsPEMStr(privkey *rsa.PrivateKey) string {
 func saveKeyToFile(keyPem, filename string) {
 	pemBytes := []byte(keyPem)
 	ioutil.WriteFile(filename, pemBytes, 0400)
+}
+
+// brute force protection ban user
+func protectBruteForce(c *gin.Context, username string) bool {
+	var user models.User
+	initializers.DB.First(&user, "email = ?", username)
+	if user.CountLog >= 5 {
+		tempTime := time.Now()
+		diff := tempTime.Sub(user.LastLogin)
+		if diff < time.Minute*1 {
+			user.LastLogin = time.Now()
+			c.JSON(http.StatusBadRequest, gin.H{
+				"error": "Banned",
+			})
+			return true
+		}
+		user.CountLog = 1
+	} else {
+		user.CountLog = user.CountLog + 1
+		user.LastLogin = time.Now()
+	}
+	initializers.DB.Save(&user)
+	return false
 }
