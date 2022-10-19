@@ -19,6 +19,7 @@ func Signup(c *gin.Context) {
 	var body struct {
 		Username string
 		Password string
+		Name     string
 	}
 
 	if c.BindJSON(&body) != nil {
@@ -42,7 +43,7 @@ func Signup(c *gin.Context) {
 	}
 
 	//create the account
-	user := models.User{Email: body.Username, Pwd: string(hash), Role: "user"}
+	user := models.User{Email: body.Username, Pwd: string(hash), Role: "user", Name: body.Name}
 	result := initializers.DB.Create(&user)
 
 	if result.Error != nil {
