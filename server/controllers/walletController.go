@@ -3,6 +3,7 @@ package controllers
 import (
 	"log"
 	"net/http"
+	"strconv"
 	"testAPI/initializers"
 	"testAPI/models"
 
@@ -52,4 +53,15 @@ func checkAmount(user_id int) int {
 	row.Scan(&amount)
 
 	return amount
+}
+
+func MyCoin(c *gin.Context) {
+	id := c.Param("id")
+	ID, err := strconv.Atoi(id)
+	if err != nil {
+		log.Fatal(err)
+	}
+	amount := checkAmount(ID)
+
+	c.JSON(http.StatusOK, amount)
 }

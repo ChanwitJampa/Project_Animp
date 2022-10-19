@@ -64,6 +64,7 @@ func main() {
 	// stripe
 	r.POST("/api/charges", controllers.Charges)   // topup
 	r.POST("/api/discount", controllers.Discount) // discount
+	r.GET("/api/myCoin/:id", controllers.MyCoin)  // get my coin
 
 	r.Run(os.Getenv("PORT"))
 }
