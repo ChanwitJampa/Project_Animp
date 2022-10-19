@@ -43,6 +43,13 @@ psLBYuApa66NcVHJpCECQQDTjI2AQhFc1yRnCU/YgDnSpJVm1nASoRUnU8Jfm3Oz
 uku7JUXcVpt08DFSceCEX9unCuMcT72rAQlLpdZir876
 -----END RSA PRIVATE KEY-----`
 
+var publicKey =`
+-----BEGIN PUBLIC KEY-----
+MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDlOJu6TyygqxfWT7eLtGDwajtN
+FOb9I5XRb6khyfD1Yt3YiCgQWMNW649887VGJiGr/L5i2osbl8C9+WJTeucF+S76
+xFxdU6jE0NQ+Z+zEdhUTooNRaY5nZiu5PgDB0ED/ZKBUSLKL7eibMxZtMlUDHjm4
+gwQco1KRMDSmXSMkDwIDAQAB
+-----END PUBLIC KEY-----`
     const navigate = useNavigate();
     const MySwal = withReactContent(Swal)
     const [values, setValues] = useState({
@@ -83,6 +90,7 @@ uku7JUXcVpt08DFSceCEX9unCuMcT72rAQlLpdZir876
         event.preventDefault();
     };
     const decodeRSA = (string) => {
+        const cipherText = string
         var decrypt = new JSEncrypt();
         decrypt.setPrivateKey(privateKey);
         var start = 0
@@ -90,32 +98,77 @@ uku7JUXcVpt08DFSceCEX9unCuMcT72rAQlLpdZir876
         var realPlainText = ""
         var decryptMessage = ""
         var SubText = ""
-        for (let i = 0; i <= parseInt(string.length / 344); i++) {
-            if (i == parseInt(string.length / 344)) {
+        const lengthCipher = cipherText.length
+        for (let i = 0; i <= parseInt(Math.floor(lengthCipher / 172)); i=i+1) {
+            if (i ==parseInt(lengthCipher / 172)) {
                 start = end
-                end = string.length
+                end = lengthCipher
             } else {
                 start = end
-                end = ((i + 1) * 344)
+                end = ((i + 1) * 172)
             }
-            SubText = string.substr(start, end)
+            SubText = string.substr(start, end)  
             ///////// EN crypt ?///////
             var decrypt = new JSEncrypt();
             decrypt.setPrivateKey(privateKey);
             var decryptMessage = decrypt.decrypt(SubText);
             realPlainText += decryptMessage
+            if(end==parseInt(lengthCipher)){
+                break
+            }
             ////////////en crypt//////////
         }
+        
         console.log(realPlainText)
+        
     }
 
-    decodeRSA(`VO5cYktmilDNBQzsLyHIGnyPBXcO4IzxAShvTfsGv8g/jngfDi+3NHHpCFsHW+JRF50MoLlFbdV+av/r8jFrdEv2mJmil1QVEgeDEny44WD6zh7ohi6nkZWHBAGudwtg7HQb1lPUHLwqZIF+60hHKKE1V1pGnlii+lV1D7mqQus=GIFnM5LRXgyAqCrgV3GKQiz734NOaIAxG8SQ6b36Fd1s/1FewGs4M1dnf5BK0zE8CkPte6VUx0OluqhARB9GNa8Jq1QRgTIPR5HpArlO3i445sVQKcunxZ1ndsT9EK2LwWUzQVmqV6WrxGgu08e74WjbCN8ryPoKtMWECRsnP0E=Dp6RzTDY3IqBn7AvQwAnSgCrIvrU3buUCiUXi7Q5lautIzI4AuAzHdYjbfNupAmh8/IpaKb48VooEIfuiV7vGuvX+0hUHGtHHNV7/z+jcPJ+262urbyeZucUMR5sgjrvf8L88Pik3Ufp8GabT0ut4XIu2YIA4TlbhEGOm4CroSY=udPF99Tp3JkIH2ye397wwocjTXsuJbsYQehmWVO5GBbiZCAp1JJ/UHLwlzTpEUzrOETtJ/hZZuPTFBywStxT5KnD7LYoJndojLGaGlj9OPxp4IuD3ouVZUXvJm2QZtpQm2DMu1Cdx2BlgJipbxarR1iaeLSpnf+enl0I6wAPsHs=oWy1zUFJgaXwTtrU596804IxzvA6UiXqUUxCL4ypeZ4GShZJ6mHmSB3VKAb0NvdirWsOo3asQ3M0NgCfbxcOsXRUxs80LFIsik40XoC0NPIznrwveSrMmbVM+bs62y8OeURdigSzKnEfCE6Cfw4TK95om9N+I1eZucH0/NojXtk=`)
+    const encodeRSA = (string) => {
+        const plainText = string
+        // var decrypt = new JSEncrypt();
+        // decrypt.setPrivateKey(privateKey);
+        var start = 0
+        var end = 0
+        var realCipherText = ""
+        var SubText = ""
+        const lengthPlainText = plainText.length
+        for (let i = 0; i <= parseInt(Math.floor(lengthPlainText / 50)); i=i+1) {
+            if (i ==parseInt(lengthPlainText / 50)) {
+                start = end
+                end = lengthPlainText
+            } else {
+                start = end
+                end = ((i + 1) * 50)
+            }
+            SubText = string.substr(start, end)
+
+            var encrypt = new JSEncrypt();
+            encrypt.setPublicKey(publicKey);
+            var encrypted = encrypt.encrypt(SubText);
+
+            realCipherText += encrypted
+
+            if(end==parseInt(lengthPlainText)){
+                break
+            }
+        }
+        
+        //console.log(realCipherText)
+        return realCipherText
+    }
+
+    
     const submitForm = () => {
+        // var str = encodeRSA(JSON.stringify({
+        //     username: email,
+        //     password: password
+        // }))
+        // console.log(str)
         axios.post(`http://localhost:5000/login`, {
             username: email,
             password: password
         })
-            .then((response) => response.data)
+            .then((response) => { console.log(response.data) ;decodeRSA(response.data)})
             .then((res) => { authenticate(res, () => navigate('/')) })
             .catch(err => {
                 MySwal.fire(
