@@ -6,7 +6,6 @@ require (
 	github.com/gin-contrib/cors v1.4.0
 	github.com/gin-gonic/gin v1.8.1
 	github.com/golang-jwt/jwt/v4 v4.4.2
-	github.com/gorilla/mux v1.8.0
 	github.com/joho/godotenv v1.4.0
 	github.com/stripe/stripe-go/v73 v73.13.0
 	golang.org/x/crypto v0.0.0-20221010152910-d6f0a8c073c2
