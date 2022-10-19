@@ -62,7 +62,8 @@ func main() {
 	r.GET("/getAnimeDetail/:id", controllers.GetAnimeDetailsByUsersId)
 
 	// stripe
-	r.POST("/api/charges", controllers.Charges)
+	r.POST("/api/charges", controllers.Charges)   // topup
+	r.POST("/api/discount", controllers.Discount) // discount
 
 	r.Run(os.Getenv("PORT"))
 }
