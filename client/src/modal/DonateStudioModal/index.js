@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 import { getRole, getUser } from "../../servies/authorize";
+import axios from "axios";
 const itemDonate=[
     {  id: 1, name: "คุ้กกี้", image: "../image/Cokie.png", price: 5},
     {  id: 2, name: "ดังโงะ", image: "../image/Dango.png", price: 5},
@@ -37,15 +38,20 @@ const DonateStudioModal = (props) => {
 
     onClose()
     if(user){
+        // console.log(item.price)
+        // console.log(modalStudio.studioes_name)
+        // console.log(user)
+        console.log(user.ID)
         console.log(item.price)
-        console.log(modalStudio.studioes_name)
-        console.log(user)
         MySwal.fire({
             title: <p>Loading</p>,
             didOpen: () => {
               // `MySwal` is a subclass of `Swal` with all the same instance & static methods
               MySwal.showLoading()
-              
+              axios.post(`http://localhost:5000/api/discount`,{
+                user_id:Number(user.ID),
+                amount:Number(item.price)
+            })
               .then((response) => {
                 MySwal.fire({
                   title: <strong>Good job!</strong>,

@@ -56,23 +56,25 @@ const PaymaentModal = (props) => {
     const [loading, setLoading] = useState(false);
     const handleNext = async () => {
         setLoading(true);
-        console.log(typeof user.ID)
+        console.log(user.ID)
         console.log(user.Email)
-        console.log(typeof state.amount);
+        console.log(state.amount);
         console.log(state.ccnumber);
         console.log(state.expMonth)
-        console.log(typeof state.expYear)
-        console.log(typeof state.cvc)
+        console.log(state.expYear)
+        console.log(state.cvc)
         onClose()
+        
         axios.post(`http://localhost:5000/api/charges`, {
             user_id: user.ID,
             stripe_token:"pk_test_51LuGomLNgThWAHdrmtmYnzkwfL4oVwrHt7zfX06XYiQ1qHehbqx9DaOXhMBMRgXwam0hCORTDHpqqVlRTYziOkT1004g7gMtlH",
             amount:Number(state.amount),
             receiptEmail:user.Email,
-            number:"4242424242424242",
-            expMonth:"12",
-            expYear:"2023",
-            CVC:"123"
+            number:state.ccnumber.toString(),
+            expMonth:state.expMonth.toString(),
+            expYear:state.expYear.toString(),
+            CVC:state.cvc.toString(),
+
         })
             .then((response) =>MySwal.fire({
                 title: <strong>Good job!</strong>,
@@ -80,6 +82,7 @@ const PaymaentModal = (props) => {
                 icon: 'success'
               }))
             .catch(err => {
+                console.log(err);
                 MySwal.fire(
                     'เติมเงินไม่สำเร็จ',
                     'Email or Password is wrong',
