@@ -12,7 +12,7 @@ import (
 )
 
 func Earn(c *gin.Context, wallet models.Wallet) {
-	if err := initializers.DB.Exec("INSERT INTO wallets (`id`, `amount`, `user_id`, `status`) VALUES ( ? , ? , ? , ? )", wallet.ID, wallet.Amount, wallet.User_Id, wallet.Status).Error; err != nil {
+	if err := initializers.DB.Exec("INSERT INTO wallets (`id`, `amount`, `user_id`, `wallets_status`) VALUES ( ? , ? , ? , ? )", wallet.ID, wallet.Amount, wallet.User_Id, wallet.Status).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"error": err,
 		})
