@@ -91,6 +91,7 @@ gwQco1KRMDSmXSMkDwIDAQAB
     };
     const decodeRSA = (string) => {
         const cipherText = string
+        console.log(cipherText,"\n\n")
         var decrypt = new JSEncrypt();
         decrypt.setPrivateKey(privateKey);
         var start = 0
@@ -118,7 +119,9 @@ gwQco1KRMDSmXSMkDwIDAQAB
             }
             ////////////en crypt//////////
         }
+
         const test = JSON.parse(realPlainText)
+        console.log(test)
         return test
     }
 
